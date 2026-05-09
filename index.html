@@ -1,0 +1,5435 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BBM 智慧屏 Demo</title>
+  <style>
+    :root {
+      --bg: #090e18;
+      --panel: rgba(15, 23, 38, 0.92);
+      --panel-strong: #131d30;
+      --line: rgba(127, 151, 180, 0.22);
+      --line-strong: rgba(134, 164, 202, 0.34);
+      --text: #edf5ff;
+      --muted: #91a2ba;
+      --accent: #52a6ff;
+      --accent-2: #ff8c4d;
+      --shadow: 0 24px 70px rgba(0, 0, 0, 0.36);
+    }
+
+    * { box-sizing: border-box; }
+    html,
+    body {
+      width: 100%;
+      min-height: 760px;
+      margin: 0;
+      overflow: hidden;
+      background:
+        radial-gradient(circle at top left, rgba(82, 166, 255, 0.18), transparent 28%),
+        radial-gradient(circle at bottom right, rgba(255, 140, 77, 0.10), transparent 28%),
+        linear-gradient(180deg, #0b1220 0%, #070b12 100%);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+    }
+
+    button { font: inherit; cursor: pointer; }
+
+    .app {
+      display: grid;
+      grid-template-columns: minmax(220px, 260px) minmax(620px, 1fr);
+      gap: 16px;
+      height: 100vh;
+      padding: 16px;
+    }
+
+    .panel {
+      min-height: 0;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      background: var(--panel);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(14px);
+    }
+
+    .sidebar {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .side-head {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      padding: 22px 18px 18px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .brand-mark {
+      display: grid;
+      width: 40px;
+      height: 40px;
+      place-items: center;
+      border-radius: 12px;
+      background: linear-gradient(180deg, #52a6ff, #2563eb);
+      color: #fff;
+      font-size: 15px;
+      font-weight: 800;
+      letter-spacing: 0;
+    }
+
+    .side-head h1 {
+      margin: 0;
+      font-size: 18px;
+      line-height: 1.15;
+    }
+
+    .side-head p {
+      margin: 5px 0 0;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .nav-scroll {
+      min-height: 0;
+      overflow: auto;
+      padding: 14px 12px 16px;
+    }
+
+    .nav-scroll::before {
+      display: block;
+      margin: 0 6px 12px;
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.06);
+      padding: 9px 10px;
+      color: #d7e7fb;
+      font-size: 12px;
+      font-weight: 800;
+      content: "页面导航";
+    }
+
+    .nav-group {
+      margin-bottom: 14px;
+    }
+
+    .nav-group h2 {
+      margin: 0 0 8px;
+      padding: 0 6px;
+      color: #71819a;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0;
+      text-transform: none;
+    }
+
+    .nav-item {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      width: 100%;
+      min-height: 40px;
+      margin-bottom: 6px;
+      border: 1px solid transparent;
+      border-radius: 14px;
+      background: transparent;
+      padding: 8px 12px;
+      color: #aab7c9;
+      font-size: 13px;
+      text-align: left;
+    }
+
+    .nav-item::before {
+      width: 8px;
+      height: 8px;
+      flex: 0 0 auto;
+      border-radius: 999px;
+      background: currentColor;
+      content: "";
+      opacity: .7;
+    }
+
+    .nav-item:hover {
+      background: rgba(82, 166, 255, 0.10);
+      color: #d9ecff;
+    }
+
+    .nav-item.active {
+      border-color: rgba(82, 166, 255, 0.46);
+      background: linear-gradient(90deg, rgba(82, 166, 255, 0.24), rgba(82, 166, 255, 0.08));
+      color: #ffffff;
+      font-weight: 700;
+    }
+
+    .nav-sub {
+      display: grid;
+      gap: 5px;
+      margin: -1px 0 8px 26px;
+      padding-left: 12px;
+      border-left: 1px solid rgba(134, 164, 202, 0.22);
+    }
+
+    .nav-sub-item {
+      width: 100%;
+      min-height: 32px;
+      border: 1px solid transparent;
+      border-radius: 11px;
+      background: transparent;
+      padding: 6px 10px;
+      color: #8fa0b7;
+      font-size: 12px;
+      text-align: left;
+    }
+
+    .nav-sub-item:hover {
+      background: rgba(82, 166, 255, 0.08);
+      color: #d7e7fb;
+    }
+
+    .nav-sub-item.active {
+      border-color: rgba(82, 166, 255, 0.42);
+      background: rgba(82, 166, 255, 0.16);
+      color: #ffffff;
+      font-weight: 700;
+    }
+
+    .center {
+      display: grid;
+      min-width: 0;
+      place-items: center;
+    }
+
+    .canvas-wrap {
+      width: min(1280px, 100%);
+      display: flex;
+      flex-direction: column;
+      min-width: 0;
+      gap: 10px;
+    }
+
+    .canvas-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 4px;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .canvas-head strong {
+      color: var(--text);
+      font-size: 15px;
+    }
+
+    .shell {
+      min-height: 0;
+      overflow: hidden;
+      aspect-ratio: 16 / 10;
+      border: 1px solid rgba(134, 164, 202, 0.42);
+      border-radius: 28px;
+      background: #0d1524;
+      box-shadow: 0 30px 80px rgba(0, 0, 0, 0.44);
+    }
+
+    .screen {
+      display: grid;
+      height: 100%;
+      grid-template-columns: 82px minmax(0, 1fr);
+      grid-template-rows: 48px 48px minmax(0, 1fr) 108px;
+      background: #0d1524;
+    }
+
+    .screen.fullscreen-mode {
+      grid-template-columns: minmax(0, 1fr);
+      grid-template-rows: 48px 48px minmax(0, 1fr);
+      background: #050a12;
+    }
+
+    .screen.full-single {
+      grid-template-rows: 48px minmax(0, 1fr);
+    }
+
+    .screen.onboarding-page-mode {
+      grid-template-columns: minmax(0, 1fr);
+      grid-template-rows: minmax(0, 1fr);
+      background:
+        radial-gradient(circle at 50% 8%, rgba(82, 166, 255, 0.18), transparent 34%),
+        #080f1d;
+    }
+
+    .topbar {
+      grid-column: 1 / -1;
+      grid-row: 1;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      border-bottom: 1px solid var(--line);
+      background: #111b2d;
+      padding: 0 22px;
+    }
+
+    .screen-date {
+      color: #eef6ff;
+      font-size: 16px;
+      font-weight: 700;
+    }
+
+    .screen-status {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      color: #d7e6f8;
+      font-size: 16px;
+      font-weight: 700;
+    }
+
+    .status-icon {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      min-height: 22px;
+    }
+
+    .wifi-svg {
+      display: block;
+      width: 27px;
+      height: 20px;
+      color: #d7e6f8;
+    }
+
+    .battery-icon {
+      position: relative;
+      display: inline-block;
+      width: 28px;
+      height: 15px;
+      border: 2px solid #d7e6f8;
+      border-radius: 4px;
+    }
+
+    .battery-icon::before {
+      position: absolute;
+      top: 3px;
+      right: -5px;
+      width: 3px;
+      height: 5px;
+      border-radius: 0 2px 2px 0;
+      background: #d7e6f8;
+      content: "";
+    }
+
+    .battery-icon::after {
+      position: absolute;
+      inset: 3px 6px 3px 3px;
+      border-radius: 2px;
+      background: #65d58d;
+      content: "";
+    }
+
+    .screen-menu {
+      grid-column: 1;
+      grid-row: 2 / 5;
+      display: grid;
+      grid-template-rows: repeat(5, 72px) minmax(0, 1fr) 72px;
+      gap: 1px;
+      border-right: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.04);
+      padding: 8px 6px;
+    }
+
+    .screen.fullscreen-mode .screen-menu,
+    .screen.fullscreen-mode .right-panel,
+    .screen.fullscreen-mode .device-strip {
+      display: none;
+    }
+
+    .screen.full-single .tabs-bar {
+      display: none;
+    }
+
+    .screen-menu-item {
+      display: grid;
+      place-items: center;
+      min-width: 0;
+      border: 1px solid transparent;
+      border-radius: 14px;
+      background: transparent;
+      color: #aab7c9;
+      font-size: 15px;
+      font-weight: 700;
+      letter-spacing: 0;
+    }
+
+    .screen-menu-item:hover {
+      background: rgba(82, 166, 255, 0.10);
+      color: #e5f2ff;
+    }
+
+    .screen-menu-item.active {
+      border-color: rgba(82, 166, 255, 0.52);
+      background: linear-gradient(180deg, rgba(82, 166, 255, 0.26), rgba(82, 166, 255, 0.10));
+      color: #ffffff;
+      box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.05);
+    }
+
+    .screen-menu-spacer {
+      min-height: 0;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 14px;
+      font-weight: 800;
+    }
+
+    .brand::before {
+      width: 10px;
+      height: 10px;
+      border-radius: 999px;
+      background: var(--accent);
+      content: "";
+      box-shadow: 0 0 0 4px rgba(82, 166, 255, 0.12);
+    }
+
+    .top-status {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .status-chip {
+      border: 1px solid var(--line-strong);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.06);
+      padding: 6px 10px;
+      color: #bfd0e4;
+    }
+
+    .tabs-bar {
+      grid-column: 2;
+      grid-row: 2;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      align-items: center;
+      gap: 10px;
+      border-bottom: 1px solid var(--line);
+      padding: 8px 14px;
+      background: #101929;
+    }
+
+    .screen.fullscreen-mode .tabs-bar {
+      grid-column: 1;
+      grid-row: 2;
+      grid-template-columns: minmax(0, 1fr);
+      border-bottom-color: rgba(255, 255, 255, 0.16);
+      background: rgba(9, 15, 26, 0.96);
+      padding: 7px 12px;
+    }
+
+    .screen.fullscreen-mode #sceneTabs {
+      display: none;
+    }
+
+    .tab-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      align-items: center;
+      min-width: 0;
+    }
+
+    .tab-btn {
+      border: 1px solid rgba(134, 164, 202, 0.28);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.06);
+      padding: 7px 14px;
+      color: #aebbd0;
+      font-size: 12px;
+      white-space: nowrap;
+    }
+
+    .tab-btn.active {
+      border-color: rgba(82, 166, 255, 0.78);
+      background: linear-gradient(180deg, #52a6ff 0%, #2563eb 100%);
+      color: #fff;
+      box-shadow: 0 10px 22px rgba(37, 99, 235, 0.32);
+    }
+
+    .content {
+      grid-column: 2;
+      grid-row: 3;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 252px;
+      grid-auto-rows: 100%;
+      gap: 14px;
+      align-items: stretch;
+      align-content: stretch;
+      min-height: 0;
+      padding: 12px;
+    }
+
+    .event-record-list {
+      display: grid;
+      align-content: start;
+      gap: 8px;
+      min-height: 0;
+      overflow: hidden;
+    }
+
+    .event-record-card {
+      display: grid;
+      grid-template-columns: auto minmax(0, 1fr);
+      align-items: center;
+      gap: 9px;
+      min-height: 52px;
+      border: 1px solid rgba(127, 151, 180, 0.22);
+      border-radius: 14px;
+      background: rgba(255, 255, 255, 0.055);
+      padding: 10px;
+      color: inherit;
+      text-align: left;
+    }
+
+    .event-record-card:first-child {
+      border-color: rgba(82, 166, 255, 0.52);
+      background: linear-gradient(90deg, rgba(82, 166, 255, 0.20), rgba(255, 255, 255, 0.06));
+    }
+
+    .event-time {
+      color: #f3f8ff;
+      font-size: 13px;
+      font-weight: 900;
+      letter-spacing: 0;
+    }
+
+    .event-copy {
+      min-width: 0;
+    }
+
+    .event-copy strong {
+      display: block;
+      overflow: hidden;
+      color: #f6fbff;
+      font-size: 12px;
+      font-weight: 900;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .event-copy span {
+      display: block;
+      margin-top: 3px;
+      color: #92a4bd;
+      font-size: 10px;
+      font-weight: 650;
+    }
+
+    .event-tag {
+      border-radius: 999px;
+      background: rgba(82, 166, 255, 0.16);
+      padding: 7px 10px;
+      color: #c4e1ff;
+      font-size: 11px;
+      font-weight: 900;
+      white-space: nowrap;
+    }
+
+    .screen.fullscreen-mode .content {
+      grid-column: 1;
+      grid-row: 3;
+      grid-template-columns: minmax(0, 1fr);
+      padding: 0;
+    }
+
+    .screen.full-single .content {
+      grid-row: 2;
+    }
+
+    .monitor-stack {
+      display: grid;
+      grid-template-rows: minmax(0, 1fr);
+      min-width: 0;
+      max-width: 100%;
+      height: 100%;
+      min-height: 0;
+      overflow: hidden;
+    }
+
+    .monitor {
+      position: relative;
+      overflow: hidden;
+      width: 100%;
+      max-width: 100%;
+      height: 100%;
+      min-height: 0;
+      border-radius: 22px;
+      background:
+        linear-gradient(180deg, rgba(6, 11, 19, 0.06), rgba(6, 11, 19, 0.48)),
+        url("public/baby-crib-overhead.jpg");
+      background-position: center 56%;
+      background-size: cover;
+      box-shadow: inset 0 -52px 96px rgba(0, 0, 0, 0.22);
+    }
+
+    .screen.fullscreen-mode .monitor {
+      border-radius: 0;
+      box-shadow: inset 0 -120px 180px rgba(0, 0, 0, 0.45);
+    }
+
+    .monitor::before {
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(90deg, rgba(0, 0, 0, 0.12), transparent 25%),
+        linear-gradient(180deg, transparent 38%, rgba(0, 0, 0, 0.12) 100%);
+      content: "";
+      pointer-events: none;
+    }
+
+    .monitor-header {
+      position: absolute;
+      inset: 14px 14px auto;
+      z-index: 3;
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .screen.fullscreen-mode .monitor-header {
+      inset: 20px 20px auto;
+    }
+
+    .monitor-left-tools {
+      display: grid;
+      gap: 8px;
+      justify-items: start;
+    }
+
+    .monitor-setting {
+      display: grid;
+      width: 38px;
+      height: 38px;
+      place-items: center;
+      border: 1px solid rgba(255, 255, 255, 0.30);
+      border-radius: 50%;
+      background: rgba(17, 24, 39, 0.48);
+      color: #fff;
+      backdrop-filter: blur(12px);
+    }
+
+    .monitor-setting svg {
+      width: 19px;
+      height: 19px;
+      display: block;
+    }
+
+    .live-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .live-pill,
+    .cam-name {
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.20);
+      padding: 7px 11px;
+      color: #fff;
+      font-size: 12px;
+      font-weight: 700;
+      backdrop-filter: blur(12px);
+    }
+
+    .live-pill.live {
+      background: rgba(242, 76, 84, 0.92);
+    }
+
+    .cam-name {
+      background: rgba(17, 24, 39, 0.46);
+      font-weight: 700;
+    }
+
+    .fullscreen-room-pill {
+      display: none;
+    }
+
+    .screen.fullscreen-mode .fullscreen-room-pill {
+      display: inline-flex;
+    }
+
+    .screen.fullscreen-mode .metric-chip {
+      display: none;
+    }
+
+    .monitor-metrics {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .metric-chip {
+      border: 1px solid rgba(255, 255, 255, 0.24);
+      border-radius: 999px;
+      background: rgba(17, 24, 39, 0.36);
+      padding: 6px 10px;
+      color: rgba(255, 255, 255, 0.96);
+      font-size: 11px;
+      backdrop-filter: blur(12px);
+    }
+
+    .monitor-actions {
+      position: absolute;
+      right: 14px;
+      bottom: 14px;
+      z-index: 3;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .screen.fullscreen-mode .monitor-actions {
+      right: 50%;
+      bottom: 22px;
+      transform: translateX(50%);
+      gap: 10px;
+      padding: 8px;
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      border-radius: 18px;
+      background: rgba(7, 12, 22, 0.50);
+      backdrop-filter: blur(16px);
+    }
+
+    .monitor.split-2 .monitor-actions,
+    .monitor.split-4 .monitor-actions {
+      display: none;
+    }
+
+    .screen.fullscreen-mode .monitor.split-2 .monitor-actions,
+    .screen.fullscreen-mode .monitor.split-4 .monitor-actions {
+      display: flex;
+    }
+
+    .monitor.split-2 .monitor-setting,
+    .monitor.split-4 .monitor-setting {
+      display: none;
+    }
+
+    .icon-btn {
+      display: grid;
+      width: 36px;
+      height: 36px;
+      place-items: center;
+      border: 0;
+      border-radius: 12px;
+      background: rgba(17, 24, 39, 0.40);
+      color: #fff;
+      font-size: 15px;
+      backdrop-filter: blur(12px);
+    }
+
+    .action-label {
+      display: none;
+    }
+
+    .fullscreen-only {
+      display: none;
+    }
+
+    .screen.fullscreen-mode .fullscreen-only {
+      display: grid;
+    }
+
+    .screen.fullscreen-mode .icon-btn {
+      width: 40px;
+      min-width: 40px;
+      height: 40px;
+      border-radius: 14px;
+      padding: 0;
+      background: rgba(17, 24, 39, 0.62);
+      font-size: 15px;
+    }
+
+    .screen.fullscreen-mode .action-label {
+      display: none;
+    }
+
+    .multi-grid {
+      position: absolute;
+      inset: 0;
+      z-index: 2;
+      display: none;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      grid-template-rows: repeat(2, minmax(0, 1fr));
+      gap: 0;
+    }
+
+    .monitor.split-2 .multi-grid,
+    .monitor.split-4 .multi-grid { display: grid; }
+
+    .monitor.split-2 .multi-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      grid-template-rows: 1fr;
+    }
+
+    .monitor.split-2 .camera-tile:nth-child(n+3) { display: none; }
+
+    .monitor.split-4 .multi-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      grid-template-rows: repeat(2, minmax(0, 1fr));
+    }
+
+    .monitor.split-4 .camera-tile:nth-child(n+5) { display: none; }
+
+    .camera-tile {
+      position: relative;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.34);
+      border-radius: 0;
+      background:
+        linear-gradient(180deg, rgba(0, 0, 0, 0.06), rgba(0, 0, 0, 0.54)),
+        url("public/baby-crib-overhead.jpg");
+      background-position: var(--pos, center 55%);
+      background-size: cover;
+      color: #fff;
+      text-align: left;
+    }
+
+    .camera-tile.active {
+      outline: 2px solid rgba(82, 166, 255, 0.92);
+      outline-offset: -2px;
+    }
+
+    .camera-tile .tile-sound {
+      position: absolute;
+      right: 10px;
+      bottom: 10px;
+      z-index: 2;
+      display: grid;
+      width: 34px;
+      height: 34px;
+      place-items: center;
+      border: 0;
+      border-radius: 50%;
+      background: rgba(17, 24, 39, 0.58);
+      color: #fff;
+      font-size: 14px;
+      backdrop-filter: blur(12px);
+    }
+
+    .camera-tile .tile-setting {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      z-index: 2;
+      display: grid;
+      width: 34px;
+      height: 34px;
+      place-items: center;
+      border: 1px solid rgba(255, 255, 255, 0.30);
+      border-radius: 50%;
+      background: rgba(17, 24, 39, 0.54);
+      color: #fff;
+      backdrop-filter: blur(12px);
+    }
+
+    .tile-sound svg,
+    .tile-setting svg {
+      width: 17px;
+      height: 17px;
+      display: block;
+    }
+
+    .sound-icon {
+      display: inline-grid;
+      place-items: center;
+      line-height: 0;
+    }
+
+    .camera-tile strong {
+      position: absolute;
+      z-index: 1;
+    }
+
+    .camera-tile strong {
+      left: 10px;
+      bottom: 10px;
+      font-size: 12px;
+    }
+
+    .right-panel {
+      position: relative;
+      z-index: 2;
+      display: grid;
+      grid-template-rows: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+      align-self: stretch;
+      min-width: 0;
+      min-height: 0;
+    }
+
+    .care-card {
+      display: flex;
+      min-height: 0;
+      flex-direction: column;
+      justify-content: center;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      background: linear-gradient(180deg, rgba(23, 34, 54, 0.96), rgba(15, 24, 40, 0.96));
+      padding: 14px;
+    }
+
+    .care-card h3 {
+      margin: 0 0 8px;
+      color: #eff6ff;
+      font-size: 15px;
+      line-height: 1.45;
+    }
+
+    .care-card p {
+      margin: 0;
+      color: #c0cce0;
+      font-size: 13px;
+      line-height: 1.55;
+    }
+
+    .care-card strong {
+      color: #ffffff;
+      font-weight: 800;
+    }
+
+    .care-card .event-record-list {
+      margin-top: 2px;
+    }
+
+    .care-card.scene-card {
+      display: none;
+    }
+
+    .right-panel[data-scene-panel="看护"] .scene-care,
+    .right-panel[data-scene-panel="活动"] .scene-activity,
+    .right-panel[data-scene-panel="育儿"] .scene-parenting {
+      display: flex;
+    }
+
+    .right-panel[data-scene-panel="活动"] .scene-activity {
+      grid-row: 1 / -1;
+    }
+
+    .scene-activity {
+      justify-content: flex-start;
+      padding: 16px;
+    }
+
+    .scene-activity h3 {
+      margin-bottom: 6px;
+    }
+
+    .scene-activity > p {
+      margin-bottom: 16px;
+      padding-bottom: 14px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .scene-activity .event-record-list {
+      gap: 14px;
+      margin-top: 2px;
+    }
+
+    .scene-activity .event-record-card {
+      min-height: 66px;
+      border-radius: 16px;
+      padding: 13px 12px;
+    }
+
+    .scene-parenting {
+      position: relative;
+      justify-content: flex-start;
+      overflow: hidden;
+      border-color: rgba(255, 182, 135, 0.28);
+      background:
+        linear-gradient(135deg, rgba(255, 206, 168, 0.16), transparent 52%),
+        linear-gradient(180deg, rgba(28, 38, 58, 0.98), rgba(16, 27, 45, 0.98));
+    }
+
+    .scene-parenting::before {
+      position: absolute;
+      top: -18px;
+      right: -18px;
+      width: 78px;
+      height: 78px;
+      border-radius: 50%;
+      background: rgba(255, 206, 168, 0.14);
+      content: "";
+    }
+
+    .parenting-card-head {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 8px;
+    }
+
+    .parenting-icon {
+      display: grid;
+      width: 34px;
+      height: 34px;
+      place-items: center;
+      border-radius: 13px;
+      background: rgba(255, 255, 255, 0.12);
+      color: #ffd0b0;
+      font-size: 17px;
+      font-weight: 900;
+    }
+
+    .scene-parenting h3 {
+      margin: 0;
+    }
+
+    .parenting-note {
+      position: relative;
+      z-index: 1;
+      border-radius: 14px;
+      background: rgba(255, 255, 255, 0.07);
+      padding: 9px 10px;
+      color: #dbe6f3;
+      font-size: 12px;
+      line-height: 1.55;
+    }
+
+    .parenting-chip {
+      display: inline-flex;
+      width: fit-content;
+      margin-top: 8px;
+      border-radius: 999px;
+      background: rgba(255, 206, 168, 0.16);
+      padding: 5px 9px;
+      color: #ffd0b0;
+      font-size: 10px;
+      font-weight: 900;
+    }
+
+    .profile-card,
+    .insight-card,
+    .status-card {
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      background: linear-gradient(180deg, rgba(23, 34, 54, 0.96), rgba(15, 24, 40, 0.96));
+      padding: 14px;
+    }
+
+    .profile-row {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+    }
+
+    .avatar {
+      width: 66px;
+      height: 66px;
+      flex: 0 0 auto;
+      border: 3px solid rgba(82, 166, 255, 0.38);
+      border-radius: 50%;
+      background-image: url("public/baby-crib-overhead.jpg");
+      background-position: 54% 66%;
+      background-size: cover;
+    }
+
+    .profile-name {
+      margin: 0;
+      font-size: 18px;
+      font-weight: 800;
+    }
+
+    .profile-sub {
+      margin-top: 4px;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .tag-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 10px;
+    }
+
+    .tag {
+      border-radius: 999px;
+      background: rgba(82, 166, 255, 0.14);
+      padding: 5px 9px;
+      color: #bddcff;
+      font-size: 11px;
+    }
+
+    .metric-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 8px;
+      margin-top: 12px;
+    }
+
+    .metric {
+      border-radius: 14px;
+      background: rgba(255, 255, 255, 0.06);
+      padding: 10px;
+      color: #9aa9bd;
+      font-size: 11px;
+    }
+
+    .metric strong {
+      display: block;
+      margin-top: 2px;
+      color: #f5f9ff;
+      font-size: 16px;
+    }
+
+    .metric:nth-child(1) { background: rgba(82, 166, 255, 0.12); }
+    .metric:nth-child(2) { background: rgba(255, 140, 77, 0.13); }
+    .metric:nth-child(3) { background: rgba(83, 213, 154, 0.12); }
+    .metric:nth-child(4) { background: rgba(166, 139, 255, 0.13); }
+
+    .insight-card strong,
+    .status-card strong {
+      display: block;
+      margin-bottom: 8px;
+      color: #eff6ff;
+      font-size: 14px;
+    }
+
+    .insight-card p,
+    .status-card p {
+      margin: 0;
+      color: #a9b7ca;
+      font-size: 12px;
+      line-height: 1.7;
+    }
+
+    .status-line {
+      display: grid;
+      gap: 8px;
+    }
+
+    .status-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      border-radius: 14px;
+      background: rgba(255, 255, 255, 0.06);
+      padding: 10px 12px;
+      color: #a4b2c6;
+      font-size: 12px;
+    }
+
+    .status-item b {
+      color: #f6fbff;
+      font-size: 13px;
+    }
+
+    .device-strip {
+      grid-column: 2;
+      grid-row: 4;
+      display: flex;
+      align-items: stretch;
+      padding: 10px 12px;
+    }
+
+    .device-row {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 10px;
+      width: 100%;
+    }
+
+    .device-card {
+      display: grid;
+      grid-template-rows: 30px auto auto;
+      align-content: center;
+      gap: 3px;
+      min-width: 0;
+      min-height: 86px;
+      height: 100%;
+      overflow: hidden;
+      border: 1px solid rgba(127, 151, 180, 0.28);
+      border-radius: 18px;
+      background: rgba(18, 28, 47, 0.96);
+      padding: 8px 12px;
+      color: #d7e4f6;
+      text-align: center;
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,.04);
+    }
+
+    .device-card.active {
+      border-color: rgba(255, 140, 77, 0.72);
+      background: linear-gradient(180deg, rgba(255, 140, 77, 0.24), rgba(18, 28, 47, 0.98));
+      color: #fff4ec;
+    }
+
+    .device-card:nth-child(3),
+    .device-card:nth-child(5) {
+      border-color: rgba(82, 166, 255, 0.32);
+      background: rgba(18, 34, 58, 0.96);
+    }
+
+    .device-meta {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      align-items: center;
+      min-width: 0;
+      position: relative;
+    }
+
+    .device-icon {
+      display: grid;
+      width: 30px;
+      height: 30px;
+      place-items: center;
+      border-radius: 50%;
+      background: rgba(82, 166, 255, 0.18);
+      color: #fff;
+      font-size: 13px;
+      flex: 0 0 auto;
+    }
+
+    .device-card.active .device-icon { background: #ff8c4d; color: #fff; }
+    .device-card:nth-child(3) .device-icon,
+    .device-card:nth-child(5) .device-icon { background: #68cde0; }
+
+    .device-name {
+      min-width: 0;
+      margin: 0;
+      overflow: hidden;
+      font-size: 11px;
+      font-weight: 700;
+      line-height: 1.25;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .device-state {
+      min-width: 0;
+      margin: 0;
+      overflow: hidden;
+      color: #91a2ba;
+      font-size: 10px;
+      line-height: 1.25;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .device-meta > .device-state {
+      position: absolute;
+      top: 0;
+      right: 0;
+      margin: 0;
+      color: inherit;
+    }
+
+    .device-card.active .device-state { color: #ffd0af; }
+    .device-card:nth-child(3) .device-state,
+    .device-card:nth-child(5) .device-state { color: #62b973; }
+
+    .device-page {
+      grid-column: 2;
+      grid-row: 2 / 5;
+      display: none;
+      min-height: 0;
+      overflow: hidden;
+      background: #0d1524;
+      padding: 18px 20px 20px;
+    }
+
+    .screen.device-page-mode .tabs-bar,
+    .screen.device-page-mode .content,
+    .screen.device-page-mode .device-strip,
+    .screen.device-page-mode .care-page,
+    .screen.device-page-mode .replay-page,
+    .screen.device-page-mode .settings-page,
+    .screen.device-page-mode .account-page,
+    .screen.device-page-mode .notification-page,
+    .screen.device-page-mode .onboarding-page {
+      display: none;
+    }
+
+    .screen.device-page-mode .device-page {
+      display: grid;
+      grid-template-rows: auto auto minmax(0, 1fr);
+      gap: 16px;
+    }
+
+    .device-page-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      min-height: 54px;
+    }
+
+    .replay-page {
+      grid-column: 2;
+      grid-row: 2 / 5;
+      display: none;
+      min-height: 0;
+      overflow: hidden;
+      background: #0d1524;
+    }
+
+    .screen.replay-page-mode .tabs-bar,
+    .screen.replay-page-mode .content,
+    .screen.replay-page-mode .device-strip,
+    .screen.replay-page-mode .device-page,
+    .screen.replay-page-mode .care-page,
+    .screen.replay-page-mode .settings-page,
+    .screen.replay-page-mode .account-page,
+    .screen.replay-page-mode .notification-page,
+    .screen.replay-page-mode .onboarding-page {
+      display: none;
+    }
+
+    .screen.replay-page-mode .replay-page {
+      display: grid;
+      grid-template-rows: 48px minmax(0, 1fr);
+      min-height: 0;
+    }
+
+    .replay-top {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+      align-items: center;
+      gap: 12px;
+      border-bottom: 1px solid var(--line);
+      background: #101929;
+      padding: 0 14px;
+    }
+
+    .replay-title {
+      color: #f5f9ff;
+      font-size: 18px;
+      font-weight: 900;
+    }
+
+    .replay-tabs {
+      display: inline-flex;
+      gap: 8px;
+      justify-self: center;
+    }
+
+    .replay-top-actions {
+      display: inline-flex;
+      align-items: center;
+      justify-self: end;
+      gap: 10px;
+    }
+
+    .replay-tab {
+      min-width: 86px;
+      height: 34px;
+      border: 1px solid rgba(134, 164, 202, 0.30);
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.055);
+      color: #aebbd0;
+      font-size: 13px;
+      font-weight: 900;
+    }
+
+    .replay-tab.active {
+      border-color: rgba(82, 166, 255, 0.72);
+      background: linear-gradient(180deg, #52a6ff, #2563eb);
+      color: #fff;
+    }
+
+    .album-btn {
+      justify-self: end;
+      min-width: 86px;
+      height: 34px;
+      border: 1px solid rgba(134, 164, 202, 0.30);
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.055);
+      color: #dbe8f8;
+      font-size: 13px;
+      font-weight: 900;
+    }
+
+    .replay-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 300px;
+      min-height: 0;
+    }
+
+    .replay-main {
+      display: grid;
+      grid-template-rows: minmax(0, 1fr) 124px;
+      min-height: 0;
+      border-right: 1px solid var(--line);
+    }
+
+    .video-player {
+      position: relative;
+      min-height: 0;
+      overflow: hidden;
+      background:
+        linear-gradient(180deg, rgba(6, 11, 19, 0.18), rgba(6, 11, 19, 0.46)),
+        url("public/baby-crib-overhead.jpg");
+      background-position: center 56%;
+      background-size: cover;
+    }
+
+    .video-player::after {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, transparent 55%, rgba(0, 0, 0, 0.34));
+      content: "";
+      pointer-events: none;
+    }
+
+    .video-label {
+      position: absolute;
+      top: 18px;
+      left: 18px;
+      z-index: 1;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      border-radius: 999px;
+      background: rgba(17, 24, 39, 0.52);
+      padding: 8px 12px;
+      color: #fff;
+      font-size: 12px;
+      font-weight: 900;
+      backdrop-filter: blur(12px);
+    }
+
+    .video-center-play {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      z-index: 1;
+      display: grid;
+      width: 72px;
+      height: 72px;
+      place-items: center;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.20);
+      color: #fff;
+      font-size: 28px;
+      transform: translate(-50%, -50%);
+      backdrop-filter: blur(14px);
+    }
+
+    .replay-controls {
+      position: absolute;
+      right: 20px;
+      bottom: 18px;
+      z-index: 1;
+      display: flex;
+      gap: 8px;
+    }
+
+    .replay-control-btn {
+      min-width: 46px;
+      height: 36px;
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      border-radius: 13px;
+      background: rgba(17, 24, 39, 0.52);
+      color: #fff;
+      font-size: 12px;
+      font-weight: 900;
+      backdrop-filter: blur(12px);
+    }
+
+    .timeline-panel {
+      display: grid;
+      align-items: center;
+      padding: 14px 18px 16px;
+      background: rgba(255, 255, 255, 0.035);
+    }
+
+    .event-timeline {
+      position: relative;
+      height: 92px;
+    }
+
+    .event-timeline::before {
+      position: absolute;
+      top: 38px;
+      right: 0;
+      left: 0;
+      height: 12px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.10);
+      content: "";
+    }
+
+    .timeline-block {
+      position: absolute;
+      top: 38px;
+      height: 12px;
+      border-radius: 999px;
+      box-shadow: 0 0 18px rgba(255, 255, 255, 0.08);
+    }
+
+    .timeline-block.sleep {
+      background: linear-gradient(90deg, #59a7ff, #7fc8ff);
+    }
+
+    .timeline-block.move {
+      background: linear-gradient(90deg, #ffb057, #ff8a4a);
+    }
+
+    .timeline-block.alert {
+      background: linear-gradient(90deg, #ff6b7a, #ff3f67);
+    }
+
+    .timeline-block.feed {
+      background: linear-gradient(90deg, #55e0b7, #36c894);
+    }
+
+    .timeline-tick {
+      position: absolute;
+      top: 30px;
+      bottom: 28px;
+      width: 1px;
+      background: rgba(255, 255, 255, 0.20);
+      transform: translateX(-50%);
+    }
+
+    .timeline-tick strong {
+      position: absolute;
+      top: 43px;
+      left: 50%;
+      color: #90a2bb;
+      font-size: 10px;
+      font-weight: 800;
+      white-space: nowrap;
+      transform: translateX(-50%);
+    }
+
+    .timeline-legend {
+      position: absolute;
+      top: 0;
+      right: 0;
+      display: flex;
+      gap: 10px;
+    }
+
+    .timeline-legend span {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      color: #9dafc6;
+      font-size: 10px;
+      font-weight: 800;
+    }
+
+    .timeline-legend i {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+    }
+
+    .timeline-legend .sleep-dot {
+      background: #65b9ff;
+    }
+
+    .timeline-legend .move-dot {
+      background: #ff9950;
+    }
+
+    .timeline-legend .alert-dot {
+      background: #ff5570;
+    }
+
+    .timeline-legend .feed-dot {
+      background: #45d3a2;
+    }
+
+    .replay-side {
+      display: grid;
+      grid-template-rows: auto minmax(0, 1fr);
+      min-height: 0;
+      background: rgba(255, 255, 255, 0.035);
+    }
+
+    .device-select {
+      display: grid;
+      gap: 10px;
+      border-bottom: 1px solid var(--line);
+      padding: 16px;
+    }
+
+    .device-select h3,
+    .event-list-head h3 {
+      margin: 0;
+      color: #f5f9ff;
+      font-size: 16px;
+    }
+
+    .device-pills {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .device-pill {
+      border: 1px solid rgba(134, 164, 202, 0.28);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.055);
+      padding: 7px 10px;
+      color: #aebbd0;
+      font-size: 11px;
+      font-weight: 900;
+    }
+
+    .device-pill.active {
+      background: rgba(82, 166, 255, 0.20);
+      color: #fff;
+      border-color: rgba(82, 166, 255, 0.58);
+    }
+
+    .event-replay-list {
+      display: grid;
+      grid-template-rows: auto minmax(0, 1fr);
+      min-height: 0;
+      padding: 16px;
+    }
+
+    .event-list-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 12px;
+    }
+
+    .replay-events {
+      display: grid;
+      align-content: start;
+      gap: 10px;
+      min-height: 0;
+      overflow: hidden;
+    }
+
+    .replay-event-card {
+      display: grid;
+      grid-template-columns: 72px minmax(0, 1fr);
+      gap: 10px;
+      min-height: 78px;
+      border: 1px solid rgba(127, 151, 180, 0.22);
+      border-radius: 16px;
+      background: rgba(255, 255, 255, 0.055);
+      padding: 9px;
+    }
+
+    .event-thumb {
+      border-radius: 12px;
+      background:
+        linear-gradient(180deg, rgba(0, 0, 0, 0.05), rgba(0, 0, 0, 0.36)),
+        url("public/baby-crib-overhead.jpg");
+      background-position: center;
+      background-size: cover;
+    }
+
+    .replay-event-card strong {
+      display: block;
+      overflow: hidden;
+      color: #f5f9ff;
+      font-size: 12px;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .replay-event-card span {
+      display: block;
+      margin-top: 5px;
+      color: #91a2ba;
+      font-size: 10px;
+      line-height: 1.45;
+    }
+
+    .device-title h2 {
+      margin: 0;
+      color: #f5f9ff;
+      font-size: 24px;
+      font-weight: 800;
+      letter-spacing: 0;
+    }
+
+    .device-title p {
+      margin: 6px 0 0;
+      color: #8fa0b9;
+      font-size: 12px;
+      font-weight: 600;
+    }
+
+    .add-device-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      height: 38px;
+      border: 1px solid rgba(82, 166, 255, 0.62);
+      border-radius: 13px;
+      background: linear-gradient(180deg, #52a6ff 0%, #2563eb 100%);
+      padding: 0 15px;
+      color: #fff;
+      font-size: 13px;
+      font-weight: 800;
+      box-shadow: 0 12px 24px rgba(37, 99, 235, 0.26);
+    }
+
+    .add-device-btn svg {
+      width: 17px;
+      height: 17px;
+    }
+
+    .device-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      grid-auto-rows: 142px;
+      align-content: start;
+      gap: 12px;
+      min-height: 0;
+    }
+
+    .device-page-card {
+      position: relative;
+      display: grid;
+      grid-template-rows: auto auto auto;
+      gap: 9px;
+      min-width: 0;
+      overflow: hidden;
+      border: 1px solid rgba(127, 151, 180, 0.24);
+      border-radius: 20px;
+      background:
+        radial-gradient(circle at 88% 10%, rgba(82, 166, 255, 0.16), transparent 32%),
+        linear-gradient(180deg, rgba(20, 31, 52, 0.98), rgba(14, 23, 39, 0.98));
+      padding: 12px 13px;
+      color: #edf6ff;
+      text-align: left;
+      box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.035);
+    }
+
+    .device-page-card.active {
+      border-color: rgba(82, 166, 255, 0.70);
+      background:
+        radial-gradient(circle at 86% 10%, rgba(82, 166, 255, 0.26), transparent 34%),
+        linear-gradient(180deg, rgba(28, 45, 74, 0.98), rgba(14, 23, 39, 0.98));
+      box-shadow: 0 16px 34px rgba(0, 0, 0, 0.20), inset 0 0 0 1px rgba(255, 255, 255, 0.045);
+    }
+
+    .device-card-top {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 10px;
+      min-width: 0;
+    }
+
+    .device-page-icon {
+      display: grid;
+      width: 34px;
+      height: 34px;
+      place-items: center;
+      border-radius: 12px;
+      background: rgba(82, 166, 255, 0.18);
+      color: #dceeff;
+    }
+
+    .device-page-icon svg {
+      width: 19px;
+      height: 19px;
+    }
+
+    .device-online {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      min-width: 0;
+      border-radius: 999px;
+      background: rgba(87, 214, 143, 0.12);
+      padding: 4px 7px;
+      color: #80e2a5;
+      font-size: 10px;
+      font-weight: 800;
+      white-space: nowrap;
+    }
+
+    .device-online::before {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: currentColor;
+      content: "";
+    }
+
+    .device-online.pending {
+      background: rgba(255, 178, 92, 0.14);
+      color: #ffc57d;
+    }
+
+    .device-page-main {
+      min-width: 0;
+    }
+
+    .device-page-main strong {
+      display: block;
+      overflow: hidden;
+      color: #f6fbff;
+      font-size: 14px;
+      line-height: 1.25;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .device-page-main span {
+      display: block;
+      margin-top: 4px;
+      overflow: hidden;
+      color: #8fa0b9;
+      font-size: 11px;
+      line-height: 1.35;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .device-page-foot {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      min-width: 0;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      padding-top: 7px;
+      color: #b7c6dc;
+      font-size: 11px;
+      font-weight: 700;
+    }
+
+    .device-page-foot b {
+      overflow: hidden;
+      color: #f5f9ff;
+      font-size: 12px;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .device-switch {
+      position: relative;
+      width: 36px;
+      height: 20px;
+      flex: 0 0 auto;
+      border-radius: 999px;
+      background: rgba(82, 166, 255, 0.86);
+    }
+
+    .device-switch::after {
+      position: absolute;
+      top: 3px;
+      right: 3px;
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      background: #fff;
+      content: "";
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.24);
+    }
+
+    .device-switch.off {
+      background: rgba(143, 160, 185, 0.34);
+    }
+
+    .device-switch.off::after {
+      right: 19px;
+      background: #c6d0df;
+    }
+
+    .care-page {
+      grid-column: 2;
+      grid-row: 2 / 5;
+      display: none;
+      min-height: 0;
+      overflow: hidden;
+      background: #0d1524;
+      padding: 18px 20px 20px;
+    }
+
+    .screen.care-page-mode .tabs-bar,
+    .screen.care-page-mode .content,
+    .screen.care-page-mode .device-strip,
+    .screen.care-page-mode .device-page,
+    .screen.care-page-mode .replay-page,
+    .screen.care-page-mode .settings-page,
+    .screen.care-page-mode .account-page,
+    .screen.care-page-mode .notification-page,
+    .screen.care-page-mode .onboarding-page {
+      display: none;
+    }
+
+    .screen.care-page-mode .care-page {
+      display: grid;
+      grid-template-rows: auto minmax(0, 1fr);
+      gap: 14px;
+    }
+
+    .care-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+    }
+
+    .care-head h2 {
+      margin: 0;
+      color: #f5f9ff;
+      font-size: 24px;
+      font-weight: 900;
+    }
+
+    .care-head p {
+      margin: 5px 0 0;
+      color: #8fa0b9;
+      font-size: 12px;
+      font-weight: 600;
+    }
+
+    .care-tools {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .date-picker {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      height: 38px;
+      border: 1px solid rgba(82, 166, 255, 0.52);
+      border-radius: 13px;
+      background: rgba(82, 166, 255, 0.16);
+      padding: 0 12px;
+      color: #f5f9ff;
+      font-size: 12px;
+      font-weight: 900;
+    }
+
+    .date-picker svg {
+      width: 16px;
+      height: 16px;
+      color: #9ed0ff;
+    }
+
+    .care-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.85fr);
+      gap: 14px;
+      min-height: 0;
+    }
+
+    .metric-timeline,
+    .ai-advice-panel {
+      min-height: 0;
+      border: 1px solid rgba(127, 151, 180, 0.22);
+      border-radius: 22px;
+      background: linear-gradient(180deg, rgba(20, 31, 52, 0.98), rgba(14, 23, 39, 0.98));
+      box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.035);
+    }
+
+    .metric-timeline {
+      display: grid;
+      grid-template-columns: 54px minmax(0, 1fr);
+      overflow: hidden;
+    }
+
+    .axis-label {
+      display: grid;
+      place-items: center;
+      border-right: 1px solid rgba(255, 255, 255, 0.08);
+      color: #a9b7cc;
+      font-size: 13px;
+      font-weight: 900;
+      writing-mode: vertical-rl;
+      letter-spacing: 4px;
+    }
+
+    .timeline-list {
+      display: grid;
+      grid-template-rows: repeat(5, minmax(70px, 1fr)) minmax(96px, auto);
+      min-height: 0;
+    }
+
+    .timeline-item {
+      position: relative;
+      display: grid;
+      grid-template-columns: 150px minmax(0, 1fr);
+      align-items: center;
+      gap: 12px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      padding: 8px 12px;
+    }
+
+    .timeline-item h3 {
+      margin: 0;
+      color: #f5f9ff;
+      font-size: 14px;
+    }
+
+    .timeline-item p {
+      margin: 4px 0 0;
+      color: #8fa0b9;
+      font-size: 11px;
+      line-height: 1.35;
+    }
+
+    .mini-chart {
+      height: 58px;
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.055);
+      overflow: hidden;
+    }
+
+    .mini-chart svg {
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
+
+    .chart-grid-line {
+      stroke: rgba(255, 255, 255, 0.10);
+      stroke-width: 1;
+    }
+
+    .chart-axis-text {
+      fill: #7f90a8;
+      font-size: 8px;
+      font-weight: 800;
+    }
+
+    .chart-line {
+      fill: none;
+      stroke: #55d68c;
+      stroke-width: 2.2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .chart-alert-line {
+      fill: none;
+      stroke: #ff6472;
+      stroke-width: 3;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .chart-point {
+      fill: #ff6472;
+      stroke: rgba(255, 255, 255, 0.9);
+      stroke-width: 1;
+    }
+
+    .ai-advice-panel {
+      display: grid;
+      grid-template-rows: auto minmax(0, 1fr);
+      padding: 18px;
+    }
+
+    .ai-advice-panel h3 {
+      margin: 0;
+      color: #f6fbff;
+      font-size: 20px;
+    }
+
+    .advice-list {
+      display: grid;
+      align-content: start;
+      gap: 0;
+      margin-top: 0;
+    }
+
+    .advice-card {
+      border: 1px solid rgba(255, 206, 168, 0.20);
+      border-radius: 20px;
+      background:
+        linear-gradient(135deg, rgba(255, 206, 168, 0.12), transparent 58%),
+        rgba(255, 255, 255, 0.06);
+      padding: 18px;
+      color: #d3deec;
+      font-size: 15px;
+      line-height: 1.7;
+    }
+
+    .advice-card strong {
+      display: none;
+      margin-bottom: 10px;
+      color: #f5f9ff;
+      font-size: 17px;
+    }
+
+    .sleep-time-card {
+      grid-column: 1 / -1;
+      border: 1px solid rgba(127, 151, 180, 0.22);
+      border-radius: 20px;
+      background: rgba(255, 255, 255, 0.055);
+      padding: 14px;
+    }
+
+    .sleep-time-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+
+    .sleep-time-head h3 {
+      margin: 0;
+      color: #f5f9ff;
+      font-size: 16px;
+    }
+
+    .sleep-legend {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      color: #aebbd0;
+      font-size: 12px;
+      font-weight: 800;
+    }
+
+    .sleep-legend span {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      white-space: nowrap;
+    }
+
+    .sleep-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--dot);
+    }
+
+    .sleep-bar {
+      display: flex;
+      overflow: hidden;
+      height: 26px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.08);
+    }
+
+    .sleep-seg {
+      width: var(--w);
+      background: var(--c);
+    }
+
+    .sleep-scale {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 8px;
+      color: #8fa0b9;
+      font-size: 12px;
+      font-weight: 800;
+    }
+
+    .settings-page {
+      grid-column: 2;
+      grid-row: 2 / 5;
+      display: none;
+      min-height: 0;
+      overflow: hidden;
+      background: #0d1524;
+    }
+
+    .screen.settings-page-mode .tabs-bar,
+    .screen.settings-page-mode .content,
+    .screen.settings-page-mode .device-strip,
+    .screen.settings-page-mode .device-page,
+    .screen.settings-page-mode .care-page,
+    .screen.settings-page-mode .replay-page,
+    .screen.settings-page-mode .account-page,
+    .screen.settings-page-mode .notification-page,
+    .screen.settings-page-mode .onboarding-page {
+      display: none;
+    }
+
+    .screen.settings-page-mode .settings-page {
+      display: grid;
+      grid-template-columns: 142px minmax(0, 1fr);
+      min-height: 0;
+    }
+
+    .settings-nav {
+      min-height: 0;
+      border-right: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.045);
+      padding: 12px 8px;
+    }
+
+    .settings-nav button {
+      display: flex;
+      align-items: center;
+      width: 100%;
+      min-height: 42px;
+      border: 1px solid transparent;
+      border-radius: 13px;
+      background: transparent;
+      padding: 0 12px;
+      color: #9facbf;
+      font-size: 13px;
+      font-weight: 800;
+      text-align: left;
+    }
+
+    .settings-nav button + button {
+      margin-top: 5px;
+    }
+
+    .settings-nav button.active {
+      border-color: rgba(82, 166, 255, 0.50);
+      background: linear-gradient(180deg, rgba(82, 166, 255, 0.24), rgba(82, 166, 255, 0.08));
+      color: #fff;
+    }
+
+    .settings-content {
+      min-height: 0;
+      overflow: hidden;
+      padding: 18px 20px 20px;
+    }
+
+    .settings-panel {
+      display: none;
+      height: 100%;
+      min-height: 0;
+    }
+
+    .settings-panel.active {
+      display: grid;
+      grid-template-rows: auto minmax(0, 1fr);
+      gap: 16px;
+    }
+
+    .settings-head {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .settings-head h2 {
+      margin: 0;
+      color: #f5f9ff;
+      font-size: 24px;
+      font-weight: 800;
+    }
+
+    .settings-head p {
+      margin: 6px 0 0;
+      color: #8fa0b9;
+      font-size: 12px;
+      font-weight: 600;
+    }
+
+    .settings-chip {
+      border: 1px solid rgba(134, 164, 202, 0.24);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.06);
+      padding: 7px 10px;
+      color: #b9c9df;
+      font-size: 11px;
+      font-weight: 800;
+      white-space: nowrap;
+    }
+
+    .settings-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.8fr);
+      gap: 14px;
+      min-height: 0;
+    }
+
+    .settings-list {
+      display: grid;
+      align-content: start;
+      gap: 10px;
+      min-height: 0;
+    }
+
+    .setting-row,
+    .setting-card {
+      border: 1px solid rgba(127, 151, 180, 0.22);
+      border-radius: 18px;
+      background: linear-gradient(180deg, rgba(20, 31, 52, 0.98), rgba(14, 23, 39, 0.98));
+      box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.035);
+    }
+
+    .setting-row {
+      display: grid;
+      grid-template-columns: 112px minmax(0, 1fr) auto;
+      align-items: center;
+      gap: 14px;
+      min-height: 54px;
+      padding: 11px 14px;
+    }
+
+    .setting-label {
+      min-width: 0;
+      color: #f5f9ff;
+      font-size: 14px;
+      font-weight: 800;
+    }
+
+    .setting-desc {
+      display: block;
+      margin-top: 3px;
+      color: #8798b1;
+      font-size: 10px;
+      font-weight: 600;
+    }
+
+    .setting-value {
+      color: #b9c9df;
+      font-size: 12px;
+      font-weight: 800;
+      white-space: nowrap;
+    }
+
+    .setting-slider {
+      position: relative;
+      height: 6px;
+      overflow: hidden;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.08);
+    }
+
+    .setting-slider span {
+      display: block;
+      width: var(--value, 50%);
+      height: 100%;
+      border-radius: inherit;
+      background: linear-gradient(90deg, #52a6ff, #2563eb);
+      box-shadow: 0 0 18px rgba(82, 166, 255, 0.36);
+    }
+
+    .segmented {
+      display: inline-flex;
+      overflow: hidden;
+      border: 1px solid rgba(134, 164, 202, 0.24);
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.05);
+      padding: 3px;
+    }
+
+    .segmented span {
+      display: grid;
+      min-width: 46px;
+      height: 26px;
+      place-items: center;
+      border-radius: 9px;
+      color: #90a1b8;
+      font-size: 11px;
+      font-weight: 800;
+    }
+
+    .segmented span.active {
+      background: #2f7df1;
+      color: #fff;
+    }
+
+    .setting-switch {
+      position: relative;
+      width: 42px;
+      height: 24px;
+      border: 0;
+      border-radius: 999px;
+      background: rgba(82, 166, 255, 0.86);
+      flex: 0 0 auto;
+    }
+
+    .setting-switch::after {
+      position: absolute;
+      top: 3px;
+      right: 3px;
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: #fff;
+      content: "";
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.22);
+    }
+
+    .setting-card {
+      padding: 15px;
+    }
+
+    .setting-card h3 {
+      margin: 0;
+      color: #f6fbff;
+      font-size: 15px;
+    }
+
+    .setting-card p {
+      margin: 8px 0 0;
+      color: #91a2ba;
+      font-size: 12px;
+      line-height: 1.6;
+    }
+
+    .setting-mini-list {
+      display: grid;
+      gap: 8px;
+      margin-top: 12px;
+    }
+
+    .setting-mini-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.055);
+      padding: 10px;
+      color: #aebbd0;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .settings-simple-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      align-content: start;
+      gap: 12px;
+    }
+
+    .account-page {
+      grid-column: 2;
+      grid-row: 2 / 5;
+      display: none;
+      min-height: 0;
+      overflow: hidden;
+      background: #0d1524;
+    }
+
+    .screen.account-page-mode .tabs-bar,
+    .screen.account-page-mode .content,
+    .screen.account-page-mode .device-strip,
+    .screen.account-page-mode .device-page,
+    .screen.account-page-mode .settings-page,
+    .screen.account-page-mode .care-page,
+    .screen.account-page-mode .replay-page,
+    .screen.account-page-mode .notification-page,
+    .screen.account-page-mode .onboarding-page {
+      display: none;
+    }
+
+    .screen.account-page-mode .account-page {
+      display: grid;
+      grid-template-columns: 132px minmax(0, 1fr);
+      min-height: 0;
+    }
+
+    .notification-page {
+      grid-column: 1 / -1;
+      grid-row: 1 / -1;
+      display: none;
+      position: relative;
+      z-index: 24;
+      min-height: 0;
+      place-items: start center;
+      background: transparent;
+      padding: 36px 28px 0;
+      pointer-events: none;
+    }
+
+    .screen.notification-page-mode .notification-page {
+      display: grid;
+    }
+
+    .onboarding-page {
+      grid-column: 2;
+      grid-row: 2 / 5;
+      display: none;
+      min-height: 0;
+      overflow: hidden;
+      background: transparent;
+      padding: 18px 20px 20px;
+    }
+
+    .screen.onboarding-page-mode .tabs-bar,
+    .screen.onboarding-page-mode .topbar,
+    .screen.onboarding-page-mode .screen-menu,
+    .screen.onboarding-page-mode .content,
+    .screen.onboarding-page-mode .device-strip,
+    .screen.onboarding-page-mode .device-page,
+    .screen.onboarding-page-mode .replay-page,
+    .screen.onboarding-page-mode .care-page,
+    .screen.onboarding-page-mode .settings-page,
+    .screen.onboarding-page-mode .account-page,
+    .screen.onboarding-page-mode .notification-page {
+      display: none;
+    }
+
+    .screen.onboarding-page-mode .onboarding-page {
+      grid-column: 1;
+      grid-row: 1;
+      display: grid;
+      grid-template-rows: minmax(0, 1fr);
+      padding: 26px 34px 30px;
+    }
+
+    .onboarding-head {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 16px;
+      width: 100%;
+      max-width: 1040px;
+      margin: 0 auto;
+    }
+
+    .onboarding-head h2 {
+      margin: 0;
+      color: #f5f9ff;
+      font-size: 24px;
+      font-weight: 900;
+    }
+
+    .onboarding-head p {
+      margin: 6px 0 0;
+      color: #8fa0b9;
+      font-size: 12px;
+      font-weight: 650;
+    }
+
+    .onboarding-layout {
+      display: grid;
+      grid-template-rows: minmax(0, 1fr);
+      min-height: 0;
+      width: 100%;
+      max-width: 1040px;
+      margin: 0 auto;
+    }
+
+    .onboarding-steps,
+    .onboarding-flow-card {
+      border: 1px solid rgba(127, 151, 180, 0.22);
+      border-radius: 24px;
+      background: linear-gradient(180deg, rgba(20, 31, 52, 0.86), rgba(14, 23, 39, 0.86));
+      box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.035);
+      backdrop-filter: blur(20px);
+    }
+
+    .onboarding-steps {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      min-height: 72px;
+      padding: 12px;
+    }
+
+    .onboarding-step {
+      position: relative;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex: 1;
+      min-width: 0;
+      min-height: 46px;
+      border: 1px solid transparent;
+      border-radius: 14px;
+      background: rgba(255, 255, 255, 0.04);
+      padding: 7px 9px;
+      color: #aab8cc;
+      text-align: left;
+    }
+
+    .onboarding-step.active {
+      border-color: rgba(82, 166, 255, 0.56);
+      background: linear-gradient(90deg, rgba(82, 166, 255, 0.22), rgba(255, 255, 255, 0.06));
+      color: #fff;
+    }
+
+    .step-index {
+      display: grid;
+      width: 28px;
+      height: 28px;
+      flex: 0 0 auto;
+      place-items: center;
+      border-radius: 50%;
+      background: rgba(82, 166, 255, 0.18);
+      color: #c8e3ff;
+      font-size: 12px;
+      font-weight: 900;
+    }
+
+    .onboarding-step.done .step-index {
+      background: rgba(79, 218, 166, 0.20);
+      color: #80f0ca;
+    }
+
+    .onboarding-step.locked {
+      opacity: 0.48;
+    }
+
+    .onboarding-step strong {
+      display: block;
+      color: inherit;
+      overflow: hidden;
+      font-size: 12px;
+      font-weight: 900;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .onboarding-step span:last-child {
+      display: block;
+      margin-top: 3px;
+      color: #7f90a8;
+      font-size: 9px;
+      font-weight: 650;
+    }
+
+    .onboarding-flow-card {
+      position: relative;
+      display: grid;
+      grid-template-rows: minmax(0, 1fr) auto;
+      min-height: 0;
+      overflow: hidden;
+      box-shadow: 0 28px 80px rgba(0, 0, 0, 0.30), inset 0 0 0 1px rgba(255, 255, 255, 0.035);
+    }
+
+    .onboarding-screen {
+      display: none;
+      grid-template-columns: minmax(0, 1fr);
+      min-height: 0;
+      padding: 38px 56px;
+    }
+
+    .onboarding-screen.active {
+      display: grid;
+    }
+
+    .setup-visual {
+      display: grid;
+      align-content: center;
+      justify-items: center;
+      gap: 16px;
+      min-height: 0;
+      border-radius: 24px;
+      background:
+        radial-gradient(circle at 50% 28%, rgba(82, 166, 255, 0.30), transparent 38%),
+        linear-gradient(180deg, rgba(82, 166, 255, 0.12), rgba(255, 255, 255, 0.035));
+      padding: 20px;
+    }
+
+    .setup-device-illustration {
+      position: relative;
+      width: min(260px, 90%);
+      aspect-ratio: 4 / 3;
+      border: 1px solid rgba(160, 193, 232, 0.30);
+      border-radius: 28px;
+      background:
+        linear-gradient(180deg, rgba(12, 23, 40, 0.18), rgba(0, 0, 0, 0.30)),
+        url("public/baby-crib-overhead.jpg");
+      background-position: center;
+      background-size: cover;
+      box-shadow: 0 26px 60px rgba(0, 0, 0, 0.28);
+    }
+
+    .setup-device-illustration::after {
+      position: absolute;
+      right: 16px;
+      bottom: 14px;
+      width: 48px;
+      height: 5px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.55);
+      content: "";
+    }
+
+    .setup-visual-badge {
+      border: 1px solid rgba(134, 164, 202, 0.28);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.08);
+      padding: 8px 12px;
+      color: #d9e8fa;
+      font-size: 12px;
+      font-weight: 900;
+    }
+
+    .setup-form {
+      display: grid;
+      align-content: center;
+      gap: 14px;
+      min-height: 0;
+      width: min(560px, 100%);
+      margin: 0 auto;
+    }
+
+    .setup-form h3 {
+      margin: 0;
+      color: #f6fbff;
+      font-size: 26px;
+      line-height: 1.15;
+      font-weight: 900;
+    }
+
+    .setup-form p {
+      margin: 0;
+      color: #93a5bd;
+      font-size: 13px;
+      line-height: 1.65;
+      font-weight: 650;
+    }
+
+    .setup-options {
+      display: grid;
+      gap: 10px;
+      margin-top: 4px;
+    }
+
+    .setup-options.two-col {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .setup-select-wrap {
+      display: grid;
+      gap: 10px;
+      margin-top: 6px;
+    }
+
+    .setup-select-label {
+      color: #8fa0b9;
+      font-size: 12px;
+      font-weight: 800;
+    }
+
+    .setup-select {
+      position: relative;
+      display: grid;
+      grid-template-columns: 42px minmax(0, 1fr) 22px;
+      align-items: center;
+      gap: 12px;
+      min-height: 62px;
+      border: 1px solid rgba(82, 166, 255, 0.58);
+      border-radius: 18px;
+      background: rgba(82, 166, 255, 0.14);
+      padding: 10px 14px;
+      color: #eef6ff;
+      text-align: left;
+      box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.04);
+    }
+
+    .setup-select strong {
+      display: block;
+      color: #f6fbff;
+      font-size: 15px;
+      font-weight: 900;
+    }
+
+    .setup-select span {
+      display: block;
+      margin-top: 4px;
+      color: #8ea0b8;
+      font-size: 11px;
+      font-weight: 650;
+    }
+
+    .setup-select-arrow {
+      color: #9ecfff;
+      font-size: 18px;
+      font-weight: 900;
+    }
+
+    .setup-select-menu {
+      overflow: hidden;
+      border: 1px solid rgba(127, 151, 180, 0.22);
+      border-radius: 18px;
+      background: rgba(255, 255, 255, 0.055);
+    }
+
+    .setup-select-menu button {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      min-height: 48px;
+      border: 0;
+      border-bottom: 1px solid rgba(127, 151, 180, 0.14);
+      background: transparent;
+      padding: 0 14px;
+      color: #dce8f8;
+      font-size: 13px;
+      font-weight: 800;
+      text-align: left;
+    }
+
+    .setup-select-menu button:last-child {
+      border-bottom: 0;
+    }
+
+    .setup-select-menu button.active {
+      color: #8fc8ff;
+    }
+
+    .wifi-panel {
+      display: grid;
+      gap: 12px;
+      margin-top: 6px;
+    }
+
+    .wifi-current {
+      display: grid;
+      grid-template-columns: 42px minmax(0, 1fr) auto;
+      align-items: center;
+      gap: 12px;
+      min-height: 64px;
+      border: 1px solid rgba(82, 166, 255, 0.58);
+      border-radius: 18px;
+      background: rgba(82, 166, 255, 0.14);
+      padding: 10px 14px;
+      color: #eef6ff;
+    }
+
+    .wifi-current strong,
+    .wifi-list button strong {
+      display: block;
+      color: #f6fbff;
+      font-size: 14px;
+      font-weight: 900;
+    }
+
+    .wifi-current span,
+    .wifi-list button span {
+      display: block;
+      margin-top: 4px;
+      color: #8ea0b8;
+      font-size: 11px;
+      font-weight: 650;
+    }
+
+    .wifi-switch {
+      position: relative;
+      width: 46px;
+      height: 26px;
+      border-radius: 999px;
+      background: linear-gradient(180deg, #52a6ff, #2563eb);
+      box-shadow: 0 10px 18px rgba(37, 99, 235, 0.24);
+    }
+
+    .wifi-switch::after {
+      position: absolute;
+      top: 3px;
+      right: 3px;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: #fff;
+      content: "";
+    }
+
+    .wifi-list {
+      overflow: hidden;
+      border: 1px solid rgba(127, 151, 180, 0.22);
+      border-radius: 18px;
+      background: rgba(255, 255, 255, 0.055);
+    }
+
+    .wifi-list button {
+      display: grid;
+      grid-template-columns: 42px minmax(0, 1fr) auto;
+      align-items: center;
+      gap: 12px;
+      width: 100%;
+      min-height: 58px;
+      border: 0;
+      border-bottom: 1px solid rgba(127, 151, 180, 0.14);
+      background: transparent;
+      padding: 9px 14px;
+      text-align: left;
+    }
+
+    .wifi-list button:last-child {
+      border-bottom: 0;
+    }
+
+    .wifi-list button.active {
+      background: rgba(82, 166, 255, 0.10);
+    }
+
+    .wifi-secure {
+      color: #8fc8ff;
+      font-size: 12px;
+      font-weight: 900;
+    }
+
+    .setup-option,
+    .setup-field-row,
+    .setup-device-card {
+      border: 1px solid rgba(127, 151, 180, 0.22);
+      border-radius: 18px;
+      background: rgba(255, 255, 255, 0.055);
+      box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.03);
+    }
+
+    .setup-option {
+      display: grid;
+      grid-template-columns: 36px minmax(0, 1fr) auto;
+      align-items: center;
+      gap: 14px;
+      min-height: 62px;
+      padding: 11px 13px;
+      color: #eef6ff;
+      text-align: left;
+    }
+
+    .setup-option.active {
+      border-color: rgba(82, 166, 255, 0.62);
+      background: rgba(82, 166, 255, 0.16);
+    }
+
+    .setup-option-icon {
+      display: grid;
+      width: 36px;
+      height: 36px;
+      place-items: center;
+      border-radius: 14px;
+      background: rgba(82, 166, 255, 0.18);
+      color: #badeff;
+    }
+
+    .setup-option-icon svg {
+      width: 20px;
+      height: 20px;
+    }
+
+    .setup-option strong,
+    .setup-device-card strong {
+      display: block;
+      color: #f6fbff;
+      font-size: 13px;
+      font-weight: 900;
+    }
+
+    .setup-option span,
+    .setup-device-card span {
+      display: block;
+      margin-top: 4px;
+      color: #8ea0b8;
+      font-size: 11px;
+      font-weight: 650;
+    }
+
+    .setup-status {
+      border-radius: 999px;
+      background: rgba(79, 218, 166, 0.16);
+      padding: 6px 9px;
+      color: #83efc9;
+      font-size: 10px;
+      font-weight: 900;
+    }
+
+    .setup-fields {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    .setup-field-row {
+      min-height: 58px;
+      padding: 10px 12px;
+    }
+
+    .setup-field-row span {
+      display: block;
+      color: #8293aa;
+      font-size: 10px;
+      font-weight: 800;
+    }
+
+    .setup-field-row strong {
+      display: block;
+      margin-top: 6px;
+      color: #f6fbff;
+      font-size: 14px;
+      font-weight: 900;
+    }
+
+    .setup-auth-tabs {
+      display: inline-flex;
+      width: fit-content;
+      border: 1px solid rgba(134, 164, 202, 0.24);
+      border-radius: 14px;
+      background: rgba(255, 255, 255, 0.05);
+      padding: 4px;
+    }
+
+    .setup-auth-tabs button {
+      min-width: 88px;
+      height: 32px;
+      border: 0;
+      border-radius: 10px;
+      background: transparent;
+      color: #91a2ba;
+      font-size: 12px;
+      font-weight: 900;
+    }
+
+    .setup-auth-tabs button.active {
+      background: linear-gradient(180deg, #52a6ff, #2563eb);
+      color: #fff;
+    }
+
+    .auth-form {
+      display: grid;
+      gap: 10px;
+    }
+
+    .auth-input-row {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      align-items: center;
+      gap: 10px;
+      min-height: 58px;
+      border: 1px solid rgba(127, 151, 180, 0.22);
+      border-radius: 18px;
+      background: rgba(255, 255, 255, 0.055);
+      padding: 10px 12px;
+    }
+
+    .auth-input-row label {
+      display: block;
+      color: #8293aa;
+      font-size: 10px;
+      font-weight: 800;
+    }
+
+    .auth-input-row strong {
+      display: block;
+      margin-top: 6px;
+      color: #f6fbff;
+      font-size: 14px;
+      font-weight: 900;
+    }
+
+    .auth-inline-btn {
+      min-width: 76px;
+      height: 32px;
+      border: 1px solid rgba(82, 166, 255, 0.42);
+      border-radius: 11px;
+      background: rgba(82, 166, 255, 0.12);
+      color: #9ed0ff;
+      font-size: 11px;
+      font-weight: 900;
+    }
+
+    .auth-note {
+      color: #8fa0b9;
+      font-size: 11px;
+      font-weight: 650;
+      line-height: 1.5;
+    }
+
+    .setup-device-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    .setup-device-card {
+      display: grid;
+      grid-template-columns: 36px minmax(0, 1fr);
+      gap: 10px;
+      align-items: center;
+      min-height: 68px;
+      padding: 12px;
+    }
+
+    .setup-finish-list {
+      display: grid;
+      gap: 9px;
+    }
+
+    .setup-finish-list span {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      color: #d7e6f7;
+      font-size: 12px;
+      font-weight: 800;
+    }
+
+    .setup-finish-list span::before {
+      display: grid;
+      width: 20px;
+      height: 20px;
+      place-items: center;
+      border-radius: 50%;
+      background: rgba(79, 218, 166, 0.18);
+      color: #7ff0c8;
+      content: "✓";
+      font-size: 12px;
+      font-weight: 900;
+    }
+
+    .setup-qr {
+      display: grid;
+      width: 116px;
+      height: 116px;
+      place-items: center;
+      border-radius: 18px;
+      background:
+        linear-gradient(90deg, #0f1b2e 8px, transparent 8px) 0 0 / 18px 18px,
+        linear-gradient(#0f1b2e 8px, transparent 8px) 0 0 / 18px 18px,
+        #edf6ff;
+      color: #10213a;
+      font-size: 12px;
+      font-weight: 900;
+    }
+
+    .setup-actions {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      border-top: 1px solid rgba(127, 151, 180, 0.18);
+      padding: 14px 18px;
+    }
+
+    .setup-action-group {
+      display: flex;
+      gap: 10px;
+    }
+
+    .setup-secondary-btn,
+    .setup-primary-btn {
+      height: 38px;
+      border-radius: 13px;
+      padding: 0 16px;
+      font-size: 13px;
+      font-weight: 900;
+    }
+
+    .setup-secondary-btn {
+      border: 1px solid rgba(134, 164, 202, 0.26);
+      background: rgba(255, 255, 255, 0.06);
+      color: #c8d7eb;
+    }
+
+    .setup-secondary-btn:disabled {
+      opacity: 0.42;
+    }
+
+    .setup-primary-btn {
+      border: 1px solid rgba(82, 166, 255, 0.62);
+      background: linear-gradient(180deg, #52a6ff 0%, #2563eb 100%);
+      color: #fff;
+      box-shadow: 0 12px 24px rgba(37, 99, 235, 0.26);
+    }
+
+    .alert-modal {
+      display: grid;
+      grid-template-columns: 42px minmax(0, 1fr) auto 30px;
+      align-items: center;
+      gap: 12px;
+      width: min(700px, 88%);
+      min-height: 76px;
+      border: 1px solid rgba(255, 222, 226, 0.90);
+      border-radius: 24px;
+      background:
+        linear-gradient(135deg, rgba(255, 248, 250, 0.98), rgba(233, 245, 255, 0.98));
+      padding: 14px 16px;
+      box-shadow: 0 14px 34px rgba(31, 74, 128, 0.18);
+      pointer-events: auto;
+    }
+
+    .alert-baby-icon {
+      display: grid;
+      width: 42px;
+      height: 42px;
+      place-items: center;
+      border-radius: 16px;
+      background: rgba(255, 229, 234, 0.76);
+      color: #f05b70;
+      font-size: 20px;
+      font-weight: 900;
+    }
+
+    .alert-baby-icon svg {
+      width: 23px;
+      height: 23px;
+      display: block;
+    }
+
+    .alert-copy {
+      min-width: 0;
+    }
+
+    .alert-text {
+      color: #ec3f57;
+      font-size: 18px;
+      font-weight: 800;
+      letter-spacing: 0;
+      white-space: nowrap;
+    }
+
+    .alert-subtext {
+      margin-top: 3px;
+      color: #728196;
+      font-size: 12px;
+      font-weight: 650;
+      white-space: nowrap;
+    }
+
+    .alert-action {
+      min-width: 104px;
+      height: 38px;
+      border: 0;
+      border-radius: 15px;
+      background: linear-gradient(180deg, #3692ff, #1f74e8);
+      color: #fff;
+      font-size: 14px;
+      font-weight: 800;
+      box-shadow: 0 10px 18px rgba(31, 116, 232, 0.22);
+    }
+
+    .alert-close {
+      display: grid;
+      width: 36px;
+      height: 36px;
+      place-items: center;
+      border: 0;
+      border-radius: 50%;
+      background: transparent;
+      color: #8a98a8;
+      font-size: 28px;
+      line-height: 1;
+    }
+
+    .control-page {
+      grid-column: 1 / -1;
+      grid-row: 1 / -1;
+      display: none;
+      position: relative;
+      min-height: 0;
+      overflow: hidden;
+      background:
+        linear-gradient(90deg, rgba(87, 132, 188, 0.28), rgba(78, 121, 180, 0.46) 58%, rgba(64, 101, 157, 0.58)),
+        rgba(13, 25, 44, 0.62);
+      padding: 22px 34px 38px;
+      z-index: 12;
+      backdrop-filter: blur(24px);
+    }
+
+    .screen.control-page-mode .control-page {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 500px;
+      align-items: start;
+      justify-content: end;
+    }
+
+    .control-page::before {
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(circle at 28% 44%, rgba(255, 255, 255, 0.16), transparent 26%),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.10), transparent 48%);
+      content: "";
+      pointer-events: none;
+    }
+
+    .control-panel {
+      position: relative;
+      z-index: 1;
+      grid-column: 2;
+      display: grid;
+      grid-template-rows: auto minmax(0, 1fr);
+      gap: 14px;
+      width: 500px;
+      max-width: 100%;
+    }
+
+    .control-panel-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      min-height: 56px;
+    }
+
+    .control-panel-head h2 {
+      margin: 0;
+      color: rgba(255, 255, 255, 0.94);
+      font-size: 30px;
+      font-weight: 900;
+    }
+
+    .control-settings-btn {
+      display: grid;
+      width: 94px;
+      height: 48px;
+      place-items: center;
+      border: 1px solid rgba(255, 255, 255, 0.20);
+      border-radius: 18px;
+      background: rgba(227, 240, 255, 0.18);
+      color: #fff;
+      font-size: 18px;
+      font-weight: 900;
+      backdrop-filter: blur(18px);
+    }
+
+    .control-date {
+      display: none;
+    }
+
+    .control-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      grid-template-rows: repeat(4, 74px) 74px;
+      gap: 12px;
+      min-height: 0;
+    }
+
+    .glass-tile {
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      border-radius: 24px;
+      background: rgba(227, 240, 255, 0.18);
+      color: #fff;
+      box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.06), 0 16px 34px rgba(16, 35, 70, 0.18);
+      backdrop-filter: blur(18px);
+    }
+
+    .glass-tile.active {
+      background: linear-gradient(180deg, rgba(52, 145, 255, 0.96), rgba(37, 99, 235, 0.92));
+      box-shadow: 0 18px 36px rgba(37, 99, 235, 0.30);
+    }
+
+    .control-toggle {
+      display: grid;
+      grid-template-columns: 46px minmax(0, 1fr);
+      align-items: center;
+      gap: 12px;
+      min-width: 0;
+      padding: 12px 15px;
+      text-align: left;
+    }
+
+    .control-toggle.wide {
+      grid-column: span 2;
+    }
+
+    .control-toggle.stack {
+      grid-column: 1 / 3;
+    }
+
+    .control-icon {
+      display: grid;
+      width: 46px;
+      height: 46px;
+      place-items: center;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.16);
+      color: #fff;
+      font-size: 21px;
+      font-weight: 900;
+    }
+
+    .control-svg {
+      width: 25px;
+      height: 25px;
+      display: block;
+    }
+
+    .control-title {
+      display: block;
+      overflow: hidden;
+      color: #fff;
+      font-size: 17px;
+      font-weight: 900;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .control-subtitle {
+      display: block;
+      margin-top: 4px;
+      color: rgba(255, 255, 255, 0.76);
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .vertical-slider {
+      display: grid;
+      align-content: stretch;
+      justify-items: center;
+      gap: 10px;
+      padding: 14px 10px 12px;
+    }
+
+    .vertical-slider.brightness-slider {
+      grid-column: 4;
+      grid-row: 1 / 5;
+    }
+
+    .vertical-slider.volume-slider {
+      grid-column: 3;
+      grid-row: 1 / 5;
+    }
+
+    .vertical-track {
+      position: relative;
+      width: 62px;
+      height: 232px;
+      overflow: hidden;
+      border-radius: 28px;
+      background: rgba(255, 255, 255, 0.18);
+    }
+
+    .vertical-fill {
+      position: absolute;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      height: var(--value, 50%);
+      border-radius: inherit;
+      background: rgba(255, 255, 255, 0.92);
+    }
+
+    .vertical-slider b {
+      position: relative;
+      z-index: 2;
+      color: #1f2b3d;
+      font-size: 24px;
+    }
+
+    .round-control {
+      display: grid;
+      width: 82px;
+      height: 82px;
+      place-items: center;
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      border-radius: 50%;
+      background: rgba(227, 240, 255, 0.16);
+      color: #fff;
+      font-size: 26px;
+      font-weight: 900;
+      backdrop-filter: blur(18px);
+    }
+
+    .round-control.active {
+      background: linear-gradient(180deg, #2f91ff, #0873da);
+    }
+
+    .round-control.light {
+      background: rgba(245, 249, 255, 0.82);
+      color: #244061;
+    }
+
+    .sleep-control-card {
+      grid-column: 1 / 5;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      align-items: center;
+      gap: 12px;
+      padding: 14px 18px;
+      text-align: left;
+    }
+
+    .account-nav {
+      min-height: 0;
+      border-right: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.045);
+      padding: 12px 8px;
+    }
+
+    .account-nav button {
+      display: flex;
+      align-items: center;
+      width: 100%;
+      min-height: 44px;
+      border: 1px solid transparent;
+      border-radius: 13px;
+      background: transparent;
+      padding: 0 12px;
+      color: #9facbf;
+      font-size: 13px;
+      font-weight: 800;
+      text-align: left;
+    }
+
+    .account-nav button + button {
+      margin-top: 6px;
+    }
+
+    .account-nav button.active {
+      border-color: rgba(82, 166, 255, 0.50);
+      background: linear-gradient(180deg, rgba(82, 166, 255, 0.24), rgba(82, 166, 255, 0.08));
+      color: #fff;
+    }
+
+    .account-content {
+      min-height: 0;
+      overflow: hidden;
+      padding: 18px 20px 20px;
+    }
+
+    .account-panel {
+      display: none;
+      height: 100%;
+      min-height: 0;
+    }
+
+    .account-panel.active {
+      display: grid;
+      grid-template-rows: auto minmax(0, 1fr);
+      gap: 16px;
+    }
+
+    .account-head {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .account-head h2 {
+      margin: 0;
+      color: #f5f9ff;
+      font-size: 24px;
+      font-weight: 800;
+    }
+
+    .account-head p {
+      margin: 6px 0 0;
+      color: #8fa0b9;
+      font-size: 12px;
+      font-weight: 600;
+    }
+
+    .account-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+      gap: 14px;
+      min-height: 0;
+    }
+
+    .baby-card-layout {
+      display: grid;
+      grid-template-columns: 258px minmax(0, 1fr);
+      gap: 14px;
+      min-height: 0;
+    }
+
+    .baby-card-list {
+      display: grid;
+      align-content: start;
+      gap: 10px;
+      min-width: 0;
+    }
+
+    .baby-info-card {
+      display: grid;
+      grid-template-columns: auto minmax(0, 1fr);
+      gap: 12px;
+      min-height: 112px;
+      border: 1px solid rgba(127, 151, 180, 0.22);
+      border-radius: 20px;
+      background:
+        radial-gradient(circle at 86% 10%, rgba(82, 166, 255, 0.12), transparent 34%),
+        linear-gradient(180deg, rgba(20, 31, 52, 0.98), rgba(14, 23, 39, 0.98));
+      padding: 14px;
+      color: #edf6ff;
+      text-align: left;
+      box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.035);
+    }
+
+    .baby-info-card.active {
+      border-color: rgba(82, 166, 255, 0.72);
+      background:
+        radial-gradient(circle at 86% 10%, rgba(82, 166, 255, 0.24), transparent 34%),
+        linear-gradient(180deg, rgba(28, 45, 74, 0.98), rgba(14, 23, 39, 0.98));
+    }
+
+    .baby-info-card h3 {
+      margin: 0;
+      overflow: hidden;
+      color: #f6fbff;
+      font-size: 16px;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .baby-info-card p {
+      margin: 5px 0 0;
+      color: #91a2ba;
+      font-size: 12px;
+      line-height: 1.45;
+    }
+
+    .baby-card-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 10px;
+    }
+
+    .baby-card-tags span {
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.07);
+      padding: 4px 7px;
+      color: #b8c7dc;
+      font-size: 10px;
+      font-weight: 800;
+    }
+
+    .add-baby-card {
+      display: grid;
+      min-height: 82px;
+      place-items: center;
+      border: 1px dashed rgba(134, 164, 202, 0.42);
+      border-radius: 18px;
+      background: rgba(255, 255, 255, 0.035);
+      color: #badbff;
+      font-size: 13px;
+      font-weight: 800;
+    }
+
+    .baby-detail-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+      min-height: 0;
+      align-content: start;
+    }
+
+    .profile-card,
+    .account-card,
+    .member-card {
+      border: 1px solid rgba(127, 151, 180, 0.22);
+      border-radius: 20px;
+      background:
+        radial-gradient(circle at 86% 10%, rgba(82, 166, 255, 0.14), transparent 34%),
+        linear-gradient(180deg, rgba(20, 31, 52, 0.98), rgba(14, 23, 39, 0.98));
+      box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.035);
+    }
+
+    .baby-profile {
+      display: grid;
+      grid-template-columns: auto minmax(0, 1fr);
+      gap: 16px;
+      padding: 16px;
+    }
+
+    .baby-avatar,
+    .user-avatar {
+      display: grid;
+      place-items: center;
+      border-radius: 22px;
+      background: linear-gradient(180deg, #52a6ff 0%, #2563eb 100%);
+      color: #fff;
+      font-weight: 900;
+      box-shadow: 0 16px 32px rgba(37, 99, 235, 0.24);
+    }
+
+    .baby-avatar {
+      width: 78px;
+      height: 78px;
+      font-size: 28px;
+    }
+
+    .user-avatar {
+      width: 58px;
+      height: 58px;
+      border-radius: 18px;
+      font-size: 20px;
+    }
+
+    .profile-card h3,
+    .account-card h3,
+    .member-card h3 {
+      margin: 0;
+      color: #f6fbff;
+      font-size: 17px;
+    }
+
+    .profile-card p,
+    .account-card p,
+    .member-card p {
+      margin: 6px 0 0;
+      color: #91a2ba;
+      font-size: 12px;
+      line-height: 1.55;
+    }
+
+    .profile-stats {
+      grid-column: 1 / -1;
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 10px;
+      margin-top: 4px;
+    }
+
+    .profile-stat {
+      border-radius: 15px;
+      background: rgba(255, 255, 255, 0.055);
+      padding: 10px;
+      color: #91a2ba;
+      font-size: 11px;
+      font-weight: 700;
+    }
+
+    .profile-stat strong {
+      display: block;
+      margin-top: 4px;
+      color: #f7fbff;
+      font-size: 15px;
+    }
+
+    .account-list {
+      display: grid;
+      align-content: start;
+      gap: 10px;
+    }
+
+    .account-card {
+      padding: 15px;
+    }
+
+    .account-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      border-radius: 14px;
+      background: rgba(255, 255, 255, 0.055);
+      padding: 11px 12px;
+      color: #aebbd0;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .account-row + .account-row {
+      margin-top: 8px;
+    }
+
+    .account-row b {
+      color: #f5f9ff;
+      font-size: 13px;
+    }
+
+    .editable-info-row {
+      width: 100%;
+      border: 0;
+      text-align: left;
+      cursor: pointer;
+    }
+
+    .editable-info-row .edit-mark {
+      display: grid;
+      width: 26px;
+      height: 26px;
+      place-items: center;
+      border-radius: 9px;
+      background: rgba(82, 166, 255, 0.14);
+      color: #9cccff;
+      font-size: 13px;
+      font-weight: 900;
+    }
+
+    .editable-info-row.editing {
+      outline: 1px solid rgba(82, 166, 255, 0.64);
+      background: rgba(82, 166, 255, 0.12);
+    }
+
+    .account-actions {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+      margin-top: 12px;
+    }
+
+    .account-action-btn {
+      display: grid;
+      min-height: 42px;
+      place-items: center;
+      border: 1px solid rgba(134, 164, 202, 0.26);
+      border-radius: 14px;
+      background: rgba(255, 255, 255, 0.06);
+      color: #e5f0ff;
+      font-size: 13px;
+      font-weight: 800;
+    }
+
+    .account-action-btn.danger {
+      border-color: rgba(242, 76, 84, 0.36);
+      background: rgba(242, 76, 84, 0.12);
+      color: #ffb6ba;
+    }
+
+    .member-list {
+      display: grid;
+      gap: 10px;
+    }
+
+    .member-card {
+      display: grid;
+      grid-template-columns: auto minmax(0, 1fr) auto;
+      align-items: center;
+      gap: 12px;
+      padding: 13px;
+    }
+
+    .member-role {
+      border-radius: 999px;
+      background: rgba(82, 166, 255, 0.14);
+      padding: 6px 9px;
+      color: #badbff;
+      font-size: 11px;
+      font-weight: 800;
+      white-space: nowrap;
+    }
+
+    .permission-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+      margin-top: 12px;
+    }
+
+    .permission-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      border-radius: 14px;
+      background: rgba(255, 255, 255, 0.055);
+      padding: 10px 11px;
+      color: #aebbd0;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .doc {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .doc-head {
+      border-bottom: 1px solid var(--line);
+      padding: 22px 20px 16px;
+    }
+
+    .doc-head h2 {
+      margin: 0;
+      font-size: 22px;
+    }
+
+    .doc-head p {
+      margin: 10px 0 0;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.7;
+    }
+
+    .doc-body {
+      min-height: 0;
+      overflow: auto;
+      display: grid;
+      gap: 14px;
+      padding: 16px;
+    }
+
+    .logic-card {
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      background: rgba(18, 28, 47, 0.90);
+      padding: 14px;
+    }
+
+    .logic-card h3 {
+      margin: 0 0 12px;
+      font-size: 15px;
+    }
+
+    .nav-tree {
+      display: grid;
+      gap: 10px;
+    }
+
+    .tree-group {
+      border-radius: 14px;
+      background: rgba(255, 255, 255, 0.05);
+      padding: 12px;
+    }
+
+    .tree-group strong {
+      display: block;
+      margin-bottom: 8px;
+      font-size: 13px;
+    }
+
+    .tree-items {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .tree-item {
+      border: 1px solid rgba(134, 164, 202, 0.24);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.06);
+      padding: 6px 10px;
+      color: #adbad0;
+      font-size: 11px;
+    }
+
+    .logic-list {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      display: grid;
+      gap: 10px;
+    }
+
+    .logic-list li {
+      display: grid;
+      grid-template-columns: 28px 1fr;
+      gap: 10px;
+      color: #aab7c9;
+      font-size: 12px;
+      line-height: 1.7;
+    }
+
+    .num {
+      display: grid;
+      width: 26px;
+      height: 26px;
+      place-items: center;
+      border-radius: 999px;
+      background: rgba(82, 166, 255, 0.18);
+      color: #9cccff;
+      font-size: 12px;
+      font-weight: 800;
+    }
+
+    .badge-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 10px;
+    }
+
+    .badge {
+      border-radius: 999px;
+      background: rgba(82, 166, 255, 0.14);
+      padding: 5px 9px;
+      color: #badbff;
+      font-size: 11px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="app">
+    <aside class="panel sidebar">
+      <div class="side-head">
+        <div class="brand-mark">BBM</div>
+        <div>
+          <h1>BBM 智慧屏 Demo</h1>
+          <p>8 寸横屏高保真原型</p>
+        </div>
+      </div>
+      <div class="nav-scroll">
+        <section class="nav-group">
+          <h2>一级模块</h2>
+          <button class="nav-item active" data-page="实时监控区">主页</button>
+          <div class="nav-sub">
+            <button class="nav-sub-item active" data-page="实时监控区" data-view="single">单画面</button>
+            <button class="nav-sub-item" data-page="实时监控区" data-view="split2">二画面</button>
+            <button class="nav-sub-item" data-page="实时监控区" data-view="split4">四画面</button>
+            <button class="nav-sub-item" data-page="实时监控区" data-view="singleFull">单画面全屏</button>
+            <button class="nav-sub-item" data-page="实时监控区" data-view="split2Full">二画面全屏</button>
+            <button class="nav-sub-item" data-page="实时监控区" data-view="split4Full">四画面全屏</button>
+          </div>
+          <button class="nav-item" data-page="宝宝看护指标区">智能看护</button>
+          <button class="nav-item" data-page="日常活动统计" data-scene="活动" data-room="活动区">事件回放</button>
+          <button class="nav-item" data-page="其他生态设备控制">设备</button>
+          <button class="nav-item" data-page="智能看护快捷设置">设置</button>
+          <button class="nav-item" data-page="账号信息">账号</button>
+          <button class="nav-item" data-page="控制中心">控制中心</button>
+          <button class="nav-item" data-page="消息通知">消息通知</button>
+          <button class="nav-item" data-page="屏端初始化向导">屏端初始化向导</button>
+        </section>
+      </div>
+    </aside>
+
+    <section class="center">
+      <div class="canvas-wrap">
+        <div class="canvas-head">
+          <strong>8 寸平板横屏原型</strong>
+          <span id="canvasLabel">实时监控区 / 婴儿房 / 看护</span>
+        </div>
+
+        <div class="shell">
+          <div class="screen">
+            <header class="topbar">
+              <div class="screen-date">2026/5/7 周四</div>
+              <div class="screen-status">
+                <span class="status-icon" aria-label="Wi-Fi信号">
+                  <svg class="wifi-svg" viewBox="0 0 28 20" aria-hidden="true">
+                    <path d="M2.8 6.6C9-0.1 19-0.1 25.2 6.6" fill="none" stroke="currentColor" stroke-width="2.7" stroke-linecap="round"/>
+                    <path d="M7.4 10.8c3.8-4 9.4-4 13.2 0" fill="none" stroke="currentColor" stroke-width="2.7" stroke-linecap="round"/>
+                    <path d="M11.6 14.8c1.5-1.4 3.3-1.4 4.8 0" fill="none" stroke="currentColor" stroke-width="2.7" stroke-linecap="round"/>
+                    <circle cx="14" cy="18" r="1.7" fill="currentColor"/>
+                  </svg>
+                </span>
+                <span class="status-icon" aria-label="电量"><span class="battery-icon"></span></span>
+                <span>12:09</span>
+              </div>
+            </header>
+
+            <nav class="screen-menu" aria-label="屏内主菜单">
+              <button class="screen-menu-item active" data-page="实时监控区" data-scene="看护">主页</button>
+              <button class="screen-menu-item" data-page="宝宝看护指标区" data-scene="看护">智能看护</button>
+              <button class="screen-menu-item" data-page="日常活动统计" data-scene="活动" data-room="活动区">事件回放</button>
+              <button class="screen-menu-item" data-page="其他生态设备控制">设备</button>
+              <button class="screen-menu-item" data-page="智能看护快捷设置">设置</button>
+              <div class="screen-menu-spacer"></div>
+              <button class="screen-menu-item" data-page="账号信息">账号</button>
+            </nav>
+
+            <div class="tabs-bar">
+              <div class="tab-group" id="roomTabs">
+                <button class="tab-btn active" data-room="全部设备">全部设备</button>
+                <button class="tab-btn" data-room="婴儿房">婴儿房</button>
+                <button class="tab-btn" data-room="活动区">活动区</button>
+              </div>
+              <div class="tab-group" id="sceneTabs">
+                <button class="tab-btn active" data-scene="看护">看护</button>
+                <button class="tab-btn" data-scene="活动">活动</button>
+                <button class="tab-btn" data-scene="育儿">育儿</button>
+              </div>
+            </div>
+
+            <main class="content">
+              <div class="monitor-stack">
+                <section class="monitor" id="monitor">
+                  <div class="monitor-header">
+                    <div class="monitor-left-tools">
+                      <div class="live-pills">
+                        <span class="live-pill live">Live</span>
+                        <span class="cam-name fullscreen-room-pill" id="fullscreenRoomPill">婴儿房</span>
+                        <span class="metric-chip" id="tempChip">25°C</span>
+                        <span class="metric-chip" id="envChip">30%</span>
+                      </div>
+                    </div>
+                    <button class="monitor-setting" type="button" title="设置" aria-label="设置">
+                      <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M12 15.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7Z"/>
+                        <path d="M19.4 15a1.8 1.8 0 0 0 .36 1.98l.04.04a2.16 2.16 0 0 1-3.05 3.05l-.04-.04a1.8 1.8 0 0 0-1.98-.36 1.8 1.8 0 0 0-1.1 1.66V21.4a2.16 2.16 0 0 1-4.32 0v-.07a1.8 1.8 0 0 0-1.1-1.66 1.8 1.8 0 0 0-1.98.36l-.04.04a2.16 2.16 0 0 1-3.05-3.05l.04-.04A1.8 1.8 0 0 0 4.6 15a1.8 1.8 0 0 0-1.66-1.1H2.86a2.16 2.16 0 0 1 0-4.32h.07A1.8 1.8 0 0 0 4.6 8a1.8 1.8 0 0 0-.36-1.98l-.04-.04a2.16 2.16 0 0 1 3.05-3.05l.04.04A1.8 1.8 0 0 0 9.27 3.3a1.8 1.8 0 0 0 1.1-1.66V1.6a2.16 2.16 0 0 1 4.32 0v.07a1.8 1.8 0 0 0 1.1 1.66 1.8 1.8 0 0 0 1.98-.36l.04-.04a2.16 2.16 0 0 1 3.05 3.05l-.04.04A1.8 1.8 0 0 0 19.4 8a1.8 1.8 0 0 0 1.66 1.1h.07a2.16 2.16 0 0 1 0 4.32h-.07A1.8 1.8 0 0 0 19.4 15Z"/>
+                      </svg>
+                    </button>
+                  </div>
+
+                  <div class="multi-grid" id="multiGrid">
+                    <button class="camera-tile active" data-room="婴儿房" data-camera="婴儿床摄像头" style="--pos:center 56%;">
+                      <strong>婴儿房</strong><span class="tile-setting" title="设置" aria-label="设置"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 15.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7Z"/><path d="M19.4 15a1.8 1.8 0 0 0 .36 1.98l.04.04a2.16 2.16 0 0 1-3.05 3.05l-.04-.04a1.8 1.8 0 0 0-1.98-.36 1.8 1.8 0 0 0-1.1 1.66V21.4a2.16 2.16 0 0 1-4.32 0v-.07a1.8 1.8 0 0 0-1.1-1.66 1.8 1.8 0 0 0-1.98.36l-.04.04a2.16 2.16 0 0 1-3.05-3.05l.04-.04A1.8 1.8 0 0 0 4.6 15a1.8 1.8 0 0 0-1.66-1.1H2.86a2.16 2.16 0 0 1 0-4.32h.07A1.8 1.8 0 0 0 4.6 8a1.8 1.8 0 0 0-.36-1.98l-.04-.04a2.16 2.16 0 0 1 3.05-3.05l.04.04A1.8 1.8 0 0 0 9.27 3.3a1.8 1.8 0 0 0 1.1-1.66V1.6a2.16 2.16 0 0 1 4.32 0v.07a1.8 1.8 0 0 0 1.1 1.66 1.8 1.8 0 0 0 1.98-.36l.04-.04a2.16 2.16 0 0 1 3.05 3.05l-.04.04A1.8 1.8 0 0 0 19.4 8a1.8 1.8 0 0 0 1.66 1.1h.07a2.16 2.16 0 0 1 0 4.32h-.07A1.8 1.8 0 0 0 19.4 15Z"/></svg></span><span class="tile-sound" title="声音开关" aria-label="声音开关"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9v6h4l5 4V5L8 9H4Z"/><path d="M16.5 8.5a5 5 0 0 1 0 7"/><path d="M19 6a8.5 8.5 0 0 1 0 12"/></svg></span>
+                    </button>
+                    <button class="camera-tile" data-room="活动区" data-camera="活动区摄像头" style="--pos:58% 56%;">
+                      <strong>活动区</strong><span class="tile-setting" title="设置" aria-label="设置"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 15.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7Z"/><path d="M19.4 15a1.8 1.8 0 0 0 .36 1.98l.04.04a2.16 2.16 0 0 1-3.05 3.05l-.04-.04a1.8 1.8 0 0 0-1.98-.36 1.8 1.8 0 0 0-1.1 1.66V21.4a2.16 2.16 0 0 1-4.32 0v-.07a1.8 1.8 0 0 0-1.1-1.66 1.8 1.8 0 0 0-1.98.36l-.04.04a2.16 2.16 0 0 1-3.05-3.05l.04-.04A1.8 1.8 0 0 0 4.6 15a1.8 1.8 0 0 0-1.66-1.1H2.86a2.16 2.16 0 0 1 0-4.32h.07A1.8 1.8 0 0 0 4.6 8a1.8 1.8 0 0 0-.36-1.98l-.04-.04a2.16 2.16 0 0 1 3.05-3.05l.04.04A1.8 1.8 0 0 0 9.27 3.3a1.8 1.8 0 0 0 1.1-1.66V1.6a2.16 2.16 0 0 1 4.32 0v.07a1.8 1.8 0 0 0 1.1 1.66 1.8 1.8 0 0 0 1.98-.36l.04-.04a2.16 2.16 0 0 1 3.05 3.05l-.04.04A1.8 1.8 0 0 0 19.4 8a1.8 1.8 0 0 0 1.66 1.1h.07a2.16 2.16 0 0 1 0 4.32h-.07A1.8 1.8 0 0 0 19.4 15Z"/></svg></span><span class="tile-sound" title="声音开关" aria-label="声音开关"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9v6h4l5 4V5L8 9H4Z"/><path d="M16.5 8.5a5 5 0 0 1 0 7"/><path d="M19 6a8.5 8.5 0 0 1 0 12"/></svg></span>
+                    </button>
+                    <button class="camera-tile" data-room="婴儿房2" data-camera="婴儿房2摄像头" style="--pos:50% 42%;">
+                      <strong>婴儿房2</strong><span class="tile-setting" title="设置" aria-label="设置"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 15.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7Z"/><path d="M19.4 15a1.8 1.8 0 0 0 .36 1.98l.04.04a2.16 2.16 0 0 1-3.05 3.05l-.04-.04a1.8 1.8 0 0 0-1.98-.36 1.8 1.8 0 0 0-1.1 1.66V21.4a2.16 2.16 0 0 1-4.32 0v-.07a1.8 1.8 0 0 0-1.1-1.66 1.8 1.8 0 0 0-1.98.36l-.04.04a2.16 2.16 0 0 1-3.05-3.05l.04-.04A1.8 1.8 0 0 0 4.6 15a1.8 1.8 0 0 0-1.66-1.1H2.86a2.16 2.16 0 0 1 0-4.32h.07A1.8 1.8 0 0 0 4.6 8a1.8 1.8 0 0 0-.36-1.98l-.04-.04a2.16 2.16 0 0 1 3.05-3.05l.04.04A1.8 1.8 0 0 0 9.27 3.3a1.8 1.8 0 0 0 1.1-1.66V1.6a2.16 2.16 0 0 1 4.32 0v.07a1.8 1.8 0 0 0 1.1 1.66 1.8 1.8 0 0 0 1.98-.36l.04-.04a2.16 2.16 0 0 1 3.05 3.05l-.04.04A1.8 1.8 0 0 0 19.4 8a1.8 1.8 0 0 0 1.66 1.1h.07a2.16 2.16 0 0 1 0 4.32h-.07A1.8 1.8 0 0 0 19.4 15Z"/></svg></span><span class="tile-sound" title="声音开关" aria-label="声音开关"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9v6h4l5 4V5L8 9H4Z"/><path d="M16.5 8.5a5 5 0 0 1 0 7"/><path d="M19 6a8.5 8.5 0 0 1 0 12"/></svg></span>
+                    </button>
+                    <button class="camera-tile" data-room="婴儿房3" data-camera="婴儿房3摄像头" style="--pos:47% 50%;">
+                      <strong>婴儿房3</strong><span class="tile-setting" title="设置" aria-label="设置"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 15.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7Z"/><path d="M19.4 15a1.8 1.8 0 0 0 .36 1.98l.04.04a2.16 2.16 0 0 1-3.05 3.05l-.04-.04a1.8 1.8 0 0 0-1.98-.36 1.8 1.8 0 0 0-1.1 1.66V21.4a2.16 2.16 0 0 1-4.32 0v-.07a1.8 1.8 0 0 0-1.1-1.66 1.8 1.8 0 0 0-1.98.36l-.04.04a2.16 2.16 0 0 1-3.05-3.05l.04-.04A1.8 1.8 0 0 0 4.6 15a1.8 1.8 0 0 0-1.66-1.1H2.86a2.16 2.16 0 0 1 0-4.32h.07A1.8 1.8 0 0 0 4.6 8a1.8 1.8 0 0 0-.36-1.98l-.04-.04a2.16 2.16 0 0 1 3.05-3.05l.04.04A1.8 1.8 0 0 0 9.27 3.3a1.8 1.8 0 0 0 1.1-1.66V1.6a2.16 2.16 0 0 1 4.32 0v.07a1.8 1.8 0 0 0 1.1 1.66 1.8 1.8 0 0 0 1.98-.36l.04-.04a2.16 2.16 0 0 1 3.05 3.05l-.04.04A1.8 1.8 0 0 0 19.4 8a1.8 1.8 0 0 0 1.66 1.1h.07a2.16 2.16 0 0 1 0 4.32h-.07A1.8 1.8 0 0 0 19.4 15Z"/></svg></span><span class="tile-sound" title="声音开关" aria-label="声音开关"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9v6h4l5 4V5L8 9H4Z"/><path d="M16.5 8.5a5 5 0 0 1 0 7"/><path d="M19 6a8.5 8.5 0 0 1 0 12"/></svg></span>
+                    </button>
+                  </div>
+
+                  <div class="monitor-actions">
+                    <button class="icon-btn" title="休眠 / 唤醒"><span>◔</span><span class="action-label">休眠/唤醒</span></button>
+                    <button class="icon-btn" title="安抚乐"><span>♫</span><span class="action-label">安抚乐</span></button>
+                    <button class="icon-btn" title="语音对讲"><span>☎</span><span class="action-label">对讲</span></button>
+                    <button class="icon-btn" title="声音"><span>♪</span><span class="action-label">声音</span></button>
+                    <button class="icon-btn fullscreen-only" title="截图"><span>▣</span><span class="action-label">截图</span></button>
+                    <button class="icon-btn fullscreen-only" title="录像"><span>●</span><span class="action-label">录像</span></button>
+                    <button class="icon-btn fullscreen-only" title="退出全屏" data-action="exit-fullscreen"><span>×</span><span class="action-label">退出全屏</span></button>
+                  </div>
+                </section>
+              </div>
+
+              <aside class="right-panel" id="rightPanel" data-scene-panel="看护">
+                <div class="care-card scene-card scene-care">
+                  <h3>睡眠：<strong>质量优</strong></h3>
+                  <p>宝宝深睡中</p>
+                </div>
+                <div class="care-card scene-card scene-care">
+                  <h3>体征：<strong>正常</strong></h3>
+                  <p>心率：<span id="heartValue">75 bpm</span><br>呼吸率：<span id="breathValue">42 br/min</span></p>
+                </div>
+                <div class="care-card scene-card scene-care">
+                  <h3>环境：<strong>正常</strong></h3>
+                  <p>温度：<span id="tempValue">25°C</span><br>湿度：<span id="envValue">30%</span></p>
+                </div>
+                <div class="care-card scene-card scene-activity">
+                  <h3>事件统计：<strong>平稳</strong></h3>
+                  <p>今日 3 条记录，暂无高危事件。</p>
+                  <div class="event-record-list">
+                  <button class="event-record-card" type="button">
+                    <span class="event-time">12:09</span>
+                    <span class="event-copy"><strong>婴儿房检测到宝宝入睡</strong><span>婴儿房摄像头 · 睡眠状态识别</span></span>
+                  </button>
+                  <button class="event-record-card" type="button">
+                    <span class="event-time">11:34</span>
+                    <span class="event-copy"><strong>婴儿房检测到宝宝在位</strong><span>婴儿床区域 · 体态稳定</span></span>
+                  </button>
+                  <button class="event-record-card" type="button">
+                    <span class="event-time">11:23</span>
+                    <span class="event-copy"><strong>婴儿房移动侦测</strong><span>婴儿房摄像头 · 画面变化记录</span></span>
+                  </button>
+                  </div>
+                </div>
+                <div class="care-card scene-card scene-parenting">
+                  <div class="parenting-card-head"><span class="parenting-icon">眠</span><h3>看护建议</h3></div>
+                  <div class="parenting-note">宝宝最近睡眠时长有点不够，可以多哄哄他。</div>
+                  <span class="parenting-chip">温柔安抚</span>
+                </div>
+                <div class="care-card scene-card scene-parenting">
+                  <div class="parenting-card-head"><span class="parenting-icon">衣</span><h3>今天穿衣推荐</h3></div>
+                  <div class="parenting-note">宝宝适合穿棉质柔软的长袖长裤，外出可以加个薄外套。</div>
+                  <span class="parenting-chip">舒适保暖</span>
+                </div>
+                <div class="care-card scene-card scene-parenting">
+                  <div class="parenting-card-head"><span class="parenting-icon">家</span><h3>环境提醒</h3></div>
+                  <div class="parenting-note">室内保持 24-26°C，睡前避免强光和嘈杂声音。</div>
+                  <span class="parenting-chip">安静入睡</span>
+                </div>
+              </aside>
+            </main>
+
+            <main class="care-page" id="carePage">
+              <div class="care-head">
+                <div>
+                  <h2>智能看护</h2>
+                  <p>看护统计、指标趋势与 AI 看护建议。</p>
+                </div>
+                <div class="care-tools">
+                  <div class="segmented"><span class="active">天</span><span>周</span></div>
+                  <button class="date-picker" type="button" aria-label="日期选择">
+                    <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="17" rx="3"/><path d="M8 2v4M16 2v4M3 10h18"/></svg>
+                    2026/05/09
+                  </button>
+                  <button class="add-device-btn" type="button">智能看护设置</button>
+                </div>
+              </div>
+
+              <section class="care-layout">
+                <div class="metric-timeline">
+                  <div class="axis-label">各指标线</div>
+                  <div class="timeline-list">
+                    <div class="timeline-item">
+                      <div><h3>其他异常时段标注</h3><p>纵轴：事件强度</p></div>
+                      <div class="mini-chart">
+                        <svg viewBox="0 0 260 64" role="img" aria-label="其他异常事件随时间变化曲线">
+                          <path class="chart-grid-line" d="M32 12H248M32 34H248M32 54H248M32 10V54M96 10V54M160 10V54M224 10V54"/>
+                          <text class="chart-axis-text" x="4" y="15">高</text><text class="chart-axis-text" x="4" y="57">低</text>
+                          <text class="chart-axis-text" x="26" y="63">09</text><text class="chart-axis-text" x="91" y="63">12</text><text class="chart-axis-text" x="155" y="63">15</text><text class="chart-axis-text" x="219" y="63">18</text>
+                          <path class="chart-line" d="M32 50 C60 48,78 46,96 43 S132 38,150 42 S184 49,204 44 S230 36,248 32"/>
+                          <path class="chart-alert-line" d="M204 44 C218 36,232 33,248 32"/>
+                          <circle class="chart-point" cx="232" cy="35" r="3.5"/>
+                        </svg>
+                      </div>
+                    </div>
+                    <div class="timeline-item">
+                      <div><h3>环境温湿度趋势曲线</h3><p>纵轴：温湿度值</p></div>
+                      <div class="mini-chart">
+                        <svg viewBox="0 0 260 64" role="img" aria-label="环境温湿度随时间变化曲线">
+                          <path class="chart-grid-line" d="M32 12H248M32 34H248M32 54H248M32 10V54M96 10V54M160 10V54M224 10V54"/>
+                          <text class="chart-axis-text" x="2" y="15">30</text><text class="chart-axis-text" x="2" y="57">20</text>
+                          <text class="chart-axis-text" x="26" y="63">09</text><text class="chart-axis-text" x="91" y="63">12</text><text class="chart-axis-text" x="155" y="63">15</text><text class="chart-axis-text" x="219" y="63">18</text>
+                          <path class="chart-line" d="M32 31 C58 29,78 28,98 30 S136 34,158 32 S190 26,208 28 S232 39,248 45"/>
+                          <path class="chart-alert-line" d="M222 34 C232 39,240 43,248 45"/>
+                          <circle class="chart-point" cx="246" cy="45" r="3.5"/>
+                        </svg>
+                      </div>
+                    </div>
+                    <div class="timeline-item">
+                      <div><h3>呼吸率趋势曲线</h3><p>纵轴：br/min</p></div>
+                      <div class="mini-chart">
+                        <svg viewBox="0 0 260 64" role="img" aria-label="呼吸率随时间变化曲线">
+                          <path class="chart-grid-line" d="M32 12H248M32 34H248M32 54H248M32 10V54M96 10V54M160 10V54M224 10V54"/>
+                          <text class="chart-axis-text" x="2" y="15">50</text><text class="chart-axis-text" x="2" y="57">25</text>
+                          <text class="chart-axis-text" x="26" y="63">09</text><text class="chart-axis-text" x="91" y="63">12</text><text class="chart-axis-text" x="155" y="63">15</text><text class="chart-axis-text" x="219" y="63">18</text>
+                          <path class="chart-line" d="M32 38 C58 36,74 33,96 36 S132 42,156 39 S188 30,207 27 S230 20,248 18"/>
+                          <path class="chart-alert-line" d="M204 28 C220 21,234 18,248 18"/>
+                          <circle class="chart-point" cx="238" cy="19" r="3.5"/>
+                        </svg>
+                      </div>
+                    </div>
+                    <div class="timeline-item">
+                      <div><h3>心率趋势曲线</h3><p>纵轴：bpm</p></div>
+                      <div class="mini-chart">
+                        <svg viewBox="0 0 260 64" role="img" aria-label="心率随时间变化曲线">
+                          <path class="chart-grid-line" d="M32 12H248M32 34H248M32 54H248M32 10V54M96 10V54M160 10V54M224 10V54"/>
+                          <text class="chart-axis-text" x="0" y="15">150</text><text class="chart-axis-text" x="4" y="57">80</text>
+                          <text class="chart-axis-text" x="26" y="63">09</text><text class="chart-axis-text" x="91" y="63">12</text><text class="chart-axis-text" x="155" y="63">15</text><text class="chart-axis-text" x="219" y="63">18</text>
+                          <path class="chart-line" d="M32 42 C58 41,78 36,98 38 S132 44,156 40 S186 32,205 34 S228 24,248 20"/>
+                          <path class="chart-alert-line" d="M215 31 C228 24,238 21,248 20"/>
+                          <circle class="chart-point" cx="241" cy="21" r="3.5"/>
+                        </svg>
+                      </div>
+                    </div>
+                    <div class="timeline-item">
+                      <div><h3>睡眠异常行为时段标注</h3><p>纵轴：异常风险</p></div>
+                      <div class="mini-chart">
+                        <svg viewBox="0 0 260 64" role="img" aria-label="睡眠异常行为随时间变化曲线">
+                          <path class="chart-grid-line" d="M32 12H248M32 34H248M32 54H248M32 10V54M96 10V54M160 10V54M224 10V54"/>
+                          <text class="chart-axis-text" x="4" y="15">高</text><text class="chart-axis-text" x="4" y="57">低</text>
+                          <text class="chart-axis-text" x="26" y="63">09</text><text class="chart-axis-text" x="91" y="63">12</text><text class="chart-axis-text" x="155" y="63">15</text><text class="chart-axis-text" x="219" y="63">18</text>
+                          <path class="chart-line" d="M32 50 C62 50,84 48,100 46 S134 43,154 47 S188 52,204 45 S230 22,248 18"/>
+                          <path class="chart-alert-line" d="M205 44 C220 28,232 20,248 18"/>
+                          <circle class="chart-point" cx="226" cy="25" r="3.5"/>
+                        </svg>
+                      </div>
+                    </div>
+                    <div class="sleep-time-card">
+                      <div class="sleep-time-head">
+                        <h3>睡眠状态时段 / 时长标注</h3>
+                        <div class="sleep-legend">
+                          <span><i class="sleep-dot" style="--dot:#c05280"></i>深睡 1h25m</span>
+                          <span><i class="sleep-dot" style="--dot:#dea8b7"></i>浅睡 3h25m</span>
+                          <span><i class="sleep-dot" style="--dot:#dfe2e6"></i>清醒 3h25m</span>
+                        </div>
+                      </div>
+                      <div class="sleep-bar" aria-label="睡眠时间轴">
+                        <span class="sleep-seg" style="--w:9%;--c:#dfe2e6"></span>
+                        <span class="sleep-seg" style="--w:22%;--c:#dea8b7"></span>
+                        <span class="sleep-seg" style="--w:24%;--c:#c05280"></span>
+                        <span class="sleep-seg" style="--w:8%;--c:#dea8b7"></span>
+                        <span class="sleep-seg" style="--w:9%;--c:#c05280"></span>
+                        <span class="sleep-seg" style="--w:3%;--c:#dfe2e6"></span>
+                        <span class="sleep-seg" style="--w:8%;--c:#dea8b7"></span>
+                        <span class="sleep-seg" style="--w:17%;--c:rgba(255,255,255,.10)"></span>
+                      </div>
+                      <div class="sleep-scale"><span>09:00</span><span>12:00</span><span>15:00</span><span>18:00</span><span>21:00</span><span>24:00</span></div>
+                    </div>
+                    <div class="timeline-base">时间线</div>
+                  </div>
+                </div>
+
+                <aside class="ai-advice-panel">
+                  <div>
+                    <h3>AI 看护建议</h3>
+                    <p class="control-subtitle">根据宝宝月龄和当日看护指标生成。</p>
+                  </div>
+                  <div class="advice-list">
+                    <div class="advice-card"><strong>综合建议</strong>宝宝今日整体状态平稳，深睡时长略少，环境湿度偏低。建议睡前 30 分钟开启加湿器，并保持房间安静，帮助宝宝更连续地入睡。</div>
+                  </div>
+                </aside>
+              </section>
+            </main>
+
+            <main class="device-page" id="devicePage">
+              <div class="device-page-head">
+                <div class="device-title">
+                  <h2>所有设备</h2>
+                  <p>8 台设备已添加，7 台在线，1 台待接入</p>
+                </div>
+                <button class="add-device-btn" type="button">
+                  <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>
+                  添加设备
+                </button>
+              </div>
+
+              <section class="device-grid" aria-label="所有设备">
+                <button class="device-page-card active" data-device-name="婴儿房摄像头">
+                  <div class="device-card-top">
+                    <span class="device-page-icon">
+                      <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 10l4.5-2.6v9.2L15 14"/><rect x="3" y="6" width="12" height="12" rx="3"/></svg>
+                    </span>
+                    <span class="device-online">在线</span>
+                  </div>
+                  <div class="device-page-main"><strong>婴儿房摄像头</strong><span>婴儿房 · 主看护画面</span></div>
+                  <div class="device-page-foot"><b>实时看护</b><span class="device-switch" aria-hidden="true"></span></div>
+                </button>
+
+                <button class="device-page-card" data-device-name="活动区摄像头">
+                  <div class="device-card-top">
+                    <span class="device-page-icon">
+                      <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 10l4.5-2.6v9.2L15 14"/><rect x="3" y="6" width="12" height="12" rx="3"/></svg>
+                    </span>
+                    <span class="device-online">在线</span>
+                  </div>
+                  <div class="device-page-main"><strong>活动区摄像头</strong><span>活动区 · 多画面联动</span></div>
+                  <div class="device-page-foot"><b>画面同步</b><span class="device-switch" aria-hidden="true"></span></div>
+                </button>
+
+                <button class="device-page-card" data-device-name="婴儿房2摄像头">
+                  <div class="device-card-top">
+                    <span class="device-page-icon">
+                      <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 10l4.5-2.6v9.2L15 14"/><rect x="3" y="6" width="12" height="12" rx="3"/></svg>
+                    </span>
+                    <span class="device-online">在线</span>
+                  </div>
+                  <div class="device-page-main"><strong>婴儿房2摄像头</strong><span>婴儿房2 · 夜间看护</span></div>
+                  <div class="device-page-foot"><b>夜视开启</b><span class="device-switch" aria-hidden="true"></span></div>
+                </button>
+
+                <button class="device-page-card" data-device-name="智能婴儿床">
+                  <div class="device-card-top">
+                    <span class="device-page-icon">
+                      <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 11h16v7H4z"/><path d="M7 11V8a3 3 0 0 1 6 0v3"/><path d="M4 18v2M20 18v2"/></svg>
+                    </span>
+                    <span class="device-online">在线</span>
+                  </div>
+                  <div class="device-page-main"><strong>智能婴儿床</strong><span>婴儿房 · 摇篮/体态感知</span></div>
+                  <div class="device-page-foot"><b>轻摇模式</b><span class="device-switch" aria-hidden="true"></span></div>
+                </button>
+
+                <button class="device-page-card" data-device-name="体温贴">
+                  <div class="device-card-top">
+                    <span class="device-page-icon">
+                      <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M14 14.8V5a4 4 0 0 0-8 0v9.8a6 6 0 1 0 8 0Z"/><path d="M10 8v8"/></svg>
+                    </span>
+                    <span class="device-online">在线</span>
+                  </div>
+                  <div class="device-page-main"><strong>体温贴</strong><span>宝宝体温 · 已同步</span></div>
+                  <div class="device-page-foot"><b>36.6°C</b><span class="device-switch" aria-hidden="true"></span></div>
+                </button>
+
+                <button class="device-page-card" data-device-name="加湿器">
+                  <div class="device-card-top">
+                    <span class="device-page-icon">
+                      <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 3s5 6 5 10a5 5 0 0 1-10 0c0-4 5-10 5-10Z"/><path d="M8 20h8"/></svg>
+                    </span>
+                    <span class="device-online">在线</span>
+                  </div>
+                  <div class="device-page-main"><strong>加湿器</strong><span>婴儿房 · 环境调节</span></div>
+                  <div class="device-page-foot"><b>湿度 56%</b><span class="device-switch" aria-hidden="true"></span></div>
+                </button>
+
+                <button class="device-page-card" data-device-name="空气净化器">
+                  <div class="device-card-top">
+                    <span class="device-page-icon">
+                      <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 9h13a3 3 0 1 0-3-3"/><path d="M4 15h15a3 3 0 1 1-3 3"/><path d="M4 12h9"/></svg>
+                    </span>
+                    <span class="device-online">在线</span>
+                  </div>
+                  <div class="device-page-main"><strong>空气净化器</strong><span>活动区 · 空气质量</span></div>
+                  <div class="device-page-foot"><b>空气优</b><span class="device-switch" aria-hidden="true"></span></div>
+                </button>
+
+                <button class="device-page-card" data-device-name="第三方设备">
+                  <div class="device-card-top">
+                    <span class="device-page-icon">
+                      <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="4"/><path d="M9 9h6v6H9z"/></svg>
+                    </span>
+                    <span class="device-online pending">待接入</span>
+                  </div>
+                  <div class="device-page-main"><strong>第三方设备</strong><span>Matter / Alexa 生态协同</span></div>
+                  <div class="device-page-foot"><b>未连接</b><span class="device-switch off" aria-hidden="true"></span></div>
+                </button>
+              </section>
+            </main>
+
+            <main class="replay-page" id="replayPage">
+              <div class="replay-top">
+                <div class="replay-title">录像回放</div>
+                <div class="replay-tabs" role="tablist" aria-label="录像来源">
+                  <button class="replay-tab active" type="button">本地录像</button>
+                  <button class="replay-tab" type="button">云录像</button>
+                </div>
+                <div class="replay-top-actions">
+                  <button class="date-picker" type="button" aria-label="日期选择">
+                    <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="17" rx="3"/><path d="M8 2v4M16 2v4M3 10h18"/></svg>
+                    2026/5/7
+                  </button>
+                  <button class="album-btn" type="button">相册</button>
+                </div>
+              </div>
+
+              <section class="replay-layout" aria-label="事件回放">
+                <div class="replay-main">
+                  <section class="video-player" aria-label="录像画面">
+                    <div class="video-label">婴儿房摄像头 · 12:09</div>
+                    <div class="video-center-play">▶</div>
+                    <div class="replay-controls">
+                      <button class="replay-control-btn" type="button">暂停</button>
+                      <button class="replay-control-btn" type="button">截图</button>
+                      <button class="replay-control-btn" type="button">倍速</button>
+                      <button class="replay-control-btn" type="button">声音</button>
+                      <button class="replay-control-btn" type="button">全屏</button>
+                    </div>
+                  </section>
+
+                  <section class="timeline-panel" aria-label="时间轴">
+                    <div class="event-timeline">
+                      <span class="timeline-block sleep" style="left:0%;width:34%;"></span>
+                      <span class="timeline-block feed" style="left:36%;width:8%;"></span>
+                      <span class="timeline-block move" style="left:48%;width:12%;"></span>
+                      <span class="timeline-block alert" style="left:62%;width:6%;"></span>
+                      <span class="timeline-block sleep" style="left:72%;width:20%;"></span>
+                      <span class="timeline-tick" style="left:0%;"><strong>00:00</strong></span>
+                      <span class="timeline-tick" style="left:25%;"><strong>06:00</strong></span>
+                      <span class="timeline-tick" style="left:50%;"><strong>12:00</strong></span>
+                      <span class="timeline-tick" style="left:75%;"><strong>18:00</strong></span>
+                      <span class="timeline-tick" style="left:100%;"><strong>24:00</strong></span>
+                      <div class="timeline-legend" aria-hidden="true">
+                        <span><i class="sleep-dot"></i>睡眠</span>
+                        <span><i class="feed-dot"></i>喂养</span>
+                        <span><i class="move-dot"></i>活动</span>
+                        <span><i class="alert-dot"></i>异常</span>
+                      </div>
+                    </div>
+                  </section>
+                </div>
+
+                <aside class="replay-side">
+                  <section class="device-select">
+                    <h3>设备选择</h3>
+                    <div class="device-pills">
+                      <button class="device-pill active" type="button">全部设备</button>
+                      <button class="device-pill" type="button">婴儿房</button>
+                      <button class="device-pill" type="button">活动区</button>
+                      <button class="device-pill" type="button">婴儿房2</button>
+                    </div>
+                  </section>
+
+                  <section class="event-replay-list">
+                    <div class="event-list-head">
+                      <h3>事件录像记录</h3>
+                      <span class="settings-chip">今日 5 条</span>
+                    </div>
+                    <div class="replay-events">
+                      <button class="replay-event-card" type="button"><span class="event-thumb"></span><span><strong>12:09 宝宝移动</strong><span>设备1检测到宝宝移动</span></span></button>
+                      <button class="replay-event-card" type="button"><span class="event-thumb"></span><span><strong>11:42 宝宝遮脸</strong><span>设备1检测到宝宝遮脸</span></span></button>
+                      <button class="replay-event-card" type="button"><span class="event-thumb"></span><span><strong>10:28 安全出界</strong><span>设备1检测到宝宝安全出界</span></span></button>
+                      <button class="replay-event-card" type="button"><span class="event-thumb"></span><span><strong>09:18 宝宝移动</strong><span>设备1检测到宝宝移动</span></span></button>
+                      <button class="replay-event-card" type="button"><span class="event-thumb"></span><span><strong>08:30 宝宝移动</strong><span>设备1检测到宝宝移动</span></span></button>
+                    </div>
+                  </section>
+                </aside>
+              </section>
+            </main>
+
+            <main class="settings-page" id="settingsPage">
+              <nav class="settings-nav" aria-label="设置分类">
+                <button class="active" data-setting-panel="sound">音量</button>
+                <button data-setting-panel="brightness">屏幕亮度</button>
+                <button data-setting-panel="sleep">息屏设置</button>
+                <button data-setting-panel="power">省电模式</button>
+                <button data-setting-panel="wifi">Wi-Fi 信息</button>
+                <button data-setting-panel="general">其他设置</button>
+                <button data-setting-panel="deviceInfo">设备信息</button>
+                <button data-setting-panel="support">帮助与反馈</button>
+                <button data-setting-panel="privacy">隐私与条款</button>
+              </nav>
+
+              <section class="settings-content">
+                <div class="settings-panel active" data-panel="sound">
+                  <div class="settings-head">
+                    <div><h2>音量</h2><p>调节系统提示、安抚乐和语音对讲音量。</p></div>
+                    <span class="settings-chip">当前 52%</span>
+                  </div>
+                  <div class="settings-grid">
+                    <div class="settings-list">
+                      <div class="setting-row">
+                        <div><span class="setting-label">媒体音量</span><span class="setting-desc">安抚乐 / 回放</span></div>
+                        <div class="setting-slider" style="--value:52%"><span></span></div>
+                        <span class="setting-value">52%</span>
+                      </div>
+                      <div class="setting-row">
+                        <div><span class="setting-label">对讲音量</span><span class="setting-desc">家长语音输出</span></div>
+                        <div class="setting-slider" style="--value:68%"><span></span></div>
+                        <span class="setting-value">68%</span>
+                      </div>
+                      <div class="setting-row">
+                        <div><span class="setting-label">提醒音量</span><span class="setting-desc">异常与高危提醒</span></div>
+                        <div class="setting-slider" style="--value:44%"><span></span></div>
+                        <span class="setting-value">44%</span>
+                      </div>
+                    </div>
+                    <aside class="setting-card">
+                      <h3>夜间低打扰</h3>
+                      <p>夜间 22:00-07:00 自动降低普通提醒音量，高危提醒仍保持清晰。</p>
+                      <div class="setting-mini-list">
+                        <div class="setting-mini-item"><span>夜间模式</span><span class="device-switch" aria-hidden="true"></span></div>
+                        <div class="setting-mini-item"><span>高危提醒增强</span><span class="device-switch" aria-hidden="true"></span></div>
+                      </div>
+                    </aside>
+                  </div>
+                </div>
+
+                <div class="settings-panel" data-panel="brightness">
+                  <div class="settings-head">
+                    <div><h2>屏幕亮度</h2><p>适配白天、夜间和宝宝睡眠场景。</p></div>
+                    <span class="settings-chip">自动亮度开启</span>
+                  </div>
+                  <div class="settings-grid">
+                    <div class="settings-list">
+                      <div class="setting-row"><div><span class="setting-label">屏幕亮度</span><span class="setting-desc">手动亮度</span></div><div class="setting-slider" style="--value:46%"><span></span></div><span class="setting-value">46%</span></div>
+                      <div class="setting-row"><div><span class="setting-label">夜间亮度</span><span class="setting-desc">睡眠时段</span></div><div class="setting-slider" style="--value:22%"><span></span></div><span class="setting-value">22%</span></div>
+                      <div class="setting-row"><div><span class="setting-label">自动亮度</span><span class="setting-desc">随环境光调节</span></div><div></div><button class="setting-switch" aria-label="自动亮度"></button></div>
+                    </div>
+                    <aside class="setting-card"><h3>屏幕舒适度</h3><p>深夜看护时降低蓝光和屏幕峰值亮度，减少对宝宝和家长的打扰。</p></aside>
+                  </div>
+                </div>
+
+                <div class="settings-panel" data-panel="sleep">
+                  <div class="settings-head">
+                    <div><h2>息屏设置</h2><p>设置无操作后的息屏时间。</p></div>
+                    <span class="settings-chip">当前 1 分钟</span>
+                  </div>
+                  <div class="settings-list">
+                    <div class="setting-row"><div><span class="setting-label">息屏时间</span><span class="setting-desc">30s / 1 / 3 / 5min / 常亮</span></div><div class="segmented"><span>30s</span><span class="active">1min</span><span>3min</span><span>5min</span><span>常亮</span></div><span></span></div>
+                    <div class="setting-row"><div><span class="setting-label">监控页常亮</span><span class="setting-desc">实时看护时不自动息屏</span></div><div></div><button class="setting-switch" aria-label="监控页常亮"></button></div>
+                    <div class="setting-row"><div><span class="setting-label">夜间轻唤醒</span><span class="setting-desc">轻触屏幕低亮度唤醒</span></div><div></div><button class="setting-switch" aria-label="夜间轻唤醒"></button></div>
+                  </div>
+                </div>
+
+                <div class="settings-panel" data-panel="power">
+                  <div class="settings-head">
+                    <div><h2>省电模式</h2><p>省电模式下，仅重要事件和手动唤醒时亮屏。</p></div>
+                    <span class="settings-chip">预计续航 +28%</span>
+                  </div>
+                  <div class="settings-grid">
+                    <div class="settings-list">
+                      <div class="setting-row"><div><span class="setting-label">省电模式</span><span class="setting-desc">仅高危/异常提醒亮屏</span></div><div></div><button class="setting-switch" aria-label="省电模式"></button></div>
+                      <div class="setting-row"><div><span class="setting-label">省电提醒</span><span class="setting-desc">低电量时自动建议开启</span></div><div></div><button class="setting-switch" aria-label="省电提醒"></button></div>
+                    </div>
+                    <aside class="setting-card"><h3>省电模式说明</h3><p>开启后，普通事件只保留通知记录；高危提醒、异常哭声和体温异常仍会亮屏并响铃。</p></aside>
+                  </div>
+                </div>
+
+                <div class="settings-panel" data-panel="wifi">
+                  <div class="settings-head"><div><h2>Wi-Fi 信息</h2><p>查看当前网络并切换家庭 Wi-Fi。</p></div><span class="settings-chip">信号强</span></div>
+                  <div class="settings-simple-grid">
+                    <div class="setting-card"><h3>BBM_Home_5G</h3><p>已连接 · 5GHz · 信号 92%</p></div>
+                    <div class="setting-card"><h3>BBM_Home_2.4G</h3><p>可用 · 适合远距离房间</p></div>
+                    <div class="setting-card"><h3>网络诊断</h3><p>延迟 18ms · 云端同步正常</p></div>
+                    <div class="setting-card"><h3>重新配网</h3><p>用于更换路由器或家庭网络。</p></div>
+                  </div>
+                </div>
+
+                <div class="settings-panel" data-panel="general">
+                  <div class="settings-head"><div><h2>其他设置</h2><p>闹钟、语言、时区、单位和时间格式。</p></div><span class="settings-chip">中国标准时间</span></div>
+                  <div class="settings-simple-grid">
+                    <div class="setting-card"><h3>闹钟</h3><p>喂养提醒 07:30，午睡提醒 13:00。</p></div>
+                    <div class="setting-card"><h3>语言</h3><p>简体中文</p></div>
+                    <div class="setting-card"><h3>时区</h3><p>GMT+08:00 北京时间</p></div>
+                    <div class="setting-card"><h3>时间格式</h3><p>24 小时制</p></div>
+                    <div class="setting-card"><h3>温湿度单位</h3><p>摄氏度 / 百分比</p></div>
+                    <div class="setting-card"><h3>重量 / 长度单位</h3><p>kg / cm</p></div>
+                  </div>
+                </div>
+
+                <div class="settings-panel" data-panel="deviceInfo">
+                  <div class="settings-head"><div><h2>设备信息</h2><p>设备型号、系统版本和维护操作。</p></div><span class="settings-chip">系统已是最新</span></div>
+                  <div class="settings-simple-grid">
+                    <div class="setting-card"><h3>设备型号</h3><p>BBM Smart Screen 8</p></div>
+                    <div class="setting-card"><h3>设备系统版本</h3><p>BBM OS 1.2.8 · OTA 升级</p></div>
+                    <div class="setting-card"><h3>存储空间</h3><p>已用 38% · 录像缓存正常</p></div>
+                    <div class="setting-card"><h3>设备重启</h3><p>重启不会删除看护记录和设备绑定。</p></div>
+                  </div>
+                </div>
+
+                <div class="settings-panel" data-panel="support">
+                  <div class="settings-head"><div><h2>帮助与反馈</h2><p>查看 FAQ、联系方式和问题反馈。</p></div><span class="settings-chip">在线客服</span></div>
+                  <div class="settings-simple-grid">
+                    <div class="setting-card"><h3>联系方式</h3><p>400-800-BBM · 工作日 09:00-21:00</p></div>
+                    <div class="setting-card"><h3>FAQ</h3><p>配网、设备绑定、提醒策略、录像回放。</p></div>
+                    <div class="setting-card"><h3>问题反馈</h3><p>提交日志和问题描述，帮助定位异常。</p></div>
+                    <div class="setting-card"><h3>远程协助</h3><p>授权后客服可协助排查网络和设备问题。</p></div>
+                  </div>
+                </div>
+
+                <div class="settings-panel" data-panel="privacy">
+                  <div class="settings-head"><div><h2>隐私与条款</h2><p>管理隐私权限和用户协议。</p></div><span class="settings-chip">家庭成员共享</span></div>
+                  <div class="settings-simple-grid">
+                    <div class="setting-card"><h3>隐私政策</h3><p>查看图像、声音、宝宝数据的使用说明。</p></div>
+                    <div class="setting-card"><h3>用户协议</h3><p>BBM 智慧屏服务条款。</p></div>
+                    <div class="setting-card"><h3>家庭成员权限</h3><p>管理成员看护、回放和设备控制权限。</p></div>
+                    <div class="setting-card"><h3>数据导出</h3><p>导出宝宝成长和看护记录。</p></div>
+                  </div>
+                </div>
+              </section>
+            </main>
+
+            <main class="account-page" id="accountPage">
+              <nav class="account-nav" aria-label="账号分类">
+                <button class="active" data-account-panel="baby">宝宝信息</button>
+                <button data-account-panel="account">账号信息</button>
+              </nav>
+
+              <section class="account-content">
+                <div class="account-panel active" data-panel="baby">
+                  <div class="account-head">
+                    <div>
+                      <h2>宝宝信息</h2>
+                      <p>以宝宝资料卡片管理档案，点击卡片进入编辑宝宝信息。</p>
+                    </div>
+                    <button class="add-device-btn" type="button">
+                      <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>
+                      添加宝宝
+                    </button>
+                  </div>
+
+                  <div class="baby-card-layout">
+                    <section class="baby-card-list" aria-label="宝宝资料卡片">
+                      <button class="baby-info-card active" type="button" data-baby-card="chen">
+                        <div class="baby-avatar">宸</div>
+                        <div>
+                          <h3>小宸宸</h3>
+                          <p>男宝宝 · 8 个月 12 天</p>
+                          <div class="baby-card-tags"><span>72 cm</span><span>8.6 kg</span><span>44.8 cm</span></div>
+                        </div>
+                      </button>
+                      <button class="baby-info-card" type="button" data-baby-card="newborn">
+                        <div class="baby-avatar">安</div>
+                        <div>
+                          <h3>小安安</h3>
+                          <p>女宝宝 · 2 个月 6 天</p>
+                          <div class="baby-card-tags"><span>58 cm</span><span>5.1 kg</span><span>38.2 cm</span></div>
+                        </div>
+                      </button>
+                    </section>
+
+                    <section class="baby-detail-grid" aria-label="编辑宝宝信息" id="babyDetailPanel">
+                      <div class="account-card">
+                        <h3>编辑宝宝信息</h3>
+                        <p>点击左侧宝宝资料卡片后，在这里编辑对应宝宝资料。</p>
+                        <button class="account-row editable-info-row" type="button"><span>小名</span><b data-baby-field="nickname">小宸宸</b><span class="edit-mark">✎</span></button>
+                        <button class="account-row editable-info-row" type="button"><span>性别</span><b data-baby-field="gender">男宝宝</b><span class="edit-mark">✎</span></button>
+                        <button class="account-row editable-info-row" type="button"><span>年龄</span><b data-baby-field="age">8 个月 12 天</b><span class="edit-mark">✎</span></button>
+                      </div>
+
+                      <div class="account-card">
+                        <h3>身体信息</h3>
+                        <p>仅展示功能结构中的身高、体重和头围。</p>
+                        <button class="account-row editable-info-row" type="button"><span>身高</span><b data-baby-field="height">72 cm</b><span class="edit-mark">✎</span></button>
+                        <button class="account-row editable-info-row" type="button"><span>体重</span><b data-baby-field="weight">8.6 kg</b><span class="edit-mark">✎</span></button>
+                        <button class="account-row editable-info-row" type="button"><span>头围</span><b data-baby-field="head">44.8 cm</b><span class="edit-mark">✎</span></button>
+                      </div>
+
+                      <div class="account-card">
+                        <h3>养育信息</h3>
+                        <p>仅展示功能结构中的喂养类的。</p>
+                        <button class="account-row editable-info-row" type="button"><span>喂养类的</span><b data-baby-field="feeding">混合喂养</b><span class="edit-mark">✎</span></button>
+                      </div>
+
+                    </section>
+                  </div>
+                </div>
+
+                <div class="account-panel" data-panel="account">
+                  <div class="account-head">
+                    <div>
+                      <h2>账号信息</h2>
+                      <p>展示账号基础信息，并提供账号操作。</p>
+                    </div>
+                    <span class="settings-chip">已登录</span>
+                  </div>
+
+                  <div class="account-grid">
+                    <section class="profile-card baby-profile">
+                      <div class="user-avatar">L</div>
+                      <div>
+                        <h3>陆雪琪</h3>
+                        <p>BBM 云端账号</p>
+                      </div>
+                    </section>
+
+                    <section class="account-card">
+                      <h3>账号信息</h3>
+                      <p>单条展示名称、姓氏、邮箱和手机号信息。</p>
+                      <div class="account-row"><span>名称</span><b>雪琪</b></div>
+                      <div class="account-row"><span>姓氏</span><b>陆</b></div>
+                      <div class="account-row"><span>邮箱</span><b>lxq***@mail.com</b></div>
+                      <div class="account-row"><span>手机号</span><b>138****0927</b></div>
+                      <div class="account-actions">
+                        <button class="account-action-btn" type="button">退出登录</button>
+                        <button class="account-action-btn danger" type="button">删除账号</button>
+                      </div>
+                    </section>
+                  </div>
+                </div>
+              </section>
+            </main>
+
+            <main class="notification-page" id="notificationPage">
+              <section class="alert-modal" aria-label="消息通知弹窗">
+                <div class="alert-baby-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M17.5 14.5A6.8 6.8 0 0 1 9.5 6a7 7 0 1 0 8 8.5Z"/>
+                    <path d="M18.5 5.5v4M16.5 7.5h4"/>
+                  </svg>
+                </div>
+                <div class="alert-copy">
+                  <div class="alert-text">niki 宝宝睡眠时有遮脸风险</div>
+                </div>
+                <button class="alert-action" type="button">查看画面</button>
+                <button class="alert-close" type="button" aria-label="关闭">×</button>
+              </section>
+            </main>
+
+            <main class="onboarding-page" id="onboardingPage">
+              <section class="onboarding-layout" aria-label="屏端初始化向导">
+                <section class="onboarding-flow-card">
+                  <div class="onboarding-screen active" data-onboarding-panel="0">
+                    <div class="setup-form">
+                      <h3>选择系统语言</h3>
+                      <p>选择屏端界面显示语言，后续设置和看护提醒都会按当前语言展示。</p>
+                      <div class="setup-select-wrap">
+                        <span class="setup-select-label">Language</span>
+                        <button class="setup-select" type="button" aria-label="Language selection">
+                          <span class="setup-option-icon">EN</span>
+                          <span><strong>English</strong><span>Default language</span></span>
+                          <span class="setup-select-arrow">⌄</span>
+                        </button>
+                        <div class="setup-select-menu">
+                          <button class="active" type="button"><span>English</span><b>✓</b></button>
+                          <button type="button"><span>简体中文</span></button>
+                          <button type="button"><span>繁體中文</span></button>
+                          <button type="button"><span>日本語</span></button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="onboarding-screen" data-onboarding-panel="1">
+                    <div class="setup-form">
+                      <h3>选择时区</h3>
+                      <p>设置屏端所在地区和时间格式，事件回放、通知记录和睡眠统计会使用该时间。</p>
+                      <div class="setup-select-wrap">
+                        <span class="setup-select-label">Time Zone</span>
+                        <button class="setup-select" type="button" aria-label="Time zone selection">
+                          <span class="setup-option-icon">UTC</span>
+                          <span><strong>America / Los Angeles</strong><span>GMT-07:00 · 2026/5/8 21:09</span></span>
+                          <span class="setup-select-arrow">⌄</span>
+                        </button>
+                        <div class="setup-select-menu">
+                          <button class="active" type="button"><span>America / Los Angeles</span><b>✓</b></button>
+                          <button type="button"><span>America / New York</span></button>
+                          <button type="button"><span>America / Chicago</span></button>
+                          <button type="button"><span>America / Denver</span></button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="onboarding-screen" data-onboarding-panel="2">
+                    <div class="setup-form">
+                      <h3>配置 Wi-Fi 网络</h3>
+                      <p>选择信号稳定的家庭网络，优先推荐 5GHz 网络用于实时监控和录像回放。</p>
+                      <div class="wifi-panel">
+                        <div class="wifi-current">
+                          <span class="setup-option-icon"><svg viewBox="0 0 24 18" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M2 6c5.5-5 14.5-5 20 0"/><path d="M6 10c3.2-3 8.8-3 12 0"/><path d="M10 14c1.2-1 2.8-1 4 0"/><path d="M12 17h.01"/></svg></span>
+                          <span><strong>Wi-Fi</strong><span>已开启</span></span>
+                          <span class="wifi-switch" aria-hidden="true"></span>
+                        </div>
+                        <div class="wifi-list" aria-label="Wi-Fi 列表">
+                          <button class="active" type="button"><span class="setup-option-icon"><svg viewBox="0 0 24 18" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M2 6c5.5-5 14.5-5 20 0"/><path d="M6 10c3.2-3 8.8-3 12 0"/><path d="M10 14c1.2-1 2.8-1 4 0"/><path d="M12 17h.01"/></svg></span><span><strong>BBM_Home_5G</strong><span>信号强 · 推荐连接</span></span><b class="wifi-secure">✓</b></button>
+                          <button type="button"><span class="setup-option-icon"><svg viewBox="0 0 24 18" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M2 6c5.5-5 14.5-5 20 0"/><path d="M6 10c3.2-3 8.8-3 12 0"/><path d="M10 14c1.2-1 2.8-1 4 0"/><path d="M12 17h.01"/></svg></span><span><strong>BBM_Home_2.4G</strong><span>覆盖更远 · 适合远房间设备</span></span><b class="wifi-secure">锁</b></button>
+                          <button type="button"><span class="setup-option-icon"><svg viewBox="0 0 24 18" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M2 6c5.5-5 14.5-5 20 0"/><path d="M6 10c3.2-3 8.8-3 12 0"/><path d="M10 14c1.2-1 2.8-1 4 0"/><path d="M12 17h.01"/></svg></span><span><strong>Nursery_Guest</strong><span>信号中 · 需要密码</span></span><b class="wifi-secure">锁</b></button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="onboarding-screen" data-onboarding-panel="3">
+                    <div class="setup-form">
+                      <h3>账号登录或注册</h3>
+                      <p>选择登录已有 BBM 账号，或注册新账号用于同步设备、通知和云端录像。</p>
+                      <div class="setup-auth-tabs" role="tablist" aria-label="账号操作">
+                        <button class="active" type="button">登录</button>
+                        <button type="button">注册</button>
+                      </div>
+                      <div class="auth-form">
+                        <div class="auth-input-row"><span><label>账号</label><strong>email@example.com</strong></span></div>
+                        <div class="auth-input-row"><span><label>验证码</label><strong>● ● ● ● ● ●</strong></span><button class="auth-inline-btn" type="button">获取</button></div>
+                        <div class="auth-input-row"><span><label>密码</label><strong>••••••••</strong></span><button class="auth-inline-btn" type="button">显示</button></div>
+                        <p class="auth-note">选择“注册”后，填写邮箱或手机号并验证，即可创建新的 BBM 家庭账号。</p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="onboarding-screen" data-onboarding-panel="4">
+                    <div class="setup-form">
+                      <h3>添加婴儿看护摄像头</h3>
+                      <p>扫描摄像头机身二维码，或选择附近发现的摄像头，完成后进入实时看护主页。</p>
+                      <div class="setup-device-grid">
+                        <button class="setup-device-card" type="button"><span class="setup-option-icon">Cam</span><span><strong>BBM Cam A1</strong><span>婴儿房 · 信号强</span></span></button>
+                        <button class="setup-device-card" type="button"><span class="setup-option-icon">QR</span><span><strong>扫描二维码添加</strong><span>摄像头底部 / 包装盒</span></span></button>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="setup-actions">
+                    <span></span>
+                    <div class="setup-action-group">
+                      <button class="setup-secondary-btn" type="button" data-setup-prev>上一步</button>
+                      <button class="setup-primary-btn" type="button" data-setup-next>继续</button>
+                    </div>
+                  </div>
+                </section>
+              </section>
+            </main>
+
+            <main class="control-page" id="controlPage">
+              <section class="control-panel" aria-label="控制中心">
+                <div class="control-panel-head">
+                  <h2>控制中心</h2>
+                  <button class="control-settings-btn" type="button">设置</button>
+                </div>
+                <div class="control-grid">
+                  <button class="glass-tile control-toggle stack active" type="button">
+                    <span class="control-icon">
+                      <svg class="control-svg" viewBox="0 0 28 20" aria-hidden="true">
+                        <path d="M2.8 6.6C9-0.1 19-0.1 25.2 6.6" fill="none" stroke="currentColor" stroke-width="2.7" stroke-linecap="round"/>
+                        <path d="M7.4 10.8c3.8-4 9.4-4 13.2 0" fill="none" stroke="currentColor" stroke-width="2.7" stroke-linecap="round"/>
+                        <path d="M11.6 14.8c1.5-1.4 3.3-1.4 4.8 0" fill="none" stroke="currentColor" stroke-width="2.7" stroke-linecap="round"/>
+                        <circle cx="14" cy="18" r="1.7" fill="currentColor"/>
+                      </svg>
+                    </span>
+                    <span><span class="control-title">Wi-Fi</span><span class="control-subtitle">36170 · 已连接</span></span>
+                  </button>
+                  <button class="glass-tile control-toggle stack" type="button">
+                    <span class="control-icon">◌</span>
+                    <span><span class="control-title">麦克风</span><span class="control-subtitle">已开启</span></span>
+                  </button>
+                  <button class="glass-tile control-toggle stack" type="button">
+                    <span class="control-icon">◒</span>
+                    <span><span class="control-title">喇叭静音</span><span class="control-subtitle">未开启</span></span>
+                  </button>
+                  <button class="glass-tile control-toggle stack" type="button">
+                    <span class="control-icon">◐</span>
+                    <span><span class="control-title">省电模式</span><span class="control-subtitle">未开启</span></span>
+                  </button>
+                  <div class="glass-tile vertical-slider brightness-slider">
+                    <div class="vertical-track"><div class="vertical-fill" style="--value:72%"></div><b>☀</b></div>
+                    <span class="control-subtitle">亮度</span>
+                  </div>
+                  <div class="glass-tile vertical-slider volume-slider">
+                    <div class="vertical-track"><div class="vertical-fill" style="--value:36%"></div><b>♪</b></div>
+                    <span class="control-subtitle">音量</span>
+                  </div>
+                  <button class="glass-tile sleep-control-card" type="button">
+                    <span><span class="control-title">息屏设置</span><span class="control-subtitle">1 分钟后自动息屏</span></span>
+                    <span class="settings-chip">1min</span>
+                  </button>
+                </div>
+              </section>
+            </main>
+
+            <section class="device-strip">
+              <div class="device-row">
+                <button class="device-card active">
+                  <div class="device-meta">
+                    <span class="device-icon">▣</span>
+                    <span class="device-state">在线</span>
+                  </div>
+                  <div class="device-name">智能婴儿床</div>
+                  <div class="device-state">支持摇篮 / 体态感知</div>
+                </button>
+                <button class="device-card">
+                  <div class="device-meta">
+                    <span class="device-icon">℃</span>
+                    <span class="device-state">36.6°C</span>
+                  </div>
+                  <div class="device-name">体温贴</div>
+                  <div class="device-state">已同步</div>
+                </button>
+                <button class="device-card">
+                  <div class="device-meta">
+                    <span class="device-icon">≋</span>
+                    <span class="device-state">已开启</span>
+                  </div>
+                  <div class="device-name">加湿器</div>
+                  <div class="device-state">婴儿房</div>
+                </button>
+                <button class="device-card">
+                  <div class="device-meta">
+                    <span class="device-icon">◌</span>
+                    <span class="device-state">在线</span>
+                  </div>
+                  <div class="device-name">空气净化器</div>
+                  <div class="device-state">活动区</div>
+                </button>
+                <button class="device-card">
+                  <div class="device-meta">
+                    <span class="device-icon">▤</span>
+                    <span class="device-state">待接入</span>
+                  </div>
+                  <div class="device-name">第三方设备</div>
+                  <div class="device-state">生态协同</div>
+                </button>
+              </div>
+            </section>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <script>
+    const pageMeta = {
+      '实时监控区': {
+        title: '实时监控区',
+        desc: '默认进入宝宝实时监控主页，主画面展示真实宝宝看护画面，右侧承载宝宝档案、指标和当前建议。',
+        bullets: [
+          '默认单画面进入婴儿床实时看护，点击房间或摄像头即可切换主画面。',
+          '多画面模式支持婴儿房、活动区和婴儿房2的同屏看护。',
+          '右侧保留宝宝档案、核心指标与今日建议，便于家长快速判断状态。'
+        ]
+      },
+      '宝宝看护指标区': {
+        title: '宝宝看护指标区',
+        desc: '聚合睡眠、体征、环境和行为相关指标，用于快速判断宝宝看护状态。',
+        bullets: [
+          '汇总睡眠、呼吸、心率、温湿度等核心指标。',
+          '异常状态以颜色和文案同步提示，便于夜间快速扫视。',
+          '与实时监控画面联动，避免家长在多个页面之间跳转。'
+        ]
+      },
+      '智能看护快捷设置': {
+        title: '智能看护快捷设置',
+        desc: '集中管理语音、报警、休眠、画面亮度和提醒级别等高频控制项。',
+        bullets: [
+          '支持高危、一般提醒的分级控制。',
+          '可以快速配置语音对讲、安抚乐、休眠/唤醒等操作。',
+          '适合夜间低打扰的家长使用路径。'
+        ]
+      },
+      '其他生态设备控制': {
+        title: '其他生态设备控制',
+        desc: '展示非 IPC 生态设备的状态、名称和核心功能，适合扩展到体温贴、加湿器与净化器等设备。',
+        bullets: [
+          '设备卡包含 icon、名称、状态和核心能力。',
+          '可作为后续生态协同的统一控制入口。',
+          '为多设备家庭场景预留扩展空间。'
+        ]
+      },
+      '睡眠统计': {
+        title: '睡眠统计',
+        desc: '按天/周维度查看睡眠时长、深浅睡、入睡和异常行为。',
+        bullets: [
+          '适合回看睡眠趋势和异常节点。',
+          '支持按时间维度统计和对比。',
+          '可连接录像和图片列表做追溯。'
+        ]
+      },
+      '日常活动统计': {
+        title: '日常活动统计',
+        desc: '沉淀宝宝日常事件记录，为成长分析和回看提供入口。',
+        bullets: [
+          '记录活动区和婴儿房中的关键行为。',
+          '可与录像回放和图片列表联动查看。',
+          '为成长记录和 AI 分析提供素材。'
+        ]
+      },
+      '录像回放': {
+        title: '录像回放',
+        desc: '面向事件回看，支持暂停、截图、倍速、拖动和事件标记。',
+        bullets: [
+          '适合查看异常事件前后的完整过程。',
+          '截图和事件标识便于归档。',
+          '支持按时间轴快速定位。'
+        ]
+      },
+      '图片列表': {
+        title: '图片列表',
+        desc: '统一管理截图、告警附图和成长照片。',
+        bullets: [
+          '支持查看、删除和归档。',
+          '可作为成长纪念和事件留存的入口。',
+          '与录像回放构成看护证据链。'
+        ]
+      },
+      'AI 智能体': {
+        title: 'AI 智能体',
+        desc: '围绕宝宝档案、设备信息和看护数据生成情境化建议。',
+        bullets: [
+          '面向家长给出简化、可执行的建议。',
+          '可结合环境、睡眠和成长记录生成提醒。',
+          '作为母婴助手的入口。'
+        ]
+      },
+      '宝宝成长记录': {
+        title: '宝宝成长记录',
+        desc: '记录身高、体重、头围、照片和阶段里程碑。',
+        bullets: [
+          '便于长期跟踪成长变化。',
+          '支持与看护场景结合查看。',
+          '可和 AI 智能体联动生成建议。'
+        ]
+      },
+      '喂养记录': {
+        title: '喂养记录',
+        desc: '记录奶量、辅食、时间和喂养提醒。',
+        bullets: [
+          '适合日常高频记录。',
+          '后续可与提醒、统计和建议联动。',
+          '能补齐家庭看护的闭环数据。'
+        ]
+      },
+      '育儿建议': {
+        title: '育儿建议',
+        desc: '基于环境、睡眠和成长信息输出穿衣、睡眠和喂养建议。',
+        bullets: [
+          '面向家长提供轻量、可读性强的建议。',
+          '建议内容可随场景与状态自动变化。',
+          '适合放在主页作为即时参考。'
+        ]
+      },
+      'WiFi 网络': {
+        title: 'WiFi 网络',
+        desc: '用于连接家庭网络并完成设备联网配置。',
+        bullets: ['支持家庭网络接入。', '为实时监控和云同步提供基础连接。', '可与初始化向导联动。']
+      },
+      '熄屏设置': {
+        title: '熄屏设置',
+        desc: '配置 30s / 1 / 3 / 5 分钟和常亮等屏幕策略。',
+        bullets: ['适配夜间低干扰使用。', '支持常亮与自动熄屏切换。', '兼顾家长操作和节能。']
+      },
+      '省电模式': {
+        title: '省电模式',
+        desc: '管理低功耗策略与提醒规则。',
+        bullets: ['减少非必要亮屏和常驻消耗。', '保留关键告警能力。', '适合夜间和长待机场景。']
+      },
+      'OTA 升级': {
+        title: 'OTA 升级',
+        desc: '支持手动升级、自动升级和版本信息查看。',
+        bullets: ['用于设备固件维护。', '可扩展升级提示和失败重试。', '支持版本信息展示。']
+      },
+      '设备信息': {
+        title: '设备信息',
+        desc: '展示设备型号、序列号、网络和固件信息。',
+        bullets: ['便于售后和运维查看。', '与账号、网络配置关联。', '适合设备详情页入口。']
+      },
+      '屏端初始化向导': {
+        title: '屏端初始化向导',
+        desc: '覆盖 WiFi、登录、宝宝基础信息和设备添加的初始化流程。',
+        bullets: ['用于首次开机引导。', '包含设备配网、账号登录和宝宝信息录入。', '完成后可直达主页实时监控。']
+      },
+      '宝宝信息': {
+        title: '宝宝信息',
+        desc: '维护宝宝姓名、生日、性别、身高体重和健康信息。',
+        bullets: ['作为建议和统计的基础数据源。', '适合单宝宝家庭的档案管理。', '后续可扩展多宝宝切换。']
+      },
+      '账号信息': {
+        title: '账号信息',
+        desc: '查看家庭账号、成员权限和登录状态。',
+        bullets: ['支持家庭成员协同看护。', '可扩展角色权限管理。', '与生态设备同步绑定。']
+      },
+      '控制中心': {
+        title: '控制中心',
+        desc: '快速调节亮度、音量、Wi-Fi、省电、麦克风和息屏。',
+        bullets: ['聚合高频快捷开关。', '适合平板类设备的常驻控制入口。', '减少深层设置路径。']
+      },
+      '消息通知': {
+        title: '消息通知',
+        desc: '集中展示高危提醒、普通事件、设备状态和系统通知。',
+        bullets: ['支持按全部、高危、普通和已读查看。', '通知列表与右侧详情预览联动。', '可快速跳转实时画面或事件回放。']
+      },
+      '语音控制': {
+        title: '语音控制',
+        desc: '预留 Alexa Built-in、Matter Bridge 和自研语音能力入口。',
+        bullets: ['支持语音接入规划。', '可扩展第三方生态协同。', '适合多设备家庭场景。']
+      }
+    };
+
+    const roomMeta = {
+      '全部设备': { camera: '婴儿床摄像头', roomLabel: '全部设备', pos: 'center 56%', breath: '32 次/分', heart: '118 次/分', temp: '36.6°C', env: '26°C / 55%' },
+      '婴儿房': { camera: '婴儿床摄像头', roomLabel: '婴儿房', pos: 'center 58%', breath: '31 次/分', heart: '116 次/分', temp: '36.5°C', env: '25°C / 56%' },
+      '活动区': { camera: '活动区摄像头', roomLabel: '活动区', pos: '48% 48%', breath: '29 次/分', heart: '121 次/分', temp: '36.7°C', env: '26°C / 54%' },
+      '婴儿房2': { camera: '婴儿房2摄像头', roomLabel: '婴儿房2', pos: '50% 42%', breath: '30 次/分', heart: '113 次/分', temp: '36.4°C', env: '25°C / 53%' },
+      '婴儿房3': { camera: '婴儿房3摄像头', roomLabel: '婴儿房3', pos: '47% 50%', breath: '30 次/分', heart: '112 次/分', temp: '36.5°C', env: '25°C / 52%' }
+    };
+
+    const sceneMeta = {
+      '看护': { title: '今日穿衣建议', text: '长袖连体衣 + 薄开衫，适合夜间看护场景。早晚切换活动区时，建议再加一层轻薄外套。', state: '平稳' },
+      '活动': { title: '活动场景建议', text: '活动区建议保持通风与安全边界清晰，互动时优先使用语音对讲和实时画面切换。', state: '关注活动' },
+      '育儿': { title: '育儿建议', text: '结合睡眠、体征和成长记录，建议保持规律作息，关注喂养和体温变化。', state: '建议参考' }
+    };
+
+    const appState = {
+      page: '实时监控区',
+      room: '婴儿房',
+      scene: '看护',
+      view: 'single',
+      device: '智能婴儿床'
+    };
+
+    const roomSets = {
+      single: ['婴儿房'],
+      split2: ['全部设备', '婴儿房', '活动区'],
+      split4: ['全部设备', '婴儿房', '活动区', '婴儿房2', '婴儿房3'],
+      singleFull: ['婴儿房'],
+      split2Full: ['全部设备', '婴儿房', '活动区'],
+      split4Full: ['全部设备', '婴儿房', '活动区', '婴儿房2', '婴儿房3']
+    };
+
+    const fullscreenViewMap = {
+      single: 'singleFull',
+      split2: 'split2Full',
+      split4: 'split4Full'
+    };
+
+    const monitor = document.getElementById('monitor');
+    const screen = document.querySelector('.screen');
+    const tempChip = document.getElementById('tempChip');
+    const envChip = document.getElementById('envChip');
+    const heartValue = document.getElementById('heartValue');
+    const breathValue = document.getElementById('breathValue');
+    const tempValue = document.getElementById('tempValue');
+    const envValue = document.getElementById('envValue');
+    const canvasLabel = document.getElementById('canvasLabel');
+    const fullscreenRoomPill = document.getElementById('fullscreenRoomPill');
+    const roomTabs = document.getElementById('roomTabs');
+    const navSubButtons = document.querySelectorAll('.nav-sub-item');
+    const sceneButtons = document.querySelectorAll('#sceneTabs .tab-btn');
+    const navButtons = document.querySelectorAll('.nav-item');
+    const screenMenuButtons = document.querySelectorAll('.screen-menu-item');
+    const deviceButtons = document.querySelectorAll('.device-card');
+    const devicePageCards = document.querySelectorAll('.device-page-card');
+    const settingNavButtons = document.querySelectorAll('.settings-nav button');
+    const settingPanels = document.querySelectorAll('.settings-panel');
+    const accountNavButtons = document.querySelectorAll('.account-nav button');
+    const accountPanels = document.querySelectorAll('.account-panel');
+    const babyInfoCards = document.querySelectorAll('.baby-info-card');
+    const editableInfoRows = document.querySelectorAll('.editable-info-row');
+    const tiles = document.querySelectorAll('.camera-tile');
+    const rightPanel = document.getElementById('rightPanel');
+    const onboardingSteps = document.querySelectorAll('.onboarding-step');
+    const onboardingPanels = document.querySelectorAll('.onboarding-screen');
+    const setupPrevButton = document.querySelector('[data-setup-prev]');
+    const setupNextButton = document.querySelector('[data-setup-next]');
+
+    const babyProfiles = {
+      chen: {
+        nickname: '小宸宸',
+        gender: '男宝宝',
+        age: '8 个月 12 天',
+        height: '72 cm',
+        weight: '8.6 kg',
+        head: '44.8 cm',
+        feeding: '混合喂养'
+      },
+      newborn: {
+        nickname: '小安安',
+        gender: '女宝宝',
+        age: '2 个月 6 天',
+        height: '58 cm',
+        weight: '5.1 kg',
+        head: '38.2 cm',
+        feeding: '母乳喂养'
+      }
+    };
+
+    function renderRoomTabs() {
+      const rooms = roomSets[appState.view] || roomSets.single;
+      roomTabs.innerHTML = rooms.map((name) => (
+        `<button class="tab-btn${name === appState.room ? ' active' : ''}" data-room="${name}">${name}</button>`
+      )).join('');
+    }
+
+    let onboardingIndex = 0;
+    let onboardingCompletedIndex = 0;
+
+    function renderOnboardingStep() {
+      onboardingSteps.forEach((button, index) => {
+        button.classList.toggle('active', index === onboardingIndex);
+        button.classList.toggle('done', index < onboardingCompletedIndex);
+        button.classList.toggle('locked', index > onboardingCompletedIndex);
+        button.disabled = index > onboardingCompletedIndex;
+      });
+      onboardingPanels.forEach((panel, index) => {
+        panel.classList.toggle('active', index === onboardingIndex);
+      });
+      if (setupPrevButton) {
+        setupPrevButton.disabled = onboardingIndex === 0;
+        setupPrevButton.textContent = '上一步';
+      }
+      if (setupNextButton) {
+        setupNextButton.textContent = onboardingIndex === onboardingPanels.length - 1 ? '完成' : '继续';
+      }
+    }
+
+    function renderState() {
+      const room = roomMeta[appState.room] || roomMeta['全部设备'];
+      const scene = sceneMeta[appState.scene] || sceneMeta['看护'];
+      const isMonitorPage = appState.page === '实时监控区';
+      const isDevicePage = appState.page === '其他生态设备控制';
+      const isCarePage = appState.page === '宝宝看护指标区';
+      const isReplayPage = appState.page === '日常活动统计';
+      const isSettingsPage = appState.page === '智能看护快捷设置';
+      const isAccountPage = appState.page === '账号信息';
+      const isNotificationPage = appState.page === '消息通知';
+      const isOnboardingPage = appState.page === '屏端初始化向导';
+      const isControlPage = appState.page === '控制中心';
+      const isFull = isMonitorPage && (appState.view === 'singleFull' || appState.view === 'split2Full' || appState.view === 'split4Full');
+      const showSplit = isMonitorPage && appState.room === '全部设备' && (appState.view === 'split2' || appState.view === 'split4' || appState.view === 'split2Full' || appState.view === 'split4Full');
+      const showSplit2 = appState.view === 'split2' || appState.view === 'split2Full';
+      const showSplit4 = appState.view === 'split4' || appState.view === 'split4Full';
+
+      monitor.classList.toggle('split-2', showSplit && showSplit2);
+      monitor.classList.toggle('split-4', showSplit && showSplit4);
+      screen.classList.toggle('fullscreen-mode', isFull);
+      screen.classList.toggle('full-single', appState.view === 'singleFull');
+      screen.classList.remove('activity-scene');
+      screen.classList.toggle('device-page-mode', isDevicePage);
+      screen.classList.toggle('care-page-mode', isCarePage);
+      screen.classList.toggle('replay-page-mode', isReplayPage);
+      screen.classList.toggle('settings-page-mode', isSettingsPage);
+      screen.classList.toggle('account-page-mode', isAccountPage);
+      screen.classList.toggle('notification-page-mode', isNotificationPage);
+      screen.classList.toggle('onboarding-page-mode', isOnboardingPage);
+      screen.classList.toggle('control-page-mode', isControlPage);
+      monitor.style.backgroundPosition = room.pos;
+      if (fullscreenRoomPill) {
+        fullscreenRoomPill.textContent = room.roomLabel;
+      }
+      if (rightPanel) {
+        rightPanel.dataset.scenePanel = appState.scene;
+      }
+
+      tempChip.textContent = '25°C';
+      envChip.textContent = '30%';
+      heartValue.textContent = '75 bpm';
+      breathValue.textContent = '42 br/min';
+      tempValue.textContent = '25°C';
+      envValue.textContent = '30%';
+
+      canvasLabel.textContent = isDevicePage ? `${appState.page} / 所有设备` : (isCarePage ? `${appState.page} / 指标趋势` : (isReplayPage ? `${appState.page} / 录像回放` : (isSettingsPage ? `${appState.page} / 设置` : (isAccountPage ? `${appState.page} / 宝宝信息` : (isNotificationPage ? `主页 / 消息弹窗` : (isOnboardingPage ? `${appState.page} / 首次开机` : (isControlPage ? `${appState.page} / 快捷控制` : (isFull ? `${appState.page} / ${room.roomLabel}` : `${appState.page} / ${room.roomLabel} / ${appState.scene}`))))))));
+
+      renderRoomTabs();
+      navSubButtons.forEach((button) => button.classList.toggle('active', button.dataset.view === appState.view && appState.page === button.dataset.page));
+      sceneButtons.forEach((button) => button.classList.toggle('active', button.dataset.scene === appState.scene));
+      tiles.forEach((tile) => {
+        const selected = showSplit ? false : tile.dataset.room === appState.room;
+        tile.classList.toggle('active', selected);
+      });
+      navButtons.forEach((button) => button.classList.toggle('active', (button.dataset.page || button.textContent.trim()) === appState.page));
+      screenMenuButtons.forEach((button) => button.classList.toggle('active', button.dataset.page === appState.page));
+      if (isOnboardingPage) {
+        renderOnboardingStep();
+      }
+    }
+
+    function activatePage(page) {
+      appState.page = page;
+      if (page === '消息通知') {
+        appState.view = 'single';
+        appState.room = '婴儿房';
+        appState.scene = '看护';
+        renderState();
+        return;
+      }
+      if (page !== '实时监控区') {
+        appState.view = 'single';
+        appState.room = '婴儿房';
+      }
+      renderState();
+    }
+
+    function enterFullscreenView() {
+      if (!fullscreenViewMap[appState.view]) return;
+      appState.view = fullscreenViewMap[appState.view];
+      appState.room = appState.view === 'singleFull' ? '婴儿房' : '全部设备';
+      appState.scene = '看护';
+      renderState();
+    }
+
+    navButtons.forEach((button) => {
+      button.addEventListener('click', () => {
+        if (button.dataset.room) {
+          appState.room = button.dataset.room;
+        }
+        if (button.dataset.scene) {
+          appState.scene = button.dataset.scene;
+        }
+        if (button.dataset.page === '实时监控区' || button.dataset.page === '消息通知') {
+          appState.view = 'single';
+          appState.room = '婴儿房';
+        }
+        activatePage(button.dataset.page || button.textContent.trim());
+      });
+    });
+
+    navSubButtons.forEach((button) => {
+      button.addEventListener('click', () => {
+        appState.page = button.dataset.page;
+        appState.view = button.dataset.view;
+        appState.room = appState.view === 'single' || appState.view === 'singleFull' ? '婴儿房' : '全部设备';
+        appState.scene = '看护';
+        renderState();
+      });
+    });
+
+    screenMenuButtons.forEach((button) => {
+      button.addEventListener('click', () => {
+        if (button.dataset.room) {
+          appState.room = button.dataset.room;
+        }
+        if (button.dataset.scene) {
+          appState.scene = button.dataset.scene;
+        }
+        activatePage(button.dataset.page);
+      });
+    });
+
+    roomTabs.addEventListener('click', (event) => {
+      const button = event.target.closest('.tab-btn');
+      if (!button) return;
+      appState.room = button.dataset.room;
+      if (appState.room !== '全部设备') {
+        appState.device = roomMeta[appState.room].camera;
+      }
+      renderState();
+    });
+
+    monitor.addEventListener('click', (event) => {
+      if (event.target.closest('button') || event.target.closest('.camera-tile') || event.target.closest('.monitor-actions')) return;
+      enterFullscreenView();
+    });
+
+    sceneButtons.forEach((button) => {
+      button.addEventListener('click', () => {
+        appState.scene = button.dataset.scene;
+        renderState();
+      });
+    });
+
+    tiles.forEach((tile) => {
+      tile.addEventListener('click', () => {
+        if (appState.view === 'split2' || appState.view === 'split4') {
+          appState.view = fullscreenViewMap[appState.view];
+          appState.room = '全部设备';
+          appState.scene = '看护';
+          renderState();
+          return;
+        }
+        appState.room = tile.dataset.room;
+        appState.device = tile.dataset.camera;
+        renderState();
+      });
+    });
+
+    deviceButtons.forEach((button) => {
+      button.addEventListener('click', () => {
+        deviceButtons.forEach((item) => item.classList.remove('active'));
+        button.classList.add('active');
+        appState.device = button.querySelector('.device-name').textContent.trim();
+      });
+    });
+
+    devicePageCards.forEach((button) => {
+      button.addEventListener('click', () => {
+        devicePageCards.forEach((item) => item.classList.remove('active'));
+        button.classList.add('active');
+        appState.device = button.dataset.deviceName;
+      });
+    });
+
+    settingNavButtons.forEach((button) => {
+      button.addEventListener('click', () => {
+        settingNavButtons.forEach((item) => item.classList.remove('active'));
+        settingPanels.forEach((panel) => panel.classList.remove('active'));
+        button.classList.add('active');
+        const panel = document.querySelector(`.settings-panel[data-panel="${button.dataset.settingPanel}"]`);
+        if (panel) {
+          panel.classList.add('active');
+        }
+      });
+    });
+
+    accountNavButtons.forEach((button) => {
+      button.addEventListener('click', () => {
+        accountNavButtons.forEach((item) => item.classList.remove('active'));
+        accountPanels.forEach((panel) => panel.classList.remove('active'));
+        button.classList.add('active');
+        const panel = document.querySelector(`.account-panel[data-panel="${button.dataset.accountPanel}"]`);
+        if (panel) {
+          panel.classList.add('active');
+          canvasLabel.textContent = `账号信息 / ${button.textContent.trim()}`;
+        }
+      });
+    });
+
+    babyInfoCards.forEach((button) => {
+      button.addEventListener('click', () => {
+        babyInfoCards.forEach((item) => item.classList.remove('active'));
+        button.classList.add('active');
+        const profile = babyProfiles[button.dataset.babyCard];
+        if (!profile) return;
+        Object.entries(profile).forEach(([key, value]) => {
+          const target = document.querySelector(`[data-baby-field="${key}"]`);
+          if (target) target.textContent = value;
+        });
+      });
+    });
+
+    editableInfoRows.forEach((button) => {
+      button.addEventListener('click', () => {
+        editableInfoRows.forEach((item) => item.classList.remove('editing'));
+        button.classList.add('editing');
+      });
+    });
+
+    onboardingSteps.forEach((button) => {
+      button.addEventListener('click', () => {
+        const targetIndex = Number(button.dataset.onboardingStep) || 0;
+        if (targetIndex > onboardingCompletedIndex) return;
+        onboardingIndex = targetIndex;
+        renderOnboardingStep();
+      });
+    });
+
+    if (setupPrevButton) {
+      setupPrevButton.addEventListener('click', () => {
+        if (onboardingIndex === 0) return;
+        onboardingIndex -= 1;
+        renderOnboardingStep();
+      });
+    }
+
+    if (setupNextButton) {
+      setupNextButton.addEventListener('click', () => {
+        if (onboardingIndex >= onboardingPanels.length - 1) {
+          activatePage('实时监控区');
+          return;
+        }
+        onboardingCompletedIndex = Math.max(onboardingCompletedIndex, onboardingIndex + 1);
+        onboardingIndex += 1;
+        renderOnboardingStep();
+      });
+    }
+
+    document.addEventListener('click', (event) => {
+      const action = event.target.closest('[data-action]');
+      if (!action) return;
+      if (action.dataset.action === 'exit-fullscreen') {
+        const fallbackView = {
+          singleFull: 'single',
+          split2Full: 'split2',
+          split4Full: 'split4'
+        };
+        appState.view = fallbackView[appState.view] || 'single';
+        appState.room = appState.view === 'single' ? '婴儿房' : '全部设备';
+        renderState();
+      }
+    });
+
+    renderState();
+  </script>
+</body>
+
+</html>
