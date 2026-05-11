@@ -2265,17 +2265,17 @@
 
     .care-settings-back {
       display: inline-grid;
-      width: 36px;
-      height: 36px;
-      min-height: 36px;
-      margin: 0 0 12px 0;
+      width: 46px;
+      height: 46px;
+      min-height: 46px;
+      margin: 0 0 14px 0;
       place-items: center;
       border: 1px solid rgba(134, 164, 202, 0.28);
-      border-radius: 12px;
+      border-radius: 15px;
       background: rgba(255, 255, 255, 0.06);
       padding: 0;
       color: #d8e8fb;
-      font-size: 20px;
+      font-size: 28px;
       font-weight: 900;
       line-height: 1;
     }
@@ -2346,6 +2346,30 @@
       border-radius: 0;
       background: transparent;
       padding: 12px 15px;
+    }
+
+    .care-setting-item.as-link {
+      grid-template-columns: minmax(0, 1fr) auto auto;
+      width: 100%;
+      color: inherit;
+      cursor: pointer;
+      text-align: left;
+    }
+
+    .care-setting-item.as-link:hover {
+      background: rgba(82, 166, 255, 0.08);
+    }
+
+    .care-setting-arrow {
+      display: grid;
+      width: 28px;
+      height: 28px;
+      place-items: center;
+      border-radius: 10px;
+      background: rgba(255, 255, 255, 0.055);
+      color: #92a7c1;
+      font-size: 18px;
+      font-weight: 900;
     }
 
     .care-setting-item + .care-setting-item {
@@ -5477,17 +5501,17 @@
                     <section class="care-settings-card">
                       <h3>检测项开关</h3>
                       <div class="care-setting-list">
-                        <div class="care-setting-item"><div><strong>移动侦测</strong><span>检测开关、灵敏度、告警通知开关</span></div><span class="care-setting-pill">高灵敏</span><button class="setting-switch" aria-label="移动侦测"></button></div>
-                        <div class="care-setting-item"><div><strong>宝宝在位检测</strong><span>检测开关、告警通知开关</span></div><span class="care-setting-pill">已开启</span><button class="setting-switch" aria-label="宝宝在位检测"></button></div>
-                        <div class="care-setting-item"><div><strong>趴睡检测</strong><span>检测开关、告警通知开关</span></div><span class="care-setting-pill">强提醒</span><button class="setting-switch" aria-label="趴睡检测"></button></div>
-                        <div class="care-setting-item"><div><strong>遮脸检测</strong><span>检测开关、告警通知开关</span></div><span class="care-setting-pill">强提醒</span><button class="setting-switch" aria-label="遮脸检测"></button></div>
-                        <div class="care-setting-item"><div><strong>安全 / 危险区域</strong><span>检测开关、告警通知开关、区域设置</span></div><span class="care-setting-pill">已设区域</span><button class="setting-switch" aria-label="安全危险区域"></button></div>
-                        <div class="care-setting-item"><div><strong>呼吸率异常检测</strong><span>检测开关、告警通知开关</span></div><span class="care-setting-pill">强提醒</span><button class="setting-switch" aria-label="呼吸率异常检测"></button></div>
-                        <div class="care-setting-item"><div><strong>心率异常检测</strong><span>检测开关、告警通知开关</span></div><span class="care-setting-pill">强提醒</span><button class="setting-switch" aria-label="心率异常检测"></button></div>
-                        <div class="care-setting-item"><div><strong>哭声检测</strong><span>检测开关、灵敏度、告警通知开关、安抚音设置</span></div><span class="care-setting-pill">中灵敏</span><button class="setting-switch" aria-label="哭声检测"></button></div>
-                        <div class="care-setting-item"><div><strong>异响检测</strong><span>检测开关、灵敏度、告警通知开关</span></div><span class="care-setting-pill">中灵敏</span><button class="setting-switch" aria-label="异响检测"></button></div>
-                        <div class="care-setting-item"><div><strong>温湿度检测</strong><span>检测开关、告警通知开关、温湿度范围</span></div><span class="care-setting-pill">24-26°C / 45-65%</span><button class="setting-switch" aria-label="温湿度检测"></button></div>
-                        <div class="care-setting-item"><div><strong>人脸标记开关</strong><span>用于识别家庭成员和宝宝看护画面</span></div><span class="care-setting-pill">本地处理</span><button class="setting-switch" aria-label="人脸标记开关"></button></div>
+                        <button class="care-setting-item as-link" type="button"><div><strong>移动侦测</strong><span>检测开关、灵敏度、告警通知开关</span></div><span class="care-setting-pill">高灵敏</span><span class="care-setting-arrow">›</span></button>
+                        <button class="care-setting-item as-link" type="button"><div><strong>宝宝在位检测</strong><span>检测开关、告警通知开关</span></div><span class="care-setting-pill">已开启</span><span class="care-setting-arrow">›</span></button>
+                        <button class="care-setting-item as-link" type="button"><div><strong>趴睡检测</strong><span>检测开关、告警通知开关</span></div><span class="care-setting-pill">强提醒</span><span class="care-setting-arrow">›</span></button>
+                        <button class="care-setting-item as-link" type="button"><div><strong>遮脸检测</strong><span>检测开关、告警通知开关</span></div><span class="care-setting-pill">强提醒</span><span class="care-setting-arrow">›</span></button>
+                        <button class="care-setting-item as-link" type="button"><div><strong>安全 / 危险区域</strong><span>检测开关、告警通知开关、区域设置</span></div><span class="care-setting-pill">已设区域</span><span class="care-setting-arrow">›</span></button>
+                        <button class="care-setting-item as-link" type="button"><div><strong>呼吸率异常检测</strong><span>检测开关、告警通知开关</span></div><span class="care-setting-pill">强提醒</span><span class="care-setting-arrow">›</span></button>
+                        <button class="care-setting-item as-link" type="button"><div><strong>心率异常检测</strong><span>检测开关、告警通知开关</span></div><span class="care-setting-pill">强提醒</span><span class="care-setting-arrow">›</span></button>
+                        <button class="care-setting-item as-link" type="button"><div><strong>哭声检测</strong><span>检测开关、灵敏度、告警通知开关、安抚音设置</span></div><span class="care-setting-pill">中灵敏</span><span class="care-setting-arrow">›</span></button>
+                        <button class="care-setting-item as-link" type="button"><div><strong>异响检测</strong><span>检测开关、灵敏度、告警通知开关</span></div><span class="care-setting-pill">中灵敏</span><span class="care-setting-arrow">›</span></button>
+                        <button class="care-setting-item as-link" type="button"><div><strong>温湿度检测</strong><span>检测开关、告警通知开关、温湿度范围</span></div><span class="care-setting-pill">24-26°C / 45-65%</span><span class="care-setting-arrow">›</span></button>
+                        <button class="care-setting-item as-link" type="button"><div><strong>人脸标记开关</strong><span>用于识别家庭成员和宝宝看护画面</span></div><span class="care-setting-pill">本地处理</span><span class="care-setting-arrow">›</span></button>
                       </div>
                     </section>
 
@@ -5513,9 +5537,9 @@
                     <section class="care-settings-card">
                       <h3>场景模式设置</h3>
                       <div class="care-setting-list">
-                        <div class="care-setting-item"><div><strong>入睡安抚</strong><span>入睡条件、安抚音、屏幕亮度和自动结束时间。</span></div><span class="care-setting-pill">18 分钟</span><button class="setting-switch" aria-label="入睡安抚"></button></div>
-                        <div class="care-setting-item"><div><strong>睡眠看护</strong><span>睡眠状态识别、呼吸趋势、环境监测和异常强提醒。</span></div><span class="care-setting-pill">默认模式</span><button class="setting-switch" aria-label="睡眠看护"></button></div>
-                        <div class="care-setting-item"><div><strong>接觉安抚</strong><span>将醒未醒时低音量安抚，避免强光刺激。</span></div><span class="care-setting-pill">12 分钟</span><button class="setting-switch" aria-label="接觉安抚"></button></div>
+                        <button class="care-setting-item as-link" type="button"><div><strong>入睡安抚</strong><span>入睡条件、安抚音、屏幕亮度和自动结束时间。</span></div><span class="care-setting-pill">18 分钟</span><span class="care-setting-arrow">›</span></button>
+                        <button class="care-setting-item as-link" type="button"><div><strong>睡眠看护</strong><span>睡眠状态识别、呼吸趋势、环境监测和异常强提醒。</span></div><span class="care-setting-pill">默认模式</span><span class="care-setting-arrow">›</span></button>
+                        <button class="care-setting-item as-link" type="button"><div><strong>接觉安抚</strong><span>将醒未醒时低音量安抚，避免强光刺激。</span></div><span class="care-setting-pill">12 分钟</span><span class="care-setting-arrow">›</span></button>
                       </div>
                     </section>
                   </div>
