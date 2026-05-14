@@ -3890,6 +3890,15 @@
       gap: 12px;
     }
 
+    .settings-general-stack {
+      display: grid;
+      align-content: start;
+      gap: 14px;
+      min-height: 0;
+      overflow: auto;
+      scrollbar-width: none;
+    }
+
     .account-page {
       grid-column: 2;
       grid-row: 2 / 5;
@@ -5428,7 +5437,7 @@
     .share-flow-grid,
     .share-wizard {
       display: grid;
-      grid-template-rows: auto minmax(0, 1fr);
+      grid-template-rows: minmax(0, 1fr);
       gap: 12px;
       min-height: 0;
     }
@@ -5924,9 +5933,9 @@
           <button class="nav-item" data-page="日常活动统计" data-scene="活动" data-room="活动区">录像回放</button>
           <button class="nav-item" data-page="其他生态设备控制">设备</button>
           <button class="nav-item" data-page="智能看护快捷设置">设置</button>
-          <button class="nav-item" data-page="账号信息">账号</button>
+          <button class="nav-item active" data-page="账号信息">账号</button>
           <button class="nav-item" data-page="控制中心">控制中心</button>
-          <button class="nav-item active" data-page="消息通知">消息通知</button>
+          <button class="nav-item" data-page="消息通知">消息通知</button>
           <div class="nav-sub">
             <button class="nav-sub-item" data-page="干预通知">干预通知</button>
           </div>
@@ -5939,11 +5948,11 @@
       <div class="canvas-wrap">
         <div class="canvas-head">
           <strong>8 寸平板横屏原型</strong>
-          <span id="canvasLabel">主页 / 消息通知</span>
+          <span id="canvasLabel">账号信息 / 宝宝信息</span>
         </div>
 
         <div class="shell">
-          <div class="screen notification-page-mode">
+          <div class="screen account-page-mode">
             <header class="topbar">
               <div class="screen-date">2026/5/7 周四</div>
               <div class="screen-status">
@@ -5967,7 +5976,7 @@
               <button class="screen-menu-item" data-page="其他生态设备控制">设备</button>
               <button class="screen-menu-item" data-page="智能看护快捷设置">设置</button>
               <div class="screen-menu-spacer"></div>
-              <button class="screen-menu-item" data-page="账号信息">账号</button>
+              <button class="screen-menu-item active" data-page="账号信息">账号</button>
             </nav>
 
             <div class="tabs-bar">
@@ -5976,7 +5985,7 @@
 
             <main class="content">
               <div class="monitor-stack">
-                <section class="monitor" id="monitor" style="background-image: linear-gradient(rgba(6, 11, 19, 0.06), rgba(6, 11, 19, 0.48)), url(&quot;public/baby-face-covered.png&quot;); background-position: center 48%;">
+                <section class="monitor" id="monitor" style="background-image: linear-gradient(rgba(6, 11, 19, 0.06), rgba(6, 11, 19, 0.48)), url(&quot;public/baby-sleep-overhead.png&quot;); background-position: center 58%;">
                   <div class="monitor-header">
                     <div class="monitor-left-tools">
                       <div class="live-pills">
@@ -6525,13 +6534,15 @@
 
                 <div class="settings-panel" data-panel="general">
                   <div class="settings-head"><div><h2>其他设置</h2><p>闹钟、语言、时区、单位和时间格式。</p></div><span class="settings-chip">中国标准时间</span></div>
-                  <div class="settings-simple-grid">
-                    <div class="setting-card"><h3>闹钟</h3><p>喂养提醒 07:30，午睡提醒 13:00。</p></div>
-                    <div class="setting-card"><h3>语言</h3><p>简体中文</p></div>
-                    <div class="setting-card"><h3>时区</h3><p>GMT+08:00 北京时间</p></div>
-                    <div class="setting-card"><h3>时间格式</h3><p>24 小时制</p></div>
-                    <div class="setting-card"><h3>温湿度单位</h3><p>摄氏度 / 百分比</p></div>
-                    <div class="setting-card"><h3>重量 / 长度单位</h3><p>kg / cm</p></div>
+                  <div class="settings-general-stack">
+                    <div class="settings-simple-grid">
+                      <div class="setting-card"><h3>闹钟</h3><p>喂养提醒 07:30，午睡提醒 13:00。</p></div>
+                      <div class="setting-card"><h3>语言</h3><p>简体中文</p></div>
+                      <div class="setting-card"><h3>时区</h3><p>GMT+08:00 北京时间</p></div>
+                      <div class="setting-card"><h3>时间格式</h3><p>24 小时制</p></div>
+                      <div class="setting-card"><h3>温湿度单位</h3><p>摄氏度 / 百分比</p></div>
+                      <div class="setting-card"><h3>重量 / 长度单位</h3><p>kg / cm</p></div>
+                    </div>
                   </div>
                 </div>
 
@@ -6569,13 +6580,13 @@
 
             <main class="account-page" id="accountPage">
               <nav class="account-nav" aria-label="账号分类">
-                <button class="" data-account-panel="baby">宝宝信息</button>
-                <button data-account-panel="account">账号信息</button>
-                <button data-account-panel="sharing" class="active">设备分享</button>
+                <button class="active" data-account-panel="baby">宝宝信息</button>
+                <button data-account-panel="account" class="">账号信息</button>
+                <button data-account-panel="sharing" class="">设备分享</button>
               </nav>
 
               <section class="account-content">
-                <div class="account-panel" data-panel="baby">
+                <div class="account-panel active" data-panel="baby">
                   <div class="account-head">
                     <div>
                       <h2>宝宝信息</h2>
@@ -6638,13 +6649,10 @@
                       <h2>账号信息</h2>
                       <p>展示账号基础信息，并提供账号操作。</p>
                     </div>
-                    <span class="settings-chip">已登录</span>
                   </div>
 
                   <div class="account-grid account-grid-single">
                     <section class="account-card">
-                      <h3>账号信息</h3>
-                      <p>单条展示名称、姓氏、邮箱和手机号信息。</p>
                       <div class="account-row"><span>名称</span><b>雪琪</b></div>
                       <div class="account-row"><span>姓氏</span><b>陆</b></div>
                       <div class="account-row"><span>邮箱</span><b>lxq***@mail.com</b></div>
@@ -6657,23 +6665,18 @@
                   </div>
                 </div>
 
-                <div class="account-panel active" data-panel="sharing">
+                <div class="account-panel" data-panel="sharing">
                   <div class="account-head">
                     <div>
                       <h2>设备分享</h2>
-                      <p>先添加分享账号，再选择可查看的设备，并为每个设备设置分享权限。</p>
+                      <p>添加分享账号，选择可查看设备，并设置分享权限。</p>
                     </div>
                     <span class="settings-chip">已选择 3 台设备</span>
                   </div>
 
                   <div class="share-wizard" aria-label="设备分享分步设置">
-                    <div class="share-wizard-steps">
-                      <button class="share-wizard-step active" type="button" data-share-step="0"><b>1</b><span><strong>输入分享账号</strong><span>手机号 / 邮箱</span></span></button>
-                      <button class="share-wizard-step" type="button" data-share-step="1"><b>2</b><span><strong>选择分享设备及分享权限</strong><span>高级 / 基础</span></span></button>
-                    </div>
-
                     <div class="share-stack">
-                      <section class="share-step-card share-wizard-panel active" data-share-panel="0">
+                      <section class="share-step-card share-wizard-panel" data-share-panel="0">
                         <h3>输入分享账号</h3>
                         <p>输入家人手机号或邮箱，系统会向该账号发送设备分享邀请。</p>
                         <div class="share-input-row"><span>输入手机号 / 邮箱</span><button class="account-action-btn" type="button">添加</button></div>
@@ -6682,10 +6685,10 @@
                           <div><strong>妈妈</strong><small>mom***@mail.com · 待确认邀请</small></div>
                           <span class="care-setting-pill">已添加</span>
                         </div>
-                        <div class="share-step-actions"><button class="account-action-btn" type="button" data-share-next="">下一步</button></div>
+                        <div class="share-step-actions"><button class="setup-primary-btn" type="button" data-share-next="">继续</button></div>
                       </section>
 
-                      <section class="share-step-card share-wizard-panel" data-share-panel="1">
+                      <section class="share-step-card share-wizard-panel active" data-share-panel="1">
                         <h3>选择分享设备及权限</h3>
                         <p>选择可查看的设备，并为每台设备设置分享权限。高级权限可查看回放并控制设备；基础权限仅查看实时画面和接收提醒。</p>
                         <div class="share-device-permission-list">
@@ -6705,7 +6708,7 @@
                             <div class="segmented"><span class="active">高级权限</span><span>基础权限</span></div>
                           </div>
                         </div>
-                        <div class="share-step-actions"><button class="account-action-btn" type="button" data-share-prev="">上一步</button><button class="account-action-btn" type="button">发送邀请</button></div>
+                        <div class="share-step-actions"><button class="setup-secondary-btn" type="button" data-share-prev="">上一步</button><button class="setup-primary-btn" type="button">发送邀请</button></div>
                       </section>
                     </div>
                   </div>
@@ -7039,9 +7042,8 @@
     "title": "智能看护数据统计",
     "desc": "聚合睡眠、体征、环境和行为相关指标，用于快速判断宝宝看护状态。",
     "bullets": [
-      "汇总睡眠、呼吸、心率、温湿度等核心指标。",
-      "异常状态以颜色和文案同步提示，便于夜间快速扫视。",
-      "与实时监控画面联动，避免家长在多个页面之间跳转。"
+      "- 汇总睡眠、呼吸、心率、温湿度等核心指标。",
+      "- 异常状态以颜色和文案同步提示，便于查看看护数据、及AI看护分析建议。"
     ],
     "rules": [
       "支持按天和按周查看睡眠数据。",
@@ -7089,17 +7091,11 @@
   },
   "账号信息": {
     "title": "账号信息",
-    "desc": "查看家庭账号、成员权限和登录状态。",
+    "desc": "",
     "bullets": [
-      "支持家庭成员协同看护。",
-      "可扩展角色权限管理。",
-      "与生态设备同步绑定。"
+      "展示宝宝信息、账号信息、设备分享"
     ],
-    "rules": [
-      "通过左侧页面导航或屏内底部菜单切换页面。",
-      "页面内按钮仅用于高保真交互示意，后续可接入真实流程。",
-      "同一页面内避免重复标题和重复说明，优先保留可操作信息。"
-    ]
+    "rules": []
   },
   "控制中心": {
     "title": "控制中心",
@@ -8296,6 +8292,8 @@
 
     renderState();
   </script>
+
+
 
 
 
