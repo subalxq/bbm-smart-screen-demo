@@ -1,9 +1,7 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
-
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<html lang="zh-CN"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>BBM 智慧屏 Demo</title>
   <style>
     :root {
@@ -42,6 +40,12 @@
       gap: 16px;
       height: 100vh;
       padding: 16px;
+      transition: grid-template-columns .24s ease, padding-right .24s ease;
+    }
+
+    .app.docs-expanded {
+      grid-template-columns: minmax(170px, 220px) minmax(420px, 1fr);
+      padding-right: 496px;
     }
 
     .prototype-docs {
@@ -104,18 +108,42 @@
       padding: 18px 18px 14px;
     }
 
-    .docs-head h2 {
+    .docs-title-input {
+      display: block;
+      width: 100%;
       margin: 0;
+      border: 1px solid transparent;
+      border-radius: 10px;
+      background: transparent;
+      padding: 2px 4px;
       color: #f6fbff;
       font-size: 20px;
       font-weight: 900;
+      outline: none;
     }
 
-    .docs-head p {
+    .docs-desc-input {
+      display: block;
+      width: 100%;
+      min-height: 42px;
       margin: 6px 0 0;
+      border: 1px solid transparent;
+      border-radius: 10px;
+      background: transparent;
+      padding: 4px;
       color: #91a2ba;
       font-size: 12px;
       line-height: 1.55;
+      outline: none;
+      resize: vertical;
+    }
+
+    .docs-title-input:focus,
+    .docs-desc-input:focus,
+    .docs-editor:focus {
+      border-color: rgba(82, 166, 255, 0.62);
+      background: rgba(82, 166, 255, 0.08);
+      box-shadow: 0 0 0 3px rgba(82, 166, 255, 0.10);
     }
 
     .docs-badge {
@@ -126,6 +154,36 @@
       color: #ffb082;
       font-size: 11px;
       font-weight: 900;
+    }
+
+    .docs-actions {
+      display: flex;
+      flex: 0 0 auto;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 8px;
+    }
+
+    .docs-save {
+      border: 1px solid rgba(82, 166, 255, 0.50);
+      border-radius: 999px;
+      background: rgba(82, 166, 255, 0.14);
+      padding: 6px 10px;
+      color: #dcecff;
+      font-size: 11px;
+      font-weight: 900;
+    }
+
+    .docs-save:hover {
+      background: rgba(82, 166, 255, 0.24);
+    }
+
+    .docs-save-status {
+      max-width: 120px;
+      color: #91a2ba;
+      font-size: 10px;
+      line-height: 1.4;
+      text-align: right;
     }
 
     .docs-body {
@@ -149,6 +207,26 @@
       color: #dcecff;
       font-size: 14px;
       font-weight: 900;
+    }
+
+    .docs-editor {
+      width: 100%;
+      min-height: 112px;
+      border: 1px solid rgba(127, 151, 180, 0.18);
+      border-radius: 14px;
+      background: rgba(9, 14, 24, 0.42);
+      padding: 10px 12px;
+      color: #b9c7da;
+      font: inherit;
+      font-size: 12px;
+      line-height: 1.65;
+      outline: none;
+      resize: vertical;
+    }
+
+    .docs-editor::placeholder,
+    .docs-desc-input::placeholder {
+      color: rgba(145, 162, 186, 0.62);
     }
 
     .docs-list {
@@ -5350,8 +5428,8 @@
     .share-flow-grid,
     .share-wizard {
       display: grid;
-      grid-template-columns: 220px minmax(0, 1fr);
-      gap: 14px;
+      grid-template-rows: auto minmax(0, 1fr);
+      gap: 12px;
       min-height: 0;
     }
 
@@ -5366,9 +5444,12 @@
     }
 
     .share-wizard-steps {
-      gap: 10px;
-      border-right: 1px solid rgba(127, 151, 180, 0.22);
-      padding-right: 14px;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 8px;
+      border: 1px solid rgba(127, 151, 180, 0.22);
+      border-radius: 18px;
+      background: linear-gradient(180deg, rgba(20, 31, 52, 0.86), rgba(14, 23, 39, 0.86));
+      padding: 9px;
     }
 
     .share-stepper {
@@ -5410,16 +5491,17 @@
     }
 
     .share-wizard-step {
+      position: relative;
       display: grid;
       grid-template-columns: auto minmax(0, 1fr);
       align-items: center;
-      gap: 10px;
+      gap: 8px;
       width: 100%;
-      min-height: 62px;
-      border: 1px solid rgba(127, 151, 180, 0.20);
-      border-radius: 17px;
+      min-height: 46px;
+      border: 1px solid transparent;
+      border-radius: 14px;
       background: rgba(255, 255, 255, 0.045);
-      padding: 10px;
+      padding: 7px 9px;
       color: #aebbd0;
       text-align: left;
     }
@@ -5432,8 +5514,8 @@
 
     .share-wizard-step b {
       display: grid;
-      width: 30px;
-      height: 30px;
+      width: 28px;
+      height: 28px;
       place-items: center;
       border-radius: 50%;
       background: rgba(82, 166, 255, 0.18);
@@ -5450,18 +5532,23 @@
     .share-wizard-step strong {
       display: block;
       overflow: hidden;
-      font-size: 13px;
+      font-size: 12px;
       font-weight: 900;
       text-overflow: ellipsis;
-      white-space: nowrap;
+      white-space: normal;
+    }
+
+    .share-wizard-step.done b {
+      background: rgba(79, 218, 166, 0.20);
+      color: #80f0ca;
     }
 
     .share-wizard-step span {
       display: block;
       margin-top: 3px;
       color: #7f90a8;
-      font-size: 10px;
-      font-weight: 700;
+      font-size: 9px;
+      font-weight: 650;
     }
 
     .share-wizard-panel {
@@ -5806,7 +5893,7 @@
 </head>
 
 <body>
-  <div class="app">
+  <div class="app docs-expanded">
     <aside class="panel sidebar">
       <div class="side-head">
         <div class="brand-mark">BBM</div>
@@ -5819,11 +5906,11 @@
         <section class="nav-group">
           <h2>一级模块</h2>
           <button class="nav-item" data-page="屏端初始化向导">屏端初始化向导</button>
-          <button class="nav-item active" data-page="实时监控区">主页</button>
+          <button class="nav-item" data-page="实时监控区">主页</button>
           <div class="nav-sub">
             <button class="nav-sub-item" data-page="实时监控区" data-scene="入睡安抚">入睡安抚</button>
             <button class="nav-sub-item" data-page="实时监控区" data-scene="接觉安抚">接觉安抚</button>
-            <button class="nav-sub-item active" data-page="实时监控区" data-scene="睡眠看护">睡眠看护</button>
+            <button class="nav-sub-item" data-page="实时监控区" data-scene="睡眠看护">睡眠看护</button>
             <button class="nav-sub-item" data-page="实时监控区" data-view="split2">二画面</button>
             <button class="nav-sub-item" data-page="实时监控区" data-view="split4">四画面</button>
             <button class="nav-sub-item" data-page="实时监控区" data-view="singleFull">单画面全屏</button>
@@ -5839,7 +5926,7 @@
           <button class="nav-item" data-page="智能看护快捷设置">设置</button>
           <button class="nav-item" data-page="账号信息">账号</button>
           <button class="nav-item" data-page="控制中心">控制中心</button>
-          <button class="nav-item" data-page="消息通知">消息通知</button>
+          <button class="nav-item active" data-page="消息通知">消息通知</button>
           <div class="nav-sub">
             <button class="nav-sub-item" data-page="干预通知">干预通知</button>
           </div>
@@ -5852,20 +5939,20 @@
       <div class="canvas-wrap">
         <div class="canvas-head">
           <strong>8 寸平板横屏原型</strong>
-          <span id="canvasLabel">实时监控区 / 婴儿房 / 看护</span>
+          <span id="canvasLabel">主页 / 消息通知</span>
         </div>
 
         <div class="shell">
-          <div class="screen">
+          <div class="screen notification-page-mode">
             <header class="topbar">
               <div class="screen-date">2026/5/7 周四</div>
               <div class="screen-status">
                 <span class="status-icon" aria-label="Wi-Fi信号">
                   <svg class="wifi-svg" viewBox="0 0 28 20" aria-hidden="true">
-                    <path d="M2.8 6.6C9-0.1 19-0.1 25.2 6.6" fill="none" stroke="currentColor" stroke-width="2.7" stroke-linecap="round"/>
-                    <path d="M7.4 10.8c3.8-4 9.4-4 13.2 0" fill="none" stroke="currentColor" stroke-width="2.7" stroke-linecap="round"/>
-                    <path d="M11.6 14.8c1.5-1.4 3.3-1.4 4.8 0" fill="none" stroke="currentColor" stroke-width="2.7" stroke-linecap="round"/>
-                    <circle cx="14" cy="18" r="1.7" fill="currentColor"/>
+                    <path d="M2.8 6.6C9-0.1 19-0.1 25.2 6.6" fill="none" stroke="currentColor" stroke-width="2.7" stroke-linecap="round"></path>
+                    <path d="M7.4 10.8c3.8-4 9.4-4 13.2 0" fill="none" stroke="currentColor" stroke-width="2.7" stroke-linecap="round"></path>
+                    <path d="M11.6 14.8c1.5-1.4 3.3-1.4 4.8 0" fill="none" stroke="currentColor" stroke-width="2.7" stroke-linecap="round"></path>
+                    <circle cx="14" cy="18" r="1.7" fill="currentColor"></circle>
                   </svg>
                 </span>
                 <span class="status-icon" aria-label="电量"><span class="battery-icon"></span></span>
@@ -5874,7 +5961,7 @@
             </header>
 
             <nav class="screen-menu" aria-label="屏内主菜单">
-              <button class="screen-menu-item active" data-page="实时监控区" data-scene="睡眠看护">主页</button>
+              <button class="screen-menu-item" data-page="实时监控区" data-scene="睡眠看护">主页</button>
               <button class="screen-menu-item" data-page="宝宝看护指标区" data-scene="睡眠看护">智能看护</button>
               <button class="screen-menu-item" data-page="日常活动统计" data-scene="活动" data-room="活动区">录像回放</button>
               <button class="screen-menu-item" data-page="其他生态设备控制">设备</button>
@@ -5884,45 +5971,41 @@
             </nav>
 
             <div class="tabs-bar">
-              <div class="tab-group" id="roomTabs">
-                <button class="tab-btn active" data-room="全部设备">全部设备</button>
-                <button class="tab-btn" data-room="婴儿房">婴儿房</button>
-                <button class="tab-btn" data-room="活动区">活动区</button>
-              </div>
+              <div class="tab-group" id="roomTabs"><button class="tab-btn active" data-room="婴儿房">婴儿房</button></div>
             </div>
 
             <main class="content">
               <div class="monitor-stack">
-                <section class="monitor" id="monitor">
+                <section class="monitor" id="monitor" style="background-image: linear-gradient(rgba(6, 11, 19, 0.06), rgba(6, 11, 19, 0.48)), url(&quot;public/baby-face-covered.png&quot;); background-position: center 48%;">
                   <div class="monitor-header">
                     <div class="monitor-left-tools">
                       <div class="live-pills">
                         <span class="live-pill live">Live</span>
-                        <span class="cam-name fullscreen-room-pill" id="fullscreenRoomPill">婴儿房</span>
+                        <span class="cam-name fullscreen-room-pill" id="fullscreenRoomPill">婴儿房 · niki</span>
                         <span class="metric-chip" id="tempChip">25°C</span>
                         <span class="metric-chip" id="envChip">30%</span>
                       </div>
                     </div>
                     <button class="monitor-setting" type="button" title="设置" aria-label="设置">
                       <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M12 15.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7Z"/>
-                        <path d="M19.4 15a1.8 1.8 0 0 0 .36 1.98l.04.04a2.16 2.16 0 0 1-3.05 3.05l-.04-.04a1.8 1.8 0 0 0-1.98-.36 1.8 1.8 0 0 0-1.1 1.66V21.4a2.16 2.16 0 0 1-4.32 0v-.07a1.8 1.8 0 0 0-1.1-1.66 1.8 1.8 0 0 0-1.98.36l-.04.04a2.16 2.16 0 0 1-3.05-3.05l.04-.04A1.8 1.8 0 0 0 4.6 15a1.8 1.8 0 0 0-1.66-1.1H2.86a2.16 2.16 0 0 1 0-4.32h.07A1.8 1.8 0 0 0 4.6 8a1.8 1.8 0 0 0-.36-1.98l-.04-.04a2.16 2.16 0 0 1 3.05-3.05l.04.04A1.8 1.8 0 0 0 9.27 3.3a1.8 1.8 0 0 0 1.1-1.66V1.6a2.16 2.16 0 0 1 4.32 0v.07a1.8 1.8 0 0 0 1.1 1.66 1.8 1.8 0 0 0 1.98-.36l.04-.04a2.16 2.16 0 0 1 3.05 3.05l-.04.04A1.8 1.8 0 0 0 19.4 8a1.8 1.8 0 0 0 1.66 1.1h.07a2.16 2.16 0 0 1 0 4.32h-.07A1.8 1.8 0 0 0 19.4 15Z"/>
+                        <path d="M12 15.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7Z"></path>
+                        <path d="M19.4 15a1.8 1.8 0 0 0 .36 1.98l.04.04a2.16 2.16 0 0 1-3.05 3.05l-.04-.04a1.8 1.8 0 0 0-1.98-.36 1.8 1.8 0 0 0-1.1 1.66V21.4a2.16 2.16 0 0 1-4.32 0v-.07a1.8 1.8 0 0 0-1.1-1.66 1.8 1.8 0 0 0-1.98.36l-.04.04a2.16 2.16 0 0 1-3.05-3.05l.04-.04A1.8 1.8 0 0 0 4.6 15a1.8 1.8 0 0 0-1.66-1.1H2.86a2.16 2.16 0 0 1 0-4.32h.07A1.8 1.8 0 0 0 4.6 8a1.8 1.8 0 0 0-.36-1.98l-.04-.04a2.16 2.16 0 0 1 3.05-3.05l.04.04A1.8 1.8 0 0 0 9.27 3.3a1.8 1.8 0 0 0 1.1-1.66V1.6a2.16 2.16 0 0 1 4.32 0v.07a1.8 1.8 0 0 0 1.1 1.66 1.8 1.8 0 0 0 1.98-.36l.04-.04a2.16 2.16 0 0 1 3.05 3.05l-.04.04A1.8 1.8 0 0 0 19.4 8a1.8 1.8 0 0 0 1.66 1.1h.07a2.16 2.16 0 0 1 0 4.32h-.07A1.8 1.8 0 0 0 19.4 15Z"></path>
                       </svg>
                     </button>
                   </div>
 
                   <div class="multi-grid" id="multiGrid">
                     <button class="camera-tile active" data-room="婴儿房" data-camera="婴儿床摄像头" style="--pos:center 56%;">
-                      <strong>婴儿房</strong><span class="tile-setting" title="设置" aria-label="设置"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 15.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7Z"/><path d="M19.4 15a1.8 1.8 0 0 0 .36 1.98l.04.04a2.16 2.16 0 0 1-3.05 3.05l-.04-.04a1.8 1.8 0 0 0-1.98-.36 1.8 1.8 0 0 0-1.1 1.66V21.4a2.16 2.16 0 0 1-4.32 0v-.07a1.8 1.8 0 0 0-1.1-1.66 1.8 1.8 0 0 0-1.98.36l-.04.04a2.16 2.16 0 0 1-3.05-3.05l.04-.04A1.8 1.8 0 0 0 4.6 15a1.8 1.8 0 0 0-1.66-1.1H2.86a2.16 2.16 0 0 1 0-4.32h.07A1.8 1.8 0 0 0 4.6 8a1.8 1.8 0 0 0-.36-1.98l-.04-.04a2.16 2.16 0 0 1 3.05-3.05l.04.04A1.8 1.8 0 0 0 9.27 3.3a1.8 1.8 0 0 0 1.1-1.66V1.6a2.16 2.16 0 0 1 4.32 0v.07a1.8 1.8 0 0 0 1.1 1.66 1.8 1.8 0 0 0 1.98-.36l.04-.04a2.16 2.16 0 0 1 3.05 3.05l-.04.04A1.8 1.8 0 0 0 19.4 8a1.8 1.8 0 0 0 1.66 1.1h.07a2.16 2.16 0 0 1 0 4.32h-.07A1.8 1.8 0 0 0 19.4 15Z"/></svg></span><span class="tile-sound" title="睡眠安抚" aria-label="睡眠安抚"><span>♪</span><span>睡眠安抚</span></span>
+                      <strong>婴儿房</strong><span class="tile-setting" title="设置" aria-label="设置"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 15.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7Z"></path><path d="M19.4 15a1.8 1.8 0 0 0 .36 1.98l.04.04a2.16 2.16 0 0 1-3.05 3.05l-.04-.04a1.8 1.8 0 0 0-1.98-.36 1.8 1.8 0 0 0-1.1 1.66V21.4a2.16 2.16 0 0 1-4.32 0v-.07a1.8 1.8 0 0 0-1.1-1.66 1.8 1.8 0 0 0-1.98.36l-.04.04a2.16 2.16 0 0 1-3.05-3.05l.04-.04A1.8 1.8 0 0 0 4.6 15a1.8 1.8 0 0 0-1.66-1.1H2.86a2.16 2.16 0 0 1 0-4.32h.07A1.8 1.8 0 0 0 4.6 8a1.8 1.8 0 0 0-.36-1.98l-.04-.04a2.16 2.16 0 0 1 3.05-3.05l.04.04A1.8 1.8 0 0 0 9.27 3.3a1.8 1.8 0 0 0 1.1-1.66V1.6a2.16 2.16 0 0 1 4.32 0v.07a1.8 1.8 0 0 0 1.1 1.66 1.8 1.8 0 0 0 1.98-.36l.04-.04a2.16 2.16 0 0 1 3.05 3.05l-.04.04A1.8 1.8 0 0 0 19.4 8a1.8 1.8 0 0 0 1.66 1.1h.07a2.16 2.16 0 0 1 0 4.32h-.07A1.8 1.8 0 0 0 19.4 15Z"></path></svg></span><span class="tile-sound" title="睡眠安抚" aria-label="睡眠安抚"><span>♪</span><span>睡眠安抚</span></span>
                     </button>
                     <button class="camera-tile" data-room="活动区" data-camera="活动区摄像头" style="--pos:58% 56%;">
-                      <strong>活动区</strong><span class="tile-setting" title="设置" aria-label="设置"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 15.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7Z"/><path d="M19.4 15a1.8 1.8 0 0 0 .36 1.98l.04.04a2.16 2.16 0 0 1-3.05 3.05l-.04-.04a1.8 1.8 0 0 0-1.98-.36 1.8 1.8 0 0 0-1.1 1.66V21.4a2.16 2.16 0 0 1-4.32 0v-.07a1.8 1.8 0 0 0-1.1-1.66 1.8 1.8 0 0 0-1.98.36l-.04.04a2.16 2.16 0 0 1-3.05-3.05l.04-.04A1.8 1.8 0 0 0 4.6 15a1.8 1.8 0 0 0-1.66-1.1H2.86a2.16 2.16 0 0 1 0-4.32h.07A1.8 1.8 0 0 0 4.6 8a1.8 1.8 0 0 0-.36-1.98l-.04-.04a2.16 2.16 0 0 1 3.05-3.05l.04.04A1.8 1.8 0 0 0 9.27 3.3a1.8 1.8 0 0 0 1.1-1.66V1.6a2.16 2.16 0 0 1 4.32 0v.07a1.8 1.8 0 0 0 1.1 1.66 1.8 1.8 0 0 0 1.98-.36l.04-.04a2.16 2.16 0 0 1 3.05 3.05l-.04.04A1.8 1.8 0 0 0 19.4 8a1.8 1.8 0 0 0 1.66 1.1h.07a2.16 2.16 0 0 1 0 4.32h-.07A1.8 1.8 0 0 0 19.4 15Z"/></svg></span><span class="tile-sound" title="睡眠安抚" aria-label="睡眠安抚"><span>♪</span><span>睡眠安抚</span></span>
+                      <strong>活动区</strong><span class="tile-setting" title="设置" aria-label="设置"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 15.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7Z"></path><path d="M19.4 15a1.8 1.8 0 0 0 .36 1.98l.04.04a2.16 2.16 0 0 1-3.05 3.05l-.04-.04a1.8 1.8 0 0 0-1.98-.36 1.8 1.8 0 0 0-1.1 1.66V21.4a2.16 2.16 0 0 1-4.32 0v-.07a1.8 1.8 0 0 0-1.1-1.66 1.8 1.8 0 0 0-1.98.36l-.04.04a2.16 2.16 0 0 1-3.05-3.05l.04-.04A1.8 1.8 0 0 0 4.6 15a1.8 1.8 0 0 0-1.66-1.1H2.86a2.16 2.16 0 0 1 0-4.32h.07A1.8 1.8 0 0 0 4.6 8a1.8 1.8 0 0 0-.36-1.98l-.04-.04a2.16 2.16 0 0 1 3.05-3.05l.04.04A1.8 1.8 0 0 0 9.27 3.3a1.8 1.8 0 0 0 1.1-1.66V1.6a2.16 2.16 0 0 1 4.32 0v.07a1.8 1.8 0 0 0 1.1 1.66 1.8 1.8 0 0 0 1.98-.36l.04-.04a2.16 2.16 0 0 1 3.05 3.05l-.04.04A1.8 1.8 0 0 0 19.4 8a1.8 1.8 0 0 0 1.66 1.1h.07a2.16 2.16 0 0 1 0 4.32h-.07A1.8 1.8 0 0 0 19.4 15Z"></path></svg></span><span class="tile-sound" title="睡眠安抚" aria-label="睡眠安抚"><span>♪</span><span>睡眠安抚</span></span>
                     </button>
                     <button class="camera-tile" data-room="婴儿房2" data-camera="婴儿房2摄像头" style="--pos:50% 42%;">
-                      <strong>婴儿房2</strong><span class="tile-setting" title="设置" aria-label="设置"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 15.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7Z"/><path d="M19.4 15a1.8 1.8 0 0 0 .36 1.98l.04.04a2.16 2.16 0 0 1-3.05 3.05l-.04-.04a1.8 1.8 0 0 0-1.98-.36 1.8 1.8 0 0 0-1.1 1.66V21.4a2.16 2.16 0 0 1-4.32 0v-.07a1.8 1.8 0 0 0-1.1-1.66 1.8 1.8 0 0 0-1.98.36l-.04.04a2.16 2.16 0 0 1-3.05-3.05l.04-.04A1.8 1.8 0 0 0 4.6 15a1.8 1.8 0 0 0-1.66-1.1H2.86a2.16 2.16 0 0 1 0-4.32h.07A1.8 1.8 0 0 0 4.6 8a1.8 1.8 0 0 0-.36-1.98l-.04-.04a2.16 2.16 0 0 1 3.05-3.05l.04.04A1.8 1.8 0 0 0 9.27 3.3a1.8 1.8 0 0 0 1.1-1.66V1.6a2.16 2.16 0 0 1 4.32 0v.07a1.8 1.8 0 0 0 1.1 1.66 1.8 1.8 0 0 0 1.98-.36l.04-.04a2.16 2.16 0 0 1 3.05 3.05l-.04.04A1.8 1.8 0 0 0 19.4 8a1.8 1.8 0 0 0 1.66 1.1h.07a2.16 2.16 0 0 1 0 4.32h-.07A1.8 1.8 0 0 0 19.4 15Z"/></svg></span><span class="tile-sound" title="睡眠安抚" aria-label="睡眠安抚"><span>♪</span><span>睡眠安抚</span></span>
+                      <strong>婴儿房2</strong><span class="tile-setting" title="设置" aria-label="设置"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 15.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7Z"></path><path d="M19.4 15a1.8 1.8 0 0 0 .36 1.98l.04.04a2.16 2.16 0 0 1-3.05 3.05l-.04-.04a1.8 1.8 0 0 0-1.98-.36 1.8 1.8 0 0 0-1.1 1.66V21.4a2.16 2.16 0 0 1-4.32 0v-.07a1.8 1.8 0 0 0-1.1-1.66 1.8 1.8 0 0 0-1.98.36l-.04.04a2.16 2.16 0 0 1-3.05-3.05l.04-.04A1.8 1.8 0 0 0 4.6 15a1.8 1.8 0 0 0-1.66-1.1H2.86a2.16 2.16 0 0 1 0-4.32h.07A1.8 1.8 0 0 0 4.6 8a1.8 1.8 0 0 0-.36-1.98l-.04-.04a2.16 2.16 0 0 1 3.05-3.05l.04.04A1.8 1.8 0 0 0 9.27 3.3a1.8 1.8 0 0 0 1.1-1.66V1.6a2.16 2.16 0 0 1 4.32 0v.07a1.8 1.8 0 0 0 1.1 1.66 1.8 1.8 0 0 0 1.98-.36l.04-.04a2.16 2.16 0 0 1 3.05 3.05l-.04.04A1.8 1.8 0 0 0 19.4 8a1.8 1.8 0 0 0 1.66 1.1h.07a2.16 2.16 0 0 1 0 4.32h-.07A1.8 1.8 0 0 0 19.4 15Z"></path></svg></span><span class="tile-sound" title="睡眠安抚" aria-label="睡眠安抚"><span>♪</span><span>睡眠安抚</span></span>
                     </button>
                     <button class="camera-tile" data-room="婴儿房3" data-camera="婴儿房3摄像头" style="--pos:47% 50%;">
-                      <strong>婴儿房3</strong><span class="tile-setting" title="设置" aria-label="设置"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 15.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7Z"/><path d="M19.4 15a1.8 1.8 0 0 0 .36 1.98l.04.04a2.16 2.16 0 0 1-3.05 3.05l-.04-.04a1.8 1.8 0 0 0-1.98-.36 1.8 1.8 0 0 0-1.1 1.66V21.4a2.16 2.16 0 0 1-4.32 0v-.07a1.8 1.8 0 0 0-1.1-1.66 1.8 1.8 0 0 0-1.98.36l-.04.04a2.16 2.16 0 0 1-3.05-3.05l.04-.04A1.8 1.8 0 0 0 4.6 15a1.8 1.8 0 0 0-1.66-1.1H2.86a2.16 2.16 0 0 1 0-4.32h.07A1.8 1.8 0 0 0 4.6 8a1.8 1.8 0 0 0-.36-1.98l-.04-.04a2.16 2.16 0 0 1 3.05-3.05l.04.04A1.8 1.8 0 0 0 9.27 3.3a1.8 1.8 0 0 0 1.1-1.66V1.6a2.16 2.16 0 0 1 4.32 0v.07a1.8 1.8 0 0 0 1.1 1.66 1.8 1.8 0 0 0 1.98-.36l.04-.04a2.16 2.16 0 0 1 3.05 3.05l-.04.04A1.8 1.8 0 0 0 19.4 8a1.8 1.8 0 0 0 1.66 1.1h.07a2.16 2.16 0 0 1 0 4.32h-.07A1.8 1.8 0 0 0 19.4 15Z"/></svg></span><span class="tile-sound" title="睡眠安抚" aria-label="睡眠安抚"><span>♪</span><span>睡眠安抚</span></span>
+                      <strong>婴儿房3</strong><span class="tile-setting" title="设置" aria-label="设置"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 15.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7Z"></path><path d="M19.4 15a1.8 1.8 0 0 0 .36 1.98l.04.04a2.16 2.16 0 0 1-3.05 3.05l-.04-.04a1.8 1.8 0 0 0-1.98-.36 1.8 1.8 0 0 0-1.1 1.66V21.4a2.16 2.16 0 0 1-4.32 0v-.07a1.8 1.8 0 0 0-1.1-1.66 1.8 1.8 0 0 0-1.98.36l-.04.04a2.16 2.16 0 0 1-3.05-3.05l.04-.04A1.8 1.8 0 0 0 4.6 15a1.8 1.8 0 0 0-1.66-1.1H2.86a2.16 2.16 0 0 1 0-4.32h.07A1.8 1.8 0 0 0 4.6 8a1.8 1.8 0 0 0-.36-1.98l-.04-.04a2.16 2.16 0 0 1 3.05-3.05l.04.04A1.8 1.8 0 0 0 9.27 3.3a1.8 1.8 0 0 0 1.1-1.66V1.6a2.16 2.16 0 0 1 4.32 0v.07a1.8 1.8 0 0 0 1.1 1.66 1.8 1.8 0 0 0 1.98-.36l.04-.04a2.16 2.16 0 0 1 3.05 3.05l-.04.04A1.8 1.8 0 0 0 19.4 8a1.8 1.8 0 0 0 1.66 1.1h.07a2.16 2.16 0 0 1 0 4.32h-.07A1.8 1.8 0 0 0 19.4 15Z"></path></svg></span><span class="tile-sound" title="睡眠安抚" aria-label="睡眠安抚"><span>♪</span><span>睡眠安抚</span></span>
                     </button>
                   </div>
 
@@ -5940,7 +6023,7 @@
                 </section>
               </div>
 
-              <aside class="right-panel" id="rightPanel" data-scene-panel="睡眠看护">
+              <aside class="right-panel" id="rightPanel" data-scene-panel="睡眠看护" data-monitor-view="single">
                 <div class="scene-mode-card scene-soothe">
                   <div class="scene-mode-top">
                     <div><div class="scene-mode-state"><span class="scene-mode-icon">♪</span><span class="scene-mode-state-text"><strong>niki入睡安抚中</strong><span class="scene-mode-subtitle">安抚时长 18m</span></span></div></div>
@@ -5961,7 +6044,7 @@
                 </div>
                 <div class="scene-mode-card scene-wakeup">
                   <div class="scene-mode-top">
-                    <div><div class="scene-mode-state"><span class="scene-mode-icon">◌</span><span class="scene-mode-state-text"><strong>niki将醒未醒</strong><span class="scene-mode-subtitle">安抚时长 12m</span></span></div></div>
+                    <div><div class="scene-mode-state"><span class="scene-mode-icon">◌</span><span class="scene-mode-state-text"><strong>niki浅睡中</strong><span class="scene-mode-subtitle">安抚时长 12m</span></span></div></div>
                   </div>
                   <div class="scene-mode-alert"><strong>正在轻柔安抚</strong><p>已开启低音量安抚音，帮助宝宝睡醒后平稳过渡。</p></div>
                   <div class="scene-breath-card"><div class="scene-breath-head"><span>实时呼吸率</span><strong>31 次/分</strong></div><div class="scene-breath-bars"><i style="--h:42%"></i><i style="--h:58%"></i><i style="--h:70%"></i><i style="--h:52%"></i><i style="--h:46%"></i><i style="--h:64%"></i><i style="--h:74%"></i><i style="--h:60%"></i><i style="--h:50%"></i><i style="--h:68%"></i><i style="--h:62%"></i><i style="--h:48%"></i></div></div>
@@ -5982,7 +6065,7 @@
                     <span data-care-range="week">周</span>
                   </div>
                   <button class="date-picker" type="button" aria-label="日期选择">
-                    <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="17" rx="3"/><path d="M8 2v4M16 2v4M3 10h18"/></svg>
+                    <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="17" rx="3"></rect><path d="M8 2v4M16 2v4M3 10h18"></path></svg>
                     2026/05/09
                   </button>
                   <button class="add-device-btn" type="button" data-page-jump="智能看护设置">智能看护设置</button>
@@ -5991,7 +6074,7 @@
 
               <div class="sleep-insight care-hero-insight">
                 <span class="sleep-insight-icon">
-                  <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l1.7 4.6L18 9.3l-4.3 1.7L12 16l-1.7-5L6 9.3l4.3-1.7L12 3Z"/><path d="M19 14l.8 2.2L22 17l-2.2.8L19 20l-.8-2.2L16 17l2.2-.8L19 14Z"/></svg>
+                  <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l1.7 4.6L18 9.3l-4.3 1.7L12 16l-1.7-5L6 9.3l4.3-1.7L12 3Z"></path><path d="M19 14l.8 2.2L22 17l-2.2.8L19 20l-.8-2.2L16 17l2.2-.8L19 14Z"></path></svg>
                 </span>
                 <span id="sleepInsightText">今日深睡比例略低，夜醒 3 次。建议睡前保持房间安静，并提前开启加湿器。</span>
               </div>
@@ -5999,26 +6082,23 @@
               <section class="care-layout">
                 <div class="sleep-record-card">
                   <div class="sleep-record-head">
-                    <div><h3>睡眠记录</h3><p id="sleepRecordSubtitle">今日 · 深浅睡眠分布</p></div>
+                    <div><h3>睡眠记录</h3><p id="sleepRecordSubtitle">今日 · 睡眠时段分布</p></div>
                     <div class="sleep-record-legend">
                       <span><i style="--c:#ad6670"></i>深睡</span>
                       <span><i style="--c:#e0a1aa"></i>浅睡</span>
                       <span><i style="--c:#ffc928"></i>夜醒</span>
                     </div>
                   </div>
-                  <div class="sleep-week-chart" id="sleepChart" aria-label="睡眠柱状图">
-                    <div class="sleep-day"><span class="sleep-total">13.2h</span><div class="sleep-stack" style="--h:146px"><span style="--seg:40%;--c:#ad6670"></span><span style="--seg:56%;--c:#e0a1aa"></span><span style="--seg:4%;--c:#ffc928"></span></div><span class="sleep-day-label">周一</span></div>
-                    <div class="sleep-day"><span class="sleep-total">12.5h</span><div class="sleep-stack" style="--h:136px"><span style="--seg:36%;--c:#ad6670"></span><span style="--seg:59%;--c:#e0a1aa"></span><span style="--seg:5%;--c:#ffc928"></span></div><span class="sleep-day-label">周二</span></div>
-                    <div class="sleep-day"><span class="sleep-total">14.0h</span><div class="sleep-stack" style="--h:154px"><span style="--seg:42%;--c:#ad6670"></span><span style="--seg:55%;--c:#e0a1aa"></span><span style="--seg:3%;--c:#ffc928"></span></div><span class="sleep-day-label">周三</span></div>
-                    <div class="sleep-day"><span class="sleep-total">11.8h</span><div class="sleep-stack" style="--h:126px"><span style="--seg:34%;--c:#ad6670"></span><span style="--seg:57%;--c:#e0a1aa"></span><span style="--seg:9%;--c:#ffc928"></span></div><span class="sleep-day-label">周四</span></div>
-                    <div class="sleep-day"><span class="sleep-total">12.2h</span><div class="sleep-stack" style="--h:132px"><span style="--seg:36%;--c:#ad6670"></span><span style="--seg:57%;--c:#e0a1aa"></span><span style="--seg:7%;--c:#ffc928"></span></div><span class="sleep-day-label">周五</span></div>
-                    <div class="sleep-day"><span class="sleep-total">13.5h</span><div class="sleep-stack" style="--h:148px"><span style="--seg:41%;--c:#ad6670"></span><span style="--seg:55%;--c:#e0a1aa"></span><span style="--seg:4%;--c:#ffc928"></span></div><span class="sleep-day-label">周六</span></div>
-                    <div class="sleep-day today"><span class="sleep-total">9.7h</span><div class="sleep-stack" style="--h:106px"><span style="--seg:44%;--c:#ad6670"></span><span style="--seg:55%;--c:#e9c5ca"></span><span style="--seg:1%;--c:#ffc928"></span></div><span class="sleep-day-label">今天</span></div>
-                  </div>
+                  <div class="sleep-strip-chart" id="sleepChart" aria-label="今日睡眠水平时间轴">
+            <div class="sleep-strip-scale"><span></span><span>00:00</span><span>06:00</span><span>12:00</span><span>18:00</span><span>24:00</span></div>
+            <div class="sleep-strip-rows">
+              <div class="sleep-strip-row featured"><span class="sleep-strip-day">今日</span><div class="sleep-strip-track"><div class="sleep-strip-period" style="--start:1.4%;--width:8.9%"><span style="--seg:42%;--c:#ad6670"></span><span style="--seg:51%;--c:#e0a1aa"></span><span style="--seg:7%;--c:#ffc928"></span></div><div class="sleep-strip-period" style="--start:11.5%;--width:11.6%"><span style="--seg:50%;--c:#ad6670"></span><span style="--seg:47%;--c:#e0a1aa"></span><span style="--seg:3%;--c:#ffc928"></span></div><div class="sleep-strip-period" style="--start:25.7%;--width:3.6%"><span style="--seg:24%;--c:#ad6670"></span><span style="--seg:66%;--c:#e0a1aa"></span><span style="--seg:10%;--c:#ffc928"></span></div><div class="sleep-strip-period" style="--start:52.4%;--width:6.7%"><span style="--seg:34%;--c:#ad6670"></span><span style="--seg:59%;--c:#e0a1aa"></span><span style="--seg:7%;--c:#ffc928"></span></div><div class="sleep-strip-period" style="--start:72.1%;--width:2.9%"><span style="--seg:18%;--c:#ad6670"></span><span style="--seg:72%;--c:#e0a1aa"></span><span style="--seg:10%;--c:#ffc928"></span></div><div class="sleep-strip-period" style="--start:89.3%;--width:6.7%"><span style="--seg:32%;--c:#ad6670"></span><span style="--seg:63%;--c:#e0a1aa"></span><span style="--seg:5%;--c:#ffc928"></span></div></div></div><div class="sleep-strip-note"><span><b>00:20-02:28</b></span><span><b>02:45-05:32</b></span><span><b>06:10-07:02</b></span><span><b>12:34-14:10</b></span><span><b>17:18-18:00</b></span><span><b>21:26-23:02</b></span></div>
+            </div>
+          </div>
                   <div class="sleep-summary-grid">
                     <div class="sleep-summary-card"><span id="sleepTotalLabel">总睡眠</span><strong id="sleepTotalValue" style="--c:#f5f9ff">9.7 h</strong><em id="sleepTotalPercent"></em></div>
-                    <div class="sleep-summary-card"><span id="sleepDeepLabel">深睡</span><strong id="sleepDeepValue" style="--c:#e68a98">3.8 h</strong><em id="sleepDeepPercent">39%</em></div>
-                    <div class="sleep-summary-card"><span id="sleepLightLabel">浅睡</span><strong id="sleepLightValue" style="--c:#e0a1aa">5.3 h</strong><em id="sleepLightPercent">55%</em></div>
+                    <div class="sleep-summary-card"><span id="sleepDeepLabel">深睡</span><strong id="sleepDeepValue" style="--c:#e68a98">3.8 h</strong><em id="sleepDeepPercent">42%</em></div>
+                    <div class="sleep-summary-card"><span id="sleepLightLabel">浅睡</span><strong id="sleepLightValue" style="--c:#e0a1aa">5.3 h</strong><em id="sleepLightPercent">58%</em></div>
                     <div class="sleep-summary-card"><span id="sleepEfficiencyLabel">睡眠效率</span><strong id="sleepEfficiencyValue" style="--c:#5adca2">89%</strong><em id="sleepEfficiencyMeta">较平稳</em></div>
                     <div class="sleep-summary-card"><span id="sleepWakeLabel">夜醒次数</span><strong id="sleepWakeValue" style="--c:#ffb03a">3 次</strong><em id="sleepWakePercent">清醒 0.6h</em></div>
                   </div>
@@ -6031,32 +6111,32 @@
                   </div>
                   <div class="care-data-grid">
                     <div class="care-data-card">
-                      <span class="care-data-icon" style="--c:#ff9fac"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.5 14.5A6.8 6.8 0 0 1 9.5 6a7 7 0 1 0 8 8.5Z"/><path d="M18.5 5.5v4M16.5 7.5h4"/></svg></span>
+                      <span class="care-data-icon" style="--c:#ff9fac"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.5 14.5A6.8 6.8 0 0 1 9.5 6a7 7 0 1 0 8 8.5Z"></path><path d="M18.5 5.5v4M16.5 7.5h4"></path></svg></span>
                       <span><strong>睡眠数据</strong><span id="careSleepData">总时长 9.7h · 深睡 3.8h · 夜醒 3 次</span></span>
                       <b class="care-data-value" id="careSleepStatus" style="--c:#ff9fac">偏少</b>
                     </div>
                     <div class="care-data-card">
-                      <span class="care-data-icon" style="--c:#ff6f86"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 9v4"/><path d="M12 17h.01"/><path d="M10.3 3.9 2.4 18a2 2 0 0 0 1.7 3h15.8a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0Z"/></svg></span>
+                      <span class="care-data-icon" style="--c:#ff6f86"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 9v4"></path><path d="M12 17h.01"></path><path d="M10.3 3.9 2.4 18a2 2 0 0 0 1.7 3h15.8a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0Z"></path></svg></span>
                       <span><strong>睡眠异常行为</strong><span id="careBehaviorData">口鼻遮挡 1 次 · 趴睡 0 次 · 哭闹 2 次</span></span>
                       <b class="care-data-value" id="careBehaviorStatus" style="--c:#ff6f86">3</b>
                     </div>
                     <div class="care-data-card">
-                      <span class="care-data-icon" style="--c:#72d6ff"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 14.76V5a4 4 0 0 0-8 0v9.76a5 5 0 1 0 8 0Z"/><path d="M18 8h4"/><path d="M18 12h4"/><path d="M18 16h4"/></svg></span>
+                      <span class="care-data-icon" style="--c:#72d6ff"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 14.76V5a4 4 0 0 0-8 0v9.76a5 5 0 1 0 8 0Z"></path><path d="M18 8h4"></path><path d="M18 12h4"></path><path d="M18 16h4"></path></svg></span>
                       <span><strong>环境异常数据</strong><span id="careEnvData">湿度偏低 2h10m · 温度波动 1 次</span></span>
                       <b class="care-data-value" id="careEnvStatus" style="--c:#72d6ff">低湿</b>
                     </div>
                     <div class="care-data-card">
-                      <span class="care-data-icon" style="--c:#7ee2b8"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8Z"/><path d="M3 12h4l2-3 3 6 2-3h7"/></svg></span>
+                      <span class="care-data-icon" style="--c:#7ee2b8"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8Z"></path><path d="M3 12h4l2-3 3 6 2-3h7"></path></svg></span>
                       <span><strong>体征异常数据</strong><span id="careVitalData">呼吸率短时偏快 1 次 · 心率平稳</span></span>
                       <b class="care-data-value" id="careVitalStatus" style="--c:#7ee2b8">正常</b>
                     </div>
                     <div class="care-data-card">
-                      <span class="care-data-icon" style="--c:#ffc66f"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3h8v6a4 4 0 0 1-8 0V3Z"/><path d="M12 13v8"/><path d="M9 21h6"/></svg></span>
+                      <span class="care-data-icon" style="--c:#ffc66f"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3h8v6a4 4 0 0 1-8 0V3Z"></path><path d="M12 13v8"></path><path d="M9 21h6"></path></svg></span>
                       <span><strong>喂养数据</strong><span id="careFeedingData">喂奶 4 次 · 最近 11:40 · 总量 520ml</span></span>
                       <b class="care-data-value" id="careFeedingStatus" style="--c:#ffc66f">4</b>
                     </div>
                     <div class="care-data-card">
-                      <span class="care-data-icon" style="--c:#b8a2ff"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 4h10"/><path d="M8 4l1 16h6l1-16"/><path d="M9 9h6"/><path d="M10 13h4"/></svg></span>
+                      <span class="care-data-icon" style="--c:#b8a2ff"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 4h10"></path><path d="M8 4l1 16h6l1-16"></path><path d="M9 9h6"></path><path d="M10 13h4"></path></svg></span>
                       <span><strong>换尿布数据</strong><span id="careDiaperData">换尿布 3 次 · 便便 1 次 · 尿湿 2 次</span></span>
                       <b class="care-data-value" id="careDiaperStatus" style="--c:#b8a2ff">3</b>
                     </div>
@@ -6156,7 +6236,7 @@
                   </div>
                 </div>
                 <button class="add-device-btn" type="button">
-                  <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>
+                  <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v14M5 12h14"></path></svg>
                   添加设备
                 </button>
               </div>
@@ -6167,7 +6247,7 @@
                 <button class="device-page-card active" data-device-name="婴儿房摄像头" data-device-group="婴儿房">
                   <div class="device-card-top">
                     <span class="device-page-icon">
-                      <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 10l4.5-2.6v9.2L15 14"/><rect x="3" y="6" width="12" height="12" rx="3"/></svg>
+                      <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 10l4.5-2.6v9.2L15 14"></path><rect x="3" y="6" width="12" height="12" rx="3"></rect></svg>
                     </span>
                     <span class="device-online">在线</span>
                   </div>
@@ -6178,7 +6258,7 @@
                 <button class="device-page-card" data-device-name="活动区摄像头" data-device-group="活动区">
                   <div class="device-card-top">
                     <span class="device-page-icon">
-                      <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 10l4.5-2.6v9.2L15 14"/><rect x="3" y="6" width="12" height="12" rx="3"/></svg>
+                      <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 10l4.5-2.6v9.2L15 14"></path><rect x="3" y="6" width="12" height="12" rx="3"></rect></svg>
                     </span>
                     <span class="device-online">在线</span>
                   </div>
@@ -6189,7 +6269,7 @@
                 <button class="device-page-card" data-device-name="婴儿房2摄像头" data-device-group="婴儿房2">
                   <div class="device-card-top">
                     <span class="device-page-icon">
-                      <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 10l4.5-2.6v9.2L15 14"/><rect x="3" y="6" width="12" height="12" rx="3"/></svg>
+                      <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 10l4.5-2.6v9.2L15 14"></path><rect x="3" y="6" width="12" height="12" rx="3"></rect></svg>
                     </span>
                     <span class="device-online">在线</span>
                   </div>
@@ -6204,7 +6284,7 @@
                 <button class="device-page-card" data-device-name="白噪声" data-device-group="婴儿房">
                   <div class="device-card-top">
                     <span class="device-page-icon">
-                      <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 11h16v7H4z"/><path d="M7 11V8a3 3 0 0 1 6 0v3"/><path d="M4 18v2M20 18v2"/></svg>
+                      <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 11h16v7H4z"></path><path d="M7 11V8a3 3 0 0 1 6 0v3"></path><path d="M4 18v2M20 18v2"></path></svg>
                     </span>
                     <span class="device-online">在线</span>
                   </div>
@@ -6215,7 +6295,7 @@
                 <button class="device-page-card" data-device-name="体温贴" data-device-group="婴儿房">
                   <div class="device-card-top">
                     <span class="device-page-icon">
-                      <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M14 14.8V5a4 4 0 0 0-8 0v9.8a6 6 0 1 0 8 0Z"/><path d="M10 8v8"/></svg>
+                      <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M14 14.8V5a4 4 0 0 0-8 0v9.8a6 6 0 1 0 8 0Z"></path><path d="M10 8v8"></path></svg>
                     </span>
                     <span class="device-online">在线</span>
                   </div>
@@ -6230,7 +6310,7 @@
                 <button class="device-page-card" data-device-name="加湿器" data-device-group="婴儿房">
                   <div class="device-card-top">
                     <span class="device-page-icon">
-                      <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 3s5 6 5 10a5 5 0 0 1-10 0c0-4 5-10 5-10Z"/><path d="M8 20h8"/></svg>
+                      <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 3s5 6 5 10a5 5 0 0 1-10 0c0-4 5-10 5-10Z"></path><path d="M8 20h8"></path></svg>
                     </span>
                     <span class="device-online">在线</span>
                   </div>
@@ -6241,7 +6321,7 @@
                 <button class="device-page-card" data-device-name="空气净化器" data-device-group="活动区">
                   <div class="device-card-top">
                     <span class="device-page-icon">
-                      <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 9h13a3 3 0 1 0-3-3"/><path d="M4 15h15a3 3 0 1 1-3 3"/><path d="M4 12h9"/></svg>
+                      <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 9h13a3 3 0 1 0-3-3"></path><path d="M4 15h15a3 3 0 1 1-3 3"></path><path d="M4 12h9"></path></svg>
                     </span>
                     <span class="device-online">在线</span>
                   </div>
@@ -6252,7 +6332,7 @@
                 <button class="device-page-card" data-device-name="momcozy设备" data-device-group="婴儿房2">
                   <div class="device-card-top">
                     <span class="device-page-icon">
-                      <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="4"/><path d="M9 9h6v6H9z"/></svg>
+                      <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="4"></rect><path d="M9 9h6v6H9z"></path></svg>
                     </span>
                     <span class="device-online pending">待接入</span>
                   </div>
@@ -6273,7 +6353,7 @@
                 </div>
                 <div class="replay-top-actions">
                   <button class="date-picker" type="button" aria-label="日期选择">
-                    <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="17" rx="3"/><path d="M8 2v4M16 2v4M3 10h18"/></svg>
+                    <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="17" rx="3"></rect><path d="M8 2v4M16 2v4M3 10h18"></path></svg>
                     2026/5/7
                   </button>
                   <button class="album-btn" type="button">相册</button>
@@ -6346,19 +6426,19 @@
 
             <main class="settings-page" id="settingsPage">
               <nav class="settings-nav" aria-label="设置分类">
-                <button class="active" data-setting-panel="sound">音量</button>
+                <button class="" data-setting-panel="sound">音量</button>
                 <button data-setting-panel="brightness">屏幕亮度</button>
-                <button data-setting-panel="sleep">息屏设置</button>
-                <button data-setting-panel="power">省电模式</button>
-                <button data-setting-panel="wifi">Wi-Fi 信息</button>
-                <button data-setting-panel="general">其他设置</button>
+                <button data-setting-panel="sleep" class="active">息屏设置</button>
+                <button data-setting-panel="power" class="">省电模式</button>
+                <button data-setting-panel="wifi" class="">Wi-Fi 信息</button>
+                <button data-setting-panel="general" class="">其他设置</button>
                 <button data-setting-panel="deviceInfo">设备信息</button>
                 <button data-setting-panel="support">帮助与反馈</button>
                 <button data-setting-panel="privacy">隐私与条款</button>
               </nav>
 
               <section class="settings-content">
-                <div class="settings-panel active" data-panel="sound">
+                <div class="settings-panel" data-panel="sound">
                   <div class="settings-head">
                     <div><h2>音量</h2><p>调节系统提示、安抚乐和语音对讲音量。</p></div>
                     <span class="settings-chip">当前 52%</span>
@@ -6407,7 +6487,7 @@
                   </div>
                 </div>
 
-                <div class="settings-panel" data-panel="sleep">
+                <div class="settings-panel active" data-panel="sleep">
                   <div class="settings-head">
                     <div><h2>息屏设置</h2><p>设置无操作后的息屏时间。</p></div>
                     <span class="settings-chip">当前 1 分钟</span>
@@ -6489,20 +6569,20 @@
 
             <main class="account-page" id="accountPage">
               <nav class="account-nav" aria-label="账号分类">
-                <button class="active" data-account-panel="baby">宝宝信息</button>
+                <button class="" data-account-panel="baby">宝宝信息</button>
                 <button data-account-panel="account">账号信息</button>
-                <button data-account-panel="sharing">设备分享</button>
+                <button data-account-panel="sharing" class="active">设备分享</button>
               </nav>
 
               <section class="account-content">
-                <div class="account-panel active" data-panel="baby">
+                <div class="account-panel" data-panel="baby">
                   <div class="account-head">
                     <div>
                       <h2>宝宝信息</h2>
                       <p>以宝宝资料卡片管理档案，点击卡片查看并维护基础资料。</p>
                     </div>
                     <button class="add-device-btn" type="button">
-                      <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>
+                      <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v14M5 12h14"></path></svg>
                       添加宝宝
                     </button>
                   </div>
@@ -6577,7 +6657,7 @@
                   </div>
                 </div>
 
-                <div class="account-panel" data-panel="sharing">
+                <div class="account-panel active" data-panel="sharing">
                   <div class="account-head">
                     <div>
                       <h2>设备分享</h2>
@@ -6589,8 +6669,7 @@
                   <div class="share-wizard" aria-label="设备分享分步设置">
                     <div class="share-wizard-steps">
                       <button class="share-wizard-step active" type="button" data-share-step="0"><b>1</b><span><strong>输入分享账号</strong><span>手机号 / 邮箱</span></span></button>
-                      <button class="share-wizard-step" type="button" data-share-step="1"><b>2</b><span><strong>设备与权限</strong><span>高级 / 基础</span></span></button>
-                      <button class="share-wizard-step" type="button" data-share-step="2"><b>3</b><span><strong>确认并邀请</strong><span>发送分享邀请</span></span></button>
+                      <button class="share-wizard-step" type="button" data-share-step="1"><b>2</b><span><strong>选择分享设备及分享权限</strong><span>高级 / 基础</span></span></button>
                     </div>
 
                     <div class="share-stack">
@@ -6603,7 +6682,7 @@
                           <div><strong>妈妈</strong><small>mom***@mail.com · 待确认邀请</small></div>
                           <span class="care-setting-pill">已添加</span>
                         </div>
-                        <div class="share-step-actions"><button class="account-action-btn" type="button" data-share-next>下一步</button></div>
+                        <div class="share-step-actions"><button class="account-action-btn" type="button" data-share-next="">下一步</button></div>
                       </section>
 
                       <section class="share-step-card share-wizard-panel" data-share-panel="1">
@@ -6626,19 +6705,7 @@
                             <div class="segmented"><span class="active">高级权限</span><span>基础权限</span></div>
                           </div>
                         </div>
-                        <div class="share-step-actions"><button class="account-action-btn" type="button" data-share-prev>上一步</button><button class="account-action-btn" type="button" data-share-next>下一步</button></div>
-                      </section>
-
-                      <section class="share-step-card share-summary-card share-wizard-panel" data-share-panel="2">
-                        <h3>确认并发送邀请</h3>
-                        <p>确认分享账号、设备数量和权限后发送邀请。</p>
-                        <div class="share-summary-list">
-                          <div class="share-summary-item"><span>分享账号</span><strong>妈妈</strong></div>
-                          <div class="share-summary-item"><span>已选设备</span><strong>3 台</strong></div>
-                          <div class="share-summary-item"><span>高级权限</span><strong>2 台</strong></div>
-                          <div class="share-summary-item"><span>基础权限</span><strong>1 台</strong></div>
-                        </div>
-                        <div class="share-step-actions"><button class="account-action-btn" type="button" data-share-prev>上一步</button><button class="account-action-btn" type="button">发送邀请</button></div>
+                        <div class="share-step-actions"><button class="account-action-btn" type="button" data-share-prev="">上一步</button><button class="account-action-btn" type="button">发送邀请</button></div>
                       </section>
                     </div>
                   </div>
@@ -6648,12 +6715,7 @@
 
             <main class="notification-page" id="notificationPage">
               <section class="alert-modal" id="alertModal" aria-label="消息通知弹窗">
-                <div class="alert-baby-icon" id="alertIcon" aria-hidden="true">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M17.5 14.5A6.8 6.8 0 0 1 9.5 6a7 7 0 1 0 8 8.5Z"/>
-                    <path d="M18.5 5.5v4M16.5 7.5h4"/>
-                  </svg>
-                </div>
+                <div class="alert-baby-icon" id="alertIcon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.5 14.5A6.8 6.8 0 0 1 9.5 6a7 7 0 1 0 8 8.5Z"></path><path d="M18.5 5.5v4M16.5 7.5h4"></path></svg></div>
                 <div class="alert-copy">
                   <div class="alert-text" id="alertText">niki 宝宝睡眠时有遮脸风险</div>
                 </div>
@@ -6713,14 +6775,14 @@
                       <p>选择信号稳定的家庭网络，优先推荐 5GHz 网络用于实时监控和录像回放。</p>
                       <div class="wifi-panel">
                         <div class="wifi-current">
-                          <span class="setup-option-icon"><svg viewBox="0 0 24 18" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M2 6c5.5-5 14.5-5 20 0"/><path d="M6 10c3.2-3 8.8-3 12 0"/><path d="M10 14c1.2-1 2.8-1 4 0"/><path d="M12 17h.01"/></svg></span>
+                          <span class="setup-option-icon"><svg viewBox="0 0 24 18" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M2 6c5.5-5 14.5-5 20 0"></path><path d="M6 10c3.2-3 8.8-3 12 0"></path><path d="M10 14c1.2-1 2.8-1 4 0"></path><path d="M12 17h.01"></path></svg></span>
                           <span><strong>Wi-Fi</strong><span>已开启</span></span>
                           <span class="wifi-switch" aria-hidden="true"></span>
                         </div>
                         <div class="wifi-list" aria-label="Wi-Fi 列表">
-                          <button class="active" type="button"><span class="setup-option-icon"><svg viewBox="0 0 24 18" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M2 6c5.5-5 14.5-5 20 0"/><path d="M6 10c3.2-3 8.8-3 12 0"/><path d="M10 14c1.2-1 2.8-1 4 0"/><path d="M12 17h.01"/></svg></span><span><strong>BBM_Home_5G</strong><span>信号强 · 推荐连接</span></span><b class="wifi-secure">✓</b></button>
-                          <button type="button"><span class="setup-option-icon"><svg viewBox="0 0 24 18" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M2 6c5.5-5 14.5-5 20 0"/><path d="M6 10c3.2-3 8.8-3 12 0"/><path d="M10 14c1.2-1 2.8-1 4 0"/><path d="M12 17h.01"/></svg></span><span><strong>BBM_Home_2.4G</strong><span>覆盖更远 · 适合远房间设备</span></span><b class="wifi-secure">锁</b></button>
-                          <button type="button"><span class="setup-option-icon"><svg viewBox="0 0 24 18" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M2 6c5.5-5 14.5-5 20 0"/><path d="M6 10c3.2-3 8.8-3 12 0"/><path d="M10 14c1.2-1 2.8-1 4 0"/><path d="M12 17h.01"/></svg></span><span><strong>Nursery_Guest</strong><span>信号中 · 需要密码</span></span><b class="wifi-secure">锁</b></button>
+                          <button class="active" type="button"><span class="setup-option-icon"><svg viewBox="0 0 24 18" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M2 6c5.5-5 14.5-5 20 0"></path><path d="M6 10c3.2-3 8.8-3 12 0"></path><path d="M10 14c1.2-1 2.8-1 4 0"></path><path d="M12 17h.01"></path></svg></span><span><strong>BBM_Home_5G</strong><span>信号强 · 推荐连接</span></span><b class="wifi-secure">✓</b></button>
+                          <button type="button"><span class="setup-option-icon"><svg viewBox="0 0 24 18" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M2 6c5.5-5 14.5-5 20 0"></path><path d="M6 10c3.2-3 8.8-3 12 0"></path><path d="M10 14c1.2-1 2.8-1 4 0"></path><path d="M12 17h.01"></path></svg></span><span><strong>BBM_Home_2.4G</strong><span>覆盖更远 · 适合远房间设备</span></span><b class="wifi-secure">锁</b></button>
+                          <button type="button"><span class="setup-option-icon"><svg viewBox="0 0 24 18" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M2 6c5.5-5 14.5-5 20 0"></path><path d="M6 10c3.2-3 8.8-3 12 0"></path><path d="M10 14c1.2-1 2.8-1 4 0"></path><path d="M12 17h.01"></path></svg></span><span><strong>Nursery_Guest</strong><span>信号中 · 需要密码</span></span><b class="wifi-secure">锁</b></button>
                         </div>
                       </div>
                     </div>
@@ -6782,8 +6844,8 @@
                   <div class="setup-actions">
                     <span></span>
                     <div class="setup-action-group">
-                      <button class="setup-secondary-btn" type="button" data-setup-prev>上一步</button>
-                      <button class="setup-primary-btn" type="button" data-setup-next>继续</button>
+                      <button class="setup-secondary-btn" type="button" data-setup-prev="" disabled="">上一步</button>
+                      <button class="setup-primary-btn" type="button" data-setup-next="">继续</button>
                     </div>
                   </div>
                 </section>
@@ -6799,21 +6861,21 @@
                 <div class="screensaver-actions">
                   <button class="screensaver-action" type="button">
                     <span class="screensaver-action-icon">
-                      <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3h8v6a4 4 0 0 1-8 0V3Z"/><path d="M12 13v8"/><path d="M9 21h6"/></svg>
+                      <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3h8v6a4 4 0 0 1-8 0V3Z"></path><path d="M12 13v8"></path><path d="M9 21h6"></path></svg>
                     </span>
                     <strong>记喂奶</strong>
                     <span>快速记录奶量 / 辅食</span>
                   </button>
                   <button class="screensaver-action" type="button">
                     <span class="screensaver-action-icon">
-                      <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.5 14.5A6.8 6.8 0 0 1 9.5 6a7 7 0 1 0 8 8.5Z"/><path d="M18.5 5.5v4M16.5 7.5h4"/></svg>
+                      <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.5 14.5A6.8 6.8 0 0 1 9.5 6a7 7 0 1 0 8 8.5Z"></path><path d="M18.5 5.5v4M16.5 7.5h4"></path></svg>
                     </span>
                     <strong>记睡眠</strong>
                     <span>记录入睡 / 醒来时间</span>
                   </button>
                   <button class="screensaver-action" type="button">
                     <span class="screensaver-action-icon">
-                      <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 4h10"/><path d="M8 4l1 16h6l1-16"/><path d="M9 9h6"/><path d="M10 13h4"/></svg>
+                      <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 4h10"></path><path d="M8 4l1 16h6l1-16"></path><path d="M9 9h6"></path><path d="M10 13h4"></path></svg>
                     </span>
                     <strong>换尿布</strong>
                     <span>记录便便状态 / 时间</span>
@@ -6832,10 +6894,10 @@
                   <button class="glass-tile control-toggle stack active" type="button">
                     <span class="control-icon">
                       <svg class="control-svg" viewBox="0 0 28 20" aria-hidden="true">
-                        <path d="M2.8 6.6C9-0.1 19-0.1 25.2 6.6" fill="none" stroke="currentColor" stroke-width="2.7" stroke-linecap="round"/>
-                        <path d="M7.4 10.8c3.8-4 9.4-4 13.2 0" fill="none" stroke="currentColor" stroke-width="2.7" stroke-linecap="round"/>
-                        <path d="M11.6 14.8c1.5-1.4 3.3-1.4 4.8 0" fill="none" stroke="currentColor" stroke-width="2.7" stroke-linecap="round"/>
-                        <circle cx="14" cy="18" r="1.7" fill="currentColor"/>
+                        <path d="M2.8 6.6C9-0.1 19-0.1 25.2 6.6" fill="none" stroke="currentColor" stroke-width="2.7" stroke-linecap="round"></path>
+                        <path d="M7.4 10.8c3.8-4 9.4-4 13.2 0" fill="none" stroke="currentColor" stroke-width="2.7" stroke-linecap="round"></path>
+                        <path d="M11.6 14.8c1.5-1.4 3.3-1.4 4.8 0" fill="none" stroke="currentColor" stroke-width="2.7" stroke-linecap="round"></path>
+                        <circle cx="14" cy="18" r="1.7" fill="currentColor"></circle>
                       </svg>
                     </span>
                     <span><span class="control-title">Wi-Fi</span><span class="control-subtitle">36170 · 已连接</span></span>
@@ -6917,24 +6979,28 @@
       </div>
     </section>
 
-    <aside class="prototype-docs collapsed" id="prototypeDocs" aria-label="页面功能说明">
-      <button class="docs-toggle" id="docsToggle" type="button" aria-expanded="false">页面说明</button>
+    <aside class="prototype-docs" id="prototypeDocs" aria-label="页面功能说明">
+      <button class="docs-toggle" id="docsToggle" type="button" aria-expanded="true">页面功能说明</button>
       <section class="docs-panel">
         <div class="docs-head">
           <div>
-            <h2 id="docsTitle">实时监控区</h2>
-            <p id="docsDesc">默认进入宝宝实时监控主页。</p>
+            <input class="docs-title-input" id="docsTitle" type="text" value="实时监控区" aria-label="页面功能说明标题">
+            <textarea class="docs-desc-input" id="docsDesc" aria-label="页面功能说明描述">默认进入宝宝实时监控主页。</textarea>
           </div>
-          <span class="docs-badge">原型说明</span>
+          <div class="docs-actions">
+            <span class="docs-badge">可编辑</span>
+            <button class="docs-save" id="docsSaveHtml" type="button">保存HTML</button>
+            <span class="docs-save-status" id="docsSaveStatus">已保存到HTML文件</span>
+          </div>
         </div>
         <div class="docs-body">
           <section class="docs-card">
             <h3>功能描述</h3>
-            <ul class="docs-list" id="docsFeatureList"></ul>
+            <textarea class="docs-editor" id="docsFeatureList" aria-label="功能描述，每行一条"></textarea>
           </section>
           <section class="docs-card">
             <h3>交互规则</h3>
-            <ul class="docs-list" id="docsRuleList"></ul>
+            <textarea class="docs-editor" id="docsRuleList" aria-label="交互规则，每行一条"></textarea>
           </section>
         </div>
       </section>
@@ -6942,6 +7008,139 @@
 
   </div>
 
+  <script id="bbmSavedDocs" type="application/json">{
+  "屏端初始化向导": {
+    "title": "屏端初始化向导",
+    "desc": "覆盖 WiFi、账号登录、宝宝基础信息和设备添加的初始化流程。",
+    "bullets": [
+      "- 用于首次开机引导。",
+      "- 包含设置语言、时区、设备配网、账号登录、添加设备、宝宝信息录入等。完成后可直达主页实时监控。",
+      "- 安装指引，视具体产品型号而定，可自由配置。"
+    ],
+    "rules": [
+      "点击继续进入下一步骤"
+    ]
+  },
+  "实时监控区": {
+    "title": "实时监控区",
+    "desc": "默认进入宝宝实时监控主页，展示实时监控画面，当前状态信息、其他生态设备控制区",
+    "bullets": [
+      "- 支持单画面/多画面实时展示",
+      "- 最多四画面同时看护",
+      "- 右侧展示宝宝当前状态，便于家长快速判断状态。"
+    ],
+    "rules": [
+      "单画面底部展示睡眠安抚、开关机、对讲、截图、录像快捷操作。",
+      "二画面和四画面只在每个画面内保留对应房间的睡眠安抚入口。",
+      "全屏模式下才展示退出全屏操作。"
+    ]
+  },
+  "宝宝看护指标区": {
+    "title": "智能看护数据统计",
+    "desc": "聚合睡眠、体征、环境和行为相关指标，用于快速判断宝宝看护状态。",
+    "bullets": [
+      "汇总睡眠、呼吸、心率、温湿度等核心指标。",
+      "异常状态以颜色和文案同步提示，便于夜间快速扫视。",
+      "与实时监控画面联动，避免家长在多个页面之间跳转。"
+    ],
+    "rules": [
+      "支持按天和按周查看睡眠数据。",
+      "看护数据区域聚合睡眠、环境、体征、喂养和换尿布数据。",
+      "智能看护设置入口，跳转到智能看护设置页面。"
+    ]
+  },
+  "日常活动统计": {
+    "title": "日常活动统计",
+    "desc": "沉淀宝宝日常事件记录，为成长分析和回看提供入口。",
+    "bullets": [
+      "- 支持查看设备的录像回放（包含：本地录像、云录像）、相册",
+      "- 支持通过时间轴、事件记录查看录像",
+      "- 为成长记录和 AI 分析提供素材。"
+    ],
+    "rules": []
+  },
+  "智能看护设置": {
+    "title": "智能看护设置",
+    "desc": "管理看护检测项、睡眠安抚配置和全托管自动看护。",
+    "bullets": [
+      "- 看护设置，覆盖看护检测项设置、通知设置和免打扰时段。",
+      "- 睡眠安抚，可配置安抚音、音量和灯光配置。",
+      "- 全托管看护，支持自动识别宝宝状态并联动设备。"
+    ],
+    "rules": []
+  },
+  "其他生态设备控制": {
+    "title": "设备管理",
+    "desc": "展示所有设备，包含：摄像头和生态设备",
+    "bullets": [
+      "- 设备卡片，包含 icon、名称、在线状态和核心能力。",
+      "- 顶部设备分组，用于切换不同空间下的设备列表。",
+      "- 添加设备，用于进入后续设备添加流程。"
+    ],
+    "rules": []
+  },
+  "智能看护快捷设置": {
+    "title": "设置",
+    "desc": "集中管理屏端相关设置。",
+    "bullets": [],
+    "rules": [
+      "点击设置项，切换设置页面。"
+    ]
+  },
+  "账号信息": {
+    "title": "账号信息",
+    "desc": "查看家庭账号、成员权限和登录状态。",
+    "bullets": [
+      "支持家庭成员协同看护。",
+      "可扩展角色权限管理。",
+      "与生态设备同步绑定。"
+    ],
+    "rules": [
+      "通过左侧页面导航或屏内底部菜单切换页面。",
+      "页面内按钮仅用于高保真交互示意，后续可接入真实流程。",
+      "同一页面内避免重复标题和重复说明，优先保留可操作信息。"
+    ]
+  },
+  "控制中心": {
+    "title": "控制中心",
+    "desc": "快速调节亮度、音量、Wi-Fi、省电、麦克风和息屏。",
+    "bullets": [
+      "聚合高频快捷开关。",
+      "适合平板类设备的常驻控制入口。类似下拉菜单",
+      "减少深层设置路径。"
+    ],
+    "rules": []
+  },
+  "消息通知": {
+    "title": "消息通知",
+    "desc": "集中展示高危提醒、普通事件、设备状态和系统通知。",
+    "bullets": [
+      "- 展示告警通知、设备状态通知和系统通知等",
+      "- 告警通知，保留查看画面和关闭操作。",
+      "- 其他通知，保留关闭操作。"
+    ],
+    "rules": []
+  },
+  "干预通知": {
+    "title": "干预通知",
+    "desc": "在主页上叠加展示需要家长及时处理的干预提醒。",
+    "bullets": [
+      "- 展示需要用户介入干预的通知提醒。",
+      "- 保留查看画面和关闭操作。"
+    ],
+    "rules": []
+  },
+  "屏保快捷记录": {
+    "title": "屏保快捷记录",
+    "desc": "屏端待机时展示时间与宝宝看护快捷记录入口。",
+    "bullets": [
+      "提供记喂奶、记睡眠和换尿布三个快捷入口。",
+      "适合夜间低打扰待机状态。",
+      "点击记录按钮可作为后续记录流程入口。"
+    ],
+    "rules": []
+  }
+}</script>
   <script>
     const pageMeta = {
       '实时监控区': {
@@ -7338,6 +7537,7 @@
 
     const monitor = document.getElementById('monitor');
     const screen = document.querySelector('.screen');
+    const appRoot = document.querySelector('.app');
     const tempChip = document.getElementById('tempChip');
     const envChip = document.getElementById('envChip');
     const heartValue = document.getElementById('heartValue');
@@ -7374,6 +7574,10 @@
     const docsDesc = document.getElementById('docsDesc');
     const docsFeatureList = document.getElementById('docsFeatureList');
     const docsRuleList = document.getElementById('docsRuleList');
+    const docsSaveHtml = document.getElementById('docsSaveHtml');
+    const docsSaveStatus = document.getElementById('docsSaveStatus');
+    const embeddedDocs = document.getElementById('bbmSavedDocs');
+    const docsStorageKey = 'bbm-page-docs';
     const babyInfoCards = document.querySelectorAll('.baby-info-card');
     const editableInfoRows = document.querySelectorAll('.editable-info-row');
     const tiles = document.querySelectorAll('.camera-tile');
@@ -7546,7 +7750,9 @@
 
     function renderShareStep() {
       shareWizardSteps.forEach((button) => {
-        button.classList.toggle('active', Number(button.dataset.shareStep) === appState.shareStep);
+        const step = Number(button.dataset.shareStep);
+        button.classList.toggle('active', step === appState.shareStep);
+        button.classList.toggle('done', step < appState.shareStep);
       });
       shareWizardPanels.forEach((panel) => {
         panel.classList.toggle('active', Number(panel.dataset.sharePanel) === appState.shareStep);
@@ -7563,21 +7769,102 @@
       });
     }
 
+    function getEmbeddedDocs() {
+      if (!embeddedDocs) return {};
+      try {
+        return JSON.parse(embeddedDocs.textContent || '{}');
+      } catch (error) {
+        return {};
+      }
+    }
+
+    function getStoredDocs() {
+      try {
+        return {
+          ...getEmbeddedDocs(),
+          ...JSON.parse(localStorage.getItem(docsStorageKey) || '{}')
+        };
+      } catch (error) {
+        return getEmbeddedDocs();
+      }
+    }
+
+    function getDocsMeta(page) {
+      const meta = pageMeta[page] || pageMeta['实时监控区'];
+      const stored = getStoredDocs()[page];
+      if (!stored) return meta;
+      return {
+        ...meta,
+        ...stored,
+        bullets: Array.isArray(stored.bullets) ? stored.bullets : meta.bullets,
+        rules: Array.isArray(stored.rules) ? stored.rules : meta.rules
+      };
+    }
+
+    function savePrototypeDocs() {
+      if (!docsTitle || !docsDesc || !docsFeatureList || !docsRuleList) return;
+      const stored = getStoredDocs();
+      stored[appState.page] = {
+        title: docsTitle.value.trim() || appState.page,
+        desc: docsDesc.value.trim(),
+        bullets: docsFeatureList.value.split('\n').map((item) => item.trim()).filter(Boolean),
+        rules: docsRuleList.value.split('\n').map((item) => item.trim()).filter(Boolean)
+      };
+      localStorage.setItem(docsStorageKey, JSON.stringify(stored));
+    }
+
+    async function saveDocsToHtmlFile() {
+      if (!docsSaveHtml || !docsSaveStatus) return;
+      savePrototypeDocs();
+      const stored = getStoredDocs();
+      const clone = document.documentElement.cloneNode(true);
+      const cloneDocs = clone.querySelector('#bbmSavedDocs');
+      if (cloneDocs) {
+        cloneDocs.textContent = JSON.stringify(stored, null, 2).replace(/</g, '\\u003C');
+      }
+      const html = `<!DOCTYPE html>\n${clone.outerHTML}\n`;
+      const blob = new Blob([html], { type: 'text/html;charset=utf-8' });
+      docsSaveStatus.textContent = '请选择并覆盖 client/index.html';
+
+      try {
+        if ('showSaveFilePicker' in window) {
+          const handle = await window.showSaveFilePicker({
+            suggestedName: 'index.html',
+            types: [{
+              description: 'HTML 文件',
+              accept: { 'text/html': ['.html'] }
+            }]
+          });
+          const writable = await handle.createWritable();
+          await writable.write(blob);
+          await writable.close();
+          docsSaveStatus.textContent = '已保存到HTML文件';
+          return;
+        }
+
+        const url = URL.createObjectURL(blob);
+        const link = document.createElement('a');
+        link.href = url;
+        link.download = 'index.html';
+        link.click();
+        URL.revokeObjectURL(url);
+        docsSaveStatus.textContent = '已下载，请替换原文件';
+      } catch (error) {
+        docsSaveStatus.textContent = '未保存，请重试或检查浏览器权限';
+      }
+    }
+
     function renderPrototypeDocs() {
-      const meta = pageMeta[appState.page] || pageMeta['实时监控区'];
+      const meta = getDocsMeta(appState.page);
       const rules = meta.rules || [
         '通过左侧页面导航或屏内底部菜单切换页面。',
         '页面内按钮仅用于高保真交互示意，后续可接入真实流程。',
         '同一页面内避免重复标题和重复说明，优先保留可操作信息。'
       ];
-      if (docsTitle) docsTitle.textContent = meta.title;
-      if (docsDesc) docsDesc.textContent = meta.desc;
-      if (docsFeatureList) {
-        docsFeatureList.innerHTML = meta.bullets.map((item, index) => `<li><b>${index + 1}</b><span>${item}</span></li>`).join('');
-      }
-      if (docsRuleList) {
-        docsRuleList.innerHTML = rules.map((item, index) => `<li><b>${index + 1}</b><span>${item}</span></li>`).join('');
-      }
+      if (docsTitle) docsTitle.value = meta.title;
+      if (docsDesc) docsDesc.value = meta.desc;
+      if (docsFeatureList) docsFeatureList.value = (meta.bullets || []).join('\n');
+      if (docsRuleList) docsRuleList.value = rules.join('\n');
     }
 
     function updateCareSettingsHeader(tab) {
@@ -7990,14 +8277,27 @@
     });
 
     if (docsToggle && prototypeDocs) {
+      if (appRoot) appRoot.classList.toggle('docs-expanded', !prototypeDocs.classList.contains('collapsed'));
       docsToggle.addEventListener('click', () => {
         const collapsed = prototypeDocs.classList.toggle('collapsed');
+        if (appRoot) appRoot.classList.toggle('docs-expanded', !collapsed);
         docsToggle.setAttribute('aria-expanded', String(!collapsed));
       });
     }
 
+    [docsTitle, docsDesc, docsFeatureList, docsRuleList].forEach((field) => {
+      if (!field) return;
+      field.addEventListener('input', savePrototypeDocs);
+    });
+
+    if (docsSaveHtml) {
+      docsSaveHtml.addEventListener('click', saveDocsToHtmlFile);
+    }
+
     renderState();
   </script>
-</body>
 
-</html>
+
+
+
+</body></html>
