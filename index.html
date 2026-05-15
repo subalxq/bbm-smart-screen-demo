@@ -2852,6 +2852,36 @@
       gap: 0;
     }
 
+    .care-settings-card.scrollable-list .care-setting-list {
+      max-height: 260px;
+      overflow: auto;
+      scrollbar-width: thin;
+      scrollbar-color: rgba(82, 166, 255, 0.56) rgba(255, 255, 255, 0.06);
+    }
+
+    .care-setting-rows {
+      display: grid;
+    }
+
+    .care-settings-card.scrollable-rows .care-setting-rows {
+      max-height: 260px;
+      overflow: auto;
+      scrollbar-width: thin;
+      scrollbar-color: rgba(82, 166, 255, 0.56) rgba(255, 255, 255, 0.06);
+    }
+
+    .care-setting-group-label {
+      display: inline-flex;
+      width: fit-content;
+      margin: 12px 15px 4px;
+      border-radius: 8px;
+      background: rgba(143, 160, 185, 0.30);
+      padding: 4px 8px;
+      color: #d7e3f3;
+      font-size: 11px;
+      font-weight: 900;
+    }
+
     .care-setting-item {
       position: relative;
       display: grid;
@@ -6210,33 +6240,42 @@
                       </div>
                     </section>
 
-                    <section class="care-settings-card">
+                    <section class="care-settings-card scrollable-list">
                       <h3>智能看护检测</h3>
                       <div class="care-setting-list">
+                        <span class="care-setting-group-label">行为检测</span>
                         <button class="care-setting-item as-link" type="button"><div><strong>移动侦测</strong><span>检测开关、灵敏度、告警通知开关</span></div><span class="care-setting-pill">高灵敏</span><span class="care-setting-arrow">›</span></button>
                         <button class="care-setting-item as-link" type="button"><div><strong>宝宝在位检测</strong><span>检测开关、告警通知开关</span></div><span class="care-setting-pill">已开启</span><span class="care-setting-arrow">›</span></button>
                         <button class="care-setting-item as-link" type="button"><div><strong>趴睡检测</strong><span>检测开关、告警通知开关</span></div><span class="care-setting-pill">强提醒</span><span class="care-setting-arrow">›</span></button>
                         <button class="care-setting-item as-link" type="button"><div><strong>遮脸检测</strong><span>检测开关、告警通知开关</span></div><span class="care-setting-pill">强提醒</span><span class="care-setting-arrow">›</span></button>
                         <button class="care-setting-item as-link" type="button"><div><strong>安全 / 危险区域</strong><span>检测开关、告警通知开关、区域设置</span></div><span class="care-setting-pill">已设区域</span><span class="care-setting-arrow">›</span></button>
+                        <span class="care-setting-group-label">体征检测</span>
                         <button class="care-setting-item as-link" type="button"><div><strong>呼吸率异常检测</strong><span>检测开关、告警通知开关</span></div><span class="care-setting-pill">强提醒</span><span class="care-setting-arrow">›</span></button>
                         <button class="care-setting-item as-link" type="button"><div><strong>心率异常检测</strong><span>检测开关、告警通知开关</span></div><span class="care-setting-pill">强提醒</span><span class="care-setting-arrow">›</span></button>
+                        <span class="care-setting-group-label">声音检测</span>
                         <button class="care-setting-item as-link" type="button"><div><strong>哭声检测</strong><span>检测开关、灵敏度、告警通知开关、安抚音设置</span></div><span class="care-setting-pill">中灵敏</span><span class="care-setting-arrow">›</span></button>
                         <button class="care-setting-item as-link" type="button"><div><strong>异响检测</strong><span>检测开关、灵敏度、告警通知开关</span></div><span class="care-setting-pill">中灵敏</span><span class="care-setting-arrow">›</span></button>
+                        <span class="care-setting-group-label">环境检测</span>
                         <button class="care-setting-item as-link" type="button"><div><strong>温湿度检测</strong><span>检测开关、告警通知开关、温湿度范围</span></div><span class="care-setting-pill">24-26°C / 45-65%</span><span class="care-setting-arrow">›</span></button>
                         <button class="care-setting-item as-link" type="button"><div><strong>人脸标记开关</strong><span>用于识别家庭成员和宝宝看护画面</span></div><span class="care-setting-pill">本地处理</span><span class="care-setting-arrow">›</span></button>
                       </div>
                     </section>
 
-                    <section class="care-settings-card">
+                    <section class="care-settings-card scrollable-rows">
                       <h3>通知设置</h3>
-                      <div class="care-setting-row"><div><strong>移动侦测通知</strong><span>检测到宝宝移动时通知</span></div><div class="segmented"><span>强提醒</span><span class="active">一般提醒</span></div><button class="setting-switch" aria-label="移动侦测通知"></button></div>
-                      <div class="care-setting-row"><div><strong>宝宝出位通知</strong><span>宝宝离开看护区域时通知</span></div><div class="segmented"><span class="active">强提醒</span><span>一般提醒</span></div><button class="setting-switch" aria-label="宝宝出位通知"></button></div>
-                      <div class="care-setting-row"><div><strong>趴睡通知</strong><span>识别到趴睡姿态时通知</span></div><div class="segmented"><span class="active">强提醒</span><span>一般提醒</span></div><button class="setting-switch" aria-label="趴睡通知"></button></div>
-                      <div class="care-setting-row"><div><strong>遮脸通知</strong><span>口鼻遮挡或遮脸风险通知</span></div><div class="segmented"><span class="active">强提醒</span><span>一般提醒</span></div><button class="setting-switch" aria-label="遮脸通知"></button></div>
-                      <div class="care-setting-row"><div><strong>哭声通知</strong><span>持续哭闹或异常哭声通知</span></div><div class="segmented"><span class="active">强提醒</span><span>一般提醒</span></div><button class="setting-switch" aria-label="哭声通知"></button></div>
-                      <div class="care-setting-row"><div><strong>异响通知</strong><span>检测到突发异响时通知</span></div><div class="segmented"><span>强提醒</span><span class="active">一般提醒</span></div><button class="setting-switch" aria-label="异响通知"></button></div>
-                      <div class="care-setting-row"><div><strong>温湿度告警通知</strong><span>温度或湿度超出范围时通知</span></div><div class="segmented"><span class="active">强提醒</span><span>一般提醒</span></div><button class="setting-switch" aria-label="温湿度告警通知"></button></div>
-                      <div class="care-setting-row"><div><strong>入睡 / 睡醒通知</strong><span>识别入睡或睡醒后通知</span></div><div class="segmented"><span>强提醒</span><span class="active">一般提醒</span></div><button class="setting-switch" aria-label="入睡睡醒通知"></button></div>
+                      <div class="care-setting-rows">
+                        <div class="care-setting-row"><div><strong>移动侦测通知</strong><span>检测到宝宝移动时通知</span></div><div class="segmented"><span>强提醒</span><span class="active">一般提醒</span></div><button class="setting-switch" aria-label="移动侦测通知"></button></div>
+                        <div class="care-setting-row"><div><strong>宝宝出位通知</strong><span>宝宝离开看护区域时通知</span></div><div class="segmented"><span class="active">强提醒</span><span>一般提醒</span></div><button class="setting-switch" aria-label="宝宝出位通知"></button></div>
+                        <div class="care-setting-row"><div><strong>趴睡通知</strong><span>识别到趴睡姿态时通知</span></div><div class="segmented"><span class="active">强提醒</span><span>一般提醒</span></div><button class="setting-switch" aria-label="趴睡通知"></button></div>
+                        <div class="care-setting-row"><div><strong>遮脸通知</strong><span>口鼻遮挡或遮脸风险通知</span></div><div class="segmented"><span class="active">强提醒</span><span>一般提醒</span></div><button class="setting-switch" aria-label="遮脸通知"></button></div>
+                        <div class="care-setting-row"><div><strong>安全 / 危险区域通知</strong><span>进入危险区域或离开安全区域时通知</span></div><div class="segmented"><span class="active">强提醒</span><span>一般提醒</span></div><button class="setting-switch" aria-label="安全危险区域通知"></button></div>
+                        <div class="care-setting-row"><div><strong>哭声通知</strong><span>持续哭闹或异常哭声通知</span></div><div class="segmented"><span class="active">强提醒</span><span>一般提醒</span></div><button class="setting-switch" aria-label="哭声通知"></button></div>
+                        <div class="care-setting-row"><div><strong>异响通知</strong><span>检测到突发异响时通知</span></div><div class="segmented"><span>强提醒</span><span class="active">一般提醒</span></div><button class="setting-switch" aria-label="异响通知"></button></div>
+                        <div class="care-setting-row"><div><strong>温度告警通知</strong><span>温度超出设定范围时通知</span></div><div class="segmented"><span class="active">强提醒</span><span>一般提醒</span></div><button class="setting-switch" aria-label="温度告警通知"></button></div>
+                        <div class="care-setting-row"><div><strong>湿度告警通知</strong><span>湿度超出设定范围时通知</span></div><div class="segmented"><span class="active">强提醒</span><span>一般提醒</span></div><button class="setting-switch" aria-label="湿度告警通知"></button></div>
+                        <div class="care-setting-row"><div><strong>入睡通知</strong><span>识别宝宝入睡后通知</span></div><div class="segmented"><span>强提醒</span><span class="active">一般提醒</span></div><button class="setting-switch" aria-label="入睡通知"></button></div>
+                        <div class="care-setting-row"><div><strong>睡醒通知</strong><span>识别宝宝睡醒后通知</span></div><div class="segmented"><span>强提醒</span><span class="active">一般提醒</span></div><button class="setting-switch" aria-label="睡醒通知"></button></div>
+                      </div>
                     </section>
 
                     <section class="care-settings-card">
