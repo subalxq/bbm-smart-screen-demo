@@ -2574,6 +2574,32 @@
       font-weight: 600;
     }
 
+    .care-title-group {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      min-width: 0;
+    }
+
+    .care-baby-info {
+      display: flex;
+      align-items: center;
+      min-width: 0;
+      border: 1px solid rgba(82, 166, 255, 0.68);
+      border-radius: 999px;
+      background: linear-gradient(180deg, rgba(82, 166, 255, 0.28), rgba(37, 99, 235, 0.18));
+      padding: 7px 12px;
+      box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.05), 0 0 18px rgba(82, 166, 255, 0.22);
+    }
+
+    .care-baby-info strong {
+      display: block;
+      color: #fff;
+      font-size: 13px;
+      font-weight: 900;
+      white-space: nowrap;
+    }
+
     .care-tools {
       display: flex;
       align-items: center;
@@ -5930,10 +5956,10 @@
           <div class="nav-sub">
             <button class="nav-sub-item" data-page="智能看护设置">智能看护设置</button>
           </div>
-          <button class="nav-item" data-page="日常活动统计" data-scene="活动" data-room="活动区">录像回放</button>
+          <button class="nav-item active" data-page="日常活动统计" data-scene="活动" data-room="活动区">录像回放</button>
           <button class="nav-item" data-page="其他生态设备控制">设备</button>
           <button class="nav-item" data-page="智能看护快捷设置">设置</button>
-          <button class="nav-item active" data-page="账号信息">账号</button>
+          <button class="nav-item" data-page="账号信息">账号</button>
           <button class="nav-item" data-page="控制中心">控制中心</button>
           <button class="nav-item" data-page="消息通知">消息通知</button>
           <div class="nav-sub">
@@ -5948,11 +5974,11 @@
       <div class="canvas-wrap">
         <div class="canvas-head">
           <strong>8 寸平板横屏原型</strong>
-          <span id="canvasLabel">账号信息 / 宝宝信息</span>
+          <span id="canvasLabel">日常活动统计 / 录像回放</span>
         </div>
 
         <div class="shell">
-          <div class="screen account-page-mode">
+          <div class="screen replay-page-mode">
             <header class="topbar">
               <div class="screen-date">2026/5/7 周四</div>
               <div class="screen-status">
@@ -5972,11 +5998,11 @@
             <nav class="screen-menu" aria-label="屏内主菜单">
               <button class="screen-menu-item" data-page="实时监控区" data-scene="睡眠看护">主页</button>
               <button class="screen-menu-item" data-page="宝宝看护指标区" data-scene="睡眠看护">智能看护</button>
-              <button class="screen-menu-item" data-page="日常活动统计" data-scene="活动" data-room="活动区">录像回放</button>
+              <button class="screen-menu-item active" data-page="日常活动统计" data-scene="活动" data-room="活动区">录像回放</button>
               <button class="screen-menu-item" data-page="其他生态设备控制">设备</button>
               <button class="screen-menu-item" data-page="智能看护快捷设置">设置</button>
               <div class="screen-menu-spacer"></div>
-              <button class="screen-menu-item active" data-page="账号信息">账号</button>
+              <button class="screen-menu-item" data-page="账号信息">账号</button>
             </nav>
 
             <div class="tabs-bar">
@@ -5991,8 +6017,6 @@
                       <div class="live-pills">
                         <span class="live-pill live">Live</span>
                         <span class="cam-name fullscreen-room-pill" id="fullscreenRoomPill">婴儿房 · niki</span>
-                        <span class="metric-chip" id="tempChip">25°C</span>
-                        <span class="metric-chip" id="envChip">30%</span>
                       </div>
                     </div>
                     <button class="monitor-setting" type="button" title="设置" aria-label="设置">
@@ -6032,7 +6056,7 @@
                 </section>
               </div>
 
-              <aside class="right-panel" id="rightPanel" data-scene-panel="睡眠看护" data-monitor-view="single">
+              <aside class="right-panel" id="rightPanel" data-scene-panel="活动" data-monitor-view="single">
                 <div class="scene-mode-card scene-soothe">
                   <div class="scene-mode-top">
                     <div><div class="scene-mode-state"><span class="scene-mode-icon">♪</span><span class="scene-mode-state-text"><strong>niki入睡安抚中</strong><span class="scene-mode-subtitle">安抚时长 18m</span></span></div></div>
@@ -6064,14 +6088,18 @@
 
             <main class="care-page" id="carePage">
               <div class="care-head">
-                <div>
-                  <h2>智能看护</h2>
-                  <p>看护统计、指标趋势与 AI 看护建议。</p>
+                <div class="care-title-group">
+                  <div class="care-baby-info" aria-label="宝宝信息">
+                    <strong>小宸宸</strong>
+                  </div>
+                  <div>
+                    <h2>智能看护数据</h2>
+                  </div>
                 </div>
                 <div class="care-tools">
                   <div class="segmented care-range-toggle" id="careRangeToggle" aria-label="数据时间维度">
-                    <span class="active" data-care-range="day">天</span>
-                    <span data-care-range="week">周</span>
+                    <span class="" data-care-range="day">天</span>
+                    <span data-care-range="week" class="active">周</span>
                   </div>
                   <button class="date-picker" type="button" aria-label="日期选择">
                     <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="17" rx="3"></rect><path d="M8 2v4M16 2v4M3 10h18"></path></svg>
@@ -6085,69 +6113,69 @@
                 <span class="sleep-insight-icon">
                   <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l1.7 4.6L18 9.3l-4.3 1.7L12 16l-1.7-5L6 9.3l4.3-1.7L12 3Z"></path><path d="M19 14l.8 2.2L22 17l-2.2.8L19 20l-.8-2.2L16 17l2.2-.8L19 14Z"></path></svg>
                 </span>
-                <span id="sleepInsightText">今日深睡比例略低，夜醒 3 次。建议睡前保持房间安静，并提前开启加湿器。</span>
+                <span id="sleepInsightText">最近 3 晚夜醒频繁，深睡比例略低于同月龄。建议白天多晒太阳 30 分钟，有助调节昼夜节律。</span>
               </div>
 
               <section class="care-layout">
                 <div class="sleep-record-card">
                   <div class="sleep-record-head">
-                    <div><h3>睡眠记录</h3><p id="sleepRecordSubtitle">今日 · 睡眠时段分布</p></div>
+                    <div><h3>睡眠记录</h3><p id="sleepRecordSubtitle">近 7 天 · 睡眠时段分布</p></div>
                     <div class="sleep-record-legend">
                       <span><i style="--c:#ad6670"></i>深睡</span>
                       <span><i style="--c:#e0a1aa"></i>浅睡</span>
                       <span><i style="--c:#ffc928"></i>夜醒</span>
                     </div>
                   </div>
-                  <div class="sleep-strip-chart" id="sleepChart" aria-label="今日睡眠水平时间轴">
+                  <div class="sleep-strip-chart" id="sleepChart" aria-label="近七天睡眠水平时间轴">
             <div class="sleep-strip-scale"><span></span><span>00:00</span><span>06:00</span><span>12:00</span><span>18:00</span><span>24:00</span></div>
             <div class="sleep-strip-rows">
-              <div class="sleep-strip-row featured"><span class="sleep-strip-day">今日</span><div class="sleep-strip-track"><div class="sleep-strip-period" style="--start:1.4%;--width:8.9%"><span style="--seg:42%;--c:#ad6670"></span><span style="--seg:51%;--c:#e0a1aa"></span><span style="--seg:7%;--c:#ffc928"></span></div><div class="sleep-strip-period" style="--start:11.5%;--width:11.6%"><span style="--seg:50%;--c:#ad6670"></span><span style="--seg:47%;--c:#e0a1aa"></span><span style="--seg:3%;--c:#ffc928"></span></div><div class="sleep-strip-period" style="--start:25.7%;--width:3.6%"><span style="--seg:24%;--c:#ad6670"></span><span style="--seg:66%;--c:#e0a1aa"></span><span style="--seg:10%;--c:#ffc928"></span></div><div class="sleep-strip-period" style="--start:52.4%;--width:6.7%"><span style="--seg:34%;--c:#ad6670"></span><span style="--seg:59%;--c:#e0a1aa"></span><span style="--seg:7%;--c:#ffc928"></span></div><div class="sleep-strip-period" style="--start:72.1%;--width:2.9%"><span style="--seg:18%;--c:#ad6670"></span><span style="--seg:72%;--c:#e0a1aa"></span><span style="--seg:10%;--c:#ffc928"></span></div><div class="sleep-strip-period" style="--start:89.3%;--width:6.7%"><span style="--seg:32%;--c:#ad6670"></span><span style="--seg:63%;--c:#e0a1aa"></span><span style="--seg:5%;--c:#ffc928"></span></div></div></div><div class="sleep-strip-note"><span><b>00:20-02:28</b></span><span><b>02:45-05:32</b></span><span><b>06:10-07:02</b></span><span><b>12:34-14:10</b></span><span><b>17:18-18:00</b></span><span><b>21:26-23:02</b></span></div>
+              <div class="sleep-strip-row"><span class="sleep-strip-day">周一</span><div class="sleep-strip-track"><div class="sleep-strip-period" style="--start:0.8%;--width:29.5%"><span style="--seg:40%;--c:#ad6670"></span><span style="--seg:56%;--c:#e0a1aa"></span><span style="--seg:4%;--c:#ffc928"></span></div><div class="sleep-strip-period" style="--start:53.2%;--width:7.5%"><span style="--seg:34%;--c:#ad6670"></span><span style="--seg:58%;--c:#e0a1aa"></span><span style="--seg:8%;--c:#ffc928"></span></div><div class="sleep-strip-period" style="--start:88.1%;--width:8%"><span style="--seg:42%;--c:#ad6670"></span><span style="--seg:54%;--c:#e0a1aa"></span><span style="--seg:4%;--c:#ffc928"></span></div></div></div><div class="sleep-strip-row"><span class="sleep-strip-day">周二</span><div class="sleep-strip-track"><div class="sleep-strip-period" style="--start:1.9%;--width:27.8%"><span style="--seg:36%;--c:#ad6670"></span><span style="--seg:59%;--c:#e0a1aa"></span><span style="--seg:5%;--c:#ffc928"></span></div><div class="sleep-strip-period" style="--start:52.4%;--width:6.8%"><span style="--seg:31%;--c:#ad6670"></span><span style="--seg:61%;--c:#e0a1aa"></span><span style="--seg:8%;--c:#ffc928"></span></div><div class="sleep-strip-period" style="--start:87.6%;--width:8.1%"><span style="--seg:38%;--c:#ad6670"></span><span style="--seg:57%;--c:#e0a1aa"></span><span style="--seg:5%;--c:#ffc928"></span></div></div></div><div class="sleep-strip-row"><span class="sleep-strip-day">周三</span><div class="sleep-strip-track"><div class="sleep-strip-period" style="--start:0.4%;--width:31.2%"><span style="--seg:42%;--c:#ad6670"></span><span style="--seg:55%;--c:#e0a1aa"></span><span style="--seg:3%;--c:#ffc928"></span></div><div class="sleep-strip-period" style="--start:51.6%;--width:8.2%"><span style="--seg:36%;--c:#ad6670"></span><span style="--seg:58%;--c:#e0a1aa"></span><span style="--seg:6%;--c:#ffc928"></span></div><div class="sleep-strip-period" style="--start:88.9%;--width:7.8%"><span style="--seg:43%;--c:#ad6670"></span><span style="--seg:54%;--c:#e0a1aa"></span><span style="--seg:3%;--c:#ffc928"></span></div></div></div><div class="sleep-strip-row"><span class="sleep-strip-day">周四</span><div class="sleep-strip-track"><div class="sleep-strip-period" style="--start:2.7%;--width:24.8%"><span style="--seg:34%;--c:#ad6670"></span><span style="--seg:57%;--c:#e0a1aa"></span><span style="--seg:9%;--c:#ffc928"></span></div><div class="sleep-strip-period" style="--start:52.1%;--width:6.1%"><span style="--seg:30%;--c:#ad6670"></span><span style="--seg:60%;--c:#e0a1aa"></span><span style="--seg:10%;--c:#ffc928"></span></div><div class="sleep-strip-period" style="--start:90.2%;--width:7.2%"><span style="--seg:35%;--c:#ad6670"></span><span style="--seg:56%;--c:#e0a1aa"></span><span style="--seg:9%;--c:#ffc928"></span></div></div></div><div class="sleep-strip-row"><span class="sleep-strip-day">周五</span><div class="sleep-strip-track"><div class="sleep-strip-period" style="--start:1.8%;--width:25.9%"><span style="--seg:36%;--c:#ad6670"></span><span style="--seg:57%;--c:#e0a1aa"></span><span style="--seg:7%;--c:#ffc928"></span></div><div class="sleep-strip-period" style="--start:53%;--width:6.4%"><span style="--seg:32%;--c:#ad6670"></span><span style="--seg:60%;--c:#e0a1aa"></span><span style="--seg:8%;--c:#ffc928"></span></div><div class="sleep-strip-period" style="--start:89.4%;--width:7.8%"><span style="--seg:37%;--c:#ad6670"></span><span style="--seg:56%;--c:#e0a1aa"></span><span style="--seg:7%;--c:#ffc928"></span></div></div></div><div class="sleep-strip-row"><span class="sleep-strip-day">周六</span><div class="sleep-strip-track"><div class="sleep-strip-period" style="--start:0.9%;--width:30.1%"><span style="--seg:41%;--c:#ad6670"></span><span style="--seg:55%;--c:#e0a1aa"></span><span style="--seg:4%;--c:#ffc928"></span></div><div class="sleep-strip-period" style="--start:51.9%;--width:7.6%"><span style="--seg:35%;--c:#ad6670"></span><span style="--seg:59%;--c:#e0a1aa"></span><span style="--seg:6%;--c:#ffc928"></span></div><div class="sleep-strip-period" style="--start:88.5%;--width:8.2%"><span style="--seg:42%;--c:#ad6670"></span><span style="--seg:54%;--c:#e0a1aa"></span><span style="--seg:4%;--c:#ffc928"></span></div></div></div><div class="sleep-strip-row"><span class="sleep-strip-day">周日</span><div class="sleep-strip-track"><div class="sleep-strip-period" style="--start:1.4%;--width:20.5%"><span style="--seg:44%;--c:#ad6670"></span><span style="--seg:55%;--c:#e0a1aa"></span><span style="--seg:1%;--c:#ffc928"></span></div><div class="sleep-strip-period" style="--start:25.7%;--width:3.6%"><span style="--seg:24%;--c:#ad6670"></span><span style="--seg:66%;--c:#e0a1aa"></span><span style="--seg:10%;--c:#ffc928"></span></div><div class="sleep-strip-period" style="--start:52.4%;--width:6.7%"><span style="--seg:34%;--c:#ad6670"></span><span style="--seg:59%;--c:#e0a1aa"></span><span style="--seg:7%;--c:#ffc928"></span></div><div class="sleep-strip-period" style="--start:89.3%;--width:6.7%"><span style="--seg:32%;--c:#ad6670"></span><span style="--seg:63%;--c:#e0a1aa"></span><span style="--seg:5%;--c:#ffc928"></span></div></div></div>
             </div>
           </div>
                   <div class="sleep-summary-grid">
-                    <div class="sleep-summary-card"><span id="sleepTotalLabel">总睡眠</span><strong id="sleepTotalValue" style="--c:#f5f9ff">9.7 h</strong><em id="sleepTotalPercent"></em></div>
-                    <div class="sleep-summary-card"><span id="sleepDeepLabel">深睡</span><strong id="sleepDeepValue" style="--c:#e68a98">3.8 h</strong><em id="sleepDeepPercent">42%</em></div>
-                    <div class="sleep-summary-card"><span id="sleepLightLabel">浅睡</span><strong id="sleepLightValue" style="--c:#e0a1aa">5.3 h</strong><em id="sleepLightPercent">58%</em></div>
-                    <div class="sleep-summary-card"><span id="sleepEfficiencyLabel">睡眠效率</span><strong id="sleepEfficiencyValue" style="--c:#5adca2">89%</strong><em id="sleepEfficiencyMeta">较平稳</em></div>
-                    <div class="sleep-summary-card"><span id="sleepWakeLabel">夜醒次数</span><strong id="sleepWakeValue" style="--c:#ffb03a">3 次</strong><em id="sleepWakePercent">清醒 0.6h</em></div>
+                    <div class="sleep-summary-card"><span id="sleepTotalLabel">平均总睡眠</span><strong id="sleepTotalValue" style="--c:#f5f9ff">12.4 h/天</strong><em id="sleepTotalPercent"></em></div>
+                    <div class="sleep-summary-card"><span id="sleepDeepLabel">平均深睡</span><strong id="sleepDeepValue" style="--c:#e68a98">4.8 h/天</strong><em id="sleepDeepPercent">41%</em></div>
+                    <div class="sleep-summary-card"><span id="sleepLightLabel">平均浅睡</span><strong id="sleepLightValue" style="--c:#e0a1aa">7.0 h/天</strong><em id="sleepLightPercent">59%</em></div>
+                    <div class="sleep-summary-card"><span id="sleepEfficiencyLabel">睡眠效率</span><strong id="sleepEfficiencyValue" style="--c:#5adca2">92%</strong><em id="sleepEfficiencyMeta">近 7 天</em></div>
+                    <div class="sleep-summary-card"><span id="sleepWakeLabel">夜醒次数</span><strong id="sleepWakeValue" style="--c:#ffb03a">2.4 次/天</strong><em id="sleepWakePercent">清醒 0.6 h/天</em></div>
                   </div>
                 </div>
 
                 <aside class="care-data-panel">
                   <div class="care-data-head">
                     <h3>看护数据</h3>
-                    <p id="careDataSubtitle">今日睡眠、环境、体征与手动记录汇总</p>
+                    <p id="careDataSubtitle">近 7 天睡眠、环境、体征与手动记录汇总</p>
                   </div>
                   <div class="care-data-grid">
                     <div class="care-data-card">
                       <span class="care-data-icon" style="--c:#ff9fac"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.5 14.5A6.8 6.8 0 0 1 9.5 6a7 7 0 1 0 8 8.5Z"></path><path d="M18.5 5.5v4M16.5 7.5h4"></path></svg></span>
-                      <span><strong>睡眠数据</strong><span id="careSleepData">总时长 9.7h · 深睡 3.8h · 夜醒 3 次</span></span>
+                      <span><strong>睡眠数据</strong><span id="careSleepData">平均总时长 12.4h · 平均深睡 4.8h · 夜醒 17 次</span></span>
                       <b class="care-data-value" id="careSleepStatus" style="--c:#ff9fac">偏少</b>
                     </div>
                     <div class="care-data-card">
                       <span class="care-data-icon" style="--c:#ff6f86"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 9v4"></path><path d="M12 17h.01"></path><path d="M10.3 3.9 2.4 18a2 2 0 0 0 1.7 3h15.8a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0Z"></path></svg></span>
-                      <span><strong>睡眠异常行为</strong><span id="careBehaviorData">口鼻遮挡 1 次 · 趴睡 0 次 · 哭闹 2 次</span></span>
-                      <b class="care-data-value" id="careBehaviorStatus" style="--c:#ff6f86">3</b>
+                      <span><strong>睡眠异常行为</strong><span id="careBehaviorData">口鼻遮挡 2 次 · 趴睡 1 次 · 哭闹 8 次</span></span>
+                      <b class="care-data-value" id="careBehaviorStatus" style="--c:#ff6f86">11</b>
                     </div>
                     <div class="care-data-card">
                       <span class="care-data-icon" style="--c:#72d6ff"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 14.76V5a4 4 0 0 0-8 0v9.76a5 5 0 1 0 8 0Z"></path><path d="M18 8h4"></path><path d="M18 12h4"></path><path d="M18 16h4"></path></svg></span>
-                      <span><strong>环境异常数据</strong><span id="careEnvData">湿度偏低 2h10m · 温度波动 1 次</span></span>
-                      <b class="care-data-value" id="careEnvStatus" style="--c:#72d6ff">低湿</b>
+                      <span><strong>环境异常数据</strong><span id="careEnvData">低湿累计 8h40m · 温度波动 4 次</span></span>
+                      <b class="care-data-value" id="careEnvStatus" style="--c:#72d6ff">需关注</b>
                     </div>
                     <div class="care-data-card">
                       <span class="care-data-icon" style="--c:#7ee2b8"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8Z"></path><path d="M3 12h4l2-3 3 6 2-3h7"></path></svg></span>
-                      <span><strong>体征异常数据</strong><span id="careVitalData">呼吸率短时偏快 1 次 · 心率平稳</span></span>
-                      <b class="care-data-value" id="careVitalStatus" style="--c:#7ee2b8">正常</b>
+                      <span><strong>体征异常数据</strong><span id="careVitalData">呼吸率异常 3 次 · 心率短时偏快 1 次</span></span>
+                      <b class="care-data-value" id="careVitalStatus" style="--c:#7ee2b8">4</b>
                     </div>
                     <div class="care-data-card">
                       <span class="care-data-icon" style="--c:#ffc66f"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3h8v6a4 4 0 0 1-8 0V3Z"></path><path d="M12 13v8"></path><path d="M9 21h6"></path></svg></span>
-                      <span><strong>喂养数据</strong><span id="careFeedingData">喂奶 4 次 · 最近 11:40 · 总量 520ml</span></span>
-                      <b class="care-data-value" id="careFeedingStatus" style="--c:#ffc66f">4</b>
+                      <span><strong>喂养数据</strong><span id="careFeedingData">喂奶 27 次 · 日均 5.1 次 · 总量 3620ml</span></span>
+                      <b class="care-data-value" id="careFeedingStatus" style="--c:#ffc66f">27</b>
                     </div>
                     <div class="care-data-card">
                       <span class="care-data-icon" style="--c:#b8a2ff"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 4h10"></path><path d="M8 4l1 16h6l1-16"></path><path d="M9 9h6"></path><path d="M10 13h4"></path></svg></span>
-                      <span><strong>换尿布数据</strong><span id="careDiaperData">换尿布 3 次 · 便便 1 次 · 尿湿 2 次</span></span>
-                      <b class="care-data-value" id="careDiaperStatus" style="--c:#b8a2ff">3</b>
+                      <span><strong>换尿布数据</strong><span id="careDiaperData">换尿布 24 次 · 便便 7 次 · 尿湿 17 次</span></span>
+                      <b class="care-data-value" id="careDiaperStatus" style="--c:#b8a2ff">24</b>
                     </div>
                   </div>
                 </aside>
@@ -6157,7 +6185,7 @@
             <main class="care-settings-page" id="careSettingsPage">
               <nav class="care-settings-nav" aria-label="智能看护设置分类">
                 <button class="care-settings-back" type="button" data-page-jump="宝宝看护指标区" aria-label="返回智能看护">‹</button>
-                <button class="active" type="button" data-care-settings-tab="care">看护设置</button>
+                <button class="active" type="button" data-care-settings-tab="care">智能看护设置</button>
                 <button type="button" data-care-settings-tab="soothe">睡眠安抚</button>
                 <button type="button" data-care-settings-tab="auto">全托管看护</button>
               </nav>
@@ -6166,7 +6194,7 @@
                 <div class="care-settings-overview">
                   <div class="care-settings-title">
                     <div>
-                      <h2 id="careSettingsTitle">看护设置</h2>
+                      <h2 id="careSettingsTitle">智能看护设置</h2>
                     </div>
                   </div>
                 </div>
@@ -6183,7 +6211,7 @@
                     </section>
 
                     <section class="care-settings-card">
-                      <h3>检测项开关</h3>
+                      <h3>智能看护检测</h3>
                       <div class="care-setting-list">
                         <button class="care-setting-item as-link" type="button"><div><strong>移动侦测</strong><span>检测开关、灵敏度、告警通知开关</span></div><span class="care-setting-pill">高灵敏</span><span class="care-setting-arrow">›</span></button>
                         <button class="care-setting-item as-link" type="button"><div><strong>宝宝在位检测</strong><span>检测开关、告警通知开关</span></div><span class="care-setting-pill">已开启</span><span class="care-setting-arrow">›</span></button>
@@ -6675,7 +6703,7 @@
 
                   <div class="share-wizard" aria-label="设备分享分步设置">
                     <div class="share-stack">
-                      <section class="share-step-card share-wizard-panel" data-share-panel="0">
+                      <section class="share-step-card share-wizard-panel active" data-share-panel="0">
                         <h3>输入分享账号</h3>
                         <p>输入家人手机号或邮箱，系统会向该账号发送设备分享邀请。</p>
                         <div class="share-input-row"><span>输入手机号 / 邮箱</span><button class="account-action-btn" type="button">添加</button></div>
@@ -6687,7 +6715,7 @@
                         <div class="share-step-actions"><button class="setup-primary-btn" type="button" data-share-next="">继续</button></div>
                       </section>
 
-                      <section class="share-step-card share-wizard-panel active" data-share-panel="1">
+                      <section class="share-step-card share-wizard-panel" data-share-panel="1">
                         <h3>选择分享设备及权限</h3>
                         <p>选择可查看的设备，并为每台设备设置分享权限。高级权限可查看回放并控制设备；基础权限仅查看实时画面和接收提醒。</p>
                         <div class="share-device-permission-list">
@@ -6729,7 +6757,7 @@
             <main class="onboarding-page" id="onboardingPage">
               <section class="onboarding-layout" aria-label="屏端初始化向导">
                 <section class="onboarding-flow-card">
-                  <div class="onboarding-screen active" data-onboarding-panel="0">
+                  <div class="onboarding-screen" data-onboarding-panel="0">
                     <div class="setup-form">
                       <h3>选择系统语言</h3>
                       <p>选择屏端界面显示语言，后续设置和看护提醒都会按当前语言展示。</p>
@@ -6831,7 +6859,7 @@
                     </div>
                   </div>
 
-                  <div class="onboarding-screen" data-onboarding-panel="6">
+                  <div class="onboarding-screen active" data-onboarding-panel="6">
                     <div class="setup-form">
                       <h3>安装指引</h3>
                       <p>根据婴儿房环境完成摄像头摆放、角度校准和安全检查，确认后进入实时看护主页。</p>
@@ -6846,8 +6874,8 @@
                   <div class="setup-actions">
                     <span></span>
                     <div class="setup-action-group">
-                      <button class="setup-secondary-btn" type="button" data-setup-prev="" disabled="">上一步</button>
-                      <button class="setup-primary-btn" type="button" data-setup-next="">继续</button>
+                      <button class="setup-secondary-btn" type="button" data-setup-prev="">上一步</button>
+                      <button class="setup-primary-btn" type="button" data-setup-next="">完成</button>
                     </div>
                   </div>
                 </section>
@@ -6990,7 +7018,6 @@
             <textarea class="docs-desc-input" id="docsDesc" aria-label="页面功能说明描述">默认进入宝宝实时监控主页。</textarea>
           </div>
           <div class="docs-actions">
-            <span class="docs-badge">可编辑</span>
             <button class="docs-save" id="docsSaveHtml" type="button">保存HTML</button>
             <span class="docs-save-status" id="docsSaveStatus">已保存到HTML文件</span>
           </div>
@@ -7029,12 +7056,12 @@
     "bullets": [
       "- 支持单画面/多画面实时展示",
       "- 最多四画面同时看护",
-      "- 右侧展示宝宝当前状态，便于家长快速判断状态。"
+      "- 右侧卡片，展示宝宝当前睡眠看护状态、正在执行的安抚设置，如：已开启白噪声。"
     ],
     "rules": [
-      "单画面底部展示睡眠安抚、开关机、对讲、截图、录像快捷操作。",
-      "二画面和四画面只在每个画面内保留对应房间的睡眠安抚入口。",
-      "全屏模式下才展示退出全屏操作。"
+      "- 单画面：展示睡眠安抚、开关机、对讲、截图、录像、设备设置操作。",
+      "- 二画面和四画面：每个画面内只展示对应的睡眠安抚、设备设置入口。",
+      "- 全屏模式下，展示退出全屏操作。"
     ]
   },
   "宝宝看护指标区": {
@@ -7064,7 +7091,7 @@
     "title": "智能看护设置",
     "desc": "管理看护检测项、睡眠安抚配置和全托管自动看护。",
     "bullets": [
-      "- 看护设置，覆盖看护检测项设置、通知设置和免打扰时段。",
+      "- 智能看护设置，包含智能看护检测设置、通知设置和免打扰时段。",
       "- 睡眠安抚，可配置安抚音、音量和灯光配置。",
       "- 全托管看护，支持自动识别宝宝状态并联动设备。"
     ],
@@ -7864,10 +7891,10 @@
 
     function updateCareSettingsHeader(tab) {
       const copy = {
-        care: ['看护设置', '管理检测项、通知提醒和免打扰时段。'],
+        care: ['智能看护设置', '管理检测项、通知提醒和免打扰时段。'],
         soothe: ['睡眠安抚', '配置安抚音、灯光和默认持续时间。'],
         auto: ['全托管看护', '开启后自动识别宝宝状态，并联动屋内设备进行看护。']
-      }[tab] || ['看护设置', '管理检测项、通知提醒和免打扰时段。'];
+      }[tab] || ['智能看护设置', '管理检测项、通知提醒和免打扰时段。'];
       if (careSettingsTitle) careSettingsTitle.textContent = copy[0];
       if (careSettingsDesc) careSettingsDesc.textContent = copy[1];
     }
@@ -7939,8 +7966,8 @@
         rightPanel.dataset.monitorView = appState.view;
       }
 
-      tempChip.textContent = '25°C';
-      envChip.textContent = '30%';
+      if (tempChip) tempChip.textContent = '25°C';
+      if (envChip) envChip.textContent = '30%';
       if (heartValue) heartValue.textContent = '75 bpm';
       if (breathValue) breathValue.textContent = '42 br/min';
       if (tempValue) tempValue.textContent = '25°C';
@@ -8291,6 +8318,7 @@
 
     renderState();
   </script>
+
 
 
 
