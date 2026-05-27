@@ -846,7 +846,7 @@
       grid-column: 1;
       grid-row: 2 / 5;
       display: grid;
-      grid-template-rows: repeat(5, 72px) minmax(0, 1fr) 72px;
+      grid-template-rows: repeat(4, 72px) minmax(0, 1fr) 72px;
       gap: 1px;
       border-right: 1px solid var(--line);
       background: rgba(255, 255, 255, 0.04);
@@ -1304,6 +1304,39 @@
       display: block;
     }
 
+    .monitor-env-overlay {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      border-radius: 999px;
+      background: rgba(17, 24, 39, 0.48);
+      padding: 7px 10px;
+      color: rgba(255, 255, 255, 0.90);
+      font-size: 11px;
+      font-weight: 850;
+      backdrop-filter: blur(12px);
+      white-space: nowrap;
+    }
+
+    .monitor-env-overlay span {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .monitor-env-overlay strong {
+      color: #fff;
+      font-size: 12px;
+      font-weight: 950;
+    }
+
+    .monitor-env-icon {
+      display: block;
+      width: 13px;
+      height: 13px;
+      color: rgba(255, 255, 255, 0.92);
+    }
+
     .live-pills {
       display: flex;
       flex-wrap: wrap;
@@ -1363,6 +1396,12 @@
     .screen.offline-device-home .scene-mode-alert strong,
     .screen.offline-device-home .scene-mode-alert p {
       color: #9fadbf;
+    }
+
+    .screen.single-device-home .scene-sleep .scene-env-grid,
+    .screen.dual-device-home .scene-sleep .scene-env-grid,
+    .screen.offline-device-home .scene-sleep .scene-env-grid {
+      display: none;
     }
 
     .cam-name {
@@ -1443,6 +1482,17 @@
     .monitor.split-2 .monitor-setting,
     .monitor.split-4 .monitor-setting {
       display: none;
+    }
+
+    .monitor.split-2 .monitor-header .monitor-env-overlay,
+    .monitor.split-4 .monitor-header .monitor-env-overlay {
+      display: none !important;
+    }
+
+    .monitor.split-2 > .monitor-header,
+    .monitor.split-4 > .monitor-header {
+      inset: 10px auto auto 10px;
+      width: auto;
     }
 
     .icon-btn {
@@ -1572,6 +1622,64 @@
       backdrop-filter: blur(12px);
     }
 
+    .tile-env-overlay {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      z-index: 3;
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      width: max-content;
+      min-width: max-content;
+      max-width: none;
+      min-height: 30px;
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      border-radius: 999px;
+      background: rgba(83, 86, 96, 0.86);
+      padding: 5px 12px;
+      box-shadow: 0 10px 22px rgba(0, 0, 0, 0.24);
+      backdrop-filter: blur(14px);
+      color: rgba(255, 255, 255, 0.96);
+      font-size: 12px;
+      font-weight: 900;
+      box-sizing: border-box;
+      white-space: nowrap;
+      flex-wrap: nowrap;
+    }
+
+    .monitor.split-2 .camera-tile:first-child .tile-env-overlay,
+    .monitor.split-4 .camera-tile:first-child .tile-env-overlay {
+      left: 78px;
+    }
+
+    .tile-env-overlay span {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      justify-content: center;
+      flex: 0 0 auto;
+      min-width: max-content;
+      white-space: nowrap;
+    }
+
+    .tile-env-overlay .monitor-env-icon {
+      flex: 0 0 13px;
+      width: 13px;
+      height: 13px;
+      color: rgba(255, 255, 255, 0.92);
+    }
+
+    .tile-env-overlay strong {
+      color: #fff;
+      font-size: 12px;
+      font-weight: 950;
+      line-height: 1;
+      display: inline-block;
+      min-width: max-content;
+      white-space: nowrap;
+    }
+
     .tile-sound svg,
     .tile-setting svg {
       width: 17px;
@@ -1594,6 +1702,16 @@
       left: 10px;
       bottom: 10px;
       font-size: 12px;
+    }
+
+    .camera-tile .tile-env-overlay strong {
+      position: static;
+      left: auto;
+      bottom: auto;
+      z-index: auto;
+      display: inline;
+      font-size: 12px;
+      line-height: 1;
     }
 
     .right-panel {
@@ -1826,7 +1944,9 @@
     }
 
     .right-panel[data-monitor-view="split4"] .scene-split-card,
-    .right-panel[data-monitor-view="split4Full"] .scene-split-card {
+    .right-panel[data-monitor-view="split4Full"] .scene-split-card,
+    .right-panel[data-monitor-view="split2"] .scene-split-card,
+    .right-panel[data-monitor-view="split2Full"] .scene-split-card {
       gap: 6px;
       padding: 8px;
     }
@@ -1888,28 +2008,38 @@
     }
 
     .right-panel[data-monitor-view="split4"] .scene-split-card .scene-mode-alert,
-    .right-panel[data-monitor-view="split4Full"] .scene-split-card .scene-mode-alert {
+    .right-panel[data-monitor-view="split4Full"] .scene-split-card .scene-mode-alert,
+    .right-panel[data-monitor-view="split2"] .scene-split-card .scene-mode-alert,
+    .right-panel[data-monitor-view="split2Full"] .scene-split-card .scene-mode-alert {
       padding: 7px 0 7px 9px;
     }
 
     .right-panel[data-monitor-view="split4"] .scene-split-card .scene-mode-alert p,
-    .right-panel[data-monitor-view="split4Full"] .scene-split-card .scene-mode-alert p {
+    .right-panel[data-monitor-view="split4Full"] .scene-split-card .scene-mode-alert p,
+    .right-panel[data-monitor-view="split2"] .scene-split-card .scene-mode-alert p,
+    .right-panel[data-monitor-view="split2Full"] .scene-split-card .scene-mode-alert p {
       display: none;
     }
 
     .right-panel[data-monitor-view="split4"] .scene-split-metrics,
-    .right-panel[data-monitor-view="split4Full"] .scene-split-metrics {
+    .right-panel[data-monitor-view="split4Full"] .scene-split-metrics,
+    .right-panel[data-monitor-view="split2"] .scene-split-metrics,
+    .right-panel[data-monitor-view="split2Full"] .scene-split-metrics {
       grid-template-columns: repeat(2, minmax(0, 1fr));
       gap: 4px;
     }
 
     .right-panel[data-monitor-view="split4"] .scene-split-metric,
-    .right-panel[data-monitor-view="split4Full"] .scene-split-metric {
+    .right-panel[data-monitor-view="split4Full"] .scene-split-metric,
+    .right-panel[data-monitor-view="split2"] .scene-split-metric,
+    .right-panel[data-monitor-view="split2Full"] .scene-split-metric {
       padding: 5px 6px;
     }
 
     .right-panel[data-monitor-view="split4"] .scene-split-card .scene-split-metric strong,
-    .right-panel[data-monitor-view="split4Full"] .scene-split-card .scene-split-metric strong {
+    .right-panel[data-monitor-view="split4Full"] .scene-split-card .scene-split-metric strong,
+    .right-panel[data-monitor-view="split2"] .scene-split-card .scene-split-metric strong,
+    .right-panel[data-monitor-view="split2Full"] .scene-split-card .scene-split-metric strong {
       font-size: 10px;
     }
 
@@ -2286,8 +2416,80 @@
 
     .screen.single-device-home .content,
     .screen.dual-device-home .content,
-    .screen.offline-device-home .content {
+    .screen.offline-device-home .content,
+    .screen.no-device-page-mode .content {
       grid-row: 3 / 5;
+    }
+
+    .screen.no-device-page-mode .content {
+      grid-row: 2 / 5;
+      grid-template-columns: minmax(0, 1fr);
+      gap: 0;
+      padding: 0;
+    }
+
+    .no-device-home-empty {
+      display: none;
+      grid-column: 1 / -1;
+      min-height: 0;
+      place-items: center;
+      border: 1px solid rgba(127, 151, 180, 0.26);
+      border-radius: 0;
+      background:
+        linear-gradient(180deg, rgba(30, 66, 110, 0.88), rgba(22, 54, 92, 0.86)),
+        rgba(16, 30, 52, 0.86);
+      padding: 34px;
+      box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.04);
+    }
+
+    .screen.no-device-page-mode .tabs-bar,
+    .screen.no-device-page-mode .monitor-stack,
+    .screen.no-device-page-mode .right-panel,
+    .screen.no-device-page-mode .device-strip {
+      display: none;
+    }
+
+    .screen.no-device-page-mode .no-device-home-empty {
+      display: grid;
+    }
+
+    .no-device-empty-card {
+      display: grid;
+      justify-items: center;
+      gap: 18px;
+      width: min(560px, 100%);
+      color: #dbe9fb;
+      text-align: center;
+    }
+
+    .no-device-empty-card p {
+      margin: 0;
+      color: #c8d7eb;
+      font-size: 16px;
+      font-weight: 850;
+      line-height: 1.7;
+    }
+
+    .screen.no-device-context .settings-overview-devices .device-page-card,
+    .screen.no-device-context .settings-panel[data-panel="deviceManage"] .device-page-card,
+    .screen.no-device-context .settings-panel[data-panel="deviceManage"] .device-group-tabs {
+      display: none;
+    }
+
+    .settings-empty-state {
+      display: none;
+      min-height: 128px;
+      place-items: center;
+      border: 1px dashed rgba(180, 204, 232, 0.28);
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.045);
+      color: rgba(231, 241, 255, 0.78);
+      font-size: 15px;
+      font-weight: 900;
+    }
+
+    .screen.no-device-context .settings-overview-devices .settings-empty-state {
+      display: grid;
     }
 
     .screen.fullscreen-mode.single-device-home .content {
@@ -3296,9 +3498,62 @@
 
     .screen.care-page-mode .care-page {
       display: grid;
-      grid-template-rows: auto auto auto;
+      grid-template-rows: max-content max-content max-content;
       gap: 14px;
       align-content: start;
+    }
+
+    .care-empty-state {
+      display: none;
+      place-items: center;
+      align-content: center;
+      justify-items: center;
+      gap: 16px;
+      border: 1px solid rgba(127, 151, 180, 0.22);
+      border-radius: 22px;
+      background:
+        linear-gradient(180deg, rgba(30, 66, 110, 0.78), rgba(22, 54, 92, 0.74)),
+        rgba(16, 30, 52, 0.78);
+      color: #dbe9fb;
+      font-size: 18px;
+      font-weight: 950;
+      text-align: center;
+    }
+
+    .care-empty-action {
+      display: inline-grid;
+      min-width: 136px;
+      min-height: 42px;
+      place-items: center;
+      border: 0;
+      border-radius: 14px;
+      background: linear-gradient(180deg, #52a6ff, #2563eb);
+      color: #fff;
+      font-size: 14px;
+      font-weight: 900;
+      box-shadow: 0 12px 26px rgba(37, 99, 235, 0.30);
+    }
+
+    .care-page[data-care-state="signed-out"],
+    .care-page[data-care-state="empty"] {
+      position: relative;
+      grid-template-rows: max-content;
+      align-content: start;
+      gap: 14px;
+    }
+
+    .care-page[data-care-state="signed-out"] .care-hero-insight,
+    .care-page[data-care-state="signed-out"] .care-layout,
+    .care-page[data-care-state="empty"] .care-hero-insight,
+    .care-page[data-care-state="empty"] .care-layout {
+      display: none;
+    }
+
+    .care-page[data-care-state="signed-out"] .care-empty-state.signed-out,
+    .care-page[data-care-state="empty"] .care-empty-state.no-data {
+      display: grid;
+      position: absolute;
+      inset: 76px 20px 20px;
     }
 
     .care-head {
@@ -3794,7 +4049,8 @@
       display: grid;
       grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.85fr);
       gap: 14px;
-      min-height: 0;
+      align-items: start;
+      min-height: max-content;
     }
 
     .metric-timeline,
@@ -3939,9 +4195,11 @@
 
     .sleep-record-card {
       display: grid;
-      grid-template-rows: auto minmax(0, 1fr) auto;
-      gap: 14px;
-      min-height: 0;
+      grid-template-rows: auto auto auto auto;
+      gap: 10px;
+      align-content: start;
+      min-height: max-content;
+      overflow: visible;
       border: 1px solid rgba(127, 151, 180, 0.22);
       border-radius: 22px;
       background:
@@ -4118,18 +4376,20 @@
 
     .sleep-strip-chart {
       display: grid;
-      grid-template-rows: auto minmax(0, 1fr);
+      grid-template-rows: max-content max-content;
       gap: 10px;
-      min-height: 0;
-      padding: 8px 2px 2px;
+      min-height: max-content;
+      overflow: visible;
+      padding: 4px 2px 2px;
+      scrollbar-width: none;
     }
 
     .sleep-strip-scale {
       display: grid;
       grid-template-columns: 42px repeat(5, 1fr);
-      color: #8fa0b9;
-      font-size: 10px;
-      font-weight: 850;
+      color: rgba(143, 160, 185, 0.82);
+      font-size: 9px;
+      font-weight: 650;
     }
 
     .sleep-strip-scale span:not(:first-child) {
@@ -4138,14 +4398,15 @@
 
     .sleep-strip-rows {
       display: grid;
-      align-content: center;
+      grid-auto-rows: max-content;
+      align-content: start;
       gap: 8px;
-      min-height: 0;
+      min-height: max-content;
       border: 1px solid rgba(127, 151, 180, 0.18);
       border-radius: 18px;
       background:
-        repeating-linear-gradient(90deg, transparent 0 41px, rgba(255, 255, 255, 0.045) 41px 42px, transparent 42px 25%),
-        linear-gradient(180deg, rgba(82, 166, 255, 0.08), rgba(255, 255, 255, 0.035));
+        repeating-linear-gradient(90deg, transparent 0 41px, rgba(255, 255, 255, 0.024) 41px 42px, transparent 42px 25%),
+        linear-gradient(180deg, rgba(82, 166, 255, 0.06), rgba(255, 255, 255, 0.026));
       padding: 12px;
     }
 
@@ -4154,7 +4415,12 @@
       grid-template-columns: 42px minmax(0, 1fr);
       align-items: center;
       gap: 9px;
+      min-height: 18px;
       min-width: 0;
+    }
+
+    .sleep-strip-row.featured {
+      min-height: 28px;
     }
 
     .sleep-strip-day {
@@ -4196,25 +4462,54 @@
       background: var(--c);
     }
 
-    .sleep-strip-note {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px 12px;
-      margin-left: 51px;
-      color: #aab9ce;
-      font-size: 10px;
-      font-weight: 800;
+    .sleep-month-analysis {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 8px;
+      min-height: 0;
     }
 
-    .sleep-strip-note b {
+    .sleep-record-card [hidden] {
+      display: none !important;
+    }
+
+    .sleep-analysis-card {
+      border: 1px solid rgba(127, 151, 180, 0.14);
+      border-radius: 16px;
+      background: rgba(255, 255, 255, 0.055);
+      padding: 11px 12px;
+      min-width: 0;
+    }
+
+    .sleep-analysis-card span {
+      display: block;
+      color: #9aacbf;
+      font-size: 11px;
+      font-weight: 850;
+    }
+
+    .sleep-analysis-card strong {
+      display: block;
+      margin-top: 5px;
       color: #f5f9ff;
-      font-weight: 900;
+      font-size: 17px;
+      font-weight: 950;
+    }
+
+    .sleep-analysis-card em {
+      display: block;
+      margin-top: 4px;
+      color: #8fa0b9;
+      font-size: 10px;
+      font-style: normal;
+      font-weight: 800;
     }
 
     .sleep-summary-grid {
       display: grid;
       grid-template-columns: repeat(4, minmax(0, 1fr));
       gap: 8px;
+      margin-top: 10px;
     }
 
     .sleep-record-data-grid {
@@ -4307,9 +4602,10 @@
 
     .care-data-panel {
       display: grid;
-      grid-template-rows: auto minmax(0, 1fr);
+      grid-template-rows: auto auto;
       gap: 12px;
-      min-height: 0;
+      align-content: start;
+      min-height: max-content;
       border: 1px solid rgba(127, 151, 180, 0.22);
       border-radius: 22px;
       background: linear-gradient(180deg, rgba(20, 31, 52, 0.98), rgba(14, 23, 39, 0.98));
@@ -4336,6 +4632,8 @@
       align-content: start;
       gap: 10px;
       min-height: 0;
+      padding: 0;
+      overflow: visible;
     }
 
     .care-data-card {
@@ -4609,7 +4907,8 @@
 
     .device-settings-page[data-device-settings-panel="info"] .device-settings-detail.info,
     .device-settings-page[data-device-settings-panel="features"] .device-settings-detail.features,
-    .device-settings-page[data-device-settings-panel="share"] .device-settings-detail.share {
+    .device-settings-page[data-device-settings-panel="share"] .device-settings-detail.share,
+    .device-settings-page[data-device-settings-panel="wifi"] .device-settings-detail.wifi {
       display: grid;
     }
 
@@ -4668,6 +4967,129 @@
       background: rgba(82, 166, 255, 0.13);
       padding: 0 10px;
       color: #c6e3ff;
+    }
+
+    .device-settings-item.clickable {
+      cursor: pointer;
+    }
+
+    .device-settings-item.clickable:hover {
+      background: rgba(82, 166, 255, 0.08);
+    }
+
+    .device-settings-form {
+      display: grid;
+      gap: 14px;
+      padding: 16px;
+    }
+
+    .device-settings-field {
+      display: grid;
+      gap: 7px;
+    }
+
+    .device-wifi-picker {
+      position: relative;
+      display: grid;
+    }
+
+    .device-settings-field label {
+      color: #9fb4d0;
+      font-size: 12px;
+      font-weight: 850;
+    }
+
+    .device-settings-field input,
+    .device-settings-field select {
+      width: 100%;
+      height: 42px;
+      border: 1px solid rgba(127, 151, 180, 0.22);
+      border-radius: 8px;
+      background: rgba(8, 18, 32, 0.48);
+      padding: 0 12px;
+      color: #f5f9ff;
+      font: inherit;
+      font-size: 13px;
+      font-weight: 800;
+      outline: none;
+    }
+
+    .device-settings-field input:focus,
+    .device-settings-field select:focus {
+      border-color: rgba(82, 166, 255, 0.72);
+      box-shadow: 0 0 0 3px rgba(82, 166, 255, 0.14);
+    }
+
+    .device-settings-field select {
+      appearance: none;
+      background-image: linear-gradient(45deg, transparent 50%, #8fbce9 50%), linear-gradient(135deg, #8fbce9 50%, transparent 50%);
+      background-position: calc(100% - 18px) 17px, calc(100% - 12px) 17px;
+      background-repeat: no-repeat;
+      background-size: 6px 6px, 6px 6px;
+      color: #c6e3ff;
+    }
+
+    .device-wifi-options {
+      position: absolute;
+      z-index: 5;
+      top: calc(100% + 6px);
+      left: 0;
+      right: 0;
+      display: none;
+      overflow: hidden;
+      border: 1px solid rgba(82, 166, 255, 0.42);
+      border-radius: 8px;
+      background: rgba(12, 25, 43, 0.98);
+      box-shadow: 0 16px 30px rgba(0, 0, 0, 0.28);
+    }
+
+    .device-wifi-picker.open .device-wifi-options {
+      display: grid;
+    }
+
+    .device-wifi-option {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      min-height: 40px;
+      border: 0;
+      border-bottom: 1px solid rgba(127, 151, 180, 0.10);
+      background: transparent;
+      padding: 0 12px;
+      color: #edf6ff;
+      font-size: 13px;
+      font-weight: 850;
+      text-align: left;
+    }
+
+    .device-wifi-option:last-child {
+      border-bottom: 0;
+    }
+
+    .device-wifi-option:hover {
+      background: rgba(82, 166, 255, 0.14);
+    }
+
+    .device-wifi-option span:last-child {
+      color: #8fbce9;
+      font-size: 12px;
+    }
+
+    .device-settings-primary {
+      height: 42px;
+      border: 0;
+      border-radius: 8px;
+      background: linear-gradient(180deg, #52a6ff, #2f79e8);
+      color: #ffffff;
+      font-size: 13px;
+      font-weight: 950;
+    }
+
+    .device-settings-connect-status {
+      min-height: 18px;
+      color: #75d69b;
+      font-size: 12px;
+      font-weight: 850;
     }
 
     .screen.device-care-settings .care-device-select {
@@ -4814,16 +5236,153 @@
     }
 
     .screen.settings-page-mode .settings-page {
-      display: grid;
-      grid-template-columns: 142px minmax(0, 1fr);
+      display: block;
       min-height: 0;
+      overflow: auto;
     }
 
     .settings-nav {
+      display: none;
       min-height: 0;
       border-right: 1px solid var(--line);
       background: rgba(255, 255, 255, 0.045);
       padding: 12px 8px;
+    }
+
+    .settings-overview {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(250px, 0.9fr);
+      grid-template-areas:
+        "left devices";
+      align-content: start;
+      align-items: start;
+      gap: 24px;
+      padding: 22px;
+    }
+
+    .settings-overview-left {
+      grid-area: left;
+      display: grid;
+      gap: 12px;
+      min-width: 0;
+    }
+
+    .settings-module {
+      min-width: 0;
+    }
+
+    .settings-module.quick {
+      grid-area: auto;
+    }
+
+    .settings-module.general {
+      grid-area: auto;
+    }
+
+    .settings-module.devices {
+      grid-area: devices;
+    }
+
+    .settings-module-head {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 30px;
+      margin-bottom: 6px;
+      border: 0;
+      background: transparent;
+      color: #f5f9ff;
+      font-size: 16px;
+      font-weight: 950;
+    }
+
+    .settings-module-head-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      margin-bottom: 12px;
+    }
+
+    .settings-overview-list,
+    .settings-overview-general,
+    .settings-overview-devices {
+      overflow: hidden;
+      border: 1px solid rgba(127, 151, 180, 0.16);
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.055);
+    }
+
+    .settings-overview-row {
+      display: grid;
+      grid-template-columns: 108px minmax(0, 1fr) auto;
+      align-items: center;
+      gap: 14px;
+      min-height: 56px;
+      border-bottom: 1px solid rgba(127, 151, 180, 0.12);
+      padding: 0 16px;
+      color: #f5f9ff;
+      font-size: 14px;
+      font-weight: 900;
+    }
+
+    .settings-overview-row:last-child {
+      border-bottom: 0;
+    }
+
+    .settings-overview-general {
+      display: grid;
+      padding: 10px 0;
+    }
+
+    .settings-overview-general button {
+      min-height: 48px;
+      border: 0;
+      background: transparent;
+      color: #edf6ff;
+      font-size: 15px;
+      font-weight: 850;
+      text-align: center;
+    }
+
+    .settings-overview-general button:hover {
+      background: rgba(82, 166, 255, 0.10);
+    }
+
+    .settings-overview-devices {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr);
+      grid-auto-rows: 128px;
+      gap: 10px;
+      border: 0;
+      background: transparent;
+    }
+
+    .settings-overview-device-card {
+      min-height: 0;
+    }
+
+    .settings-overview-device-card:last-child {
+      border-bottom: 0;
+    }
+
+    .settings-page.detail-mode .settings-overview {
+      display: none;
+    }
+
+    .settings-page.detail-mode .settings-content {
+      display: grid;
+    }
+
+    .settings-nav-group-title {
+      margin: 14px 8px 6px;
+      color: #7f91aa;
+      font-size: 11px;
+      font-weight: 900;
+    }
+
+    .settings-nav-group-title:first-child {
+      margin-top: 2px;
     }
 
     .settings-nav button {
@@ -4845,6 +5404,10 @@
       margin-top: 5px;
     }
 
+    .settings-nav-group-title + button {
+      margin-top: 0;
+    }
+
     .settings-nav button.active {
       border-color: rgba(82, 166, 255, 0.50);
       background: linear-gradient(180deg, rgba(82, 166, 255, 0.24), rgba(82, 166, 255, 0.08));
@@ -4852,7 +5415,7 @@
     }
 
     .settings-content {
-      display: grid;
+      display: none;
       align-content: start;
       grid-auto-rows: max-content;
       gap: 22px;
@@ -4966,6 +5529,45 @@
       font-size: 12px;
       font-weight: 800;
       white-space: nowrap;
+    }
+
+    .sleep-schedule-row {
+      grid-template-columns: minmax(0, 1fr) auto;
+      grid-template-areas:
+        "copy switch"
+        "time time";
+      align-items: start;
+      min-height: 94px;
+      gap: 10px 14px;
+    }
+
+    .sleep-schedule-copy {
+      grid-area: copy;
+    }
+
+    .sleep-schedule-row .setting-switch {
+      grid-area: switch;
+      align-self: start;
+      margin-top: 2px;
+    }
+
+    .sleep-time-control {
+      grid-area: time;
+      justify-self: stretch;
+      min-width: 0;
+      border: 1px solid rgba(134, 164, 202, 0.24);
+      border-radius: 14px;
+      background: rgba(255, 255, 255, 0.06);
+      padding: 10px 12px;
+      color: #e5f1ff;
+      font-size: 12px;
+      font-weight: 900;
+      text-align: left;
+      white-space: nowrap;
+    }
+
+    .sleep-time-control.disabled {
+      opacity: 0.42;
     }
 
     .setting-slider {
@@ -5234,6 +5836,19 @@
       min-height: 0;
     }
 
+    .screen.account-page-mode .account-page.signed-out-mode {
+      grid-template-columns: minmax(0, 1fr);
+    }
+
+    .account-page.signed-out-mode .account-nav {
+      display: none;
+    }
+
+    .account-page.signed-out-mode .account-content {
+      display: grid;
+      min-height: 0;
+    }
+
     .notification-page {
       grid-column: 1 / -1;
       grid-row: 1 / -1;
@@ -5410,6 +6025,124 @@
       top: 36px;
       width: 50px;
       transform: rotate(180deg);
+    }
+
+    .guide-tip.control-center {
+      top: 330px;
+      left: 430px;
+    }
+
+    .guide-tip.control-center::after {
+      left: -58px;
+      top: 34px;
+      width: 56px;
+      transform: rotate(180deg);
+    }
+
+    .guide-control-drawer {
+      display: none;
+      position: absolute;
+      top: 18px;
+      right: 24px;
+      z-index: 2;
+      width: 390px;
+      gap: 12px;
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      border-radius: 0 0 24px 24px;
+      background:
+        linear-gradient(180deg, rgba(45, 88, 145, 0.92), rgba(21, 39, 68, 0.90)),
+        rgba(13, 25, 44, 0.82);
+      padding: 18px 18px 20px;
+      box-shadow: 0 26px 68px rgba(0, 0, 0, 0.34), inset 0 1px 0 rgba(255, 255, 255, 0.12);
+      backdrop-filter: blur(22px);
+    }
+
+    .guide-control-drawer::before {
+      position: absolute;
+      top: -10px;
+      left: 50%;
+      width: 54px;
+      height: 4px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.45);
+      content: "";
+      transform: translateX(-50%);
+    }
+
+    .guide-control-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      min-width: 0;
+      color: #fff;
+      font-size: 18px;
+      font-weight: 950;
+    }
+
+    .guide-control-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      grid-auto-rows: 68px;
+      gap: 10px;
+    }
+
+    .guide-control-tile {
+      display: grid;
+      align-content: center;
+      justify-items: center;
+      gap: 5px;
+      min-width: 0;
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      border-radius: 18px;
+      background: rgba(227, 240, 255, 0.18);
+      color: #fff;
+      padding: 8px;
+      text-align: center;
+      backdrop-filter: blur(18px);
+    }
+
+    .guide-control-tile.wide {
+      grid-column: span 2;
+      grid-template-columns: 34px minmax(0, 1fr);
+      align-items: center;
+      justify-items: start;
+      text-align: left;
+    }
+
+    .guide-control-tile.active {
+      background: linear-gradient(180deg, rgba(52, 145, 255, 0.96), rgba(37, 99, 235, 0.92));
+    }
+
+    .guide-control-icon {
+      display: grid;
+      width: 32px;
+      height: 32px;
+      place-items: center;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.18);
+      color: #fff;
+      font-size: 16px;
+      font-weight: 950;
+    }
+
+    .guide-control-tile strong {
+      overflow: hidden;
+      max-width: 100%;
+      color: #fff;
+      font-size: 12px;
+      font-weight: 900;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .guide-control-tile span:last-child {
+      overflow: hidden;
+      max-width: 100%;
+      color: rgba(255, 255, 255, 0.72);
+      font-size: 10px;
+      font-weight: 760;
+      text-overflow: ellipsis;
+      white-space: nowrap;
     }
 
     .guide-step {
@@ -5812,6 +6545,70 @@
       box-shadow: 0 28px 80px rgba(0, 0, 0, 0.30), inset 0 0 0 1px rgba(255, 255, 255, 0.035);
     }
 
+    .onboarding-skip-btn {
+      position: absolute;
+      top: 18px;
+      right: 18px;
+      z-index: 4;
+      display: none;
+      min-width: 58px;
+      height: 32px;
+      border: 1px solid rgba(180, 204, 232, 0.20);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.055);
+      color: rgba(222, 233, 248, 0.68);
+      font-size: 12px;
+      font-weight: 850;
+    }
+
+    .onboarding-flow-card.is-wifi-step .onboarding-skip-btn {
+      display: inline-grid;
+      place-items: center;
+    }
+
+    .onboarding-skip-modal {
+      position: absolute;
+      inset: 0;
+      z-index: 8;
+      display: grid;
+      place-items: center;
+      background: rgba(3, 8, 16, 0.42);
+      backdrop-filter: blur(8px);
+    }
+
+    .onboarding-skip-modal.is-hidden {
+      display: none;
+    }
+
+    .onboarding-skip-dialog {
+      display: grid;
+      justify-items: center;
+      gap: 14px;
+      width: min(420px, 86%);
+      border: 1px solid rgba(127, 151, 180, 0.28);
+      border-radius: 22px;
+      background: linear-gradient(180deg, rgba(24, 39, 64, 0.98), rgba(15, 27, 46, 0.98));
+      padding: 26px 24px 22px;
+      color: #f4f8ff;
+      text-align: center;
+      box-shadow: 0 24px 70px rgba(0, 0, 0, 0.42);
+    }
+
+    .onboarding-skip-dialog p {
+      margin: 0;
+      color: #c8d7eb;
+      font-size: 14px;
+      font-weight: 800;
+      line-height: 1.7;
+    }
+
+    .onboarding-skip-actions {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 4px;
+    }
+
     .onboarding-screen {
       display: none;
       grid-template-columns: minmax(0, 1fr);
@@ -5910,6 +6707,29 @@
       font-size: 13px;
       line-height: 1.65;
       font-weight: 650;
+    }
+
+    .setup-empty-state {
+      display: grid;
+      justify-items: center;
+      gap: 14px;
+      border: 1px dashed rgba(134, 164, 202, 0.32);
+      border-radius: 22px;
+      background: rgba(255, 255, 255, 0.045);
+      padding: 34px 24px;
+      text-align: center;
+    }
+
+    .setup-empty-icon {
+      display: grid;
+      width: 64px;
+      height: 64px;
+      place-items: center;
+      border-radius: 24px;
+      background: rgba(82, 166, 255, 0.16);
+      color: #badeff;
+      font-size: 28px;
+      font-weight: 900;
     }
 
     .setup-options {
@@ -6245,6 +7065,27 @@
       color: #9ed0ff;
       font-size: 11px;
       font-weight: 900;
+    }
+
+    .auth-agreement {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: #a9b8cc;
+      font-size: 11px;
+      font-weight: 800;
+      line-height: 1.4;
+    }
+
+    .auth-agreement input {
+      width: 16px;
+      height: 16px;
+      accent-color: #3b82f6;
+    }
+
+    .auth-agreement a {
+      color: #9ed0ff;
+      text-decoration: none;
     }
 
     .auth-note {
@@ -7657,6 +8498,55 @@
       margin-top: 12px;
     }
 
+    .account-panel[data-panel="signed-out"] .account-actions {
+      grid-template-columns: minmax(0, 1fr);
+    }
+
+    .account-panel[data-panel="signed-out"].active {
+      display: grid;
+      width: 100%;
+      height: 100%;
+      grid-template-rows: minmax(0, 1fr);
+      gap: 0;
+      align-items: stretch;
+      justify-items: stretch;
+    }
+
+    .account-panel[data-panel="signed-out"] .account-grid {
+      width: 100%;
+      height: 100%;
+    }
+
+    .account-panel[data-panel="signed-out"] .account-card {
+      display: grid;
+      place-content: center;
+      align-content: center;
+      justify-items: center;
+      gap: 12px;
+      width: 100%;
+      height: 100%;
+      padding: 34px 28px;
+      text-align: center;
+    }
+
+    .account-panel[data-panel="signed-out"] .account-card h3 {
+      font-size: 22px;
+      font-weight: 900;
+    }
+
+    .account-panel[data-panel="signed-out"] .account-card p {
+      max-width: 320px;
+      margin: 0;
+      font-size: 13px;
+      line-height: 1.7;
+    }
+
+    .account-panel[data-panel="signed-out"] .account-actions {
+      width: 100%;
+      max-width: 260px;
+      margin-top: 4px;
+    }
+
     .account-action-btn {
       display: grid;
       min-height: 42px;
@@ -7673,6 +8563,100 @@
       border-color: rgba(242, 76, 84, 0.36);
       background: rgba(242, 76, 84, 0.12);
       color: #ffb6ba;
+    }
+
+    .account-support-modal {
+      position: absolute;
+      inset: 0;
+      z-index: 40;
+      display: grid;
+      place-items: center;
+      padding: 24px;
+      background: rgba(5, 10, 20, 0.58);
+      backdrop-filter: blur(10px);
+    }
+
+    .account-support-modal.is-hidden {
+      display: none;
+    }
+
+    .account-support-dialog {
+      position: relative;
+      display: grid;
+      width: min(420px, 100%);
+      gap: 14px;
+      border: 1px solid rgba(134, 164, 202, 0.28);
+      border-radius: 22px;
+      background:
+        radial-gradient(circle at 86% 8%, rgba(242, 76, 84, 0.14), transparent 34%),
+        linear-gradient(180deg, rgba(22, 34, 56, 0.98), rgba(12, 20, 34, 0.98));
+      padding: 24px;
+      box-shadow: 0 26px 70px rgba(0, 0, 0, 0.42), inset 0 0 0 1px rgba(255, 255, 255, 0.04);
+    }
+
+    .account-support-close {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      display: grid;
+      width: 32px;
+      height: 32px;
+      place-items: center;
+      border: 1px solid rgba(134, 164, 202, 0.22);
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.06);
+      color: #c8d6ea;
+      font-size: 18px;
+      font-weight: 800;
+    }
+
+    .account-support-icon {
+      display: grid;
+      width: 44px;
+      height: 44px;
+      place-items: center;
+      border-radius: 16px;
+      background: rgba(242, 76, 84, 0.14);
+      color: #ffb6ba;
+      font-size: 22px;
+      font-weight: 900;
+    }
+
+    .account-support-dialog h3 {
+      margin: 0;
+      color: #f8fbff;
+      font-size: 20px;
+      font-weight: 900;
+      line-height: 1.35;
+    }
+
+    .account-support-list {
+      display: grid;
+      gap: 10px;
+    }
+
+    .account-support-list div {
+      display: grid;
+      grid-template-columns: 76px minmax(0, 1fr);
+      align-items: center;
+      gap: 12px;
+      border-radius: 14px;
+      background: rgba(255, 255, 255, 0.055);
+      padding: 12px;
+    }
+
+    .account-support-list span {
+      color: #91a2ba;
+      font-size: 12px;
+      font-weight: 800;
+    }
+
+    .account-support-list b {
+      min-width: 0;
+      overflow-wrap: anywhere;
+      color: #f5f9ff;
+      font-size: 13px;
+      font-weight: 900;
     }
 
     .member-list {
@@ -8198,36 +9182,39 @@
       <div class="nav-scroll">
         <section class="nav-group">
           <h2>一级模块</h2>
-          <button class="nav-item active" data-page="屏端初始化向导">屏端初始化向导（已配对好）</button>
-          <div class="nav-sub">
-            <button class="nav-sub-item" data-page="屏端初始化向导" data-onboarding-jump="10">添加新设备（未配对好）</button>
-          </div>
+          <button class="nav-item active" data-page="屏端初始化向导">屏端初始化向导</button>
+          <button class="nav-item" data-page="屏端初始化向导" data-onboarding-jump="4" data-onboarding-mode="paired-add">添加设备（已配对好）</button>
+          <button class="nav-item" data-page="屏端初始化向导" data-onboarding-jump="10">添加设备（未配对好）</button>
+          <button class="nav-item" data-page="无设备页">无设备页</button>
           <button class="nav-item" data-page="新手引导">新手引导</button>
           <button class="nav-item" data-page="实时监控区">主页</button>
           <div class="nav-sub">
             <button class="nav-sub-item" data-page="实时监控区" data-view="single">单IPC主页</button>
-            <button class="nav-sub-item" data-page="实时监控区" data-view="dualHome" data-home-sub-page="dualDevice">双IPC主页</button>
+            <button class="nav-sub-item" data-page="实时监控区" data-view="dualHome" data-home-sub-page="dualDevice">多IPC主页</button>
             <button class="nav-sub-item" data-page="实时监控区" data-view="single" data-home-sub-page="offlineDevice">设备离线主页</button>
-            <button class="nav-sub-item" data-page="实时监控区" data-scene="睡眠看护">睡眠看护</button>
-            <button class="nav-sub-item" data-page="实时监控区" data-scene="入睡安抚">睡眠安抚</button>
-            <button class="nav-sub-item" data-page="实时监控区" data-view="split2">二画面</button>
+            <button class="nav-sub-item" data-page="实时监控区" data-scene="睡眠看护">主页-睡眠看护</button>
+            <button class="nav-sub-item" data-page="实时监控区" data-view="split2">主页-多画面</button>
             <button class="nav-sub-item" data-page="实时监控区" data-view="singleFull">单画面全屏</button>
-            <button class="nav-sub-item" data-page="实时监控区" data-view="split2Full">二画面全屏</button>
+            <button class="nav-sub-item" data-page="实时监控区" data-view="split2Full">双画面全屏</button>
           </div>
           <button class="nav-item" data-page="宝宝看护指标区">智能看护</button>
           <div class="nav-sub">
+            <button class="nav-sub-item" data-page="宝宝看护指标区" data-care-state="signed-out">未登录状态</button>
+            <button class="nav-sub-item" data-page="宝宝看护指标区" data-care-state="empty">无数据状态</button>
             <button class="nav-sub-item" data-page="智能看护设置">智能看护设置</button>
           </div>
           <button class="nav-item" data-page="日常活动统计" data-scene="活动" data-room="neo">录像回放</button>
           <div class="nav-sub">
             <button class="nav-sub-item" data-page="日常活动统计" data-replay-state="noCard">未插卡</button>
           </div>
-          <button class="nav-item" data-page="其他生态设备控制">设备</button>
+          <button class="nav-item" data-page="智能看护快捷设置">设置</button>
           <div class="nav-sub">
             <button class="nav-sub-item" data-page="设备设置">设备设置</button>
           </div>
-          <button class="nav-item" data-page="智能看护快捷设置">设置</button>
           <button class="nav-item" data-page="账号信息">账号</button>
+          <div class="nav-sub">
+            <button class="nav-sub-item" data-page="账号信息" data-account-panel="signed-out">账号-未登录</button>
+          </div>
           <button class="nav-item" data-page="控制中心">控制中心</button>
           <button class="nav-item" data-page="消息通知">消息通知</button>
           <div class="nav-sub">
@@ -8273,14 +9260,13 @@
               <button class="screen-menu-item" data-page="实时监控区" data-scene="睡眠看护">主页</button>
               <button class="screen-menu-item" data-page="宝宝看护指标区" data-scene="睡眠看护">智能看护</button>
               <button class="screen-menu-item" data-page="日常活动统计" data-scene="活动" data-room="neo">录像回放</button>
-              <button class="screen-menu-item" data-page="其他生态设备控制">设备</button>
               <button class="screen-menu-item" data-page="智能看护快捷设置">设置</button>
               <div class="screen-menu-spacer"></div>
               <button class="screen-menu-item" data-page="账号信息">账号</button>
             </nav>
 
             <div class="tabs-bar">
-              <div class="tab-group" id="roomTabs"><button class="tab-btn active" data-room="niki">niki</button></div>
+              <div class="tab-group" id="roomTabs"><button class="tab-btn active" data-room="niki">cam1</button></div>
             </div>
 
             <main class="content">
@@ -8291,6 +9277,16 @@
                       <div class="live-pills">
                         <span class="live-pill live">Live</span>
                         <span class="cam-name fullscreen-room-pill" id="fullscreenRoomPill" hidden="">niki · niki</span>
+                        <div class="monitor-env-overlay" aria-label="实时环境温湿度">
+                          <span aria-label="室温">
+                            <svg class="monitor-env-icon" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 14.76V5a4 4 0 0 0-8 0v9.76a6 6 0 1 0 8 0Z"></path><path d="M10 8v8"></path></svg>
+                            <strong id="monitorTempValue">24.5°C</strong>
+                          </span>
+                          <span aria-label="湿度">
+                            <svg class="monitor-env-icon" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3.5S6 10.1 6 14.2a6 6 0 0 0 12 0C18 10.1 12 3.5 12 3.5Z"></path></svg>
+                            <strong id="monitorHumidityValue">55%</strong>
+                          </span>
+                        </div>
                       </div>
                     </div>
                     <button class="monitor-setting" type="button" title="设备设置" aria-label="设备设置" data-page-jump="设备设置" data-device-settings-source="monitor">
@@ -8349,7 +9345,7 @@
                   </div>
                   <div class="scene-mode-alert"><strong>已开启白噪声</strong><p>正在轻柔安抚宝宝入睡。</p></div>
                   <div class="scene-breath-card"><div class="scene-vitals-grid"><div class="scene-vital-item"><span>呼吸率</span><strong>30 br/min</strong></div><div class="scene-vital-item"><span>心率</span><strong>112 bpm</strong></div></div></div>
-                  <div class="scene-env-grid"><div class="scene-env-card"><span>室温</span><strong>24.8°C</strong></div><div class="scene-env-card"><span>湿度</span><strong>56%</strong></div></div>
+                  <div class="scene-env-grid"><div class="scene-env-card"><span>体温贴</span><strong>36.6°C</strong></div><div class="scene-env-card"><span>空气质量</span><strong>优</strong></div></div>
                 </div>
                 <div class="scene-mode-card scene-sleep">
                   <div class="scene-split-status" id="sceneSplitStatus"></div>
@@ -8358,7 +9354,7 @@
                   </div>
                   <div class="scene-mode-alert"><strong>检测到宝宝眼动活跃</strong><p>随时可能醒来，建议留意。</p></div>
                   <div class="scene-breath-card"><div class="scene-vitals-grid"><div class="scene-vital-item"><span>呼吸率</span><strong>28 br/min</strong></div><div class="scene-vital-item"><span>心率</span><strong>108 bpm</strong></div></div></div>
-                  <div class="scene-env-grid"><div class="scene-env-card"><span>室温</span><strong>24.5°C</strong></div><div class="scene-env-card"><span>湿度</span><strong>55%</strong></div></div>
+                  <div class="scene-env-grid"><div class="scene-env-card"><span>体温贴</span><strong>36.6°C</strong></div><div class="scene-env-card"><span>空气质量</span><strong>优</strong></div></div>
                 </div>
                 <div class="scene-mode-card scene-wakeup">
                   <div class="scene-mode-top">
@@ -8366,28 +9362,36 @@
                   </div>
                   <div class="scene-mode-alert"><strong>正在轻柔安抚</strong><p>已开启低音量安抚音，帮助宝宝睡醒后平稳过渡。</p></div>
                   <div class="scene-breath-card"><div class="scene-vitals-grid"><div class="scene-vital-item"><span>呼吸率</span><strong>31 br/min</strong></div><div class="scene-vital-item"><span>心率</span><strong>116 bpm</strong></div></div></div>
-                  <div class="scene-env-grid"><div class="scene-env-card"><span>室温</span><strong>24.7°C</strong></div><div class="scene-env-card"><span>湿度</span><strong>54%</strong></div></div>
+                  <div class="scene-env-grid"><div class="scene-env-card"><span>体温贴</span><strong>36.6°C</strong></div><div class="scene-env-card"><span>空气质量</span><strong>良</strong></div></div>
                 </div>
               </aside>
+
+              <section class="no-device-home-empty" aria-label="无设备空状态">
+                <div class="no-device-empty-card">
+                  <p>当前没有添加设备，添加摄像头即可开始实时看护</p>
+                  <button class="setup-primary-btn" type="button" data-paired-add-start="">添加设备</button>
+                </div>
+              </section>
             </main>
 
             <main class="care-page" id="carePage">
               <div class="care-head">
                 <div class="care-title-group">
+                  <div>
+                    <h2>看护记录</h2>
+                  </div>
                   <div class="care-baby-info">
                     <select class="care-baby-select" aria-label="选择宝宝">
-                      <option selected="">niki</option>
-                      <option>neo</option>
+                      <option selected="">cam1</option>
+                      <option>cam2</option>
                     </select>
-                  </div>
-                  <div>
-                    <h2>看护数据</h2>
                   </div>
                 </div>
                 <div class="care-tools">
                   <div class="segmented care-range-toggle" id="careRangeToggle" aria-label="数据时间维度">
                     <span class="active" data-care-range="day">天</span>
                     <span data-care-range="week" class="">周</span>
+                    <span data-care-range="month" class="">月</span>
                   </div>
                   <button class="date-picker" type="button" aria-label="日期选择">
                     <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="17" rx="3"></rect><path d="M8 2v4M16 2v4M3 10h18"></path></svg>
@@ -8417,7 +9421,7 @@
                   <div class="sleep-strip-chart" id="sleepChart" aria-label="今日睡眠水平时间轴">
             <div class="sleep-strip-scale"><span></span><span>00:00</span><span>06:00</span><span>12:00</span><span>18:00</span><span>24:00</span></div>
             <div class="sleep-strip-rows">
-              <div class="sleep-strip-row featured"><span class="sleep-strip-day">今日</span><div class="sleep-strip-track"><div class="sleep-strip-period" style="--start:1.4%;--width:8.9%"><span style="--seg:42%;--c:#ad6670"></span><span style="--seg:51%;--c:#e0a1aa"></span><span style="--seg:7%;--c:#ffc928"></span></div><div class="sleep-strip-period" style="--start:11.5%;--width:11.6%"><span style="--seg:50%;--c:#ad6670"></span><span style="--seg:47%;--c:#e0a1aa"></span><span style="--seg:3%;--c:#ffc928"></span></div><div class="sleep-strip-period" style="--start:25.7%;--width:3.6%"><span style="--seg:24%;--c:#ad6670"></span><span style="--seg:66%;--c:#e0a1aa"></span><span style="--seg:10%;--c:#ffc928"></span></div><div class="sleep-strip-period" style="--start:52.4%;--width:6.7%"><span style="--seg:34%;--c:#ad6670"></span><span style="--seg:59%;--c:#e0a1aa"></span><span style="--seg:7%;--c:#ffc928"></span></div><div class="sleep-strip-period" style="--start:72.1%;--width:2.9%"><span style="--seg:18%;--c:#ad6670"></span><span style="--seg:72%;--c:#e0a1aa"></span><span style="--seg:10%;--c:#ffc928"></span></div><div class="sleep-strip-period" style="--start:89.3%;--width:6.7%"><span style="--seg:32%;--c:#ad6670"></span><span style="--seg:63%;--c:#e0a1aa"></span><span style="--seg:5%;--c:#ffc928"></span></div></div></div><div class="sleep-strip-note"><span><b>00:20-02:28</b></span><span><b>02:45-05:32</b></span><span><b>06:10-07:02</b></span><span><b>12:34-14:10</b></span><span><b>17:18-18:00</b></span><span><b>21:26-23:02</b></span></div>
+              <div class="sleep-strip-row featured"><span class="sleep-strip-day">今日</span><div class="sleep-strip-track"><div class="sleep-strip-period" style="--start:1.4%;--width:8.9%"><span style="--seg:42%;--c:#ad6670"></span><span style="--seg:51%;--c:#e0a1aa"></span><span style="--seg:7%;--c:#ffc928"></span></div><div class="sleep-strip-period" style="--start:11.5%;--width:11.6%"><span style="--seg:50%;--c:#ad6670"></span><span style="--seg:47%;--c:#e0a1aa"></span><span style="--seg:3%;--c:#ffc928"></span></div><div class="sleep-strip-period" style="--start:25.7%;--width:3.6%"><span style="--seg:24%;--c:#ad6670"></span><span style="--seg:66%;--c:#e0a1aa"></span><span style="--seg:10%;--c:#ffc928"></span></div><div class="sleep-strip-period" style="--start:52.4%;--width:6.7%"><span style="--seg:34%;--c:#ad6670"></span><span style="--seg:59%;--c:#e0a1aa"></span><span style="--seg:7%;--c:#ffc928"></span></div><div class="sleep-strip-period" style="--start:72.1%;--width:2.9%"><span style="--seg:18%;--c:#ad6670"></span><span style="--seg:72%;--c:#e0a1aa"></span><span style="--seg:10%;--c:#ffc928"></span></div><div class="sleep-strip-period" style="--start:89.3%;--width:6.7%"><span style="--seg:32%;--c:#ad6670"></span><span style="--seg:63%;--c:#e0a1aa"></span><span style="--seg:5%;--c:#ffc928"></span></div></div></div>
             </div>
           </div>
                   <div class="sleep-summary-grid">
@@ -8445,6 +9449,11 @@
                       <b class="care-data-value" id="careEnvStatus" style="--c:#72d6ff">24.8℃ / 42%</b>
                     </div>
                     <div class="care-data-card">
+                      <span class="care-data-icon" style="--c:#ff8f7a"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 14.76V4a4 4 0 0 0-8 0v10.76a5 5 0 1 0 8 0Z"></path><path d="M10 6v7"></path><path d="M10 18h.01"></path></svg></span>
+                      <span><strong>体温贴数据</strong><span>平均体温 36.6℃ · 最高 37.1℃</span></span>
+                      <b class="care-data-value" style="--c:#ff8f7a">36.6℃</b>
+                    </div>
+                    <div class="care-data-card">
                       <span class="care-data-icon" style="--c:#ffc66f"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3h8v6a4 4 0 0 1-8 0V3Z"></path><path d="M12 13v8"></path><path d="M9 21h6"></path></svg></span>
                       <span><strong>喂养记录</strong><span id="careFeedingData">喂奶 4 次 · 最近 11:40 · 总量 520ml</span></span>
                       <b class="care-data-value" id="careFeedingStatus" style="--c:#ffc66f">4</b>
@@ -8462,6 +9471,12 @@
                   </div>
                 </aside>
               </section>
+
+              <section class="care-empty-state signed-out" aria-label="未登录状态">
+                <span>未登录账号无法使用该功能</span>
+                <button class="care-empty-action" type="button" data-page-jump="账号信息" data-account-panel-jump="signed-out">去登录</button>
+              </section>
+              <section class="care-empty-state no-data" aria-label="无数据状态">暂无任何数据</section>
             </main>
 
             <main class="care-settings-page" id="careSettingsPage">
@@ -8651,13 +9666,13 @@
                 <div class="replay-tabs" role="tablist" aria-label="录像来源">
                   <button class="replay-tab active" type="button">本地录像</button>
                   <button class="replay-tab" type="button">云录像</button>
+                  <button class="album-btn" type="button">相册</button>
                 </div>
                 <div class="replay-top-actions">
                   <button class="date-picker" type="button" aria-label="日期选择">
                     <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="17" rx="3"></rect><path d="M8 2v4M16 2v4M3 10h18"></path></svg>
                     2026/5/7
                   </button>
-                  <button class="album-btn" type="button">相册</button>
                 </div>
               </div>
 
@@ -8695,7 +9710,7 @@
                         <span><i class="in-position-dot"></i>宝宝出位</span>
                         <span><i class="prone-dot"></i>趴睡</span>
                         <span><i class="face-cover-dot"></i>遮脸</span>
-                        <span><i class="zone-dot"></i>安全/危险区域</span>
+                        <span><i class="zone-dot"></i>安全区域出界/危险区域靠近</span>
                         <span><i class="cry-dot"></i>哭声</span>
                         <span><i class="noise-dot"></i>异响</span>
                       </div>
@@ -8708,9 +9723,9 @@
                     <h3>设备选择</h3>
                     <div class="device-pills">
                       <button class="device-pill active" type="button">全部设备</button>
-                      <button class="device-pill" type="button">niki</button>
-                      <button class="device-pill" type="button">neo</button>
-                      <button class="device-pill" type="button">niki2</button>
+                      <button class="device-pill" type="button">cam1</button>
+                      <button class="device-pill" type="button">cam2</button>
+                      <button class="device-pill" type="button">cam3</button>
                     </div>
                   </section>
 
@@ -8720,11 +9735,11 @@
                       <span class="settings-chip">今日 5 条</span>
                     </div>
                     <div class="replay-events">
-                      <button class="replay-event-card" type="button"><span class="event-thumb"></span><span><strong>12:09 宝宝移动</strong><span>设备1检测到宝宝移动</span></span></button>
-                      <button class="replay-event-card" type="button"><span class="event-thumb"></span><span><strong>11:42 宝宝遮脸</strong><span>设备1检测到宝宝遮脸</span></span></button>
-                      <button class="replay-event-card" type="button"><span class="event-thumb"></span><span><strong>10:28 安全出界</strong><span>设备1检测到宝宝安全出界</span></span></button>
-                      <button class="replay-event-card" type="button"><span class="event-thumb"></span><span><strong>09:18 宝宝移动</strong><span>设备1检测到宝宝移动</span></span></button>
-                      <button class="replay-event-card" type="button"><span class="event-thumb"></span><span><strong>08:30 宝宝移动</strong><span>设备1检测到宝宝移动</span></span></button>
+                      <button class="replay-event-card" type="button"><span class="event-thumb"></span><span><strong>12:09 检测到宝宝移动</strong></span></button>
+                      <button class="replay-event-card" type="button"><span class="event-thumb"></span><span><strong>11:42 检测到宝宝遮脸</strong></span></button>
+                      <button class="replay-event-card" type="button"><span class="event-thumb"></span><span><strong>10:28 检测到安全区域出界</strong></span></button>
+                      <button class="replay-event-card" type="button"><span class="event-thumb"></span><span><strong>09:18 检测到宝宝趴睡</strong></span></button>
+                      <button class="replay-event-card" type="button"><span class="event-thumb"></span><span><strong>08:30 检测到宝宝移动</strong></span></button>
                     </div>
                     <div class="event-empty-state">暂无事件记录</div>
                   </section>
@@ -8756,8 +9771,30 @@
                     <div class="device-settings-item"><span>SN</span><span>BBM-NK-26050701</span></div>
                     <div class="device-settings-item"><span>MAC地址</span><span>8C:7A:3D:20:11:09</span></div>
                     <div class="device-settings-item"><span>IP地址</span><span>192.168.1.108</span></div>
-                    <div class="device-settings-item"><span>Wi-Fi名称</span><span>BBM_Home_2.4G</span></div>
+                    <div class="device-settings-item clickable" data-device-settings-panel-target="wifi"><span>Wi-Fi名称</span><span id="deviceWifiNameValue">BBM_Home_2.4G ›</span></div>
                     <div class="device-settings-item"><span>固件版本</span><span>V2.4.1 · 固件升级 ›</span></div>
+                  </div>
+                </section>
+                <section class="device-settings-detail wifi" aria-label="Wi-Fi网络设置">
+                  <div class="device-settings-form">
+                    <div class="device-settings-field">
+                      <label for="deviceWifiName">Wi-Fi名称</label>
+                      <div class="device-wifi-picker" id="deviceWifiPicker">
+                        <input id="deviceWifiName" type="text" value="BBM_Home_2.4G" autocomplete="off" aria-haspopup="listbox" aria-expanded="false">
+                        <div class="device-wifi-options" role="listbox" aria-label="可用Wi-Fi列表">
+                          <button class="device-wifi-option" type="button" data-device-wifi-option="BBM_Home_2.4G"><strong>BBM_Home_2.4G</strong><span>已保存</span></button>
+                          <button class="device-wifi-option" type="button" data-device-wifi-option="BBM_Home_5G"><strong>BBM_Home_5G</strong><span>信号强</span></button>
+                          <button class="device-wifi-option" type="button" data-device-wifi-option="Nursery_5G"><strong>Nursery_5G</strong><span>信号强</span></button>
+                          <button class="device-wifi-option" type="button" data-device-wifi-option="LivingRoom_WiFi"><strong>LivingRoom_WiFi</strong><span>未搜索到</span></button>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="device-settings-field">
+                      <label for="deviceWifiPassword">Wi-Fi密码</label>
+                      <input id="deviceWifiPassword" type="password" value="12345678" autocomplete="off">
+                    </div>
+                    <button class="device-settings-primary" type="button" data-action="device-wifi-connect">连接</button>
+                    <div class="device-settings-connect-status" id="deviceWifiConnectStatus" aria-live="polite"></div>
                   </div>
                 </section>
                 <section class="device-settings-detail features" aria-label="功能设置">
@@ -8786,22 +9823,101 @@
 
             <main class="settings-page" id="settingsPage">
               <nav class="settings-nav" aria-label="设置分类">
-                <button class="" data-setting-panel="sound">音量</button>
+                <div class="settings-nav-group-title">快捷设置</div>
+                <button class="active" data-setting-panel="sound">音量</button>
                 <button data-setting-panel="brightness">屏幕亮度</button>
-                <button data-setting-panel="sleepMode">睡眠模式</button>
+
+                <div class="settings-nav-group-title">通用设置</div>
                 <button data-setting-panel="sleep" class="">息屏设置</button>
                 <button data-setting-panel="power" class="">省电模式</button>
+                <button data-setting-panel="sleepMode">睡眠模式</button>
                 <button data-setting-panel="wifi" class="">Wi-Fi网络</button>
+                <button data-setting-panel="alarm" class="">闹钟</button>
                 <button data-setting-panel="general" class="">其他设置</button>
                 <button data-setting-panel="deviceInfo">设备信息</button>
                 <button data-setting-panel="support" class="">帮助与反馈</button>
-                <button data-setting-panel="privacy" class="active">隐私与条款</button>
+
+                <div class="settings-nav-group-title">设备管理</div>
+                <button data-setting-panel="deviceManage" class="">设备管理</button>
               </nav>
 
+              <section class="settings-overview" aria-label="设置总览">
+                <div class="settings-overview-left">
+                  <section class="settings-module quick" aria-label="快捷设置">
+                    <div class="settings-module-head">快捷设置</div>
+                    <div class="settings-overview-list">
+                      <div class="settings-overview-row">
+                        <span>音量</span>
+                        <div class="setting-slider" style="--value:52%"><span></span></div>
+                        <span class="setting-value">52%</span>
+                      </div>
+                      <div class="settings-overview-row">
+                        <span>屏幕亮度</span>
+                        <div class="setting-slider" style="--value:46%"><span></span></div>
+                        <span class="setting-value">46%</span>
+                      </div>
+                    </div>
+                  </section>
+
+                  <section class="settings-module general" aria-label="通用设置">
+                    <div class="settings-module-head">通用设置</div>
+                    <div class="settings-overview-general">
+                      <button type="button" data-setting-panel="sleep">息屏设置</button>
+                      <button type="button" data-setting-panel="power">省电模式</button>
+                      <button type="button" data-setting-panel="sleepMode">睡眠模式</button>
+                      <button type="button" data-setting-panel="wifi">Wi-Fi网络</button>
+                      <button type="button" data-setting-panel="alarm">闹钟</button>
+                      <button type="button" data-setting-panel="general">其他设置</button>
+                      <button type="button" data-setting-panel="deviceInfo">设备信息</button>
+                      <button type="button" data-setting-panel="support">帮助与反馈</button>
+                    </div>
+                  </section>
+                </div>
+
+                <section class="settings-module devices" aria-label="设备管理">
+                  <div class="settings-module-head-row">
+                    <div class="settings-module-head">设备管理</div>
+                    <button class="add-device-btn" type="button">
+                      <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v14M5 12h14"></path></svg>
+                      添加设备
+                    </button>
+                  </div>
+                  <div class="settings-overview-devices">
+                    <div class="settings-empty-state">暂无设备</div>
+                    <button class="settings-overview-device-card device-page-card active" type="button" data-device-name="niki摄像头" data-device-group="niki">
+                      <div class="device-card-top"><span class="device-page-icon"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 10l4.5-2.6v9.2L15 14"></path><rect x="3" y="6" width="12" height="12" rx="3"></rect></svg></span><span class="device-online">在线</span></div>
+                      <div class="device-page-main"><strong>niki摄像头</strong></div>
+                      <div class="device-page-foot"><span class="device-switch" aria-hidden="true"></span></div>
+                    </button>
+                    <button class="settings-overview-device-card device-page-card" type="button" data-device-name="neo摄像头" data-device-group="neo">
+                      <div class="device-card-top"><span class="device-page-icon"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 10l4.5-2.6v9.2L15 14"></path><rect x="3" y="6" width="12" height="12" rx="3"></rect></svg></span><span class="device-online">在线</span></div>
+                      <div class="device-page-main"><strong>neo摄像头</strong></div>
+                      <div class="device-page-foot"><span class="device-switch" aria-hidden="true"></span></div>
+                    </button>
+                    <button class="settings-overview-device-card device-page-card" type="button" data-device-name="niki2摄像头" data-device-group="niki2">
+                      <div class="device-card-top"><span class="device-page-icon"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 10l4.5-2.6v9.2L15 14"></path><rect x="3" y="6" width="12" height="12" rx="3"></rect></svg></span><span class="device-online">在线</span></div>
+                      <div class="device-page-main"><strong>niki2摄像头</strong></div>
+                      <div class="device-page-foot"><span class="device-switch" aria-hidden="true"></span></div>
+                    </button>
+                    <button class="settings-overview-device-card device-page-card" type="button" data-device-name="体温贴" data-device-group="niki">
+                      <div class="device-card-top"><span class="device-page-icon"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M14 14.8V5a4 4 0 0 0-8 0v9.8a6 6 0 1 0 8 0Z"></path><path d="M10 8v8"></path></svg></span><span class="device-online">在线</span></div>
+                      <div class="device-page-main"><strong>体温贴</strong><span>36.6°C · 更新于 12:09</span></div>
+                      <div class="device-page-foot"><span class="device-switch" aria-hidden="true"></span></div>
+                    </button>
+                    <button class="settings-overview-device-card device-page-card" type="button" data-device-name="加湿器" data-device-group="niki">
+                      <div class="device-card-top"><span class="device-page-icon"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 3s5 6 5 10a5 5 0 0 1-10 0c0-4 5-10 5-10Z"></path><path d="M8 20h8"></path></svg></span><span class="device-online">在线</span></div>
+                      <div class="device-page-main"><strong>加湿器</strong></div>
+                      <div class="device-page-foot"><span class="device-switch" aria-hidden="true"></span></div>
+                    </button>
+                  </div>
+                </section>
+              </section>
+
               <section class="settings-content">
-                <div class="settings-panel" data-panel="sound">
+                <button class="care-settings-back" type="button" data-action="settings-overview-back" aria-label="返回">‹</button>
+                <div class="settings-panel active" data-panel="sound">
                   <div class="settings-head">
-                    <div><h2>音量</h2><p>调节系统音量和提醒音量</p></div>
+                    <div><h2>音量</h2><p>调节系统音量</p></div>
                   </div>
                   <div class="settings-grid">
                     <div class="settings-list">
@@ -8809,11 +9925,6 @@
                         <div><span class="setting-label">媒体音量</span></div>
                         <div class="setting-slider" style="--value:52%"><span></span></div>
                         <span class="setting-value">52%</span>
-                      </div>
-                      <div class="setting-row">
-                        <div><span class="setting-label">提醒音量</span></div>
-                        <div class="setting-slider" style="--value:44%"><span></span></div>
-                        <span class="setting-value">44%</span>
                       </div>
                     </div>
                   </div>
@@ -8836,6 +9947,11 @@
                   </div>
                   <div class="settings-grid">
                     <div class="settings-list">
+                      <div class="setting-row sleep-schedule-row">
+                        <div class="sleep-schedule-copy"><span class="setting-label">睡眠模式时间段</span><span class="setting-desc">关闭后，睡眠模式时间段设置不生效</span></div>
+                        <button class="setting-switch" aria-label="睡眠模式时间段"></button>
+                        <button class="sleep-time-control" type="button">22:00 - 08:00</button>
+                      </div>
                       <div class="setting-row"><div><span class="setting-label">夜间提醒音量</span><span class="setting-desc">睡眠时段提醒音量</span></div><div class="setting-slider" style="--value:28%"><span></span></div><span class="setting-value">28%</span></div>
                       <div class="setting-row"><div><span class="setting-label">夜间屏幕亮度</span><span class="setting-desc">睡眠时段屏幕亮度</span></div><div class="setting-slider" style="--value:22%"><span></span></div><span class="setting-value">22%</span></div>
                       <div class="setting-row"><div><span class="setting-label">夜间通知提醒</span><span class="setting-desc">仅保留重要看护提醒</span></div><div class="segmented"><span class="active">重要提醒</span><span>全部提醒</span><span>静默</span></div><span></span></div>
@@ -8856,7 +9972,7 @@
 
                 <div class="settings-panel" data-panel="power">
                   <div class="settings-head">
-                    <div><h2>省电模式</h2><p>开启后，设备进入低功耗模式，通知唤醒可能会有几秒画面延迟。</p></div>
+                    <div><h2>省电模式</h2><p>开启后，息屏自动进入低功耗模式</p></div>
                     <span class="settings-chip">预计续航 +28%</span>
                   </div>
                   <div class="settings-grid">
@@ -8870,9 +9986,6 @@
                 <div class="settings-panel" data-panel="wifi">
                   <div class="settings-head"><div><h2>Wi-Fi网络</h2></div></div>
                   <div class="wifi-settings-list">
-                    <section class="wifi-settings-section">
-                      <div class="wifi-network-row"><span class="wifi-network-name">Wi-Fi网络</span><span class="wifi-network-meta"><span></span><button class="setting-switch" aria-label="Wi-Fi网络"></button></span></div>
-                    </section>
                     <section class="wifi-settings-section">
                       <div class="wifi-settings-title">当前连接的Wi-Fi网络</div>
                       <div class="wifi-network-row"><span class="wifi-network-name">BBM_Home_5G</span><span class="wifi-network-meta"><span class="wifi-connected">已连接</span><svg class="wifi-signal wifi-4" viewBox="0 0 24 18" aria-label="信号满格"><path class="wave-3" d="M2 5c5.5-4.4 14.5-4.4 20 0"></path><path class="wave-2" d="M6 9c3.5-2.8 8.5-2.8 12 0"></path><path class="wave-1" d="M10 13c1.2-.9 2.8-.9 4 0"></path><circle cx="12" cy="16" r="1.4"></circle></svg></span></div>
@@ -8892,11 +10005,88 @@
                   </div>
                 </div>
 
-                <div class="settings-panel" data-panel="general">
-                  <div class="settings-head"><div><h2>其他设置</h2><p>闹钟、语言、时区、单位和时间格式。</p></div><span class="settings-chip">中国标准时间</span></div>
+                <div class="settings-panel" data-panel="alarm">
+                  <div class="settings-head"><div><h2>闹钟</h2></div></div>
                   <div class="settings-general-stack">
                     <div class="settings-simple-grid">
-                      <div class="setting-card"><h3>闹钟</h3><p>喂养提醒 07:30，午睡提醒 13:00。</p></div>
+                      <div class="setting-card"><h3>喂养提醒</h3><p>07:30</p></div>
+                      <div class="setting-card"><h3>午睡提醒</h3><p>13:00</p></div>
+                      <div class="setting-card"><h3>换尿布提醒</h3><p>10:00</p></div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="settings-panel" data-panel="deviceManage">
+                  <div class="settings-head">
+                    <div><h2>设备管理</h2></div>
+                    <button class="add-device-btn" type="button">
+                      <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v14M5 12h14"></path></svg>
+                      添加设备
+                    </button>
+                  </div>
+                  <div class="device-group-tabs" aria-label="设备分组">
+                    <button class="device-group-tab active" type="button" data-device-filter="所有设备">所有设备</button>
+                  </div>
+                  <section class="device-grid" aria-label="所有设备">
+                    <section class="device-group" aria-label="看护摄像头">
+                      <div class="device-group-grid">
+                        <button class="device-page-card active" data-device-name="niki摄像头" data-device-group="niki">
+                          <div class="device-card-top"><span class="device-page-icon"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 10l4.5-2.6v9.2L15 14"></path><rect x="3" y="6" width="12" height="12" rx="3"></rect></svg></span><span class="device-online">在线</span></div>
+                          <div class="device-page-main"><strong>niki摄像头</strong></div>
+                          <div class="device-page-foot"><span class="device-switch" aria-hidden="true"></span></div>
+                        </button>
+                        <button class="device-page-card" data-device-name="neo摄像头" data-device-group="neo">
+                          <div class="device-card-top"><span class="device-page-icon"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 10l4.5-2.6v9.2L15 14"></path><rect x="3" y="6" width="12" height="12" rx="3"></rect></svg></span><span class="device-online">在线</span></div>
+                          <div class="device-page-main"><strong>neo摄像头</strong></div>
+                          <div class="device-page-foot"><span class="device-switch" aria-hidden="true"></span></div>
+                        </button>
+                        <button class="device-page-card" data-device-name="niki2摄像头" data-device-group="niki2">
+                          <div class="device-card-top"><span class="device-page-icon"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 10l4.5-2.6v9.2L15 14"></path><rect x="3" y="6" width="12" height="12" rx="3"></rect></svg></span><span class="device-online">在线</span></div>
+                          <div class="device-page-main"><strong>niki2摄像头</strong></div>
+                          <div class="device-page-foot"><span class="device-switch" aria-hidden="true"></span></div>
+                        </button>
+                      </div>
+                    </section>
+                    <section class="device-group" aria-label="宝宝看护设备">
+                      <div class="device-group-grid">
+                        <button class="device-page-card" data-device-name="白噪声" data-device-group="niki">
+                          <div class="device-card-top"><span class="device-page-icon"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 11h16v7H4z"></path><path d="M7 11V8a3 3 0 0 1 6 0v3"></path><path d="M4 18v2M20 18v2"></path></svg></span><span class="device-online">在线</span></div>
+                          <div class="device-page-main"><strong>白噪声</strong></div>
+                          <div class="device-page-foot"><span class="device-switch" aria-hidden="true"></span></div>
+                        </button>
+                        <button class="device-page-card" data-device-name="体温贴" data-device-group="niki">
+                          <div class="device-card-top"><span class="device-page-icon"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M14 14.8V5a4 4 0 0 0-8 0v9.8a6 6 0 1 0 8 0Z"></path><path d="M10 8v8"></path></svg></span><span class="device-online">在线</span></div>
+                          <div class="device-page-main"><strong>体温贴</strong><span>36.6°C · 更新于 12:09</span></div>
+                          <div class="device-page-foot"><span class="device-switch" aria-hidden="true"></span></div>
+                        </button>
+                      </div>
+                    </section>
+                    <section class="device-group" aria-label="环境与生态设备">
+                      <div class="device-group-grid">
+                        <button class="device-page-card" data-device-name="加湿器" data-device-group="niki">
+                          <div class="device-card-top"><span class="device-page-icon"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 3s5 6 5 10a5 5 0 0 1-10 0c0-4 5-10 5-10Z"></path><path d="M8 20h8"></path></svg></span><span class="device-online">在线</span></div>
+                          <div class="device-page-main"><strong>加湿器</strong></div>
+                          <div class="device-page-foot"><span class="device-switch" aria-hidden="true"></span></div>
+                        </button>
+                        <button class="device-page-card" data-device-name="空气净化器" data-device-group="neo">
+                          <div class="device-card-top"><span class="device-page-icon"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 9h13a3 3 0 1 0-3-3"></path><path d="M4 15h15a3 3 0 1 1-3 3"></path><path d="M4 12h9"></path></svg></span><span class="device-online">在线</span></div>
+                          <div class="device-page-main"><strong>空气净化器</strong></div>
+                          <div class="device-page-foot"><span class="device-switch" aria-hidden="true"></span></div>
+                        </button>
+                        <button class="device-page-card" data-device-name="momcozy设备" data-device-group="niki2">
+                          <div class="device-card-top"><span class="device-page-icon"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="4"></rect><path d="M9 9h6v6H9z"></path></svg></span><span class="device-online pending">待接入</span></div>
+                          <div class="device-page-main"><strong>momcozy设备</strong></div>
+                          <div class="device-page-foot"><span class="device-switch off" aria-hidden="true"></span></div>
+                        </button>
+                      </div>
+                    </section>
+                  </section>
+                </div>
+
+                <div class="settings-panel" data-panel="general">
+                  <div class="settings-head"><div><h2>其他设置</h2><p>语言、时区、单位和时间格式。</p></div></div>
+                  <div class="settings-general-stack">
+                    <div class="settings-simple-grid">
                       <div class="setting-card"><h3>语言</h3><p>简体中文</p></div>
                       <div class="setting-card"><h3>时区</h3><p>GMT+08:00 北京时间</p></div>
                       <div class="setting-card"><h3>时间格式</h3><p>24 小时制</p></div>
@@ -8907,16 +10097,16 @@
                 </div>
 
                 <div class="settings-panel" data-panel="deviceInfo">
-                  <div class="settings-head"><div><h2>设备信息</h2><p>设备型号、系统版本和维护操作。</p></div><span class="settings-chip">系统已是最新</span></div>
+                  <div class="settings-head"><div><h2>设备信息</h2><p>设备型号、系统版本和维护操作。</p></div></div>
                   <div class="settings-simple-grid">
                     <div class="setting-card"><h3>设备型号</h3><p>BBM Smart Screen 8</p></div>
                     <div class="setting-card"><h3>设备系统版本</h3><p>BBM OS 1.2.8 · OTA 升级</p></div>
-                    <div class="setting-card setting-action-card"><h3>设备重启</h3><p>重启不会删除看护记录和设备绑定。</p><button class="setting-action-btn" type="button">立即重启</button></div>
+                    <div class="setting-card setting-action-card"><h3>恢复出厂设置</h3><p>清除设备本地设置并恢复为出厂状态。</p><button class="setting-action-btn" type="button">恢复出厂设置</button></div>
                   </div>
                 </div>
 
                 <div class="settings-panel" data-panel="support">
-                  <div class="settings-head"><div><h2>帮助与反馈</h2><p>查看 FAQ、联系方式和问题反馈。</p></div><span class="settings-chip">在线客服</span></div>
+                  <div class="settings-head"><div><h2>帮助与反馈</h2></div></div>
                   <div class="settings-simple-grid">
                     <div class="setting-card"><h3>联系方式</h3><p>400-800-BBM · 工作日 09:00-21:00</p></div>
                     <div class="setting-card"><h3>FAQ</h3><p>配网、设备绑定、提醒策略、录像回放。</p></div>
@@ -8924,7 +10114,7 @@
                   </div>
                 </div>
 
-                <div class="settings-panel active" data-panel="privacy">
+                <div class="settings-panel" data-panel="privacy">
                   <div class="settings-head"><div><h2>隐私与条款</h2></div></div>
                   <div class="settings-simple-grid">
                     <div class="setting-card"><h3>隐私政策</h3></div>
@@ -9002,18 +10192,41 @@
 
                   <div class="account-grid account-grid-single">
                     <section class="account-card">
-                      <div class="account-row"><span>名称</span><b>雪琪</b></div>
-                      <div class="account-row"><span>姓氏</span><b>陆</b></div>
                       <div class="account-row"><span>邮箱</span><b>lxq***@mail.com</b></div>
                       <div class="account-row"><span>手机号</span><b>138****0927</b></div>
                       <div class="account-actions">
                         <button class="account-action-btn" type="button">退出登录</button>
-                        <button class="account-action-btn danger" type="button">删除账号</button>
+                        <button class="account-action-btn danger" type="button" data-account-delete>删除账号</button>
                       </div>
                     </section>
                   </div>
                 </div>
 
+                <div class="account-panel" data-panel="signed-out">
+                  <div class="account-grid account-grid-single">
+                    <section class="account-card">
+                      <h3>账号未登录</h3>
+                      <p>登录账号，绑定设备后支持看护记录、看护状态分析与建议等更多功能。</p>
+                      <div class="account-actions">
+                        <button class="account-action-btn" type="button">登录</button>
+                      </div>
+                    </section>
+                  </div>
+                </div>
+
+              </section>
+
+              <section class="account-support-modal is-hidden" id="accountDeleteModal" aria-label="删除账号联系客服弹窗">
+                <div class="account-support-dialog" role="dialog" aria-modal="true" aria-labelledby="accountDeleteTitle">
+                  <button class="account-support-close" type="button" aria-label="关闭" data-account-delete-close>×</button>
+                  <div class="account-support-icon" aria-hidden="true">!</div>
+                  <h3 id="accountDeleteTitle">删除账号请联系客服支持。</h3>
+                  <div class="account-support-list">
+                    <div><span>邮箱</span><b>support@momcozy.com</b></div>
+                    <div><span>电话</span><b>400-800-BBM</b></div>
+                    <div><span>工作时间</span><b>周一至周五 09:00-21:00</b></div>
+                  </div>
+                </div>
               </section>
             </main>
 
@@ -9031,11 +10244,12 @@
             <main class="onboarding-page" id="onboardingPage">
               <section class="onboarding-layout" aria-label="屏端初始化向导">
                 <section class="onboarding-flow-card">
-                  <div class="onboarding-screen boot-screen active" data-onboarding-panel="-1">
+                  <button class="onboarding-skip-btn" type="button" data-onboarding-wifi-skip>跳过</button>
+                  <div class="onboarding-screen boot-screen" data-onboarding-panel="-1">
                     <div class="boot-brand">Momcozy</div>
                   </div>
 
-                  <div class="onboarding-screen" data-onboarding-panel="0">
+                  <div class="onboarding-screen active" data-onboarding-panel="0">
                     <div class="setup-form">
                       <h3>选择系统语言</h3>
                       <p>选择屏端界面显示语言，后续设置和看护提醒都会按当前语言展示。</p>
@@ -9112,6 +10326,7 @@
                           <div class="auth-input-row"><span><label>确认密码</label><strong>••••••••</strong></span></div>
                           <p class="auth-note">支持使用手机号或邮箱注册 momcozy 账号。</p>
                         </div>
+                        <label class="auth-agreement"><input type="checkbox">同意<a href="javascript:void(0)">用户协议</a>与<a href="javascript:void(0)">隐私政策</a></label>
                       </div>
                     </div>
                   </div>
@@ -9129,6 +10344,15 @@
                           <div class="setup-power-cable" aria-hidden="true"></div>
                           <div class="setup-power-plug" aria-hidden="true">⚡</div>
                         </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="onboarding-screen" data-onboarding-panel="24">
+                    <div class="setup-form">
+                      <p>当前没有添加设备，添加摄像头即可开始实时看护</p>
+                      <div class="setup-empty-state">
+                        <button class="setup-primary-btn" type="button" data-paired-add-start="">添加设备</button>
                       </div>
                     </div>
                   </div>
@@ -9324,11 +10548,10 @@
 
                   <div class="onboarding-screen" data-onboarding-panel="22">
                     <div class="setup-form">
-                      <h3>发现设备</h3>
+                      <h3>添加摄像头</h3>
                       <p>点击摄像头进行下一步连接</p>
                       <div class="setup-device-grid">
                         <button class="setup-device-card" type="button" data-unpaired-camera-pair="BBM 1"><span class="setup-option-icon">▣</span><span><strong>BBM 1</strong></span></button>
-                        <button class="setup-device-card" type="button" data-unpaired-camera-pair="BBM 2"><span class="setup-option-icon">▤</span><span><strong>BBM 2</strong></span></button>
                       </div>
                     </div>
                   </div>
@@ -9352,6 +10575,15 @@
                       <button class="setup-primary-btn" type="button" data-setup-next="">继续</button>
                     </div>
                   </div>
+                  <section class="onboarding-skip-modal is-hidden" id="onboardingWifiSkipModal" aria-label="不联网确认弹窗">
+                    <div class="onboarding-skip-dialog" role="dialog" aria-modal="true">
+                      <p>不联网，设备无法支持看护记录，看护状态分析与建议等功能。是否确认不联网？</p>
+                      <div class="onboarding-skip-actions">
+                        <button class="setup-primary-btn" type="button" data-onboarding-wifi-skip-confirm>确认</button>
+                        <button class="setup-secondary-btn" type="button" data-onboarding-wifi-skip-cancel>取消</button>
+                      </div>
+                    </div>
+                  </section>
                 </section>
               </section>
             </main>
@@ -9396,6 +10628,42 @@
 
             <main class="guide-page" id="guidePage">
               <div class="guide-backdrop" aria-hidden="true"></div>
+              <section class="guide-control-drawer" aria-label="下拉控制中心">
+                <div class="guide-control-head">
+                  <strong>控制中心</strong>
+                  <span>12:09</span>
+                </div>
+                <div class="guide-control-grid">
+                  <div class="guide-control-tile wide active">
+                    <span class="guide-control-icon">⌁</span>
+                    <span><strong>Wi-Fi</strong><span>已连接</span></span>
+                  </div>
+                  <div class="guide-control-tile wide">
+                    <span class="guide-control-icon">◒</span>
+                    <span><strong>睡眠模式</strong><span>未开启</span></span>
+                  </div>
+                  <div class="guide-control-tile">
+                    <span class="guide-control-icon">☀</span>
+                    <strong>亮度</strong>
+                    <span>72%</span>
+                  </div>
+                  <div class="guide-control-tile">
+                    <span class="guide-control-icon">♪</span>
+                    <strong>音量</strong>
+                    <span>36%</span>
+                  </div>
+                  <div class="guide-control-tile">
+                    <span class="guide-control-icon">◐</span>
+                    <strong>省电</strong>
+                    <span>关闭</span>
+                  </div>
+                  <div class="guide-control-tile">
+                    <span class="guide-control-icon">⌛</span>
+                    <strong>息屏</strong>
+                    <span>1min</span>
+                  </div>
+                </div>
+              </section>
               <section class="guide-tip warning" aria-label="防啸叫提醒">
                 <span class="guide-step">1</span>
                 <div class="guide-copy">
@@ -9406,8 +10674,15 @@
               <section class="guide-tip settings" aria-label="息屏设置的位置">
                 <span class="guide-step">2</span>
                 <div class="guide-copy">
-                  <strong>调整息屏设置</strong>
-                  <span>进入设置，可调整息屏设置。</span>
+                  <strong>基础功能设置</strong>
+                  <span>进入设置，可添加设备，调整息屏设置等。</span>
+                </div>
+              </section>
+              <section class="guide-tip control-center" aria-label="快捷设置">
+                <span class="guide-step">3</span>
+                <div class="guide-copy">
+                  <strong>快捷设置</strong>
+                  <span>进入控制中心，可进行音量、亮度等快捷设置。</span>
                 </div>
               </section>
             </main>
@@ -9529,7 +10804,7 @@
       <section class="docs-panel">
         <div class="docs-head">
           <div class="docs-head-main">
-            <input class="docs-title-input" id="docsTitle" type="text" value="实时监控区" aria-label="页面功能说明标题">
+            <input class="docs-title-input" id="docsTitle" type="text" value="实时监控区" aria-label="页面功能说明标题" style="width: 276px;">
             <textarea class="docs-desc-input" id="docsDesc" aria-label="页面功能说明描述">默认进入宝宝实时监控主页。</textarea>
           </div>
           <div class="docs-actions">
@@ -9542,7 +10817,7 @@
             <div class="docs-card-head">
               <h3>功能描述</h3>
             </div>
-            <div class="docs-structured-list" data-docs-preview="features" contenteditable="true" tabindex="0" aria-label="功能描述内容，可直接编辑或粘贴图片"><div class="docs-outline-line level-1" data-level="1" contenteditable="false"><b class="docs-outline-index" contenteditable="false">1</b><div class="docs-outline-copy" contenteditable="true" spellcheck="false">- 屏端初始化向导：包含 选择语言、时区、屏端联网、账号登录、添加设备、填写宝宝信息、安装指引（具体页面待定）。完成后可直达主页实时监控。</div></div><div class="docs-outline-line level-1" data-level="1" contenteditable="false"><b class="docs-outline-index" contenteditable="false">2</b><div class="docs-outline-copy" contenteditable="true" spellcheck="false">- 选择系统语言：英语（默认）、德语、法语、西班牙、意大利语、阿拉伯语</div></div><div class="docs-outline-line level-1" data-level="1" contenteditable="false"><b class="docs-outline-index" contenteditable="false">3</b><div class="docs-outline-copy" contenteditable="true" spellcheck="false">选择时区：系统常规时区选择</div></div><div class="docs-outline-line level-1" data-level="1" contenteditable="false"><b class="docs-outline-index" contenteditable="false">4</b><div class="docs-outline-copy" contenteditable="true" spellcheck="false">- 屏端联网：展示搜到的Wi-Fi列表。点击Wi-Fi网络，输入Wi-Fi密码进行连接；连接成功后，可点击继续，进行下一步。</div></div><div class="docs-outline-line level-1" data-level="1" contenteditable="false"><b class="docs-outline-index" contenteditable="false">5</b><div class="docs-outline-copy" contenteditable="true" spellcheck="false">- 账号登录：登录已有的momcozy账号。支持注册新账号进行登录。登录账号/注册账号流程，同app</div></div><div class="docs-outline-line level-1" data-level="1" contenteditable="false"><b class="docs-outline-index" contenteditable="false">6</b><div class="docs-outline-copy" contenteditable="true" spellcheck="false">- 添加设备：目前只支持添加BM08S摄像头。最多支持添加2个（Wi-Fi Halow 点对点带宽限制）。添加流程如下图：</div></div><div class="docs-outline-line level-2" data-level="2" contenteditable="false"><b class="docs-outline-index" contenteditable="false">1</b><div class="docs-outline-copy" contenteditable="true" spellcheck="false">需先判断屏端是否有已配对好的设备。如果有 出厂已配对好的设备，直接展示相应设备名称；<span style="font-size: 14px;">如果没有 已配对好的设备，展示摄像头配对页面。提示用户：按住设备“pair”按钮、扫屏幕二维码</span></div></div><div class="docs-outline-line level-2" data-level="2" contenteditable="false"><b class="docs-outline-index" contenteditable="false">2</b><div class="docs-outline-copy" contenteditable="true" spellcheck="false">配对设备后，进入Wi-Fi配网：直接带入屏端的Wi-Fi信息。</div></div><div class="docs-outline-line level-2" data-level="2" contenteditable="false"><b class="docs-outline-index" contenteditable="false">3</b><div class="docs-outline-copy" contenteditable="true" spellcheck="false">设备配网上云：设备连接Wi-Fi网络，并绑定到账号下</div></div><div class="docs-outline-line level-1" data-level="1" contenteditable="false"><b class="docs-outline-index" contenteditable="false">7</b><div class="docs-outline-copy" contenteditable="true" spellcheck="false">- 填写宝宝信息：需填完小名、性别、生日必填项后，才可点击继续进入下一页。如果账号之前已有宝宝信息，支持选择已存在的宝宝信息，或填写新的宝宝信息，进行继续。</div></div><div class="docs-outline-line level-1" data-level="1" contenteditable="false"><b class="docs-outline-index" contenteditable="false">8</b><div class="docs-outline-copy" contenteditable="true" spellcheck="false">- 安装指引：展示安装位置、调整视角指引。</div></div></div>
+            <div class="docs-structured-list" data-docs-preview="features" contenteditable="true" tabindex="0" aria-label="功能描述内容，可直接编辑或粘贴图片"><div class="docs-outline-line level-1" data-level="1" contenteditable="false"><b class="docs-outline-index" contenteditable="false">1</b><div class="docs-outline-copy" contenteditable="true" spellcheck="false">屏端初始化向导：包含 开机动画、选择语言、时区、屏端联网、账号登录、添加设备、填写宝宝信息、安装指引（待定）。完成后可直达主页实时监控。</div></div><div class="docs-outline-line level-1" data-level="1" contenteditable="false"><b class="docs-outline-index" contenteditable="false">2</b><div class="docs-outline-copy" contenteditable="true" spellcheck="false">选择系统语言：英语（默认）、德语、法语、西班牙语、意大利语、阿拉伯语</div></div><div class="docs-outline-line level-1" data-level="1" contenteditable="false"><b class="docs-outline-index" contenteditable="false">3</b><div class="docs-outline-copy" contenteditable="true" spellcheck="false">选择时区：系统常规时区选择（待确认）</div></div><div class="docs-outline-line level-1" data-level="1" contenteditable="false"><b class="docs-outline-index" contenteditable="false">4</b><div class="docs-outline-copy" contenteditable="true" spellcheck="false">屏端联网：展示搜到的Wi-Fi列表。点击Wi-Fi网络，输入Wi-Fi密码进行连接；连接成功后，可点击继续，进行下一步。</div></div><div class="docs-outline-line level-1" data-level="1" contenteditable="false"><b class="docs-outline-index" contenteditable="false">5</b><div class="docs-outline-copy" contenteditable="true" spellcheck="false">账号登录（需同意隐私协议）：登录已有的momcozy账号。支持注册新账号进行登录。登录账号/注册账号流程，同app</div></div><div class="docs-outline-line level-1" data-level="1" contenteditable="false"><b class="docs-outline-index" contenteditable="false">6</b><div class="docs-outline-copy" contenteditable="true" spellcheck="false">添加设备：目前只支持添加BM08S摄像头。最多支持添加4个，最多同时查看2路实时画面（Wi-Fi Halow 点对点带宽限制）。添加流程如下图：</div></div><div class="docs-outline-line level-2" data-level="2" contenteditable="false"><b class="docs-outline-index" contenteditable="false">1</b><div class="docs-outline-copy" contenteditable="true" spellcheck="false">提示用户接通设备电源</div></div><div class="docs-outline-line level-2" data-level="2" contenteditable="false"><b class="docs-outline-index" contenteditable="false">2</b><div class="docs-outline-copy" contenteditable="true" spellcheck="false">判断屏端是否有已配对设备</div></div><div class="docs-outline-line level-3" data-level="3" contenteditable="false"><b class="docs-outline-index" contenteditable="false">1</b><div class="docs-outline-copy" contenteditable="true" spellcheck="false">如果有，直接展示相应设备名称</div></div><div class="docs-outline-line level-3" data-level="3" contenteditable="false"><b class="docs-outline-index" contenteditable="false">2</b><div class="docs-outline-copy" contenteditable="true" spellcheck="false">如果没有，展示摄像头配对页面。提示用户：按住设备“pair”按钮</div></div><div class="docs-outline-line level-2" data-level="2" contenteditable="false"><b class="docs-outline-index" contenteditable="false">3</b><div class="docs-outline-copy" contenteditable="true" spellcheck="false">配对设备后，进入Wi-Fi配网：直接带入屏端的Wi-Fi信息</div></div><div class="docs-outline-line level-2" data-level="2" contenteditable="false"><b class="docs-outline-index" contenteditable="false">4</b><div class="docs-outline-copy" contenteditable="true" spellcheck="false">设备配网上云：设备连接Wi-Fi网络，并绑定到账号下</div></div><div class="docs-flow-image" contenteditable="false" tabindex="0"><img src="file:///Users/lute/Desktop/code/client/public/docs-images/docs-image-01.png" alt="粘贴图片"></div><div class="docs-outline-line level-1" data-level="1" contenteditable="false"><b class="docs-outline-index" contenteditable="false">7</b><div class="docs-outline-copy" contenteditable="true" spellcheck="false">- 填写宝宝信息：需填完小名、性别、生日必填项后，才可点击继续进入下一页。如果账号之前已有宝宝信息，支持选择已存在的宝宝信息，或填写新的宝宝信息，进行继续。</div></div><div class="docs-outline-line level-1" data-level="1" contenteditable="false"><b class="docs-outline-index" contenteditable="false">8</b><div class="docs-outline-copy" contenteditable="true" spellcheck="false">- 安装指引：展示安装位置、调整视角指引。</div></div></div>
             <textarea class="docs-editor" id="docsFeatureList" hidden="" aria-label="功能描述，每行一条" style="height: 72px;"></textarea>
           </section>
           <section class="docs-card">
@@ -9558,22 +10833,24 @@
 
   </div>
 
-  <script id="bbmSavedDocs" type="application/json">
-{
+  <script id="bbmSavedDocs" type="application/json">{
   "屏端初始化向导": {
     "title": "屏端初始化向导（已配对好）",
     "desc": "用于首次开机引导",
     "bullets": [
-      "- 屏端初始化向导：包含 选择语言、时区、屏端联网、账号登录、添加设备、填写宝宝信息、安装指引（具体页面待定）。完成后可直达主页实时监控。",
-      "- 选择系统语言：英语（默认）、德语、法语、西班牙、意大利语、阿拉伯语",
-      "选择时区：系统常规时区选择",
-      "- 屏端联网：展示搜到的Wi-Fi列表。点击Wi-Fi网络，输入Wi-Fi密码进行连接；连接成功后，可点击继续，进行下一步。",
-      "- 账号登录：登录已有的momcozy账号。支持注册新账号进行登录。登录账号/注册账号流程，同app",
-      "- 添加设备：目前只支持添加BM08S摄像头。最多支持添加2个（Wi-Fi Halow 点对点带宽限制）。添加流程如下图：",
-      "  需先判断屏端是否有已配对好的设备。如果有 出厂已配对好的设备，直接展示相应设备名称；如果没有 已配对好的设备，展示摄像头配对页面。提示用户：按住设备“pair”按钮、扫屏幕二维码",
-      "  配对设备后，进入Wi-Fi配网：直接带入屏端的Wi-Fi信息。",
+      "屏端初始化向导：包含 开机动画、选择语言、时区、屏端联网、账号登录、添加设备、填写宝宝信息、安装指引（待定）。完成后可直达主页实时监控。",
+      "选择系统语言：英语（默认）、德语、法语、西班牙语、意大利语、阿拉伯语",
+      "选择时区：系统常规时区选择（待确认）",
+      "屏端联网：展示搜到的Wi-Fi列表。点击Wi-Fi网络，输入Wi-Fi密码进行连接；连接成功后，可点击继续，进行下一步。",
+      "账号登录（需同意隐私协议）：登录已有的momcozy账号。支持注册新账号进行登录。登录账号/注册账号流程，同app",
+      "添加设备：目前只支持添加BM08S摄像头。最多支持添加4个，最多同时查看2路实时画面（Wi-Fi Halow 点对点带宽限制）。添加流程如下图：",
+      "  提示用户接通设备电源",
+      "  判断屏端是否有已配对设备",
+      "    如果有，直接展示相应设备名称",
+      "    如果没有，展示摄像头配对页面。提示用户：按住设备“pair”按钮",
+      "  配对设备后，进入Wi-Fi配网：直接带入屏端的Wi-Fi信息",
       "  设备配网上云：设备连接Wi-Fi网络，并绑定到账号下",
-      "![](public/docs-images/docs-image-01.png)",
+      "![](file:///Users/lute/Desktop/code/client/public/docs-images/docs-image-01.png)",
       "- 填写宝宝信息：需填完小名、性别、生日必填项后，才可点击继续进入下一页。如果账号之前已有宝宝信息，支持选择已存在的宝宝信息，或填写新的宝宝信息，进行继续。",
       "- 安装指引：展示安装位置、调整视角指引。"
     ],
@@ -9768,20 +11045,33 @@
     "featureHtml": "",
     "ruleHtml": ""
   },
-  "屏端初始化向导 / 添加新设备（未配对好）": {
-    "title": "添加新设备（未配对好）",
+  "屏端初始化向导 / 添加设备（已配对好）": {
+    "title": "添加设备（已配对好）",
     "desc": "用于首次开机引导",
     "bullets": [
-      "- 屏端初始化向导：包含 选择语言、时区、屏端联网、账号登录、添加设备、填写宝宝信息、安装指引（具体页面待定）。完成后可直达主页实时监控。",
-      "- 选择系统语言：英语（默认）、德语、法语、西班牙、意大利语、阿拉伯语",
-      "选择时区：系统常规时区选择",
-      "- 屏端联网：展示搜到的Wi-Fi列表。点击Wi-Fi网络，输入Wi-Fi密码进行连接；连接成功后，可点击继续，进行下一步。",
-      "- 账号登录：登录已有的momcozy账号。支持注册新账号进行登录。登录账号/注册账号流程，同app",
-      "- 添加设备：目前只支持添加BM08S摄像头。最多支持添加2个（Wi-Fi Halow 点对点带宽限制）。添加流程如下图：",
-      "  需先判断屏端是否有已配对好的设备。如果有 出厂已配对好的设备，直接展示相应设备名称；如果没有 已配对好的设备，展示摄像头配对页面。提示用户：按住设备“pair”按钮、扫屏幕二维码",
-      "  配对设备后，进入Wi-Fi配网：直接带入屏端的Wi-Fi信息。",
+      "添加设备（已配对好）流程：",
+      "  提示用户接通设备电源",
+      "  检测到已配对设备后，展示设备添加流程",
+      "  连接成功后进入Wi-Fi配网和宝宝信息录入",
+      "  完成后进入安装指引"
+    ],
+    "featureEditorVersion": 2,
+    "rules": [
+      "需选择完每一步的设置后，才可点击继续，进入下一步流程页面",
+      "点击上一步，可返回上一步流程页面"
+    ],
+    "ruleEditorVersion": 2
+  },
+  "屏端初始化向导 / 添加设备（未配对好）": {
+    "title": "添加设备（未配对好）",
+    "desc": "用于首次开机引导",
+    "bullets": [
+      "添加设备（未配对好）流程：",
+      "  提示用户接通设备电源",
+      "  展示摄像头配对页面。提示用户：按住设备“pair”按钮",
+      "  配对设备后，进入Wi-Fi配网：直接带入屏端的Wi-Fi信息",
       "  设备配网上云：设备连接Wi-Fi网络，并绑定到账号下",
-      "![](public/docs-images/docs-image-01.png)",
+      "![](file:///Users/lute/Desktop/code/client/public/docs-images/docs-image-01.png)",
       "- 填写宝宝信息：需填完小名、性别、生日必填项后，才可点击继续进入下一页。如果账号之前已有宝宝信息，支持选择已存在的宝宝信息，或填写新的宝宝信息，进行继续。",
       "- 安装指引：展示安装位置、调整视角指引。"
     ],
@@ -9824,14 +11114,12 @@
       "- 活动时：展示motion",
       "接入设备类型：点对点（BM08S）、Wi-Fi、蓝牙网关"
     ],
+    "featureEditorVersion": 2,
     "rules": [
       "- 单画面：展示睡眠安抚、开关机、对讲、截图、录像、设备设置操作。",
       "- 二画面和四画面：每个画面内只展示对应的睡眠安抚、设备设置入口。",
       "- 全屏模式下，展示退出全屏操作。"
     ],
-    "featureHtml": "",
-    "ruleHtml": "",
-    "featureEditorVersion": 2,
     "ruleEditorVersion": 2
   },
   "实时监控区 / 双IPC主页": {
@@ -10067,14 +11355,11 @@
     "bullets": [
       "展示宝宝信息、账号信息、设备分享"
     ],
-    "rules": [],
-    "featureHtml": "",
-    "ruleHtml": "",
     "featureEditorVersion": 2,
+    "rules": [],
     "ruleEditorVersion": 2
   }
-}
-</script>
+}</script>
   <script>
     const pageMeta = {
       '\u5B9E\u65F6\u76D1\u63A7\u533A': {
@@ -10325,14 +11610,15 @@
         badge: '\u89C2\u5BDF'
       },
       'niki3': {
-        baby: '\u8C46\u8C46',
+        baby: 'niki',
         age: '10\u4E2A\u67081\u5929',
-        state: '\u719F\u7761\u4E2D',
-        icon: '\u25CF',
-        time: '1<small>h 38m</small>',
-        meta: '\u7761\u7720\u65F6\u957F 1h38m',
-        alertTitle: '\u7761\u7720\u7A33\u5B9A',
-        alertText: '\u547C\u5438\u8282\u5F8B\u5E73\u7A33\uFF0C\u5F53\u524D\u65E0\u5F02\u5E38\u63D0\u9192\u3002',
+        state: '\u5E73\u9759',
+        statusType: 'soothe',
+        icon: '\u263E',
+        time: '',
+        meta: '',
+        alertTitle: '\u5DF2\u5F00\u542F\u767D\u566A\u58F0',
+        alertText: '\u6B63\u5728\u8F7B\u67D4\u5B89\u629A\u5B9D\u5B9D\u5165\u7761\u3002',
         badge: '\u7A33\u5B9A'
       }
     };
@@ -10352,8 +11638,13 @@
       deviceSettingsSource: '',
       deviceSettingsReturnState: null,
       careSettingsSource: '',
+      settingsDetailPanel: '',
       replayState: 'normal',
       careRange: 'day',
+      careState: 'normal',
+      accountPanel: 'account',
+      noDeviceContext: false,
+      noDeviceMenuPage: '\u5B9E\u65F6\u76D1\u63A7\u533A',
       shareStep: 0
     };
 
@@ -10378,7 +11669,6 @@
           {
             label: '\u4ECA\u65E5',
             featured: true,
-            note: ['00:20-02:28', '02:45-05:32', '06:10-07:02', '12:34-14:10', '17:18-18:00', '21:26-23:02'],
             periods: [
               { start: 1.4, width: 8.9, deep: 42, light: 51, wake: 7 },
               { start: 11.5, width: 11.6, deep: 50, light: 47, wake: 3 },
@@ -10406,6 +11696,11 @@
           wake: '3 \u6B21',
           wakePercent: ''
         },
+        behaviorStats: [
+          { label: '\u906E\u8138', value: '1 \u6B21', meta: '' },
+          { label: '\u8DB4\u7761', value: '0 \u6B21', meta: '' },
+          { label: '\u54ED\u95F9', value: '2 \u6B21', meta: '' }
+        ],
         insight: '\u4ECA\u65E5\u6DF1\u7761\u6BD4\u4F8B\u7565\u4F4E\uFF0C\u591C\u9192 3 \u6B21\u3002\u5EFA\u8BAE\u7761\u524D\u4FDD\u6301\u623F\u95F4\u5B89\u9759\uFF0C\u5E76\u63D0\u524D\u5F00\u542F\u52A0\u6E7F\u5668\u3002',
         boardSubtitle: '\u4ECA\u65E5\u73AF\u5883\u4E0E\u624B\u52A8\u8BB0\u5F55\u6C47\u603B',
         cards: {
@@ -10447,6 +11742,11 @@
           wake: '2.4 \u6B21/\u5929',
           wakePercent: ''
         },
+        behaviorStats: [
+          { label: '\u906E\u8138', value: '2 \u6B21/\u5929', meta: '' },
+          { label: '\u8DB4\u7761', value: '1 \u6B21/\u5929', meta: '' },
+          { label: '\u54ED\u95F9', value: '8 \u6B21/\u5929', meta: '' }
+        ],
         insight: '\u6700\u8FD1 3 \u665A\u591C\u9192\u9891\u7E41\uFF0C\u6DF1\u7761\u6BD4\u4F8B\u7565\u4F4E\u4E8E\u540C\u6708\u9F84\u3002\u5EFA\u8BAE\u767D\u5929\u591A\u6652\u592A\u9633 30 \u5206\u949F\uFF0C\u6709\u52A9\u8C03\u8282\u663C\u591C\u8282\u5F8B\u3002',
         boardSubtitle: '\u8FD1 7 \u5929\u73AF\u5883\u4E0E\u624B\u52A8\u8BB0\u5F55\u6C47\u603B',
         cards: {
@@ -10457,17 +11757,66 @@
           diaper: ['\u6362\u5C3F\u5E03 24 \u6B21 \u00B7 \u4FBF\u4FBF 7 \u6B21 \u00B7 \u5C3F\u6E7F 17 \u6B21', '24'],
           nap: ['\u5C0F\u7761 10 \u6B21 \u00B7 \u65E5\u5747 1h20m', '10']
         }
+      },
+      month: {
+        subtitle: '\u8FD1 30 \u5929 \u00B7 \u7761\u7720\u6570\u636E\u5206\u6790',
+        chartLabel: '\u8FD1\u4E09\u5341\u5929\u7761\u7720\u6570\u636E\u5206\u6790',
+        chartType: 'analysis',
+        analysis: [
+          { label: '\u5E73\u5747\u5165\u7761\u65F6\u95F4', value: '20:42', meta: '\u6BD4\u4E0A\u6708\u63D0\u524D 12min' },
+          { label: '\u5E73\u5747\u8D77\u5E8A\u65F6\u95F4', value: '07:18', meta: '\u6CE2\u52A8\u8F83\u5C0F' },
+          { label: '\u591C\u95F4\u7761\u7720\u65F6\u957F', value: '10.8h/\u5929', meta: '\u8FD1 30 \u5929\u5E73\u5747' },
+          { label: '\u65E5\u95F4\u7761\u7720\u65F6\u957F', value: '1.4h/\u5929', meta: '\u8FD1 30 \u5929\u5E73\u5747' }
+        ],
+        summaries: {
+          totalLabel: '\u6708\u5747\u603B\u7761\u7720',
+          total: '12.2 h/\u5929',
+          totalPercent: '',
+          deepLabel: '\u6708\u5747\u6DF1\u7761',
+          deep: '4.9 h/\u5929',
+          deepPercent: '40%',
+          lightLabel: '\u6708\u5747\u6D45\u7761',
+          light: '7.1 h/\u5929',
+          lightPercent: '58%',
+          efficiencyLabel: '\u7761\u7720\u6548\u7387',
+          efficiency: '91%',
+          efficiencyMeta: '\u8FD1 30 \u5929',
+          wakeLabel: '\u591C\u9192\u6B21\u6570',
+          wake: '2.1 \u6B21/\u5929',
+          wakePercent: ''
+        },
+        behaviorStats: [
+          { label: '\u906E\u8138', value: '6 \u6B21/\u5929', meta: '' },
+          { label: '\u8DB4\u7761', value: '3 \u6B21/\u5929', meta: '' },
+          { label: '\u54ED\u95F9', value: '28 \u6B21/\u5929', meta: '' }
+        ],
+        insight: '\u8FD1 30 \u5929\u7761\u7720\u65F6\u957F\u8F83\u5E73\u7A33\uFF0C\u591C\u9192\u6B21\u6570\u5448\u4E0B\u964D\u8D8B\u52BF\u3002\u5EFA\u8BAE\u7EE7\u7EED\u4FDD\u6301\u56FA\u5B9A\u5165\u7761\u8282\u594F\u3002',
+        boardSubtitle: '\u8FD1 30 \u5929\u73AF\u5883\u4E0E\u624B\u52A8\u8BB0\u5F55\u6C47\u603B',
+        cards: {
+          sleep: ['\u6708\u5747\u603B\u65F6\u957F 12.2h \u00B7 \u6708\u5747\u6DF1\u7761 4.9h \u00B7 \u591C\u9192\u8D8B\u52BF\u4E0B\u964D', '\u5E73\u7A33'],
+          behavior: ['\u53E3\u9F3B\u906E\u6321 6 \u6B21 \u00B7 \u8DB4\u7761 3 \u6B21 \u00B7 \u54ED\u95F9 28 \u6B21', '37'],
+          env: ['\u5E73\u5747\u6E29\u5EA6 24.7\u2103 \u00B7 \u5E73\u5747\u6E7F\u5EA6 44%', '24.7\u2103 / 44%'],
+          feeding: ['\u5582\u5976 118 \u6B21 \u00B7 \u65E5\u5747 4.8 \u6B21 \u00B7 \u603B\u91CF 15800ml', '118'],
+          diaper: ['\u6362\u5C3F\u5E03 96 \u6B21 \u00B7 \u4FBF\u4FBF 26 \u6B21 \u00B7 \u5C3F\u6E7F 70 \u6B21', '96'],
+          nap: ['\u5C0F\u7761 42 \u6B21 \u00B7 \u65E5\u5747 1h25m', '42']
+        }
       }
     };
 
     const roomSets = {
       single: ['niki'],
-      dualHome: ['\u5168\u90E8\u8BBE\u5907', 'niki', 'neo'],
-      split2: ['\u5168\u90E8\u8BBE\u5907', 'niki', 'neo'],
+      dualHome: ['\u5168\u90E8\u8BBE\u5907', 'niki', 'neo', 'niki2', 'niki3'],
+      split2: ['\u5168\u90E8\u8BBE\u5907', 'niki', 'neo', 'niki2', 'niki3'],
       split4: ['\u5168\u90E8\u8BBE\u5907', 'niki', 'neo', 'niki2', 'niki3'],
       singleFull: ['niki'],
-      split2Full: ['\u5168\u90E8\u8BBE\u5907', 'niki', 'neo'],
+      split2Full: ['\u5168\u90E8\u8BBE\u5907', 'niki', 'neo', 'niki2', 'niki3'],
       split4Full: ['\u5168\u90E8\u8BBE\u5907', 'niki', 'neo', 'niki2', 'niki3']
+    };
+    const roomDisplayNames = {
+      niki: 'cam1',
+      neo: 'cam2',
+      niki2: 'cam3',
+      niki3: 'cam4'
     };
 
     const fullscreenViewMap = {
@@ -10491,10 +11840,14 @@
     const breathValue = document.getElementById('breathValue');
     const tempValue = document.getElementById('tempValue');
     const envValue = document.getElementById('envValue');
+    const monitorTempValue = document.getElementById('monitorTempValue');
+    const monitorHumidityValue = document.getElementById('monitorHumidityValue');
     const canvasLabel = document.getElementById('canvasLabel');
     const fullscreenRoomPill = document.getElementById('fullscreenRoomPill');
     const sleepSootheShortcut = document.getElementById('sleepSootheShortcut');
     const replayPage = document.getElementById('replayPage');
+    const settingsPage = document.getElementById('settingsPage');
+    const accountPage = document.getElementById('accountPage');
     const deviceSettingsPage = document.getElementById('deviceSettingsPage');
     const replayVideoPlayer = document.querySelector('#replayPage .video-player');
     const replayFullscreenButton = document.querySelector('[data-replay-action="fullscreen"]');
@@ -10513,6 +11866,9 @@
     const settingPanels = document.querySelectorAll('.settings-panel');
     const accountNavButtons = document.querySelectorAll('.account-nav button');
     const accountPanels = document.querySelectorAll('.account-panel');
+    const accountDeleteButton = document.querySelector('[data-account-delete]');
+    const accountDeleteModal = document.getElementById('accountDeleteModal');
+    const accountDeleteCloseButtons = document.querySelectorAll('[data-account-delete-close]');
     const shareWizardSteps = document.querySelectorAll('[data-share-step]');
     const shareWizardPanels = document.querySelectorAll('[data-share-panel]');
     const shareNextButtons = document.querySelectorAll('[data-share-next]');
@@ -10549,8 +11905,14 @@
     const onboardingSteps = document.querySelectorAll('.onboarding-step');
     const onboardingPanels = document.querySelectorAll('.onboarding-screen');
     const setupActions = document.querySelector('.setup-actions');
+    const onboardingFlowCard = document.querySelector('.onboarding-flow-card');
     const setupPrevButton = document.querySelector('[data-setup-prev]');
     const setupNextButton = document.querySelector('[data-setup-next]');
+    const onboardingWifiSkipButton = document.querySelector('[data-onboarding-wifi-skip]');
+    const onboardingWifiSkipModal = document.getElementById('onboardingWifiSkipModal');
+    const onboardingWifiSkipConfirm = document.querySelector('[data-onboarding-wifi-skip-confirm]');
+    const onboardingWifiSkipCancel = document.querySelector('[data-onboarding-wifi-skip-cancel]');
+    const pairedAddStartButtons = document.querySelectorAll('[data-paired-add-start]');
     const cameraPairButtons = document.querySelectorAll('[data-camera-pair]');
     const selectedCameraName = document.querySelector('[data-selected-camera-name]');
     const unpairedCameraPairButtons = document.querySelectorAll('[data-unpaired-camera-pair]');
@@ -10566,6 +11928,10 @@
     const careRangeButtons = document.querySelectorAll('#careRangeToggle [data-care-range]');
     const sleepRecordSubtitle = document.getElementById('sleepRecordSubtitle');
     const sleepChart = document.getElementById('sleepChart');
+    const sleepRecordLegend = document.querySelector('.sleep-record-legend');
+    const sleepSummaryGrid = document.querySelector('.sleep-summary-grid');
+    const sleepRecordDataGrid = document.querySelector('.sleep-record-data-grid');
+    const sleepBehaviorCards = document.querySelectorAll('.sleep-record-data-grid .sleep-summary-card');
     const sleepTotalLabel = document.getElementById('sleepTotalLabel');
     const sleepTotalValue = document.getElementById('sleepTotalValue');
     const sleepTotalPercent = document.getElementById('sleepTotalPercent');
@@ -10616,16 +11982,20 @@
     function renderRoomTabs() {
       const rooms = roomSets[appState.view] || roomSets.single;
       roomTabs.innerHTML = rooms.map((name) => (
-        `<button class="tab-btn${name === appState.room ? ' active' : ''}" data-room="${name}">${name}</button>`
+        `<button class="tab-btn${name === appState.room ? ' active' : ''}" data-room="${name}">${roomDisplayNames[name] || name}</button>`
       )).join('');
     }
 
     function renderCareRange() {
       const data = careRangeData[appState.careRange] || careRangeData.day;
+      const showMonthAnalysis = data.chartType === 'analysis';
       careRangeButtons.forEach((button) => {
         button.classList.toggle('active', button.dataset.careRange === appState.careRange);
       });
       if (sleepRecordSubtitle) sleepRecordSubtitle.textContent = data.subtitle;
+      if (sleepRecordLegend) sleepRecordLegend.hidden = showMonthAnalysis;
+      if (sleepSummaryGrid) sleepSummaryGrid.hidden = false;
+      if (sleepRecordDataGrid) sleepRecordDataGrid.hidden = false;
       if (sleepChart) {
         sleepChart.setAttribute('aria-label', data.chartLabel);
         if (data.chartType === 'strip') {
@@ -10637,10 +12007,16 @@
               ${data.rows.map((row) => (
                 `<div class="sleep-strip-row${row.featured ? ' featured' : ''}"><span class="sleep-strip-day">${row.label}</span><div class="sleep-strip-track">${row.periods.map((item) => (
                   `<div class="sleep-strip-period" style="--start:${item.start}%;--width:${item.width}%"><span style="--seg:${item.deep}%;--c:#ad6670"></span><span style="--seg:${item.light}%;--c:#e0a1aa"></span><span style="--seg:${item.wake}%;--c:#ffc928"></span></div>`
-                )).join('')}</div></div>${row.note ? `<div class="sleep-strip-note">${row.note.map((text) => `<span><b>${text}</b></span>`).join('')}</div>` : ''}`
+                )).join('')}</div></div>`
               )).join('')}
             </div>
           `;
+        } else if (data.chartType === 'analysis') {
+          sleepChart.className = 'sleep-month-analysis';
+          sleepChart.style.gridTemplateColumns = '';
+          sleepChart.innerHTML = data.analysis.map((item) => (
+            `<div class="sleep-analysis-card"><span>${item.label}</span><strong>${item.value}</strong><em>${item.meta}</em></div>`
+          )).join('');
         } else {
           sleepChart.className = 'sleep-week-chart';
           sleepChart.style.gridTemplateColumns = `repeat(${data.bars.length}, minmax(0, 1fr))`;
@@ -10664,6 +12040,18 @@
       if (sleepWakeLabel) sleepWakeLabel.textContent = data.summaries.wakeLabel;
       if (sleepWakeValue) sleepWakeValue.textContent = data.summaries.wake;
       if (sleepWakePercent) sleepWakePercent.textContent = data.summaries.wakePercent;
+      if (data.behaviorStats) {
+        sleepBehaviorCards.forEach((card, index) => {
+          const item = data.behaviorStats[index];
+          if (!item) return;
+          const label = card.querySelector('span');
+          const value = card.querySelector('strong');
+          const meta = card.querySelector('em');
+          if (label) label.textContent = item.label;
+          if (value) value.textContent = item.value;
+          if (meta) meta.textContent = item.meta;
+        });
+      }
       if (sleepInsightText) sleepInsightText.textContent = data.insight;
       if (careDataSubtitle) careDataSubtitle.textContent = data.boardSubtitle;
       Object.entries(data.cards).forEach(([key, values]) => {
@@ -10745,7 +12133,7 @@
         return {
           icon: status.icon,
           title: status.state,
-          meta: status.meta,
+          meta: '',
           time: '',
           showAdvice: false,
           adviceTitle: '',
@@ -10776,19 +12164,41 @@
 
     function renderMonitorBabyStatus(showSplit2, showSplit4, isOffline) {
       const splitRooms = showSplit4 ? ['niki', 'neo', 'niki2', 'niki3'] : ['niki', 'neo'];
+      const isSplitView = showSplit2 || showSplit4;
       const splitCareMetrics = {
-        niki: { breath: '28 br/min', heart: '108 bpm', temp: '24.5\u00B0C', humidity: '55%' },
-        neo: { breath: '--', heart: '--', temp: '24.7\u00B0C', humidity: '54%' },
-        niki2: { breath: '--', heart: '--', temp: '24.3\u00B0C', humidity: '57%' },
-        niki3: { breath: '31 br/min', heart: '116 bpm', temp: '24.8\u00B0C', humidity: '56%' }
+        niki: { breath: '28 br/min', heart: '108 bpm', temp: '24.5\u00B0C', humidity: '55%', bodyTemp: '36.6\u00B0C', airQuality: '\u4F18' },
+        neo: { breath: '--', heart: '--', temp: '24.7\u00B0C', humidity: '54%', bodyTemp: '36.5\u00B0C', airQuality: '\u826F' },
+        niki2: { breath: '--', heart: '--', temp: '24.3\u00B0C', humidity: '57%', bodyTemp: '--', airQuality: '\u4F18' },
+        niki3: { breath: '30 br/min', heart: '112 bpm', temp: '24.8\u00B0C', humidity: '56%', bodyTemp: '36.6\u00B0C', airQuality: '\u4F18' }
       };
+      const envIconMarkup = `
+        <svg class="monitor-env-icon" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 14.76V5a4 4 0 0 0-8 0v9.76a6 6 0 1 0 8 0Z"></path><path d="M10 8v8"></path></svg>
+      `;
+      const humidityIconMarkup = `
+        <svg class="monitor-env-icon" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3.5S6 10.1 6 14.2a6 6 0 0 0 12 0C18 10.1 12 3.5 12 3.5Z"></path></svg>
+      `;
       const currentBaby = babyStatusByRoom[appState.room] || babyStatusByRoom['niki'];
       const currentStatus = getBabyCareStatus(currentBaby, { isOffline, isSoothe: appState.scene === '\u5165\u7761\u5B89\u629A' });
+      const currentMetrics = splitCareMetrics[appState.room] || splitCareMetrics.niki;
       const sleepAlert = document.querySelector('.scene-sleep > .scene-mode-alert');
       const sleepAlertTitle = sleepAlert && sleepAlert.querySelector('strong');
       const sleepAlertDesc = sleepAlert && sleepAlert.querySelector('p');
       const sleepValues = document.querySelectorAll('.scene-sleep .scene-vital-item strong, .scene-sleep .scene-env-card strong');
-      const normalSleepValues = ['28 br/min', '108 bpm', '24.5\u00B0C', '55%'];
+      const normalSleepValues = [currentMetrics.breath, currentMetrics.heart, currentMetrics.bodyTemp, currentMetrics.airQuality];
+      if (monitorTempValue) monitorTempValue.textContent = isOffline ? '--' : currentMetrics.temp;
+      if (monitorHumidityValue) monitorHumidityValue.textContent = isOffline ? '--' : currentMetrics.humidity;
+      tiles.forEach((tile) => {
+        const roomName = tile.dataset.room;
+        const metrics = splitCareMetrics[roomName] || splitCareMetrics.niki;
+        let overlay = tile.querySelector('.tile-env-overlay');
+        if (!overlay) {
+          overlay = document.createElement('span');
+          overlay.className = 'tile-env-overlay';
+          tile.appendChild(overlay);
+        }
+        overlay.innerHTML = `<span aria-label="\u5BA4\u6E29">${envIconMarkup}<strong>${metrics.temp}</strong></span><span aria-label="\u6E7F\u5EA6">${humidityIconMarkup}<strong>${metrics.humidity}</strong></span>`;
+        overlay.hidden = !isSplitView;
+      });
       if (sceneSleepTitle) {
         sceneSleepTitle.textContent = currentStatus.title;
       }
@@ -10820,8 +12230,8 @@
             <div class="scene-split-metrics" aria-label="${status.baby}\u4F53\u5F81\u4E0E\u73AF\u5883\u6570\u636E">
               <div class="scene-split-metric"><span>\u547C\u5438\u7387</span><strong>${metrics.breath}</strong></div>
               <div class="scene-split-metric"><span>\u5FC3\u7387</span><strong>${metrics.heart}</strong></div>
-              <div class="scene-split-metric"><span>\u5BA4\u6E29</span><strong>${metrics.temp}</strong></div>
-              <div class="scene-split-metric"><span>\u6E7F\u5EA6</span><strong>${metrics.humidity}</strong></div>
+              <div class="scene-split-metric"><span>\u4F53\u6E29\u8D34</span><strong>${metrics.bodyTemp}</strong></div>
+              <div class="scene-split-metric"><span>\u7A7A\u6C14\u8D28\u91CF</span><strong>${metrics.airQuality}</strong></div>
             </div>
           </div>
         `;
@@ -11595,6 +13005,7 @@
     const unpairedDeviceSearchIndex = 21;
     const unpairedDeviceFoundIndex = 22;
     const unpairedDeviceEmptyIndex = 23;
+    const pairedDeviceWelcomeIndex = 24;
     const cameraPowerIndex = 4;
     const cameraSearchIndex = 14;
     const cameraFoundIndex = 15;
@@ -11606,6 +13017,16 @@
     let notificationAlertVisible = true;
     const unpairedDeviceFlowIndexes = new Set([unpairedDevicePanelIndex, unpairedDeviceQrIndex, unpairedDeviceSearchIndex, unpairedDeviceFoundIndex, unpairedDeviceEmptyIndex, unpairedDeviceWifiIndex, unpairedDeviceConnectingIndex, unpairedDeviceSuccessIndex, unpairedDeviceFailureIndex]);
     const blockedOnboardingNextIndexes = new Set([5, 7, cameraSearchIndex, cameraFoundIndex, unpairedDeviceSearchIndex, unpairedDeviceFoundIndex, unpairedDeviceConnectingIndex, unpairedDeviceFailureIndex]);
+
+    function isStandaloneAddFlow() {
+      return onboardingFlowMode === 'paired-add' || onboardingFlowMode === 'unpaired';
+    }
+
+    function getStandaloneAddFlowFloorIndex() {
+      if (onboardingFlowMode === 'unpaired') return unpairedDevicePanelIndex;
+      if (onboardingFlowMode === 'paired-add') return cameraPowerIndex;
+      return 0;
+    }
 
     function renderOnboardingStep() {
       if (onboardingBootTimer) {
@@ -11635,10 +13056,13 @@
         panel.classList.toggle('active', panelIndex === onboardingIndex);
       });
       const isBootScreen = onboardingIndex === -1;
-      const hideSetupActions = isBootScreen;
+      const hideSetupActions = isBootScreen || onboardingIndex === pairedDeviceWelcomeIndex;
       setupActions?.classList.toggle('is-hidden', hideSetupActions);
+      onboardingFlowCard?.classList.toggle('is-wifi-step', onboardingIndex === 2 && onboardingFlowMode === 'initial');
+      onboardingWifiSkipModal?.classList.add('is-hidden');
       if (setupPrevButton) {
-        const hidePrevButton = onboardingIndex <= 0 || (onboardingFlowMode === 'unpaired' && onboardingIndex === unpairedDevicePanelIndex);
+        const addFlowFloorIndex = getStandaloneAddFlowFloorIndex();
+        const hidePrevButton = onboardingIndex <= 0 || (isStandaloneAddFlow() && onboardingIndex === addFlowFloorIndex);
         setupPrevButton.hidden = hidePrevButton;
         setupPrevButton.disabled = hidePrevButton;
         setupPrevButton.textContent = '\u4E0A\u4E00\u6B65';
@@ -11647,8 +13071,10 @@
         canvasLabel.textContent = onboardingIndex === -1
           ? '\u5C4F\u7AEF\u521D\u59CB\u5316\u5411\u5BFC / \u5F00\u673A'
           : onboardingFlowMode === 'unpaired'
-          ? '\u5C4F\u7AEF\u521D\u59CB\u5316\u5411\u5BFC / \u6DFB\u52A0\u65B0\u8BBE\u5907\uFF08\u672A\u914D\u5BF9\u597D\uFF09'
-          : (onboardingFlowMode === 'unpaired-init'
+          ? '\u5C4F\u7AEF\u521D\u59CB\u5316\u5411\u5BFC / \u6DFB\u52A0\u8BBE\u5907\uFF08\u672A\u914D\u5BF9\u597D\uFF09'
+          : (onboardingFlowMode === 'paired-add'
+            ? '\u5C4F\u7AEF\u521D\u59CB\u5316\u5411\u5BFC / \u6DFB\u52A0\u8BBE\u5907\uFF08\u5DF2\u914D\u5BF9\u597D\uFF09'
+            : onboardingFlowMode === 'unpaired-init'
             ? '\u5C4F\u7AEF\u521D\u59CB\u5316\u5411\u5BFC\uFF08\u672A\u914D\u5BF9\u597D\uFF09 / \u9996\u6B21\u5F00\u673A'
             : '\u5C4F\u7AEF\u521D\u59CB\u5316\u5411\u5BFC / \u9996\u6B21\u5F00\u673A');
       }
@@ -11704,6 +13130,7 @@
       const isAccountPage = appState.page === '\u8D26\u53F7\u4FE1\u606F';
       const isNotificationPage = appState.page === '\u6D88\u606F\u901A\u77E5' || appState.page === '\u5E72\u9884\u901A\u77E5' || appState.page === '\u65AD\u8FDE\u901A\u77E5' || appState.page === '\u4F4E\u7535\u91CF\u901A\u77E5' || appState.page === '\u5B58\u50A8\u5361\u5F02\u5E38\u901A\u77E5' || appState.page === '\u8BBE\u5907\u56FA\u4EF6\u5347\u7EA7\u5931\u8D25\u901A\u77E5';
       const isOnboardingPage = appState.page === '\u5C4F\u7AEF\u521D\u59CB\u5316\u5411\u5BFC';
+      const isNoDevicePage = appState.page === '\u65E0\u8BBE\u5907\u9875';
       const isGuidePage = appState.page === '\u65B0\u624B\u5F15\u5BFC';
       const isControlPage = appState.page === '\u63A7\u5236\u4E2D\u5FC3';
       const isScreensaverPage = appState.page === '\u5C4F\u4FDD\u5FEB\u6377\u8BB0\u5F55';
@@ -11711,8 +13138,8 @@
       const isFull = isMonitorPage && (appState.view === 'singleFull' || appState.view === 'split2Full' || appState.view === 'split4Full');
       const showSplit = isMonitorPage && appState.room === '\u5168\u90E8\u8BBE\u5907' && (appState.view === 'dualHome' || appState.view === 'split2' || appState.view === 'split4' || appState.view === 'split2Full' || appState.view === 'split4Full');
       const showSplit2 = appState.view === 'dualHome' || appState.view === 'split2' || appState.view === 'split2Full';
-      const showSplitStatus2 = appState.view === 'dualHome' || appState.view === 'split2' || appState.view === 'split2Full';
-      const showSplit4 = appState.view === 'split4' || appState.view === 'split4Full';
+      const showSplitStatus2 = showSplit && showSplit2;
+      const showSplit4 = showSplit && (appState.view === 'split4' || appState.view === 'split4Full');
 
       monitor.classList.toggle('split-2', showSplit && showSplit2);
       monitor.classList.toggle('split-4', showSplit && showSplit4);
@@ -11735,6 +13162,7 @@
       if (deviceSettingsPage) {
         const devicePanelTitles = {
           info: '\u8BBE\u5907\u4FE1\u606F',
+          wifi: 'Wi-Fi\u7F51\u7EDC',
           features: '\u529F\u80FD\u8BBE\u7F6E',
           share: '\u8BBE\u5907\u5206\u4EAB'
         };
@@ -11743,10 +13171,28 @@
         if (deviceSettingsTitle) deviceSettingsTitle.textContent = devicePanelTitles[appState.deviceSettingsPanel] || '\u8BBE\u5907\u8BBE\u7F6E';
         if (deviceSettingsSubtitle) deviceSettingsSubtitle.textContent = appState.device || 'niki\u6444\u50CF\u5934';
       }
+      if (settingsPage) {
+        settingsPage.classList.toggle('detail-mode', Boolean(appState.settingsDetailPanel));
+      }
+      const carePage = document.getElementById('carePage');
+      if (carePage) {
+        carePage.dataset.careState = appState.careState || 'normal';
+      }
+      if (isAccountPage) {
+        if (accountPage) accountPage.classList.toggle('signed-out-mode', appState.accountPanel === 'signed-out');
+        accountNavButtons.forEach((button) => {
+          button.classList.toggle('active', button.dataset.accountPanel === appState.accountPanel);
+        });
+        accountPanels.forEach((panel) => {
+          panel.classList.toggle('active', panel.dataset.panel === appState.accountPanel);
+        });
+      }
       screen.classList.toggle('settings-page-mode', isSettingsPage);
       screen.classList.toggle('account-page-mode', isAccountPage);
       screen.classList.toggle('notification-page-mode', isNotificationPage);
       screen.classList.toggle('onboarding-page-mode', isOnboardingPage);
+      screen.classList.toggle('no-device-page-mode', isNoDevicePage);
+      screen.classList.toggle('no-device-context', appState.noDeviceContext);
       screen.classList.toggle('guide-page-mode', isGuidePage);
       screen.classList.toggle('control-page-mode', isControlPage);
       screen.classList.toggle('screensaver-page-mode', isScreensaverPage);
@@ -11761,7 +13207,7 @@
       if (livePill) livePill.textContent = isMonitorPage && appState.homeSubPage === 'offlineDevice' ? '\u79BB\u7EBF' : 'Live';
       if (rightPanel) {
         rightPanel.dataset.scenePanel = appState.scene;
-        rightPanel.dataset.monitorView = appState.view === 'dualHome' ? 'split2' : appState.view;
+        rightPanel.dataset.monitorView = showSplit ? (appState.view === 'dualHome' ? 'split2' : appState.view) : 'single';
       }
 
       if (tempChip) tempChip.textContent = '25\u00B0C';
@@ -11771,7 +13217,8 @@
       if (tempValue) tempValue.textContent = '25\u00B0C';
       if (envValue) envValue.textContent = '30%';
 
-      canvasLabel.textContent = isDevicePage ? `${appState.page} / ${appState.deviceGroup}` : (isDeviceSettingsPage ? `${appState.page} / niki\u6444\u50CF\u5934` : (isCarePage ? `${appState.page} / \u6307\u6807\u8D8B\u52BF` : (isCareSettingsPage ? `${appState.page} / \u8BBE\u7F6E` : (isReplayPage ? `${appState.page} / ${appState.replayState === 'noCard' ? '\u672A\u63D2\u5361' : '\u5F55\u50CF\u56DE\u653E'}` : (isSettingsPage ? `${appState.page} / \u8BBE\u7F6E` : (isAccountPage ? `${appState.page} / \u5B9D\u5B9D\u4FE1\u606F` : (isNotificationPage ? `\u4E3B\u9875 / ${appState.page}` : (isOnboardingPage ? `${appState.page} / \u9996\u6B21\u5F00\u673A` : (isGuidePage ? `${appState.page} / \u4F7F\u7528\u63D0\u793A` : (isControlPage ? `${appState.page} / \u5FEB\u6377\u63A7\u5236` : (isScreensaverPage ? `${appState.page} / \u5FEB\u6377\u8BB0\u5F55` : (isPowerPage ? `${appState.page} / \u5173\u673A\u786E\u8BA4` : (isFull ? `${appState.page} / ${room.roomLabel}` : `${appState.page} / ${room.roomLabel} / ${appState.scene}`)))))))))))));
+      const accountPanelTitles = { baby: '\u5B9D\u5B9D\u4FE1\u606F', account: '\u8D26\u53F7\u4FE1\u606F', 'signed-out': '\u8D26\u53F7-\u672A\u767B\u5F55' };
+      canvasLabel.textContent = isDevicePage ? `${appState.page} / ${appState.deviceGroup}` : (isDeviceSettingsPage ? `${appState.page} / niki\u6444\u50CF\u5934` : (isCarePage ? `${appState.page} / \u6307\u6807\u8D8B\u52BF` : (isCareSettingsPage ? `${appState.page} / \u8BBE\u7F6E` : (isReplayPage ? `${appState.page} / ${appState.replayState === 'noCard' ? '\u672A\u63D2\u5361' : '\u5F55\u50CF\u56DE\u653E'}` : (isSettingsPage ? `${appState.page} / \u8BBE\u7F6E` : (isAccountPage ? `${appState.page} / ${accountPanelTitles[appState.accountPanel] || '\u8D26\u53F7\u4FE1\u606F'}` : (isNotificationPage ? `\u4E3B\u9875 / ${appState.page}` : (isNoDevicePage ? '\u4E3B\u9875 / \u65E0\u8BBE\u5907\u9875' : (isOnboardingPage ? `${appState.page} / \u9996\u6B21\u5F00\u673A` : (isGuidePage ? `${appState.page} / \u4F7F\u7528\u63D0\u793A` : (isControlPage ? `${appState.page} / \u5FEB\u6377\u63A7\u5236` : (isScreensaverPage ? `${appState.page} / \u5FEB\u6377\u8BB0\u5F55` : (isPowerPage ? `${appState.page} / \u5173\u673A\u786E\u8BA4` : (isFull ? `${appState.page} / ${room.roomLabel}` : `${appState.page} / ${room.roomLabel} / ${appState.scene}`))))))))))))));
 
       renderRoomTabs();
       renderCareRange();
@@ -11786,6 +13233,8 @@
         const isSceneSub = Boolean(button.dataset.scene);
         const isReplaySub = button.dataset.replayState !== undefined;
         const isOnboardingSub = button.dataset.onboardingJump !== undefined;
+        const isAccountSub = button.dataset.accountPanel !== undefined;
+        const isCareStateSub = button.dataset.careState !== undefined;
         const onboardingJumpIndex = Number(button.dataset.onboardingJump);
         const onboardingMode = button.dataset.onboardingMode;
         let isActive = false;
@@ -11795,6 +13244,10 @@
             : (onboardingJumpIndex === onboardingIndex || (onboardingJumpIndex === unpairedDevicePanelIndex && unpairedDeviceFlowIndexes.has(onboardingIndex))));
         } else if (isReplaySub) {
           isActive = appState.page === button.dataset.page && appState.replayState === button.dataset.replayState;
+        } else if (isAccountSub) {
+          isActive = appState.page === button.dataset.page && appState.accountPanel === button.dataset.accountPanel;
+        } else if (isCareStateSub) {
+          isActive = appState.page === button.dataset.page && appState.careState === button.dataset.careState;
         } else if (isViewSub) {
           isActive = button.dataset.view === appState.view && appState.page === button.dataset.page && (button.dataset.homeSubPage
             ? appState.homeSubPage === button.dataset.homeSubPage
@@ -11819,11 +13272,31 @@
       });
       navButtons.forEach((button) => {
         const page = button.dataset.page || button.textContent.trim();
-        button.classList.toggle('active', page === appState.page || (page === '\u6D88\u606F\u901A\u77E5' && appState.page === '\u5E72\u9884\u901A\u77E5') || (page === '\u5B9D\u5B9D\u770B\u62A4\u6307\u6807\u533A' && appState.page === '\u667A\u80FD\u770B\u62A4\u8BBE\u7F6E' && !isDeviceCareSettings) || (page === '\u5176\u4ED6\u751F\u6001\u8BBE\u5907\u63A7\u5236' && (appState.page === '\u8BBE\u5907\u8BBE\u7F6E' || isDeviceCareSettings)));
+        const navOnboardingIndex = button.dataset.onboardingJump !== undefined ? Number(button.dataset.onboardingJump) : null;
+        const navOnboardingMode = button.dataset.onboardingMode;
+        const isOnboardingNavActive = navOnboardingIndex !== null
+          ? appState.page === button.dataset.page && (navOnboardingMode
+            ? navOnboardingMode === onboardingFlowMode && navOnboardingIndex === onboardingIndex
+            : (navOnboardingIndex === onboardingIndex || (navOnboardingIndex === unpairedDevicePanelIndex && unpairedDeviceFlowIndexes.has(onboardingIndex))))
+          : false;
+        const isPlainOnboardingNav = page === '\u5C4F\u7AEF\u521D\u59CB\u5316\u5411\u5BFC' && button.dataset.onboardingJump === undefined;
+        const hasActiveOnboardingJump = appState.page === '\u5C4F\u7AEF\u521D\u59CB\u5316\u5411\u5BFC' && (
+          (onboardingFlowMode === 'paired-add' && onboardingIndex === cameraPowerIndex)
+          || onboardingIndex === pairedDeviceWelcomeIndex
+          || onboardingIndex === unpairedDevicePanelIndex
+          || unpairedDeviceFlowIndexes.has(onboardingIndex)
+        );
+        const isRegularNavActive = navOnboardingIndex === null && !isPlainOnboardingNav && page === appState.page;
+        const noDeviceNavPage = appState.noDeviceContext ? '\u65E0\u8BBE\u5907\u9875' : appState.noDeviceMenuPage;
+        const isNoDeviceNavActive = appState.noDeviceContext && navOnboardingIndex === null && !isPlainOnboardingNav && page === noDeviceNavPage;
+        const isPlainOnboardingActive = isPlainOnboardingNav && page === appState.page && !hasActiveOnboardingJump;
+        button.classList.toggle('active', isNoDeviceNavActive || (!appState.noDeviceContext && (isOnboardingNavActive || isRegularNavActive || isPlainOnboardingActive || (page === '\u6D88\u606F\u901A\u77E5' && appState.page === '\u5E72\u9884\u901A\u77E5') || (page === '\u5B9D\u5B9D\u770B\u62A4\u6307\u6807\u533A' && appState.page === '\u667A\u80FD\u770B\u62A4\u8BBE\u7F6E' && !isDeviceCareSettings) || (page === '\u667A\u80FD\u770B\u62A4\u5FEB\u6377\u8BBE\u7F6E' && appState.page === '\u8BBE\u5907\u8BBE\u7F6E') || (page === '\u5176\u4ED6\u751F\u6001\u8BBE\u5907\u63A7\u5236' && isDeviceCareSettings))));
       });
       screenMenuButtons.forEach((button) => {
         const menuPage = button.dataset.page;
-        button.classList.toggle('active', menuPage === appState.page || (menuPage === '\u5B9D\u5B9D\u770B\u62A4\u6307\u6807\u533A' && appState.page === '\u667A\u80FD\u770B\u62A4\u8BBE\u7F6E' && !isDeviceCareSettings) || (menuPage === '\u5176\u4ED6\u751F\u6001\u8BBE\u5907\u63A7\u5236' && (appState.page === '\u8BBE\u5907\u8BBE\u7F6E' || isDeviceCareSettings)));
+        const isNoDeviceMenuActive = appState.noDeviceContext && menuPage === appState.noDeviceMenuPage;
+        const isRegularMenuActive = menuPage === appState.page || (menuPage === '\u5B9E\u65F6\u76D1\u63A7\u533A' && isNoDevicePage) || (menuPage === '\u5B9D\u5B9D\u770B\u62A4\u6307\u6807\u533A' && appState.page === '\u667A\u80FD\u770B\u62A4\u8BBE\u7F6E' && !isDeviceCareSettings) || (menuPage === '\u5176\u4ED6\u751F\u6001\u8BBE\u5907\u63A7\u5236' && (appState.page === '\u8BBE\u5907\u8BBE\u7F6E' || isDeviceCareSettings));
+        button.classList.toggle('active', appState.noDeviceContext ? isNoDeviceMenuActive : isRegularMenuActive);
       });
       if (isOnboardingPage) {
         renderOnboardingStep();
@@ -11841,15 +13314,15 @@
     }
 
     function returnToDeviceSettingsOrigin() {
-      if (appState.deviceSettingsSource === 'device') {
-        activatePage('\u5176\u4ED6\u751F\u6001\u8BBE\u5907\u63A7\u5236');
-        return;
-      }
       if (appState.deviceSettingsReturnState) {
         Object.assign(appState, appState.deviceSettingsReturnState);
         appState.deviceSettingsReturnState = null;
         appState.deviceSettingsPanel = '';
         renderState();
+        return;
+      }
+      if (appState.deviceSettingsSource === 'device') {
+        activatePage('\u667A\u80FD\u770B\u62A4\u5FEB\u6377\u8BBE\u7F6E');
         return;
       }
       activatePage('\u5B9E\u65F6\u76D1\u63A7\u533A');
@@ -11868,6 +13341,12 @@
       }
       if (page === '\u5C4F\u7AEF\u521D\u59CB\u5316\u5411\u5BFC') {
         onboardingFlowMode = 'initial';
+      }
+      if (page !== '\u667A\u80FD\u770B\u62A4\u5FEB\u6377\u8BBE\u7F6E') {
+        appState.settingsDetailPanel = '';
+      }
+      if (page !== '\u5B9D\u5B9D\u770B\u62A4\u6307\u6807\u533A') {
+        appState.careState = 'normal';
       }
       if (page === '\u6D88\u606F\u901A\u77E5' || page === '\u5E72\u9884\u901A\u77E5' || page === '\u65AD\u8FDE\u901A\u77E5' || page === '\u4F4E\u7535\u91CF\u901A\u77E5' || page === '\u5B58\u50A8\u5361\u5F02\u5E38\u901A\u77E5' || page === '\u8BBE\u5907\u56FA\u4EF6\u5347\u7EA7\u5931\u8D25\u901A\u77E5') {
         appState.view = 'single';
@@ -11916,10 +13395,32 @@
         safeSavePrototypeDocs();
         const targetPage = button.dataset.page || button.textContent.trim();
         setDocsContext(targetPage, button.textContent.trim());
+        if (button.dataset.onboardingJump) {
+          appState.noDeviceContext = false;
+          appState.page = targetPage;
+          onboardingIndex = Number(button.dataset.onboardingJump) || 0;
+          onboardingFlowMode = button.dataset.onboardingMode || (onboardingIndex === unpairedDevicePanelIndex ? 'unpaired' : 'initial');
+          if (onboardingIndex === unpairedDevicePanelIndex) {
+            unpairedDeviceResultIndex = unpairedDeviceSuccessIndex;
+            unpairedDiscoveryResultIndex = unpairedDeviceFoundIndex;
+          }
+          onboardingCompletedIndex = Math.max(onboardingCompletedIndex, onboardingIndex);
+          renderState();
+          renderOnboardingStep();
+          return;
+        }
         if (targetPage === '\u5C4F\u7AEF\u521D\u59CB\u5316\u5411\u5BFC') {
+          appState.noDeviceContext = false;
           onboardingFlowMode = 'initial';
           onboardingIndex = -1;
           onboardingCompletedIndex = Math.max(onboardingCompletedIndex, 0);
+        }
+        if (targetPage === '\u65E0\u8BBE\u5907\u9875') {
+          appState.noDeviceContext = true;
+          appState.noDeviceMenuPage = '\u5B9E\u65F6\u76D1\u63A7\u533A';
+        } else {
+          appState.noDeviceContext = false;
+          appState.noDeviceMenuPage = '\u5B9E\u65F6\u76D1\u63A7\u533A';
         }
         if (button.dataset.room) {
           appState.room = button.dataset.room;
@@ -11929,6 +13430,12 @@
         }
         if (button.dataset.page === '\u65E5\u5E38\u6D3B\u52A8\u7EDF\u8BA1') {
           appState.replayState = 'normal';
+        }
+        if (targetPage === '\u8D26\u53F7\u4FE1\u606F') {
+          appState.accountPanel = 'account';
+        }
+        if (targetPage === '\u5B9D\u5B9D\u770B\u62A4\u6307\u6807\u533A') {
+          appState.careState = 'normal';
         }
         if (button.dataset.page === '\u5B9E\u65F6\u76D1\u63A7\u533A' || button.dataset.page === '\u6D88\u606F\u901A\u77E5' || button.dataset.page === '\u5E72\u9884\u901A\u77E5' || button.dataset.page === '\u65AD\u8FDE\u901A\u77E5' || button.dataset.page === '\u4F4E\u7535\u91CF\u901A\u77E5' || button.dataset.page === '\u5B58\u50A8\u5361\u5F02\u5E38\u901A\u77E5' || button.dataset.page === '\u8BBE\u5907\u56FA\u4EF6\u5347\u7EA7\u5931\u8D25\u901A\u77E5') {
           appState.view = 'single';
@@ -11943,6 +13450,7 @@
         safeSavePrototypeDocs();
         setDocsContext(button.dataset.page, button.textContent.trim());
         if (button.dataset.onboardingJump) {
+          appState.noDeviceContext = false;
           appState.page = button.dataset.page;
           onboardingIndex = Number(button.dataset.onboardingJump) || 0;
           onboardingFlowMode = button.dataset.onboardingMode || (onboardingIndex === unpairedDevicePanelIndex ? 'unpaired' : 'initial');
@@ -11958,8 +13466,25 @@
           return;
         }
         if (button.dataset.replayState) {
+          appState.noDeviceContext = false;
           appState.page = button.dataset.page;
           appState.replayState = button.dataset.replayState;
+          appState.view = 'single';
+          appState.room = 'niki';
+          renderState();
+          return;
+        }
+        if (button.dataset.accountPanel) {
+          appState.noDeviceContext = false;
+          appState.page = button.dataset.page;
+          appState.accountPanel = button.dataset.accountPanel;
+          renderState();
+          return;
+        }
+        if (button.dataset.careState) {
+          appState.noDeviceContext = false;
+          appState.page = button.dataset.page;
+          appState.careState = button.dataset.careState;
           appState.view = 'single';
           appState.room = 'niki';
           renderState();
@@ -11975,6 +13500,7 @@
           appState.device = 'niki\u6444\u50CF\u5934';
         }
         if (button.dataset.scene && !button.dataset.view) {
+          appState.noDeviceContext = false;
           appState.page = button.dataset.page;
           appState.scene = button.dataset.scene;
           appState.view = 'single';
@@ -11984,9 +13510,11 @@
           return;
         }
         if (!button.dataset.view) {
+          appState.noDeviceContext = false;
           activatePage(button.dataset.page);
           return;
         }
+        appState.noDeviceContext = false;
         appState.page = button.dataset.page;
         appState.view = button.dataset.view;
         appState.room = appState.view === 'single' || appState.view === 'singleFull' ? 'niki' : '\u5168\u90E8\u8BBE\u5907';
@@ -12001,6 +13529,23 @@
       button.addEventListener('click', () => {
         safeSavePrototypeDocs();
         setDocsContext(button.dataset.page, button.textContent.trim());
+        if (appState.noDeviceContext) {
+          const noDeviceEmptyPages = ['\u5B9E\u65F6\u76D1\u63A7\u533A', '\u5B9D\u5B9D\u770B\u62A4\u6307\u6807\u533A', '\u65E5\u5E38\u6D3B\u52A8\u7EDF\u8BA1'];
+          appState.noDeviceMenuPage = button.dataset.page || '\u5B9E\u65F6\u76D1\u63A7\u533A';
+          if (noDeviceEmptyPages.includes(button.dataset.page)) {
+            appState.page = '\u65E0\u8BBE\u5907\u9875';
+            renderState();
+            return;
+          }
+          if (button.dataset.page === '\u667A\u80FD\u770B\u62A4\u5FEB\u6377\u8BBE\u7F6E') {
+            appState.page = button.dataset.page;
+            appState.settingsDetailPanel = '';
+            appState.view = 'single';
+            appState.room = 'niki';
+            renderState();
+            return;
+          }
+        }
         if (button.dataset.room) {
           appState.room = button.dataset.room;
         }
@@ -12009,6 +13554,12 @@
         }
         if (button.dataset.page === '\u65E5\u5E38\u6D3B\u52A8\u7EDF\u8BA1') {
           appState.replayState = 'normal';
+        }
+        if (button.dataset.page === '\u8D26\u53F7\u4FE1\u606F') {
+          appState.accountPanel = 'account';
+        }
+        if (button.dataset.page === '\u5B9D\u5B9D\u770B\u62A4\u6307\u6807\u533A') {
+          appState.careState = 'normal';
         }
         activatePage(button.dataset.page);
       });
@@ -12175,7 +13726,10 @@
         appState.device = button.dataset.deviceName;
         appState.deviceSettingsPanel = '';
         appState.deviceSettingsSource = 'device';
-        appState.deviceSettingsReturnState = null;
+        appState.deviceSettingsReturnState = button.closest('.settings-overview') ? {
+          page: '\u667A\u80FD\u770B\u62A4\u5FEB\u6377\u8BBE\u7F6E',
+          settingsDetailPanel: ''
+        } : null;
         activatePage('\u8BBE\u5907\u8BBE\u7F6E');
       });
     });
@@ -12185,6 +13739,28 @@
         appState.deviceGroup = button.dataset.deviceFilter || '\u6240\u6709\u8BBE\u5907';
         renderDeviceGroups();
       });
+    });
+
+    function toggleOnboardingWifiSkipModal(show) {
+      onboardingWifiSkipModal?.classList.toggle('is-hidden', !show);
+    }
+
+    onboardingWifiSkipButton?.addEventListener('click', () => {
+      toggleOnboardingWifiSkipModal(true);
+    });
+
+    onboardingWifiSkipCancel?.addEventListener('click', () => {
+      toggleOnboardingWifiSkipModal(false);
+    });
+
+    onboardingWifiSkipConfirm?.addEventListener('click', () => {
+      toggleOnboardingWifiSkipModal(false);
+    });
+
+    onboardingWifiSkipModal?.addEventListener('click', (event) => {
+      if (event.target === onboardingWifiSkipModal) {
+        toggleOnboardingWifiSkipModal(false);
+      }
     });
 
     function selectSettingPanel(panelName) {
@@ -12197,6 +13773,8 @@
       if (panel) {
         panel.classList.add('active');
       }
+      appState.settingsDetailPanel = panelName;
+      if (settingsPage) settingsPage.classList.add('detail-mode');
     }
 
     settingNavButtons.forEach((button) => {
@@ -12225,15 +13803,30 @@
 
     accountNavButtons.forEach((button) => {
       button.addEventListener('click', () => {
-        accountNavButtons.forEach((item) => item.classList.remove('active'));
-        accountPanels.forEach((panel) => panel.classList.remove('active'));
-        button.classList.add('active');
-        const panel = document.querySelector(`.account-panel[data-panel="${button.dataset.accountPanel}"]`);
-        if (panel) {
-          panel.classList.add('active');
-          canvasLabel.textContent = `\u8D26\u53F7\u4FE1\u606F / ${button.textContent.trim()}`;
-        }
+        appState.accountPanel = button.dataset.accountPanel || 'account';
+        renderState();
       });
+    });
+
+    function toggleAccountDeleteModal(show) {
+      if (!accountDeleteModal) return;
+      accountDeleteModal.classList.toggle('is-hidden', !show);
+    }
+
+    accountDeleteButton?.addEventListener('click', () => {
+      toggleAccountDeleteModal(true);
+    });
+
+    accountDeleteCloseButtons.forEach((button) => {
+      button.addEventListener('click', () => {
+        toggleAccountDeleteModal(false);
+      });
+    });
+
+    accountDeleteModal?.addEventListener('click', (event) => {
+      if (event.target === accountDeleteModal) {
+        toggleAccountDeleteModal(false);
+      }
     });
 
     shareWizardSteps.forEach((button) => {
@@ -12291,7 +13884,9 @@
       button.addEventListener('click', () => {
         cameraPairButtons.forEach((item) => item.classList.remove('active'));
         button.classList.add('active');
-        onboardingFlowMode = 'initial';
+        if (onboardingFlowMode !== 'paired-add') {
+          onboardingFlowMode = 'initial';
+        }
         onboardingConnectionResultIndex = button.dataset.cameraPair === 'BBM Cam A2' ? 7 : 6;
         if (selectedCameraName) selectedCameraName.textContent = button.dataset.cameraPair || 'BBM Cam A1';
         onboardingCompletedIndex = Math.max(onboardingCompletedIndex, 5);
@@ -12312,9 +13907,24 @@
       });
     });
 
+    pairedAddStartButtons.forEach((button) => {
+      button.addEventListener('click', () => {
+        appState.page = '\u5C4F\u7AEF\u521D\u59CB\u5316\u5411\u5BFC';
+        onboardingFlowMode = 'paired-add';
+        onboardingIndex = cameraPowerIndex;
+        onboardingCompletedIndex = Math.max(onboardingCompletedIndex, cameraPowerIndex);
+        renderState();
+      });
+    });
+
     if (setupPrevButton) {
       setupPrevButton.addEventListener('click', () => {
+        const addFlowFloorIndex = getStandaloneAddFlowFloorIndex();
         if (onboardingIndex === 0) return;
+        if (isStandaloneAddFlow() && onboardingIndex === addFlowFloorIndex) {
+          renderOnboardingStep();
+          return;
+        }
         if (onboardingIndex === cameraSearchIndex) {
           onboardingIndex = cameraPowerIndex;
           renderOnboardingStep();
@@ -12330,7 +13940,7 @@
           renderOnboardingStep();
           return;
         }
-        if (onboardingIndex === 5 && onboardingFlowMode === 'initial') {
+        if (onboardingIndex === 5 && (onboardingFlowMode === 'initial' || onboardingFlowMode === 'paired-add')) {
           onboardingIndex = cameraWifiIndex;
           renderOnboardingStep();
           return;
@@ -12386,11 +13996,16 @@
           return;
         }
         if (onboardingIndex === 8) {
-          onboardingIndex = 6;
+          onboardingIndex = onboardingFlowMode === 'unpaired' ? unpairedDeviceSuccessIndex : 6;
           renderOnboardingStep();
           return;
         }
-        onboardingIndex -= 1;
+        const previousIndex = onboardingIndex - 1;
+        if (isStandaloneAddFlow() && onboardingIndex >= addFlowFloorIndex && previousIndex < addFlowFloorIndex) {
+          renderOnboardingStep();
+          return;
+        }
+        onboardingIndex = previousIndex;
         renderOnboardingStep();
       });
     }
@@ -12398,8 +14013,17 @@
     if (setupNextButton) {
       setupNextButton.addEventListener('click', () => {
         if (blockedOnboardingNextIndexes.has(onboardingIndex)) return;
+        if (onboardingIndex === 3 && onboardingFlowMode === 'initial') {
+          return;
+        }
         if (onboardingIndex === onboardingFinishIndex) {
           activatePage('\u5B9E\u65F6\u76D1\u63A7\u533A');
+          return;
+        }
+        if (onboardingIndex === pairedDeviceWelcomeIndex) {
+          onboardingIndex = cameraPowerIndex;
+          onboardingCompletedIndex = Math.max(onboardingCompletedIndex, cameraPowerIndex);
+          renderOnboardingStep();
           return;
         }
         if (onboardingIndex === unpairedDeviceSuccessIndex) {
@@ -12409,12 +14033,15 @@
           return;
         }
         if (onboardingIndex === unpairedDevicePanelIndex) {
-          onboardingIndex = unpairedDeviceQrIndex;
+          discoveryReturnIndex = unpairedDevicePanelIndex;
+          unpairedDiscoveryResultIndex = unpairedDeviceQrIndex;
+          onboardingIndex = unpairedDeviceSearchIndex;
           renderOnboardingStep();
           return;
         }
         if (onboardingIndex === unpairedDeviceQrIndex) {
           discoveryReturnIndex = unpairedDevicePanelIndex;
+          unpairedDiscoveryResultIndex = unpairedDeviceFoundIndex;
           onboardingIndex = unpairedDeviceSearchIndex;
           renderOnboardingStep();
           return;
@@ -12459,7 +14086,52 @@
       });
     }
 
+    document.addEventListener('focusin', (event) => {
+      if (event.target.id === 'deviceWifiName') {
+        const wifiPicker = document.getElementById('deviceWifiPicker');
+        if (wifiPicker) wifiPicker.classList.add('open');
+        event.target.setAttribute('aria-expanded', 'true');
+      }
+    });
+
     document.addEventListener('click', (event) => {
+      const wifiPicker = document.getElementById('deviceWifiPicker');
+      const wifiNameInput = document.getElementById('deviceWifiName');
+      const wifiOption = event.target.closest('[data-device-wifi-option]');
+      if (wifiOption) {
+        if (wifiNameInput) {
+          wifiNameInput.value = wifiOption.dataset.deviceWifiOption || '';
+          wifiNameInput.setAttribute('aria-expanded', 'false');
+        }
+        if (wifiPicker) wifiPicker.classList.remove('open');
+        return;
+      }
+      if (wifiPicker && wifiNameInput) {
+        const clickedWifiInput = event.target === wifiNameInput;
+        const clickedInsideWifiPicker = wifiPicker.contains(event.target);
+        wifiPicker.classList.toggle('open', clickedWifiInput);
+        wifiNameInput.setAttribute('aria-expanded', String(clickedWifiInput));
+        if (clickedInsideWifiPicker && !clickedWifiInput) return;
+      }
+      const overviewSettingTarget = event.target.closest('.settings-overview [data-setting-panel]');
+      if (overviewSettingTarget) {
+        selectSettingPanel(overviewSettingTarget.dataset.settingPanel);
+        return;
+      }
+      const overviewDeviceCard = event.target.closest('.settings-overview .device-page-card');
+      if (overviewDeviceCard) {
+        document.querySelectorAll('.settings-overview .device-page-card').forEach((item) => item.classList.remove('active'));
+        overviewDeviceCard.classList.add('active');
+        appState.device = overviewDeviceCard.dataset.deviceName;
+        appState.deviceSettingsPanel = '';
+        appState.deviceSettingsSource = 'device';
+        appState.deviceSettingsReturnState = {
+          page: '\u667A\u80FD\u770B\u62A4\u5FEB\u6377\u8BBE\u7F6E',
+          settingsDetailPanel: ''
+        };
+        activatePage('\u8BBE\u5907\u8BBE\u7F6E');
+        return;
+      }
       const deviceSettingsTarget = event.target.closest('[data-device-settings-panel-target]');
       if (deviceSettingsTarget) {
         appState.deviceSettingsPanel = deviceSettingsTarget.dataset.deviceSettingsPanelTarget || '';
@@ -12469,6 +14141,9 @@
       const jump = event.target.closest('[data-page-jump]');
       if (jump) {
         appState.careSettingsSource = jump.dataset.careSettingsSource || '';
+        if (jump.dataset.accountPanelJump) {
+          appState.accountPanel = jump.dataset.accountPanelJump;
+        }
         if (jump.dataset.deviceSettingsSource) {
           appState.deviceSettingsSource = jump.dataset.deviceSettingsSource;
           appState.deviceSettingsPanel = '';
@@ -12492,6 +14167,20 @@
           return;
         }
         returnToDeviceSettingsOrigin();
+        return;
+      }
+      if (action.dataset.action === 'settings-overview-back') {
+        appState.settingsDetailPanel = '';
+        if (settingsPage) settingsPage.classList.remove('detail-mode');
+        return;
+      }
+      if (action.dataset.action === 'device-wifi-connect') {
+        const wifiNameInput = document.getElementById('deviceWifiName');
+        const wifiNameValue = document.getElementById('deviceWifiNameValue');
+        const wifiStatus = document.getElementById('deviceWifiConnectStatus');
+        const nextWifiName = wifiNameInput?.value.trim() || 'BBM_Home_2.4G';
+        if (wifiNameValue) wifiNameValue.textContent = `${nextWifiName} \u203A`;
+        if (wifiStatus) wifiStatus.textContent = `\u5DF2\u53D1\u8D77\u8FDE\u63A5\uFF1A${nextWifiName}`;
         return;
       }
       if (action.dataset.action === 'care-settings-back') {
@@ -12611,6 +14300,7 @@
     initResizablePanels();
     renderState();
   </script>
+
 
 
 
