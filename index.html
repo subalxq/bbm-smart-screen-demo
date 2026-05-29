@@ -12466,6 +12466,7 @@
     const docsAddDeviceCopyKey = `${docsStorageKey}:add-device-docs-copied-from-init-20260527`;
     let activeDocsPreview = docsFeatureEditor || docsRuleEditor || null;
     let memoryDocsCache = null;
+    const docsUndoStacks = new WeakMap();
     const babyInfoCards = document.querySelectorAll('.baby-info-card');
     const editableInfoRows = document.querySelectorAll('.editable-info-row');
     const tiles = document.querySelectorAll('.camera-tile');
@@ -13377,6 +13378,32 @@
       const selection = window.getSelection();
       selection.removeAllRanges();
       selection.addRange(range);
+      clearDocsWholeSelection(preview);
+    }
+
+    function captureDocsUndoState(preview) {
+      if (!preview) return;
+      const state = preview.innerHTML;
+      const stack = docsUndoStacks.get(preview) || [];
+      if (stack[stack.length - 1] === state) return;
+      stack.push(state);
+      while (stack.length > 3) stack.shift();
+      docsUndoStacks.set(preview, stack);
+    }
+
+    function restoreDocsUndoState(preview) {
+      if (!preview) return false;
+      const stack = docsUndoStacks.get(preview) || [];
+      const state = stack.pop();
+      if (!state) return false;
+      preview.innerHTML = state;
+      docsUndoStacks.set(preview, stack);
+      renumberDocsEditor(preview);
+      clearDocsWholeSelection(preview);
+      clearDocsImageSelection(preview);
+      syncDocsPreviewToField(preview);
+      focusDocsNearBlocks(preview, preview.querySelector('.docs-outline-line') || preview.firstElementChild);
+      return true;
     }
 
     function getCaretTextOffset(element) {
@@ -13397,6 +13424,7 @@
     function insertDocsLineAfter(currentLine) {
       const preview = currentLine?.closest('[data-docs-preview]');
       if (!preview) return;
+      captureDocsUndoState(preview);
       const copy = currentLine.querySelector('.docs-outline-copy');
       const rawText = copy?.innerText || '';
       const offset = copy ? getCaretTextOffset(copy) : rawText.length;
@@ -13448,6 +13476,7 @@
     function removeDocsImage(imageWrap) {
       const preview = imageWrap?.closest?.('[data-docs-preview]');
       if (!imageWrap || !preview) return;
+      captureDocsUndoState(preview);
       const fallback = imageWrap.nextElementSibling?.matches?.('.docs-outline-line')
         ? imageWrap.nextElementSibling
         : imageWrap.previousElementSibling?.matches?.('.docs-outline-line')
@@ -13468,6 +13497,7 @@
     function changeDocsLineIndent(line, delta) {
       const preview = line?.closest('[data-docs-preview]');
       if (!line || !preview) return;
+      captureDocsUndoState(preview);
       setDocsLineLevel(line, Number(line.dataset.level || '1') + delta);
       renumberDocsEditor(preview);
       focusDocsLine(line);
@@ -13477,6 +13507,7 @@
     function removeDocsLine(line, preferNext = false) {
       const preview = line?.closest('[data-docs-preview]');
       if (!line || !preview) return;
+      captureDocsUndoState(preview);
       const lines = [...preview.querySelectorAll('.docs-outline-line')];
       if (lines.length <= 1) {
         const copy = line.querySelector('.docs-outline-copy');
@@ -13521,6 +13552,7 @@
 
     function appendDocsImage(preview, dataUrl, insertionRange) {
       if (!preview || !dataUrl) return;
+      captureDocsUndoState(preview);
       const imageWrap = document.createElement('div');
       imageWrap.className = 'docs-flow-image';
       imageWrap.contentEditable = 'false';
@@ -13717,6 +13749,7 @@
       if (!preview) return false;
       const blocks = getDocsOperationBlocks(preview);
       if (!blocks.length) return false;
+      captureDocsUndoState(preview);
       const insertionPoint = blocks[blocks.length - 1].nextSibling;
       const newBlocks = createDocsBlocksFromLines(linesSource);
       blocks.forEach((block) => block.remove());
@@ -13731,8 +13764,33 @@
       return true;
     }
 
+    function insertDocsBlocksAtSelection(preview, linesSource) {
+      if (!preview) return false;
+      const newBlocks = createDocsBlocksFromLines(linesSource);
+      if (!newBlocks.length) return false;
+      const selection = window.getSelection();
+      const range = selection?.rangeCount ? selection.getRangeAt(0) : null;
+      let referenceBlock = null;
+      if (range && preview.contains(selection.anchorNode)) {
+        referenceBlock = getDocsBlockFromSelectionPoint(preview, selection.anchorNode, selection.anchorOffset)
+          || getDocsBlockFromSelectionPoint(preview, range.startContainer, range.startOffset);
+      }
+      if (!referenceBlock && document.activeElement && preview.contains(document.activeElement)) {
+        referenceBlock = getDocsBlockFromSelectionPoint(preview, document.activeElement, 0);
+      }
+      captureDocsUndoState(preview);
+      const insertionPoint = referenceBlock ? referenceBlock.nextSibling : null;
+      newBlocks.forEach((block) => preview.insertBefore(block, insertionPoint));
+      renumberDocsEditor(preview);
+      clearDocsWholeSelection(preview);
+      syncDocsPreviewToField(preview);
+      focusDocsNearBlocks(preview, newBlocks[0]);
+      return true;
+    }
+
     function clearDocsPreview(preview) {
       if (!preview) return;
+      captureDocsUndoState(preview);
       preview.textContent = '';
       preview.append(createDocsOutlineLine('', 1));
       renumberDocsEditor(preview);
@@ -13857,11 +13915,7 @@
       if (getDocsOperationBlocks(preview).length) {
         return replaceSelectedDocsBlocks(preview, lines);
       }
-      renderDocsMarkdownEditor(lines, preview);
-      focusDocsLine(preview.querySelector('.docs-outline-line'), true);
-      clearDocsWholeSelection(preview);
-      syncDocsPreviewToField(preview);
-      return true;
+      return insertDocsBlocksAtSelection(preview, lines);
     }
 
     function handleDocsPasteEvent(event, preview) {
@@ -13873,9 +13927,13 @@
         return true;
       }
       const plainText = event.clipboardData.getData('text/plain') || '';
-      if (plainText && getDocsOperationBlocks(preview).length) {
+      if (plainText) {
         event.preventDefault();
-        replaceSelectedDocsBlocks(preview, plainText.split('\n'));
+        if (getDocsOperationBlocks(preview).length) {
+          replaceSelectedDocsBlocks(preview, plainText.split('\n'));
+        } else {
+          insertDocsBlocksAtSelection(preview, plainText.split('\n'));
+        }
         return true;
       }
       clearDocsWholeSelection(preview);
@@ -13968,9 +14026,11 @@
         resizeDocsEditors();
         if (docsFeatureEditor) {
           renderDocsMarkdownEditor(meta.bullets || [], docsFeatureEditor);
+          docsUndoStacks.set(docsFeatureEditor, []);
         }
         if (docsRuleEditor) {
           renderDocsMarkdownEditor(rules, docsRuleEditor);
+          docsUndoStacks.set(docsRuleEditor, []);
         }
       });
     }
@@ -15266,6 +15326,10 @@
       });
       preview.addEventListener('keydown', (event) => {
         activeDocsPreview = preview;
+        if ((event.metaKey || event.ctrlKey) && !event.shiftKey && event.key.toLowerCase() === 'z') {
+          if (restoreDocsUndoState(preview)) event.preventDefault();
+          return;
+        }
         if ((event.metaKey || event.ctrlKey) && event.key.toLowerCase() === 'a') {
           event.preventDefault();
           selectAllDocsPreview(preview);
@@ -15304,6 +15368,9 @@
       });
       preview.addEventListener('beforeinput', (event) => {
         activeDocsPreview = preview;
+        if (!String(event.inputType || '').startsWith('history')) {
+          captureDocsUndoState(preview);
+        }
         if (String(event.inputType || '').startsWith('delete') && deleteSelectedDocsPreview(event, preview)) {
           return;
         }
@@ -15330,6 +15397,10 @@
       if (event.defaultPrevented || isDocsFormField(event.target)) return;
       const preview = getActiveDocsPreview(event.target);
       if (!preview || !isDocsSelectionInside(preview) && !getDocsPreviewFromNode(event.target)) return;
+      if ((event.metaKey || event.ctrlKey) && !event.shiftKey && event.key.toLowerCase() === 'z') {
+        if (restoreDocsUndoState(preview)) event.preventDefault();
+        return;
+      }
       if ((event.metaKey || event.ctrlKey) && event.key.toLowerCase() === 'a') {
         event.preventDefault();
         selectAllDocsPreview(preview);
