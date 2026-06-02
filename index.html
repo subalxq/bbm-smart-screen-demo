@@ -9308,7 +9308,7 @@
             <button class="nav-sub-item active" data-page="实时监控区" data-scene="睡眠看护">主页-睡眠看护</button>
             <button class="nav-sub-item" data-page="实时监控区" data-view="split2">主页-多画面</button>
             <button class="nav-sub-item" data-page="实时监控区" data-view="singleFull">单画面全屏</button>
-            <button class="nav-sub-item" data-page="实时监控区" data-view="split2Full">双画面全屏</button>
+            <button class="nav-sub-item active" data-page="实时监控区" data-view="split2Full">双画面全屏</button>
           </div>
           <button class="nav-item" data-page="宝宝看护指标区">智能看护</button>
           <div class="nav-sub">
@@ -9348,11 +9348,11 @@
       <div class="canvas-wrap">
         <div class="canvas-head">
           <strong>8 寸平板横屏原型</strong>
-          <span id="canvasLabel">实时监控区 / niki / 睡眠看护</span>
+          <span id="canvasLabel">实时监控区 / 全部设备</span>
         </div>
 
         <div class="shell">
-          <div class="screen">
+          <div class="screen fullscreen-mode">
             <header class="topbar">
               <div class="screen-date">2026/5/7 周四</div>
               <div class="screen-status">
@@ -9379,17 +9379,17 @@
             </nav>
 
             <div class="tabs-bar">
-              <div class="tab-group" id="roomTabs"><button class="tab-btn active" data-room="niki">cam1</button></div>
+              <div class="tab-group" id="roomTabs"><button class="tab-btn active" data-room="全部设备">全部设备</button><button class="tab-btn" data-room="niki">cam1</button><button class="tab-btn" data-room="neo">cam2</button><button class="tab-btn" data-room="niki2">cam3</button><button class="tab-btn" data-room="niki3">cam4</button></div>
             </div>
 
             <main class="content">
               <div class="monitor-stack">
-                <section class="monitor" id="monitor" style="--monitor-image: url(&quot;public/baby-sleep-overhead-rotated-monitor-16x9.png&quot;);">
+                <section class="monitor split-2" id="monitor" style="--monitor-image: url(&quot;public/baby-sleep-overhead-rotated-monitor-16x9.png&quot;);">
                   <div class="monitor-header">
                     <div class="monitor-left-tools">
                       <div class="live-pills">
                         <span class="live-pill live">Live</span>
-                        <span class="cam-name fullscreen-room-pill" id="fullscreenRoomPill" hidden="">niki · niki</span>
+                        <span class="cam-name fullscreen-room-pill" id="fullscreenRoomPill" hidden="">全部设备</span>
                         <div class="monitor-env-overlay" aria-label="实时环境温湿度">
                           <span aria-label="室温">
                             <svg class="monitor-env-icon" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 14.76V5a4 4 0 0 0-8 0v9.76a6 6 0 1 0 8 0Z"></path><path d="M10 8v8"></path></svg>
@@ -9414,29 +9414,29 @@
 
                   <div class="multi-grid" id="multiGrid">
                     <button class="camera-tile active" data-room="niki" data-camera="婴儿床摄像头" style="--pos:center 56%;">
-                      <strong>niki</strong><span class="tile-setting" title="设置" aria-label="设置"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 15.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7Z"></path><path d="M19.4 15a1.8 1.8 0 0 0 .36 1.98l.04.04a2.16 2.16 0 0 1-3.05 3.05l-.04-.04a1.8 1.8 0 0 0-1.98-.36 1.8 1.8 0 0 0-1.1 1.66V21.4a2.16 2.16 0 0 1-4.32 0v-.07a1.8 1.8 0 0 0-1.1-1.66 1.8 1.8 0 0 0-1.98.36l-.04.04a2.16 2.16 0 0 1-3.05-3.05l.04-.04A1.8 1.8 0 0 0 4.6 15a1.8 1.8 0 0 0-1.66-1.1H2.86a2.16 2.16 0 0 1 0-4.32h.07A1.8 1.8 0 0 0 4.6 8a1.8 1.8 0 0 0-.36-1.98l-.04-.04a2.16 2.16 0 0 1 3.05-3.05l.04.04A1.8 1.8 0 0 0 9.27 3.3a1.8 1.8 0 0 0 1.1-1.66V1.6a2.16 2.16 0 0 1 4.32 0v.07a1.8 1.8 0 0 0 1.1 1.66 1.8 1.8 0 0 0 1.98-.36l.04-.04a2.16 2.16 0 0 1 3.05 3.05l-.04.04A1.8 1.8 0 0 0 19.4 8a1.8 1.8 0 0 0 1.66 1.1h.07a2.16 2.16 0 0 1 0 4.32h-.07A1.8 1.8 0 0 0 19.4 15Z"></path></svg></span><span class="tile-sound" title="睡眠安抚" aria-label="睡眠安抚"><span>♪</span><span>睡眠安抚</span></span>
-                    <span class="tile-env-overlay" hidden=""><span aria-label="室温">
+                      <strong>niki</strong><span class="tile-setting" title="设置" aria-label="设置"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 15.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7Z"></path><path d="M19.4 15a1.8 1.8 0 0 0 .36 1.98l.04.04a2.16 2.16 0 0 1-3.05 3.05l-.04-.04a1.8 1.8 0 0 0-1.98-.36 1.8 1.8 0 0 0-1.1 1.66V21.4a2.16 2.16 0 0 1-4.32 0v-.07a1.8 1.8 0 0 0-1.1-1.66 1.8 1.8 0 0 0-1.98.36l-.04.04a2.16 2.16 0 0 1-3.05-3.05l.04-.04A1.8 1.8 0 0 0 4.6 15a1.8 1.8 0 0 0-1.66-1.1H2.86a2.16 2.16 0 0 1 0-4.32h.07A1.8 1.8 0 0 0 4.6 8a1.8 1.8 0 0 0-.36-1.98l-.04-.04a2.16 2.16 0 0 1 3.05-3.05l.04.04A1.8 1.8 0 0 0 9.27 3.3a1.8 1.8 0 0 0 1.1-1.66V1.6a2.16 2.16 0 0 1 4.32 0v.07a1.8 1.8 0 0 0 1.1 1.66 1.8 1.8 0 0 0 1.98-.36l.04-.04a2.16 2.16 0 0 1 3.05 3.05l-.04.04A1.8 1.8 0 0 0 19.4 8a1.8 1.8 0 0 0 1.66 1.1h.07a2.16 2.16 0 0 1 0 4.32h-.07A1.8 1.8 0 0 0 19.4 15Z"></path></svg></span>
+                    <span class="tile-env-overlay"><span aria-label="室温">
         <svg class="monitor-env-icon" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 14.76V5a4 4 0 0 0-8 0v9.76a6 6 0 1 0 8 0Z"></path><path d="M10 8v8"></path></svg>
       <strong>24.5°C</strong></span><span aria-label="湿度">
         <svg class="monitor-env-icon" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3.5S6 10.1 6 14.2a6 6 0 0 0 12 0C18 10.1 12 3.5 12 3.5Z"></path></svg>
       <strong>55%</strong></span></span></button>
                     <button class="camera-tile" data-room="neo" data-camera="neo摄像头" style="--pos:58% 56%;">
-                      <strong>neo</strong><span class="tile-setting" title="设置" aria-label="设置"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 15.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7Z"></path><path d="M19.4 15a1.8 1.8 0 0 0 .36 1.98l.04.04a2.16 2.16 0 0 1-3.05 3.05l-.04-.04a1.8 1.8 0 0 0-1.98-.36 1.8 1.8 0 0 0-1.1 1.66V21.4a2.16 2.16 0 0 1-4.32 0v-.07a1.8 1.8 0 0 0-1.1-1.66 1.8 1.8 0 0 0-1.98.36l-.04.04a2.16 2.16 0 0 1-3.05-3.05l.04-.04A1.8 1.8 0 0 0 4.6 15a1.8 1.8 0 0 0-1.66-1.1H2.86a2.16 2.16 0 0 1 0-4.32h.07A1.8 1.8 0 0 0 4.6 8a1.8 1.8 0 0 0-.36-1.98l-.04-.04a2.16 2.16 0 0 1 3.05-3.05l.04.04A1.8 1.8 0 0 0 9.27 3.3a1.8 1.8 0 0 0 1.1-1.66V1.6a2.16 2.16 0 0 1 4.32 0v.07a1.8 1.8 0 0 0 1.1 1.66 1.8 1.8 0 0 0 1.98-.36l.04-.04a2.16 2.16 0 0 1 3.05 3.05l-.04.04A1.8 1.8 0 0 0 19.4 8a1.8 1.8 0 0 0 1.66 1.1h.07a2.16 2.16 0 0 1 0 4.32h-.07A1.8 1.8 0 0 0 19.4 15Z"></path></svg></span><span class="tile-sound" title="睡眠安抚" aria-label="睡眠安抚"><span>♪</span><span>睡眠安抚</span></span>
-                    <span class="tile-env-overlay" hidden=""><span aria-label="室温">
+                      <strong>neo</strong><span class="tile-setting" title="设置" aria-label="设置"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 15.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7Z"></path><path d="M19.4 15a1.8 1.8 0 0 0 .36 1.98l.04.04a2.16 2.16 0 0 1-3.05 3.05l-.04-.04a1.8 1.8 0 0 0-1.98-.36 1.8 1.8 0 0 0-1.1 1.66V21.4a2.16 2.16 0 0 1-4.32 0v-.07a1.8 1.8 0 0 0-1.1-1.66 1.8 1.8 0 0 0-1.98.36l-.04.04a2.16 2.16 0 0 1-3.05-3.05l.04-.04A1.8 1.8 0 0 0 4.6 15a1.8 1.8 0 0 0-1.66-1.1H2.86a2.16 2.16 0 0 1 0-4.32h.07A1.8 1.8 0 0 0 4.6 8a1.8 1.8 0 0 0-.36-1.98l-.04-.04a2.16 2.16 0 0 1 3.05-3.05l.04.04A1.8 1.8 0 0 0 9.27 3.3a1.8 1.8 0 0 0 1.1-1.66V1.6a2.16 2.16 0 0 1 4.32 0v.07a1.8 1.8 0 0 0 1.1 1.66 1.8 1.8 0 0 0 1.98-.36l.04-.04a2.16 2.16 0 0 1 3.05 3.05l-.04.04A1.8 1.8 0 0 0 19.4 8a1.8 1.8 0 0 0 1.66 1.1h.07a2.16 2.16 0 0 1 0 4.32h-.07A1.8 1.8 0 0 0 19.4 15Z"></path></svg></span>
+                    <span class="tile-env-overlay"><span aria-label="室温">
         <svg class="monitor-env-icon" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 14.76V5a4 4 0 0 0-8 0v9.76a6 6 0 1 0 8 0Z"></path><path d="M10 8v8"></path></svg>
       <strong>24.7°C</strong></span><span aria-label="湿度">
         <svg class="monitor-env-icon" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3.5S6 10.1 6 14.2a6 6 0 0 0 12 0C18 10.1 12 3.5 12 3.5Z"></path></svg>
       <strong>54%</strong></span></span></button>
                     <button class="camera-tile" data-room="niki2" data-camera="niki2摄像头" style="--pos:50% 42%;">
-                      <strong>niki2</strong><span class="tile-setting" title="设置" aria-label="设置"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 15.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7Z"></path><path d="M19.4 15a1.8 1.8 0 0 0 .36 1.98l.04.04a2.16 2.16 0 0 1-3.05 3.05l-.04-.04a1.8 1.8 0 0 0-1.98-.36 1.8 1.8 0 0 0-1.1 1.66V21.4a2.16 2.16 0 0 1-4.32 0v-.07a1.8 1.8 0 0 0-1.1-1.66 1.8 1.8 0 0 0-1.98.36l-.04.04a2.16 2.16 0 0 1-3.05-3.05l.04-.04A1.8 1.8 0 0 0 4.6 15a1.8 1.8 0 0 0-1.66-1.1H2.86a2.16 2.16 0 0 1 0-4.32h.07A1.8 1.8 0 0 0 4.6 8a1.8 1.8 0 0 0-.36-1.98l-.04-.04a2.16 2.16 0 0 1 3.05-3.05l.04.04A1.8 1.8 0 0 0 9.27 3.3a1.8 1.8 0 0 0 1.1-1.66V1.6a2.16 2.16 0 0 1 4.32 0v.07a1.8 1.8 0 0 0 1.1 1.66 1.8 1.8 0 0 0 1.98-.36l.04-.04a2.16 2.16 0 0 1 3.05 3.05l-.04.04A1.8 1.8 0 0 0 19.4 8a1.8 1.8 0 0 0 1.66 1.1h.07a2.16 2.16 0 0 1 0 4.32h-.07A1.8 1.8 0 0 0 19.4 15Z"></path></svg></span><span class="tile-sound" title="睡眠安抚" aria-label="睡眠安抚"><span>♪</span><span>睡眠安抚</span></span>
-                    <span class="tile-env-overlay" hidden=""><span aria-label="室温">
+                      <strong>niki2</strong><span class="tile-setting" title="设置" aria-label="设置"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 15.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7Z"></path><path d="M19.4 15a1.8 1.8 0 0 0 .36 1.98l.04.04a2.16 2.16 0 0 1-3.05 3.05l-.04-.04a1.8 1.8 0 0 0-1.98-.36 1.8 1.8 0 0 0-1.1 1.66V21.4a2.16 2.16 0 0 1-4.32 0v-.07a1.8 1.8 0 0 0-1.1-1.66 1.8 1.8 0 0 0-1.98.36l-.04.04a2.16 2.16 0 0 1-3.05-3.05l.04-.04A1.8 1.8 0 0 0 4.6 15a1.8 1.8 0 0 0-1.66-1.1H2.86a2.16 2.16 0 0 1 0-4.32h.07A1.8 1.8 0 0 0 4.6 8a1.8 1.8 0 0 0-.36-1.98l-.04-.04a2.16 2.16 0 0 1 3.05-3.05l.04.04A1.8 1.8 0 0 0 9.27 3.3a1.8 1.8 0 0 0 1.1-1.66V1.6a2.16 2.16 0 0 1 4.32 0v.07a1.8 1.8 0 0 0 1.1 1.66 1.8 1.8 0 0 0 1.98-.36l.04-.04a2.16 2.16 0 0 1 3.05 3.05l-.04.04A1.8 1.8 0 0 0 19.4 8a1.8 1.8 0 0 0 1.66 1.1h.07a2.16 2.16 0 0 1 0 4.32h-.07A1.8 1.8 0 0 0 19.4 15Z"></path></svg></span>
+                    <span class="tile-env-overlay"><span aria-label="室温">
         <svg class="monitor-env-icon" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 14.76V5a4 4 0 0 0-8 0v9.76a6 6 0 1 0 8 0Z"></path><path d="M10 8v8"></path></svg>
       <strong>24.3°C</strong></span><span aria-label="湿度">
         <svg class="monitor-env-icon" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3.5S6 10.1 6 14.2a6 6 0 0 0 12 0C18 10.1 12 3.5 12 3.5Z"></path></svg>
       <strong>57%</strong></span></span></button>
                     <button class="camera-tile" data-room="niki3" data-camera="niki3摄像头" style="--pos:47% 50%;">
-                      <strong>niki3</strong><span class="tile-setting" title="设置" aria-label="设置"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 15.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7Z"></path><path d="M19.4 15a1.8 1.8 0 0 0 .36 1.98l.04.04a2.16 2.16 0 0 1-3.05 3.05l-.04-.04a1.8 1.8 0 0 0-1.98-.36 1.8 1.8 0 0 0-1.1 1.66V21.4a2.16 2.16 0 0 1-4.32 0v-.07a1.8 1.8 0 0 0-1.1-1.66 1.8 1.8 0 0 0-1.98.36l-.04.04a2.16 2.16 0 0 1-3.05-3.05l.04-.04A1.8 1.8 0 0 0 4.6 15a1.8 1.8 0 0 0-1.66-1.1H2.86a2.16 2.16 0 0 1 0-4.32h.07A1.8 1.8 0 0 0 4.6 8a1.8 1.8 0 0 0-.36-1.98l-.04-.04a2.16 2.16 0 0 1 3.05-3.05l.04.04A1.8 1.8 0 0 0 9.27 3.3a1.8 1.8 0 0 0 1.1-1.66V1.6a2.16 2.16 0 0 1 4.32 0v.07a1.8 1.8 0 0 0 1.1 1.66 1.8 1.8 0 0 0 1.98-.36l.04-.04a2.16 2.16 0 0 1 3.05 3.05l-.04.04A1.8 1.8 0 0 0 19.4 8a1.8 1.8 0 0 0 1.66 1.1h.07a2.16 2.16 0 0 1 0 4.32h-.07A1.8 1.8 0 0 0 19.4 15Z"></path></svg></span><span class="tile-sound" title="睡眠安抚" aria-label="睡眠安抚"><span>♪</span><span>睡眠安抚</span></span>
-                    <span class="tile-env-overlay" hidden=""><span aria-label="室温">
+                      <strong>niki3</strong><span class="tile-setting" title="设置" aria-label="设置"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 15.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7Z"></path><path d="M19.4 15a1.8 1.8 0 0 0 .36 1.98l.04.04a2.16 2.16 0 0 1-3.05 3.05l-.04-.04a1.8 1.8 0 0 0-1.98-.36 1.8 1.8 0 0 0-1.1 1.66V21.4a2.16 2.16 0 0 1-4.32 0v-.07a1.8 1.8 0 0 0-1.1-1.66 1.8 1.8 0 0 0-1.98.36l-.04.04a2.16 2.16 0 0 1-3.05-3.05l.04-.04A1.8 1.8 0 0 0 4.6 15a1.8 1.8 0 0 0-1.66-1.1H2.86a2.16 2.16 0 0 1 0-4.32h.07A1.8 1.8 0 0 0 4.6 8a1.8 1.8 0 0 0-.36-1.98l-.04-.04a2.16 2.16 0 0 1 3.05-3.05l.04.04A1.8 1.8 0 0 0 9.27 3.3a1.8 1.8 0 0 0 1.1-1.66V1.6a2.16 2.16 0 0 1 4.32 0v.07a1.8 1.8 0 0 0 1.1 1.66 1.8 1.8 0 0 0 1.98-.36l.04-.04a2.16 2.16 0 0 1 3.05 3.05l-.04.04A1.8 1.8 0 0 0 19.4 8a1.8 1.8 0 0 0 1.66 1.1h.07a2.16 2.16 0 0 1 0 4.32h-.07A1.8 1.8 0 0 0 19.4 15Z"></path></svg></span>
+                    <span class="tile-env-overlay"><span aria-label="室温">
         <svg class="monitor-env-icon" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 14.76V5a4 4 0 0 0-8 0v9.76a6 6 0 1 0 8 0Z"></path><path d="M10 8v8"></path></svg>
       <strong>24.8°C</strong></span><span aria-label="湿度">
         <svg class="monitor-env-icon" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3.5S6 10.1 6 14.2a6 6 0 0 0 12 0C18 10.1 12 3.5 12 3.5Z"></path></svg>
@@ -9467,7 +9467,7 @@
                 </section>
               </div>
 
-              <aside class="right-panel" id="rightPanel" data-scene-panel="睡眠看护" data-monitor-view="single">
+              <aside class="right-panel" id="rightPanel" data-scene-panel="睡眠看护" data-monitor-view="split2Full">
                 <div class="scene-mode-card scene-soothe">
                   <div class="scene-mode-top">
                     <div><div class="scene-mode-state"><span class="scene-mode-icon">☾</span><span class="scene-mode-state-text"><strong>niki平静</strong><span class="scene-mode-subtitle"></span></span></div></div>
@@ -9477,7 +9477,33 @@
                   <div class="scene-env-grid"><div class="scene-env-card"><span>体温贴</span><strong>36.6°C</strong></div><div class="scene-env-card"><span>空气质量</span><strong>优</strong></div></div>
                 </div>
                 <div class="scene-mode-card scene-sleep">
-                  <div class="scene-split-status" id="sceneSplitStatus"></div>
+                  <div class="scene-split-status" id="sceneSplitStatus">
+          <div class="scene-split-card">
+            <div class="scene-mode-top">
+              <div><div class="scene-mode-state"><span class="scene-mode-icon">☾</span><span class="scene-mode-state-text"><strong>niki浅睡</strong><span class="scene-mode-subtitle">已入睡 59min</span></span></div></div>
+            </div>
+            <div class="scene-mode-alert"><strong>检测到宝宝眼动活跃</strong><p>随时可能醒来，建议留意。</p></div>
+            <div class="scene-split-metrics" aria-label="niki体征与环境数据">
+              <div class="scene-split-metric"><span>呼吸率</span><strong>28 br/min</strong></div>
+              <div class="scene-split-metric"><span>心率</span><strong>108 bpm</strong></div>
+              <div class="scene-split-metric"><span>体温贴</span><strong>36.6°C</strong></div>
+              <div class="scene-split-metric"><span>空气质量</span><strong>优</strong></div>
+            </div>
+          </div>
+        
+          <div class="scene-split-card">
+            <div class="scene-mode-top">
+              <div><div class="scene-mode-state"><span class="scene-mode-icon">◌</span><span class="scene-mode-state-text"><strong>neo活跃</strong></span></div></div>
+            </div>
+            
+            <div class="scene-split-metrics" aria-label="neo体征与环境数据">
+              <div class="scene-split-metric"><span>呼吸率</span><strong>--</strong></div>
+              <div class="scene-split-metric"><span>心率</span><strong>--</strong></div>
+              <div class="scene-split-metric"><span>体温贴</span><strong>36.5°C</strong></div>
+              <div class="scene-split-metric"><span>空气质量</span><strong>良</strong></div>
+            </div>
+          </div>
+        </div>
                   <div class="scene-mode-top">
                     <div><div class="scene-mode-state"><span class="scene-mode-icon">☾</span><span class="scene-mode-state-text"><strong id="sceneSleepTitle">niki浅睡</strong><span class="scene-mode-subtitle" id="sceneSleepMeta">已入睡 59min</span></span></div></div>
                   </div>
@@ -10954,7 +10980,7 @@
       <section class="docs-panel">
         <div class="docs-head">
           <div class="docs-head-main">
-            <input class="docs-title-input" id="docsTitle" type="text" value="实时监控区" aria-label="页面功能说明标题" style="width: 149px;">
+            <input class="docs-title-input" id="docsTitle" type="text" value="实时监控区" aria-label="页面功能说明标题" style="width: 121px;">
             <textarea class="docs-desc-input" id="docsDesc" aria-label="页面功能说明描述">默认进入宝宝实时监控主页。</textarea>
           </div>
           <div class="docs-actions">
@@ -10967,7 +10993,7 @@
             <div class="docs-card-head">
               <h3>功能描述</h3>
             </div>
-            <div class="docs-structured-list" data-docs-preview="features" contenteditable="true" tabindex="0" aria-label="功能描述内容，可直接编辑或粘贴图片"><div class="docs-outline-line level-1" data-level="1"><b class="docs-outline-index" contenteditable="false">1</b><div class="docs-outline-copy" spellcheck="false">主页展示3个模块：实时画面、当前看护状态卡片、其他生态设备控制</div></div><div class="docs-outline-line level-1" data-level="1"><b class="docs-outline-index" contenteditable="false">2</b><div class="docs-outline-copy" spellcheck="false">目前支持接入的设备类型：BM08S设备，及后续对接过协议的Wi-Fi设备/蓝牙网关设备</div></div><div class="docs-outline-line level-1" data-level="1"><b class="docs-outline-index" contenteditable="false">3</b><div class="docs-outline-copy" spellcheck="false">实时画面：展示BBM设备（BM08S及其后续BBM设备）的实时监控画面。画面上，显示live图标、设备温湿度数据</div></div><div class="docs-outline-line level-2" data-level="2"><b class="docs-outline-index" contenteditable="false">1</b><div class="docs-outline-copy" spellcheck="false">支持单画面/双画面实时监控。最多2路画面同时查看（Wi-Fi Halow 点对点带宽限制）</div></div><div class="docs-outline-line level-2" data-level="2"><b class="docs-outline-index" contenteditable="false">2</b><div class="docs-outline-copy" spellcheck="false">当BBM设备数=1 时，展示单画面实时监控</div></div><div class="docs-outline-line level-2" data-level="2"><b class="docs-outline-index" contenteditable="false">3</b><div class="docs-outline-copy" spellcheck="false">当BBM设备数=2 时，默认选中 全部设备 进行双画面展示。支持切换任意单设备/或全部设备 进行展示</div></div><div class="docs-outline-line level-2" data-level="2"><b class="docs-outline-index" contenteditable="false">4</b><div class="docs-outline-copy" spellcheck="false">当BBM设备数&gt;2时，默认选中 全部设备 进行双画面展示，支持滑页，滑到下一页查看。支持切换任意单设备/或全部设备 进行展示</div></div><div class="docs-outline-line level-2" data-level="2"><b class="docs-outline-index" contenteditable="false">5</b><div class="docs-outline-copy" spellcheck="false">单画面：展示 睡眠安抚、休眠/唤醒、对讲、截图、录像、设置入口</div></div><div class="docs-outline-line level-2" data-level="2"><b class="docs-outline-index" contenteditable="false">6</b><div class="docs-outline-copy" spellcheck="false">双画面：展示 睡眠安抚、设置入口</div></div><div class="docs-outline-line level-3" data-level="3"><b class="docs-outline-index" contenteditable="false">1</b><div class="docs-outline-copy" spellcheck="false">睡眠安抚：支持 安抚音播停、安抚音选择、安抚音播放模式（单曲播/循环播）、安抚音定时时间（不定时/定时5/10/20/30min）</div></div><div class="docs-outline-line level-3" data-level="3"><b class="docs-outline-index" contenteditable="false">2</b><div class="docs-outline-copy" spellcheck="false">休眠/唤醒：开启后，摄像头关闭（音视频断流，不检测不报警不录像），只能接收指令。关闭后恢复正常工作</div></div><div class="docs-outline-line level-1" data-level="1"><b class="docs-outline-index" contenteditable="false">4</b><div class="docs-outline-copy" spellcheck="false">当前看护状态卡片：展示BBM设备宝宝当前睡眠看护状态、呼吸率/心率、体温贴/空气质量数据（需接入体温贴、空气净化器设备）。根据实时画面，展示相应的看护状态卡片。</div></div><div class="docs-outline-line level-1" data-level="1"><b class="docs-outline-index" contenteditable="false">5</b><div class="docs-outline-copy" spellcheck="false">如果设备关联了宝宝信息，看护状态卡片展示宝宝小名+当前睡眠看护状态</div></div><div class="docs-outline-line level-1" data-level="1"><b class="docs-outline-index" contenteditable="false">6</b><div class="docs-outline-copy" spellcheck="false">宝宝当前睡眠看护状态</div></div><div class="docs-outline-line level-2" data-level="2"><b class="docs-outline-index" contenteditable="false">1</b><div class="docs-outline-copy" spellcheck="false">宝宝睡着情况：展示宝宝当前睡眠状态（浅睡/深睡）、本次入睡时长、详细看护状态及建议（是否在安抚中、是否眼动活跃可能醒来、是否熟睡安稳中）</div></div><div class="docs-outline-line level-2" data-level="2"><b class="docs-outline-index" contenteditable="false">2</b><div class="docs-outline-copy" spellcheck="false">宝宝醒着情况：展示宝宝当前活跃状态（平静/活跃）、详细看护状态及建议（是否在安抚中、是否开始入睡状态）、</div></div><div class="docs-outline-line level-2" data-level="2"><b class="docs-outline-index" contenteditable="false">3</b><div class="docs-outline-copy" spellcheck="false">宝宝不在画面中情况：展示“未检测到宝宝”提示</div></div><div class="docs-outline-line level-1" data-level="1"><b class="docs-outline-index" contenteditable="false">7</b><div class="docs-outline-copy" spellcheck="false">呼吸率/心率：展示每分钟数据</div></div><div class="docs-outline-line level-2" data-level="2"><b class="docs-outline-index" contenteditable="false">1</b><div class="docs-outline-copy" spellcheck="false">宝宝睡着情况：展示每分钟数据</div></div><div class="docs-outline-line level-2" data-level="2"><b class="docs-outline-index" contenteditable="false">2</b><div class="docs-outline-copy" spellcheck="false">宝宝醒着情况：根据宝宝状态展示，平静时可测得就展示；活跃情况不可测得就不展示</div></div><div class="docs-outline-line level-2" data-level="2"><b class="docs-outline-index" contenteditable="false">3</b><div class="docs-outline-copy" spellcheck="false">宝宝不在画面中情况：不展示数据</div></div><div class="docs-outline-line level-1" data-level="1"><b class="docs-outline-index" contenteditable="false">8</b><div class="docs-outline-copy" spellcheck="false">体温贴/空气质量数据：接入体温贴、空气净化器设备时展示。根据测量机制，更新数据</div></div><div class="docs-outline-line level-1" data-level="1"><b class="docs-outline-index" contenteditable="false">9</b><div class="docs-outline-copy" spellcheck="false">其他生态设备控制区：展示后续接入的其他设备（非BBM设备）</div></div></div>
+            <div class="docs-structured-list" data-docs-preview="features" contenteditable="true" tabindex="0" aria-label="功能描述内容，可直接编辑或粘贴图片"><div class="docs-outline-line level-1" data-level="1"><b class="docs-outline-index" contenteditable="false">1</b><div class="docs-outline-copy" spellcheck="false">主页，点击单画面/双画面，进入单画面/双画面全屏页面</div></div><div class="docs-outline-line level-1" data-level="1"><b class="docs-outline-index" contenteditable="false">2</b><div class="docs-outline-copy" spellcheck="false">全屏，点击退出全屏，返回主页</div></div><div class="docs-outline-line level-1" data-level="1"><b class="docs-outline-index" contenteditable="false">3</b><div class="docs-outline-copy" spellcheck="false">全屏页面的功能操作，针对选中的设备画面生效。默认选中第一个设备画面。</div></div></div>
             <textarea class="docs-editor" id="docsFeatureList" hidden="" aria-label="功能描述，每行一条" style="height: 72px;"></textarea>
           </section>
           <section class="docs-card" tabindex="0">
@@ -11033,7 +11059,9 @@
     ],
     "featureEditorVersion": 2,
     "rules": [],
-    "ruleEditorVersion": 2
+    "ruleEditorVersion": 2,
+    "featureHtml": "",
+    "ruleHtml": ""
   },
   "实时监控区": {
     "title": "实时监控区",
@@ -11389,7 +11417,9 @@
     ],
     "featureEditorVersion": 2,
     "rules": [],
-    "ruleEditorVersion": 2
+    "ruleEditorVersion": 2,
+    "featureHtml": "",
+    "ruleHtml": ""
   },
   "实时监控区 / 双IPC主页": {
     "title": "双IPC主页",
@@ -11423,7 +11453,9 @@
     ],
     "featureEditorVersion": 2,
     "rules": [],
-    "ruleEditorVersion": 2
+    "ruleEditorVersion": 2,
+    "featureHtml": "",
+    "ruleHtml": ""
   },
   "实时监控区 / 睡眠看护": {
     "title": "睡眠看护",
@@ -11546,7 +11578,9 @@
     ],
     "featureEditorVersion": 2,
     "rules": [],
-    "ruleEditorVersion": 2
+    "ruleEditorVersion": 2,
+    "featureHtml": "",
+    "ruleHtml": ""
   },
   "日常活动统计 / 录像回放": {
     "title": "录像回放",
@@ -11561,7 +11595,9 @@
     ],
     "featureEditorVersion": 2,
     "rules": [],
-    "ruleEditorVersion": 2
+    "ruleEditorVersion": 2,
+    "featureHtml": "",
+    "ruleHtml": ""
   },
   "日常活动统计 / 未插卡": {
     "title": "未插卡",
@@ -11571,7 +11607,9 @@
     ],
     "featureEditorVersion": 2,
     "rules": [],
-    "ruleEditorVersion": 2
+    "ruleEditorVersion": 2,
+    "featureHtml": "",
+    "ruleHtml": ""
   },
   "其他生态设备控制 / 设备": {
     "title": "设备",
@@ -11615,7 +11653,9 @@
     ],
     "featureEditorVersion": 2,
     "rules": [],
-    "ruleEditorVersion": 2
+    "ruleEditorVersion": 2,
+    "featureHtml": "",
+    "ruleHtml": ""
   },
   "账号信息 / 账号": {
     "title": "账号",
@@ -11628,7 +11668,9 @@
     ],
     "featureEditorVersion": 2,
     "rules": [],
-    "ruleEditorVersion": 2
+    "ruleEditorVersion": 2,
+    "featureHtml": "",
+    "ruleHtml": ""
   },
   "实时监控区 / 多IPC主页": {
     "title": "多IPC主页",
@@ -11640,7 +11682,9 @@
     ],
     "featureEditorVersion": 2,
     "rules": [],
-    "ruleEditorVersion": 2
+    "ruleEditorVersion": 2,
+    "featureHtml": "",
+    "ruleHtml": ""
   },
   "实时监控区 / 主页-睡眠看护": {
     "title": "主页-睡眠看护",
@@ -11672,7 +11716,9 @@
     ],
     "featureEditorVersion": 2,
     "rules": [],
-    "ruleEditorVersion": 2
+    "ruleEditorVersion": 2,
+    "featureHtml": "",
+    "ruleHtml": ""
   },
   "实时监控区 / 主页-多画面": {
     "title": "主页-多画面",
@@ -11704,14 +11750,17 @@
     ],
     "featureEditorVersion": 2,
     "rules": [],
-    "ruleEditorVersion": 2
+    "ruleEditorVersion": 2,
+    "featureHtml": "",
+    "ruleHtml": ""
   },
   "实时监控区 / 双画面全屏": {
     "title": "双画面全屏",
     "desc": "",
     "bullets": [
       "主页，点击单画面/双画面，进入单画面/双画面全屏页面",
-      "全屏，点击退出全屏，返回主页"
+      "全屏，点击退出全屏，返回主页",
+      "全屏页面的功能操作，针对选中的设备画面生效。默认选中第一个设备画面。"
     ],
     "featureEditorVersion": 2,
     "rules": [],
@@ -11752,7 +11801,9 @@
     ],
     "featureEditorVersion": 2,
     "rules": [],
-    "ruleEditorVersion": 2
+    "ruleEditorVersion": 2,
+    "featureHtml": "",
+    "ruleHtml": ""
   },
   "无设备页": {
     "title": "无设备页",
@@ -11892,7 +11943,9 @@
     ],
     "featureEditorVersion": 2,
     "rules": [],
-    "ruleEditorVersion": 2
+    "ruleEditorVersion": 2,
+    "featureHtml": "",
+    "ruleHtml": ""
   },
   "电源关机": {
     "title": "电源关机",
@@ -15490,6 +15543,7 @@
     initResizablePanels();
     renderState();
   </script>
+
 
 
 
