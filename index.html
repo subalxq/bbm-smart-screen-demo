@@ -2950,7 +2950,7 @@
 
     .replay-page.no-card .replay-empty-state,
     .replay-page.no-card .event-empty-state {
-      display: grid;
+      display: grid !important;
     }
 
     .video-label {
@@ -3075,7 +3075,13 @@
       left: 0;
       height: 12px;
       border-radius: 999px;
-      background: rgba(255, 255, 255, 0.10);
+      background: repeating-linear-gradient(
+        135deg,
+        rgba(127, 151, 180, 0.18) 0,
+        rgba(127, 151, 180, 0.18) 6px,
+        rgba(127, 151, 180, 0.08) 6px,
+        rgba(127, 151, 180, 0.08) 12px
+      );
       content: "";
     }
 
@@ -3087,32 +3093,30 @@
       box-shadow: 0 0 18px rgba(255, 255, 255, 0.08);
     }
 
-    .timeline-block.motion {
+    .timeline-block.record-normal {
+      z-index: 1;
       background: linear-gradient(90deg, #59a7ff, #7fc8ff);
     }
 
-    .timeline-block.in-position {
-      background: linear-gradient(90deg, #55e0b7, #36c894);
+    .timeline-block.record-event {
+      z-index: 2;
+      top: 34px;
+      height: 20px;
+      border: 2px solid rgba(10, 18, 31, 0.62);
+      background: linear-gradient(90deg, #ff9f43, #ff6b7a);
+      box-shadow: 0 10px 22px rgba(255, 111, 122, 0.22);
     }
 
-    .timeline-block.prone {
-      background: linear-gradient(90deg, #ffb057, #ff8a4a);
-    }
-
-    .timeline-block.face-cover {
-      background: linear-gradient(90deg, #ff6b7a, #ff3f67);
-    }
-
-    .timeline-block.zone {
-      background: linear-gradient(90deg, #c084fc, #8b5cf6);
-    }
-
-    .timeline-block.cry {
-      background: linear-gradient(90deg, #f472b6, #ec4899);
-    }
-
-    .timeline-block.noise {
-      background: linear-gradient(90deg, #facc15, #f59e0b);
+    .timeline-block.record-empty {
+      z-index: 0;
+      background: repeating-linear-gradient(
+        135deg,
+        rgba(127, 151, 180, 0.24) 0,
+        rgba(127, 151, 180, 0.24) 6px,
+        rgba(127, 151, 180, 0.10) 6px,
+        rgba(127, 151, 180, 0.10) 12px
+      );
+      box-shadow: none;
     }
 
     .timeline-tick {
@@ -3161,32 +3165,23 @@
       border-radius: 50%;
     }
 
-    .timeline-legend .motion-dot {
+    .timeline-legend .record-event-dot {
+      background: #ff835d;
+    }
+
+    .timeline-legend .record-normal-dot {
       background: #65b9ff;
     }
 
-    .timeline-legend .in-position-dot {
-      background: #45d3a2;
-    }
-
-    .timeline-legend .prone-dot {
-      background: #ff9950;
-    }
-
-    .timeline-legend .face-cover-dot {
-      background: #ff5570;
-    }
-
-    .timeline-legend .zone-dot {
-      background: #9b6cff;
-    }
-
-    .timeline-legend .cry-dot {
-      background: #ec4899;
-    }
-
-    .timeline-legend .noise-dot {
-      background: #f6b31a;
+    .timeline-legend .record-empty-dot {
+      border: 1px solid rgba(157, 175, 198, 0.62);
+      background: repeating-linear-gradient(
+        135deg,
+        rgba(157, 175, 198, 0.44) 0,
+        rgba(157, 175, 198, 0.44) 3px,
+        rgba(157, 175, 198, 0.12) 3px,
+        rgba(157, 175, 198, 0.12) 6px
+      );
     }
 
     .replay-side {
@@ -3253,7 +3248,7 @@
 
     .event-replay-list {
       display: grid;
-      grid-template-rows: auto minmax(0, 1fr);
+      grid-template-rows: auto auto minmax(0, 1fr);
       min-height: 0;
       padding: 16px;
     }
@@ -3263,6 +3258,88 @@
       align-items: center;
       justify-content: space-between;
       margin-bottom: 12px;
+    }
+
+    .event-type-filter {
+      position: relative;
+      margin: 0 0 12px;
+    }
+
+    .event-filter-toggle {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      min-height: 36px;
+      border: 1px solid rgba(134, 164, 202, 0.28);
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.06);
+      padding: 8px 10px;
+      color: #f5f9ff;
+      font-size: 11px;
+      font-weight: 900;
+      text-align: left;
+    }
+
+    .event-filter-toggle i {
+      color: #91a2ba;
+      font-style: normal;
+      transition: transform .16s ease;
+    }
+
+    .event-type-filter.open .event-filter-toggle {
+      border-color: rgba(82, 166, 255, 0.64);
+      background: rgba(82, 166, 255, 0.14);
+      box-shadow: 0 8px 20px rgba(82, 166, 255, 0.12);
+    }
+
+    .event-type-filter.open .event-filter-toggle i {
+      transform: rotate(180deg);
+    }
+
+    .event-filter-menu {
+      position: absolute;
+      top: calc(100% + 6px);
+      right: 0;
+      left: 0;
+      z-index: 8;
+      display: none;
+      grid-template-columns: 1fr;
+      gap: 4px;
+      max-height: 236px;
+      overflow: auto;
+      border: 1px solid rgba(134, 164, 202, 0.28);
+      border-radius: 14px;
+      background: rgba(17, 27, 44, 0.98);
+      padding: 8px;
+      box-shadow: 0 18px 36px rgba(0, 0, 0, 0.34);
+    }
+
+    .event-type-filter.open .event-filter-menu {
+      display: grid;
+    }
+
+    .event-filter-option {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      min-height: 30px;
+      border-radius: 10px;
+      padding: 6px 8px;
+      color: #c9d5e6;
+      font-size: 11px;
+      font-weight: 850;
+    }
+
+    .event-filter-option:hover {
+      background: rgba(82, 166, 255, 0.12);
+    }
+
+    .event-filter-option input {
+      width: 14px;
+      height: 14px;
+      margin: 0;
+      accent-color: #52a6ff;
     }
 
     .replay-events {
@@ -3294,6 +3371,10 @@
       border-radius: 16px;
       background: rgba(255, 255, 255, 0.055);
       padding: 9px;
+    }
+
+    .replay-event-card.is-hidden {
+      display: none;
     }
 
     .event-thumb {
@@ -9840,26 +9921,22 @@
 
                   <section class="timeline-panel" aria-label="时间轴">
                     <div class="event-timeline">
-                      <span class="timeline-block motion" style="left:2%;width:32%;"></span>
-                      <span class="timeline-block in-position" style="left:36%;width:8%;"></span>
-                      <span class="timeline-block prone" style="left:48%;width:12%;"></span>
-                      <span class="timeline-block face-cover" style="left:62%;width:6%;"></span>
-                      <span class="timeline-block zone" style="left:72%;width:10%;"></span>
-                      <span class="timeline-block cry" style="left:84%;width:8%;"></span>
-                      <span class="timeline-block noise" style="left:94%;width:4%;"></span>
+                      <span class="timeline-block record-normal" style="left:2%;width:66%;"></span>
+                      <span class="timeline-block record-empty" style="left:68%;width:4%;"></span>
+                      <span class="timeline-block record-normal" style="left:72%;width:20%;"></span>
+                      <span class="timeline-block record-empty" style="left:92%;width:6%;"></span>
+                      <span class="timeline-block record-event" style="left:36%;width:8%;"></span>
+                      <span class="timeline-block record-event" style="left:48%;width:20%;"></span>
+                      <span class="timeline-block record-event" style="left:84%;width:8%;"></span>
                       <span class="timeline-tick" style="left:0%;"><strong>00:00</strong></span>
                       <span class="timeline-tick" style="left:25%;"><strong>06:00</strong></span>
                       <span class="timeline-tick" style="left:50%;"><strong>12:00</strong></span>
                       <span class="timeline-tick" style="left:75%;"><strong>18:00</strong></span>
                       <span class="timeline-tick" style="left:100%;"><strong>24:00</strong></span>
                       <div class="timeline-legend" aria-hidden="true">
-                        <span><i class="motion-dot"></i>移动侦测</span>
-                        <span><i class="in-position-dot"></i>宝宝出位</span>
-                        <span><i class="prone-dot"></i>趴睡</span>
-                        <span><i class="face-cover-dot"></i>遮脸</span>
-                        <span><i class="zone-dot"></i>安全区域出界/危险区域靠近</span>
-                        <span><i class="cry-dot"></i>哭声</span>
-                        <span><i class="noise-dot"></i>异响</span>
+                        <span><i class="record-event-dot"></i>有事件录像</span>
+                        <span><i class="record-normal-dot"></i>无事件录像</span>
+                        <span><i class="record-empty-dot"></i>无录像</span>
                       </div>
                     </div>
                   </section>
@@ -9869,16 +9946,32 @@
                   <section class="event-replay-list">
                     <div class="event-list-head">
                       <h3>事件记录</h3>
-                      <span class="settings-chip">今日 5 条</span>
+                      <span class="settings-chip" id="eventCountChip">今日 5 条</span>
+                    </div>
+                    <div class="event-type-filter" id="eventTypeFilter" aria-label="事件类型筛选">
+                      <button class="event-filter-toggle" id="eventFilterToggle" type="button" aria-haspopup="listbox" aria-expanded="false">
+                        <span id="eventFilterSummary">全部事件类型</span><i>⌄</i>
+                      </button>
+                      <div class="event-filter-menu" role="listbox" aria-label="事件类型多选">
+                        <label class="event-filter-option"><input type="checkbox" data-event-filter="all" checked="">全部</label>
+                        <label class="event-filter-option"><input type="checkbox" data-event-filter="移动侦测">移动侦测</label>
+                        <label class="event-filter-option"><input type="checkbox" data-event-filter="宝宝不在位">宝宝不在位</label>
+                        <label class="event-filter-option"><input type="checkbox" data-event-filter="趴睡">趴睡</label>
+                        <label class="event-filter-option"><input type="checkbox" data-event-filter="遮脸">遮脸</label>
+                        <label class="event-filter-option"><input type="checkbox" data-event-filter="安全区域出界">安全区域出界</label>
+                        <label class="event-filter-option"><input type="checkbox" data-event-filter="危险区域靠近">危险区域靠近</label>
+                        <label class="event-filter-option"><input type="checkbox" data-event-filter="哭声">哭声</label>
+                        <label class="event-filter-option"><input type="checkbox" data-event-filter="异响">异响</label>
+                      </div>
                     </div>
                     <div class="replay-events">
-                      <button class="replay-event-card" type="button"><span class="event-thumb"></span><span><strong>12:09 检测到宝宝移动</strong></span></button>
-                      <button class="replay-event-card" type="button"><span class="event-thumb"></span><span><strong>11:42 检测到宝宝遮脸</strong></span></button>
-                      <button class="replay-event-card" type="button"><span class="event-thumb"></span><span><strong>10:28 检测到安全区域出界</strong></span></button>
-                      <button class="replay-event-card" type="button"><span class="event-thumb"></span><span><strong>09:18 检测到宝宝趴睡</strong></span></button>
-                      <button class="replay-event-card" type="button"><span class="event-thumb"></span><span><strong>08:30 检测到宝宝移动</strong></span></button>
+                      <button class="replay-event-card" type="button" data-event-type="移动侦测"><span class="event-thumb"></span><span><strong>12:09 检测到宝宝移动</strong></span></button>
+                      <button class="replay-event-card" type="button" data-event-type="遮脸"><span class="event-thumb"></span><span><strong>11:42 检测到宝宝遮脸</strong></span></button>
+                      <button class="replay-event-card" type="button" data-event-type="安全区域出界"><span class="event-thumb"></span><span><strong>10:28 检测到安全区域出界</strong></span></button>
+                      <button class="replay-event-card" type="button" data-event-type="趴睡"><span class="event-thumb"></span><span><strong>09:18 检测到宝宝趴睡</strong></span></button>
+                      <button class="replay-event-card" type="button" data-event-type="移动侦测"><span class="event-thumb"></span><span><strong>08:30 检测到宝宝移动</strong></span></button>
                     </div>
-                    <div class="event-empty-state">暂无事件记录</div>
+                    <div class="event-empty-state" style="display: none;">暂无事件记录</div>
                   </section>
                 </aside>
               </section>
@@ -10985,7 +11078,7 @@
             <div class="docs-card-head">
               <h3>功能描述</h3>
             </div>
-            <div class="docs-structured-list" data-docs-preview="features" contenteditable="true" tabindex="0" aria-label="功能描述内容，可直接编辑或粘贴图片"><div class="docs-outline-line level-1" data-level="1"><b class="docs-outline-index" contenteditable="false">1</b><div class="docs-outline-copy" spellcheck="false">支持查看设备的录像回放（包含：本地录像、云录像、相册）</div></div><div class="docs-outline-line level-1" data-level="1"><b class="docs-outline-index" contenteditable="false">2</b><div class="docs-outline-copy" spellcheck="false">本地录像：支持通过时间轴、事件记录查看录像</div></div><div class="docs-outline-line level-1" data-level="1"><b class="docs-outline-index" contenteditable="false">3</b><div class="docs-outline-copy" spellcheck="false">云录像：需登录账号，付费才支持。</div></div><div class="docs-outline-line level-1" data-level="1"><b class="docs-outline-index" contenteditable="false">4</b><div class="docs-outline-copy" spellcheck="false">相册：展示用户 截图、录像 保存在设备SD卡上的图片/视频。按日期分类展示，支持按日期筛选</div></div><div class="docs-outline-line level-1" data-level="1"><b class="docs-outline-index" contenteditable="false">5</b><div class="docs-outline-copy" spellcheck="false">后续支持承接：精彩时刻、成长记录等入口。</div></div><div class="docs-outline-line level-1" data-level="1"><b class="docs-outline-index" contenteditable="false">6</b><div class="docs-outline-copy" spellcheck="false">事件类型：检测类型</div></div></div>
+            <div class="docs-structured-list" data-docs-preview="features" contenteditable="true" tabindex="0" aria-label="功能描述内容，可直接编辑或粘贴图片"><div class="docs-outline-line level-1" data-level="1"><b class="docs-outline-index" contenteditable="false">1</b><div class="docs-outline-copy" spellcheck="false">支持查看设备的录像回放（包含：本地录像、云录像、相册）</div></div><div class="docs-outline-line level-1" data-level="1"><b class="docs-outline-index" contenteditable="false">2</b><div class="docs-outline-copy" spellcheck="false">本地录像：支持通过时间轴、事件记录查看录像</div></div><div class="docs-outline-line level-2" data-level="2"><b class="docs-outline-index" contenteditable="false">1</b><div class="docs-outline-copy" spellcheck="false">倍速：支持1、2、4、8倍</div></div><div class="docs-outline-line level-1" data-level="1"><b class="docs-outline-index" contenteditable="false">3</b><div class="docs-outline-copy" spellcheck="false">云录像：需登录账号，付费才支持。</div></div><div class="docs-outline-line level-1" data-level="1"><b class="docs-outline-index" contenteditable="false">4</b><div class="docs-outline-copy" spellcheck="false">相册：展示用户 截图、录像 保存在设备SD卡上的图片/视频。按日期分类展示，支持按日期筛选</div></div><div class="docs-outline-line level-1" data-level="1"><b class="docs-outline-index" contenteditable="false">5</b><div class="docs-outline-copy" spellcheck="false">后续支持承接：精彩时刻、成长记录等入口。</div></div><div class="docs-outline-line level-1" data-level="1"><b class="docs-outline-index" contenteditable="false">6</b><div class="docs-outline-copy" spellcheck="false">事件类型：检测类型</div></div></div>
             <textarea class="docs-editor" id="docsFeatureList" hidden="" aria-label="功能描述，每行一条" style="height: 72px;"></textarea>
           </section>
           <section class="docs-card" tabindex="0">
@@ -11051,7 +11144,9 @@
     ],
     "featureEditorVersion": 2,
     "rules": [],
-    "ruleEditorVersion": 2
+    "ruleEditorVersion": 2,
+    "featureHtml": "",
+    "ruleHtml": ""
   },
   "实时监控区": {
     "title": "实时监控区",
@@ -11071,7 +11166,9 @@
       "- 二画面和四画面：每个画面内只展示对应的睡眠安抚、设备设置入口。",
       "- 全屏模式下，展示退出全屏操作。"
     ],
-    "ruleEditorVersion": 2
+    "ruleEditorVersion": 2,
+    "featureHtml": "",
+    "ruleHtml": ""
   },
   "宝宝看护指标区": {
     "title": "智能看护数据统计",
@@ -11160,7 +11257,9 @@
     ],
     "featureEditorVersion": 2,
     "rules": [],
-    "ruleEditorVersion": 2
+    "ruleEditorVersion": 2,
+    "featureHtml": "",
+    "ruleHtml": ""
   },
   "控制中心": {
     "title": "控制中心",
@@ -11195,7 +11294,9 @@
       "告警通知设置，屏端与手机app独立设置，互不影响",
       "屏端的告警通知设置，仅针对屏端，不影响手机app的告警通知设置"
     ],
-    "ruleEditorVersion": 2
+    "ruleEditorVersion": 2,
+    "featureHtml": "",
+    "ruleHtml": ""
   },
   "断连通知": {
     "title": "断连通知",
@@ -11206,7 +11307,9 @@
     ],
     "featureEditorVersion": 2,
     "rules": [],
-    "ruleEditorVersion": 2
+    "ruleEditorVersion": 2,
+    "featureHtml": "",
+    "ruleHtml": ""
   },
   "低电量通知": {
     "title": "低电量通知",
@@ -11216,7 +11319,9 @@
     ],
     "featureEditorVersion": 2,
     "rules": [],
-    "ruleEditorVersion": 2
+    "ruleEditorVersion": 2,
+    "featureHtml": "",
+    "ruleHtml": ""
   },
   "存储卡异常通知": {
     "title": "存储卡异常通知",
@@ -11227,7 +11332,9 @@
     ],
     "featureEditorVersion": 2,
     "rules": [],
-    "ruleEditorVersion": 2
+    "ruleEditorVersion": 2,
+    "featureHtml": "",
+    "ruleHtml": ""
   },
   "设备固件升级失败通知": {
     "title": "设备固件升级失败通知",
@@ -11264,7 +11371,9 @@
     ],
     "featureEditorVersion": 2,
     "rules": [],
-    "ruleEditorVersion": 2
+    "ruleEditorVersion": 2,
+    "featureHtml": "",
+    "ruleHtml": ""
   },
   "屏端初始化向导 / 添加设备（已配对好）": {
     "title": "添加设备（已配对好）",
@@ -11308,7 +11417,9 @@
     ],
     "featureEditorVersion": 2,
     "rules": [],
-    "ruleEditorVersion": 2
+    "ruleEditorVersion": 2,
+    "featureHtml": "",
+    "ruleHtml": ""
   },
   "屏端初始化向导 / 添加设备（未配对好）": {
     "title": "添加设备（未配对好）",
@@ -11352,7 +11463,9 @@
     ],
     "featureEditorVersion": 2,
     "rules": [],
-    "ruleEditorVersion": 2
+    "ruleEditorVersion": 2,
+    "featureHtml": "",
+    "ruleHtml": ""
   },
   "实时监控区 / 主页": {
     "title": "主页",
@@ -11397,7 +11510,9 @@
     ],
     "featureEditorVersion": 2,
     "rules": [],
-    "ruleEditorVersion": 2
+    "ruleEditorVersion": 2,
+    "featureHtml": "",
+    "ruleHtml": ""
   },
   "实时监控区 / 双IPC主页": {
     "title": "双IPC主页",
@@ -11431,7 +11546,9 @@
     ],
     "featureEditorVersion": 2,
     "rules": [],
-    "ruleEditorVersion": 2
+    "ruleEditorVersion": 2,
+    "featureHtml": "",
+    "ruleHtml": ""
   },
   "实时监控区 / 睡眠看护": {
     "title": "睡眠看护",
@@ -11508,7 +11625,9 @@
     ],
     "featureEditorVersion": 2,
     "rules": [],
-    "ruleEditorVersion": 2
+    "ruleEditorVersion": 2,
+    "featureHtml": "",
+    "ruleHtml": ""
   },
   "实时监控区 / 二画面全屏": {
     "title": "二画面全屏",
@@ -11556,7 +11675,9 @@
     "rules": [
       "智能看护页面 状态：未登录账号状态、屏端未联网状态、摄像头未联网状态、无任何数据状态、无部分数据状态"
     ],
-    "ruleEditorVersion": 2
+    "ruleEditorVersion": 2,
+    "featureHtml": "",
+    "ruleHtml": ""
   },
   "日常活动统计 / 录像回放": {
     "title": "录像回放",
@@ -11564,6 +11685,7 @@
     "bullets": [
       "支持查看设备的录像回放（包含：本地录像、云录像、相册）",
       "本地录像：支持通过时间轴、事件记录查看录像",
+      "  倍速：支持1、2、4、8倍",
       "云录像：需登录账号，付费才支持。",
       "相册：展示用户 截图、录像 保存在设备SD卡上的图片/视频。按日期分类展示，支持按日期筛选",
       "后续支持承接：精彩时刻、成长记录等入口。",
@@ -11629,7 +11751,9 @@
     ],
     "featureEditorVersion": 2,
     "rules": [],
-    "ruleEditorVersion": 2
+    "ruleEditorVersion": 2,
+    "featureHtml": "",
+    "ruleHtml": ""
   },
   "账号信息 / 账号": {
     "title": "账号",
@@ -11656,7 +11780,9 @@
     ],
     "featureEditorVersion": 2,
     "rules": [],
-    "ruleEditorVersion": 2
+    "ruleEditorVersion": 2,
+    "featureHtml": "",
+    "ruleHtml": ""
   },
   "实时监控区 / 主页-睡眠看护": {
     "title": "主页-睡眠看护",
@@ -11688,7 +11814,9 @@
     ],
     "featureEditorVersion": 2,
     "rules": [],
-    "ruleEditorVersion": 2
+    "ruleEditorVersion": 2,
+    "featureHtml": "",
+    "ruleHtml": ""
   },
   "实时监控区 / 主页-多画面": {
     "title": "主页-多画面",
@@ -11720,7 +11848,9 @@
     ],
     "featureEditorVersion": 2,
     "rules": [],
-    "ruleEditorVersion": 2
+    "ruleEditorVersion": 2,
+    "featureHtml": "",
+    "ruleHtml": ""
   },
   "实时监控区 / 双画面全屏": {
     "title": "双画面全屏",
@@ -11732,7 +11862,9 @@
     ],
     "featureEditorVersion": 2,
     "rules": [],
-    "ruleEditorVersion": 2
+    "ruleEditorVersion": 2,
+    "featureHtml": "",
+    "ruleHtml": ""
   },
   "宝宝看护指标区 / 未登录状态": {
     "title": "未登录状态",
@@ -11757,7 +11889,9 @@
     ],
     "featureEditorVersion": 2,
     "rules": [],
-    "ruleEditorVersion": 2
+    "ruleEditorVersion": 2,
+    "featureHtml": "",
+    "ruleHtml": ""
   },
   "账号信息 / 账号-未登录": {
     "title": "账号-未登录",
@@ -11780,7 +11914,9 @@
     ],
     "featureEditorVersion": 2,
     "rules": [],
-    "ruleEditorVersion": 2
+    "ruleEditorVersion": 2,
+    "featureHtml": "",
+    "ruleHtml": ""
   },
   "无设备页 / 主页": {
     "title": "无设备页",
@@ -11877,7 +12013,9 @@
     ],
     "featureEditorVersion": 2,
     "rules": [],
-    "ruleEditorVersion": 2
+    "ruleEditorVersion": 2,
+    "featureHtml": "",
+    "ruleHtml": ""
   },
   "设备设置": {
     "title": "设备设置",
@@ -11903,7 +12041,9 @@
     ],
     "featureEditorVersion": 2,
     "rules": [],
-    "ruleEditorVersion": 2
+    "ruleEditorVersion": 2,
+    "featureHtml": "",
+    "ruleHtml": ""
   },
   "电源关机": {
     "title": "电源关机",
@@ -12523,6 +12663,13 @@
     const alertText = document.getElementById('alertText');
     const alertAction = document.getElementById('alertAction');
     const alertCloseButton = document.querySelector('.alert-close');
+    const eventTypeFilter = document.getElementById('eventTypeFilter');
+    const eventFilterToggle = document.getElementById('eventFilterToggle');
+    const eventFilterSummary = document.getElementById('eventFilterSummary');
+    const eventFilterInputs = document.querySelectorAll('.event-filter-option input[data-event-filter]');
+    const replayEventCards = document.querySelectorAll('[data-event-type]');
+    const eventCountChip = document.getElementById('eventCountChip');
+    const eventEmptyState = document.querySelector('.event-empty-state');
     const sceneSleepTitle = document.getElementById('sceneSleepTitle');
     const sceneSleepMeta = document.getElementById('sceneSleepMeta');
     const sceneSplitStatus = document.getElementById('sceneSplitStatus');
@@ -12668,6 +12815,39 @@
       alertAction.hidden = !label;
       alertAction.textContent = label || '';
       alertAction.dataset.alertTarget = target || '';
+    }
+
+    function getSelectedReplayEventTypes() {
+      const selected = Array.from(eventFilterInputs)
+        .filter((input) => input.checked && input.dataset.eventFilter !== 'all')
+        .map((input) => input.dataset.eventFilter);
+      const allInput = Array.from(eventFilterInputs).find((input) => input.dataset.eventFilter === 'all');
+      return allInput?.checked || !selected.length ? ['all'] : selected;
+    }
+
+    function updateReplayEventFilterSummary(types) {
+      if (!eventFilterSummary) return;
+      if (!types.length || types.includes('all')) {
+        eventFilterSummary.textContent = '全部事件类型';
+        return;
+      }
+      eventFilterSummary.textContent = types.length > 2
+        ? `已选 ${types.length} 项`
+        : types.join('、');
+    }
+
+    function filterReplayEvents(types = ['all']) {
+      const selectedTypes = Array.isArray(types) ? types : [types];
+      const showAll = !selectedTypes.length || selectedTypes.includes('all');
+      let visibleCount = 0;
+      replayEventCards.forEach((card) => {
+        const matches = showAll || selectedTypes.includes(card.dataset.eventType);
+        card.classList.toggle('is-hidden', !matches);
+        if (matches) visibleCount += 1;
+      });
+      updateReplayEventFilterSummary(selectedTypes);
+      if (eventCountChip) eventCountChip.textContent = `\u4ECA\u65E5 ${visibleCount} \u6761`;
+      if (eventEmptyState) eventEmptyState.style.display = visibleCount ? 'none' : 'grid';
     }
 
     function renderNotificationContent() {
@@ -14692,6 +14872,38 @@
       });
     });
 
+    if (eventFilterToggle && eventTypeFilter) {
+      eventFilterToggle.addEventListener('click', (event) => {
+        event.stopPropagation();
+        const isOpen = eventTypeFilter.classList.toggle('open');
+        eventFilterToggle.setAttribute('aria-expanded', String(isOpen));
+      });
+    }
+
+    eventFilterInputs.forEach((input) => {
+      input.addEventListener('change', () => {
+        const allInput = Array.from(eventFilterInputs).find((item) => item.dataset.eventFilter === 'all');
+        const typeInputs = Array.from(eventFilterInputs).filter((item) => item.dataset.eventFilter !== 'all');
+        if (input.dataset.eventFilter === 'all' && input.checked) {
+          typeInputs.forEach((item) => { item.checked = false; });
+        } else if (input.dataset.eventFilter !== 'all' && input.checked && allInput) {
+          allInput.checked = false;
+        }
+        if (!Array.from(eventFilterInputs).some((item) => item.checked) && allInput) {
+          allInput.checked = true;
+        }
+        filterReplayEvents(getSelectedReplayEventTypes());
+      });
+    });
+
+    document.addEventListener('click', (event) => {
+      if (!eventTypeFilter?.classList.contains('open') || eventTypeFilter.contains(event.target)) return;
+      eventTypeFilter.classList.remove('open');
+      eventFilterToggle?.setAttribute('aria-expanded', 'false');
+    });
+
+    filterReplayEvents(['all']);
+
     if (alertAction) {
       alertAction.addEventListener('click', () => {
         const target = alertAction.dataset.alertTarget;
@@ -15504,6 +15716,7 @@
     initResizablePanels();
     renderState();
   </script>
+
 
 
 
