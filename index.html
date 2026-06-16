@@ -9700,11 +9700,11 @@
             <button class="nav-sub-item inline-edit-hint" data-page="宝宝看护指标区" data-care-state="empty">无数据状态</button>
             <button class="nav-sub-item inline-edit-hint" data-page="智能看护设置">智能看护设置</button>
           </div>
-          <button class="nav-item active inline-edit-hint" data-page="日常活动统计" data-scene="活动" data-room="neo">录像回放</button>
+          <button class="nav-item inline-edit-hint" data-page="日常活动统计" data-scene="活动" data-room="neo">录像回放</button>
           <div class="nav-sub">
             <button class="nav-sub-item inline-edit-hint" data-page="日常活动统计" data-replay-state="noCard">未插卡</button>
           </div>
-          <button class="nav-item inline-edit-hint" data-page="智能看护快捷设置">设置</button>
+          <button class="nav-item active inline-edit-hint" data-page="智能看护快捷设置">设置</button>
           <div class="nav-sub">
             <button class="nav-sub-item inline-edit-hint" data-page="设备设置">设备设置</button>
           </div>
@@ -9733,11 +9733,11 @@
       <div class="canvas-wrap">
         <div class="canvas-head">
           <strong>8 寸平板横屏原型</strong>
-          <span id="canvasLabel">日常活动统计 / 录像回放</span>
+          <span id="canvasLabel">智能看护快捷设置 / 设置</span>
         </div>
 
         <div class="shell">
-          <div class="screen replay-page-mode">
+          <div class="screen settings-page-mode">
             <header class="topbar">
               <div class="screen-date inline-edit-hint">2026/5/7 周四</div>
               <div class="screen-status">
@@ -9757,8 +9757,8 @@
             <nav class="screen-menu" aria-label="屏内主菜单">
               <button class="screen-menu-item inline-edit-hint" data-page="实时监控区" data-scene="睡眠看护">主页</button>
               <button class="screen-menu-item inline-edit-hint" data-page="宝宝看护指标区" data-scene="睡眠看护">看护记录</button>
-              <button class="screen-menu-item active inline-edit-hint" data-page="日常活动统计" data-scene="活动" data-room="neo">录像回放</button>
-              <button class="screen-menu-item inline-edit-hint" data-page="智能看护快捷设置">设置</button>
+              <button class="screen-menu-item inline-edit-hint" data-page="日常活动统计" data-scene="活动" data-room="neo">录像回放</button>
+              <button class="screen-menu-item active inline-edit-hint" data-page="智能看护快捷设置">设置</button>
               <div class="screen-menu-spacer"></div>
               <button class="screen-menu-item inline-edit-hint" data-page="账号信息">账号</button>
             </nav>
@@ -9853,7 +9853,7 @@
                 </section>
               </div>
 
-              <aside class="right-panel" id="rightPanel" data-scene-panel="活动" data-monitor-view="single">
+              <aside class="right-panel" id="rightPanel" data-scene-panel="睡眠看护" data-monitor-view="single">
                 <div class="scene-mode-card scene-soothe">
                   <div class="scene-mode-top">
                     <div><div class="scene-mode-state"><span class="scene-mode-icon inline-edit-hint">☾</span><span class="scene-mode-state-text"><strong class="inline-edit-hint">niki平静</strong><span class="scene-mode-subtitle"></span></span></div></div>
@@ -10294,7 +10294,7 @@
               <header class="device-settings-head">
                 <div class="device-settings-title">
                   <button class="care-settings-back inline-edit-hint" type="button" data-action="device-settings-back" aria-label="返回">‹</button>
-                  <div><h2 id="deviceSettingsTitle" class="inline-edit-hint">设备设置</h2><p id="deviceSettingsSubtitle" class="inline-edit-hint">白噪声</p></div>
+                  <div><h2 id="deviceSettingsTitle" class="inline-edit-hint">设备设置</h2><p id="deviceSettingsSubtitle" class="inline-edit-hint">niki摄像头</p></div>
                 </div>
               </header>
               <div class="device-settings-scroll">
@@ -10309,7 +10309,7 @@
                 </section>
                 <section class="device-settings-detail info" aria-label="设备信息">
                   <div class="device-settings-list">
-                    <div class="device-settings-item"><span class="inline-edit-hint">设备名称</span><span class="inline-edit-hint">niki摄像头</span></div>
+                    <div class="device-settings-item"><span class="inline-edit-hint" spellcheck="false">设备名称</span><span class="inline-edit-hint" spellcheck="false">niki摄像头</span></div>
                     <div class="device-settings-item"><span class="inline-edit-hint">SN</span><span class="inline-edit-hint">BBM-NK-26050701</span></div>
                     <div class="device-settings-item"><span class="inline-edit-hint">MAC地址</span><span class="inline-edit-hint">8C:7A:3D:20:11:09</span></div>
                     <div class="device-settings-item"><span class="inline-edit-hint">IP地址</span><span class="inline-edit-hint">192.168.1.108</span></div>
@@ -10357,7 +10357,7 @@
               </div>
             </main>
 
-            <main class="settings-page" id="settingsPage">
+            <main class="settings-page detail-mode" id="settingsPage">
               <nav class="settings-nav" aria-label="设置分类">
                 <div class="settings-nav-group-title inline-edit-hint">快捷设置</div>
                 <button class="inline-edit-hint" data-setting-panel="sound">音量</button>
@@ -10369,8 +10369,8 @@
                 <button data-setting-panel="sleepMode" class="inline-edit-hint">睡眠模式</button>
                 <button data-setting-panel="wifi" class="inline-edit-hint">Wi-Fi网络</button>
                 <button data-setting-panel="alarm" class="inline-edit-hint">闹钟</button>
-                <button data-setting-panel="general" class="active inline-edit-hint">其他设置</button>
-                <button data-setting-panel="deviceInfo" class="inline-edit-hint">设备信息</button>
+                <button data-setting-panel="general" class="inline-edit-hint">其他设置</button>
+                <button data-setting-panel="deviceInfo" class="active inline-edit-hint">设备信息</button>
                 <button data-setting-panel="support" class="inline-edit-hint">帮助与反馈</button>
 
                 <div class="settings-nav-group-title inline-edit-hint">设备管理</div>
@@ -10625,7 +10625,7 @@
                   </section>
                 </div>
 
-                <div class="settings-panel active" data-panel="general">
+                <div class="settings-panel" data-panel="general">
                   <div class="settings-head"><div><h2 class="inline-edit-hint">其他设置</h2><p class="inline-edit-hint">语言、时区、单位和时间格式。</p></div></div>
                   <div class="settings-general-stack">
                     <div class="settings-simple-grid">
@@ -10638,11 +10638,11 @@
                   </div>
                 </div>
 
-                <div class="settings-panel" data-panel="deviceInfo">
+                <div class="settings-panel active" data-panel="deviceInfo">
                   <div class="settings-head"><div><h2 class="inline-edit-hint">设备信息</h2><p class="inline-edit-hint">设备型号、系统版本和维护操作。</p></div></div>
                   <div class="settings-simple-grid">
                     <div class="setting-card"><h3 class="inline-edit-hint">设备型号</h3><p class="inline-edit-hint">BBM Smart Screen 8</p></div>
-                    <div class="setting-card"><h3 class="inline-edit-hint">设备系统版本</h3><p class="inline-edit-hint">BBM OS 1.2.8 · OTA 升级</p></div>
+                    <div class="setting-card"><h3 class="inline-edit-hint">设备系统版本</h3><p class="inline-edit-hint" spellcheck="false">BBM OS 1.2.8 · OTA 升级</p></div>
                     <div class="setting-card setting-action-card"><h3 class="inline-edit-hint">恢复出厂设置</h3><p class="inline-edit-hint">清除设备本地设置并恢复为出厂状态。</p><button class="setting-action-btn inline-edit-hint" type="button">恢复出厂设置</button></div>
                   </div>
                 </div>
@@ -10669,8 +10669,8 @@
             <main class="account-page" id="accountPage">
               <nav class="account-nav" aria-label="账号分类">
                 <button class="inline-edit-hint" data-account-panel="baby">宝宝信息</button>
-                <button data-account-panel="account" class="inline-edit-hint">账号信息</button>
-                <button data-account-panel="share" class="active inline-edit-hint">设备分享</button>
+                <button data-account-panel="account" class="active inline-edit-hint">账号信息</button>
+                <button data-account-panel="share" class="inline-edit-hint">设备分享</button>
                 <button data-account-panel="privacy" class="inline-edit-hint">隐私与条款</button>
               </nav>
 
@@ -10726,7 +10726,7 @@
                   </div>
                 </div>
 
-                <div class="account-panel" data-panel="account">
+                <div class="account-panel active" data-panel="account">
                   <div class="account-head">
                     <div>
                       <h2 class="inline-edit-hint">账号信息</h2>
@@ -10746,7 +10746,7 @@
                   </div>
                 </div>
 
-                <div class="account-panel active" data-panel="share">
+                <div class="account-panel" data-panel="share">
                   <div class="account-head">
                     <div>
                       <h2 class="inline-edit-hint">设备分享</h2>
@@ -11423,14 +11423,14 @@
             <div class="docs-card-head">
               <h3>功能描述</h3>
             </div>
-            <div class="docs-structured-list" data-docs-preview="features" contenteditable="true" tabindex="0" aria-label="功能描述内容，可直接编辑或粘贴图片"><div class="docs-outline-line level-1" data-level="1"><b class="docs-outline-index" contenteditable="false">1</b><div class="docs-outline-copy" spellcheck="false">支持查看设备的录像回放（包含：本地录像、云录像、相册）</div></div><div class="docs-outline-line level-1" data-level="1"><b class="docs-outline-index" contenteditable="false">2</b><div class="docs-outline-copy" spellcheck="false">本地录像：支持通过时间轴、事件记录查看录像</div></div><div class="docs-outline-line level-2" data-level="2"><b class="docs-outline-index" contenteditable="false">1</b><div class="docs-outline-copy" spellcheck="false">倍速：支持1、2、4、8倍</div></div><div class="docs-outline-line level-1" data-level="1"><b class="docs-outline-index" contenteditable="false">3</b><div class="docs-outline-copy" spellcheck="false">云录像：需登录账号，付费才支持。</div></div><div class="docs-outline-line level-1" data-level="1"><b class="docs-outline-index" contenteditable="false">4</b><div class="docs-outline-copy" spellcheck="false">相册：展示用户 截图、录像 保存在设备SD卡上的图片/视频</div></div><div class="docs-outline-line level-2" data-level="2"><b class="docs-outline-index" contenteditable="false">1</b><div class="docs-outline-copy" spellcheck="false">按日期分类展示，支持按日期筛选</div></div><div class="docs-outline-line level-2" data-level="2"><b class="docs-outline-index" contenteditable="false">2</b><div class="docs-outline-copy" spellcheck="false">支持全屏查看、删除</div></div><div class="docs-outline-line level-1" data-level="1"><b class="docs-outline-index" contenteditable="false">5</b><div class="docs-outline-copy" spellcheck="false">后续支持承接：精彩时刻、成长记录等入口。</div></div><div class="docs-outline-line level-1" data-level="1"><b class="docs-outline-index" contenteditable="false">6</b><div class="docs-outline-copy" spellcheck="false">事件类型：检测类型</div></div></div>
+            <div class="docs-structured-list" data-docs-preview="features" contenteditable="true" tabindex="0" aria-label="功能描述内容，可直接编辑或粘贴图片"><div class="docs-outline-line level-1" data-level="1"><b class="docs-outline-index" contenteditable="false">1</b><div class="docs-outline-copy" spellcheck="false">展示屏端相关设置（快捷设置、通用设置），及设备管理模块</div></div><div class="docs-outline-line level-1" data-level="1"><b class="docs-outline-index" contenteditable="false">2</b><div class="docs-outline-copy" spellcheck="false">快捷设置：音量、亮度。调节实时生效</div></div><div class="docs-outline-line level-1" data-level="1"><b class="docs-outline-index" contenteditable="false">3</b><div class="docs-outline-copy" spellcheck="false">息屏设置：支持设置 息屏时间（默认1min）、主页常亮开关（默认开）、夜间轻唤醒开关（默认开）</div></div><div class="docs-outline-line level-1" data-level="1"><b class="docs-outline-index" contenteditable="false">4</b><div class="docs-outline-copy" spellcheck="false">省电模式：支持 省电模式开关、低电量自动进入省电模式。默认都开启</div></div><div class="docs-outline-line level-2" data-level="2"><b class="docs-outline-index" contenteditable="false">1</b><div class="docs-outline-copy" spellcheck="false">开启省电模式：息屏后，主控/Wi-Fi进入低功耗模式</div></div><div class="docs-outline-line level-2" data-level="2"><b class="docs-outline-index" contenteditable="false">2</b><div class="docs-outline-copy" spellcheck="false">关闭省电模式：正常息屏，主控/Wi-Fi均正常工作</div></div><div class="docs-outline-line level-1" data-level="1"><b class="docs-outline-index" contenteditable="false">5</b><div class="docs-outline-copy" spellcheck="false">睡眠模式：支持设置 睡眠模式开关/生效时段、夜间提醒音量、夜间屏幕亮度、夜间通知提醒（重要提醒/全部提醒/静默）</div></div><div class="docs-outline-line level-2" data-level="2"><b class="docs-outline-index" contenteditable="false">1</b><div class="docs-outline-copy" spellcheck="false">夜间通知提醒-重要提醒：开启睡眠模式，仅接收重要提醒的告警通知</div></div><div class="docs-outline-line level-2" data-level="2"><b class="docs-outline-index" contenteditable="false">2</b><div class="docs-outline-copy" spellcheck="false">夜间通知提醒-全部提醒：开启睡眠模式，接收设备开启的全部告警通知（包括：重要提醒、一般提醒）</div></div><div class="docs-outline-line level-2" data-level="2"><b class="docs-outline-index" contenteditable="false">3</b><div class="docs-outline-copy" spellcheck="false">夜间通知提醒-静默：开启睡眠模式，不接收设备开启的全部告警通知（包括：重要提醒、一般提醒）</div></div><div class="docs-outline-line level-1" data-level="1"><b class="docs-outline-index" contenteditable="false">6</b><div class="docs-outline-copy" spellcheck="false">Wi-Fi网络：展示 Wi-Fi开关、屏端当前连接的Wi-Fi、之前已连接过的Wi-Fi（最多保存3个）、搜索到的可用Wi-Fi列表。Wi-Fi信息，需展示信号强度</div></div><div class="docs-outline-line level-2" data-level="2"><b class="docs-outline-index" contenteditable="false">1</b><div class="docs-outline-copy" spellcheck="false">切换环境，支持自动回连已连接过的Wi-Fi</div></div><div class="docs-outline-line level-1" data-level="1"><b class="docs-outline-index" contenteditable="false">7</b><div class="docs-outline-copy" spellcheck="false">闹钟：展示三个示例闹钟：喂养、午睡、换尿布。用户可设置 闹钟名称及时间。最多设置3个闹钟。</div></div><div class="docs-outline-line level-1" data-level="1"><b class="docs-outline-index" contenteditable="false">8</b><div class="docs-outline-copy" spellcheck="false">其他设置：包含 语言、时区、时间格式、温湿度单位、重量/长度单位</div></div><div class="docs-outline-line level-1" data-level="1"><b class="docs-outline-index" contenteditable="false">9</b><div class="docs-outline-copy" spellcheck="false">设备信息：展示屏端设备型号、设备系统版本、恢复出厂设置操作</div></div><div class="docs-outline-line level-2" data-level="2"><b class="docs-outline-index" contenteditable="false">1</b><div class="docs-outline-copy" spellcheck="false">设备系统版本：展示当前系统版本。云端有软件更新时，展示最新版本，支持手动更新</div></div><div class="docs-outline-line level-2" data-level="2"><b class="docs-outline-index" contenteditable="false">2</b><div class="docs-outline-copy" spellcheck="false">点击恢复出厂设置，二次提示用户确认：恢复出厂设置会清除本地所有设置，确定要执行吗？</div></div><div class="docs-outline-line level-1" data-level="1"><b class="docs-outline-index" contenteditable="false">10</b><div class="docs-outline-copy" spellcheck="false">帮助与反馈：展示 FAQ、联系方式、问题反馈</div></div><div class="docs-outline-line level-2" data-level="2"><b class="docs-outline-index" contenteditable="false">1</b><div class="docs-outline-copy" spellcheck="false">联系方式：展示 邮箱/电话及工作时间</div></div><div class="docs-outline-line level-2" data-level="2"><b class="docs-outline-index" contenteditable="false">2</b><div class="docs-outline-copy" spellcheck="false">问题反馈：可选择 勾选提交系统日志</div></div><div class="docs-outline-line level-1" data-level="1"><b class="docs-outline-index" contenteditable="false">11</b><div class="docs-outline-copy" spellcheck="false">设备管理模块：展示已添加的设备卡片，添加设备入口</div></div><div class="docs-outline-line level-2" data-level="2"><b class="docs-outline-index" contenteditable="false">1</b><div class="docs-outline-copy" spellcheck="false">点击BBM设备，进入设备设置页</div></div><div class="docs-outline-line level-2" data-level="2"><b class="docs-outline-index" contenteditable="false">2</b><div class="docs-outline-copy" spellcheck="false">点击其他生态设备（非BBM设备），进入设备详情页</div></div></div>
             <textarea class="docs-editor" id="docsFeatureList" hidden="" aria-label="功能描述，每行一条" style="height: 72px;"></textarea>
           </section>
           <section class="docs-card" tabindex="0">
             <div class="docs-card-head">
               <h3>其他规则</h3>
             </div>
-            <div class="docs-structured-list" data-docs-preview="rules" contenteditable="true" tabindex="0" aria-label="其他规则内容，可直接编辑或粘贴图片"><div class="docs-outline-line level-1" data-level="1"><b class="docs-outline-index" contenteditable="false">1</b><div class="docs-outline-copy" spellcheck="false">本地录像 页面状态：未插卡、存储卡异常、设备离线、无录像</div></div><div class="docs-outline-line level-1" data-level="1"><b class="docs-outline-index" contenteditable="false">2</b><div class="docs-outline-copy" spellcheck="false">相册页面状态：未插卡、存储卡异常、设备离线、无数据</div></div></div>
+            <div class="docs-structured-list" data-docs-preview="rules" contenteditable="true" tabindex="0" aria-label="其他规则内容，可直接编辑或粘贴图片"><div class="docs-outline-line level-1" data-level="1"><b class="docs-outline-index" contenteditable="false">1</b><div class="docs-outline-copy" spellcheck="false"><br></div></div></div>
             <textarea class="docs-editor" id="docsRuleList" hidden="" aria-label="其他规则，每行一条" style="height: 72px;"></textarea>
           </section>
         </div>
@@ -11615,9 +11615,7 @@
     ],
     "featureEditorVersion": 2,
     "rules": [],
-    "ruleEditorVersion": 2,
-    "featureHtml": "",
-    "ruleHtml": ""
+    "ruleEditorVersion": 2
   },
   "消息通知": {
     "title": "消息通知",
@@ -12087,7 +12085,8 @@
       "  切换环境，支持自动回连已连接过的Wi-Fi",
       "闹钟：展示三个示例闹钟：喂养、午睡、换尿布。用户可设置 闹钟名称及时间。最多设置3个闹钟。",
       "其他设置：包含 语言、时区、时间格式、温湿度单位、重量/长度单位",
-      "设备信息：展示屏端设备型号、设备系统版本、恢复出产设置操作",
+      "设备信息：展示屏端设备型号、设备系统版本、恢复出厂设置操作",
+      "  设备系统版本：展示当前系统版本。云端有软件更新时，展示最新版本，支持手动更新",
       "  点击恢复出厂设置，二次提示用户确认：恢复出厂设置会清除本地所有设置，确定要执行吗？",
       "帮助与反馈：展示 FAQ、联系方式、问题反馈",
       "  联系方式：展示 邮箱/电话及工作时间",
