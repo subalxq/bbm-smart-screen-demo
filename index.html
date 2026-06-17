@@ -9713,7 +9713,7 @@
           <div class="nav-sub">
             <button class="nav-sub-item inline-edit-hint" data-page="日常活动统计" data-replay-state="noCard">未插卡</button>
           </div>
-          <button class="nav-item inline-edit-hint" data-page="智能看护快捷设置">设置</button>
+          <button class="nav-item active inline-edit-hint" data-page="智能看护快捷设置">设置</button>
           <div class="nav-sub">
             <button class="nav-sub-item inline-edit-hint" data-page="设备设置">设备设置</button>
           </div>
@@ -9721,7 +9721,7 @@
           <div class="nav-sub">
             <button class="nav-sub-item inline-edit-hint" data-page="账号信息" data-account-panel="signed-out">账号-未登录</button>
           </div>
-          <button class="nav-item active inline-edit-hint" data-page="切网提示">切网提示</button>
+          <button class="nav-item inline-edit-hint" data-page="切网提示">切网提示</button>
           <button class="nav-item inline-edit-hint" data-page="控制中心">控制中心</button>
           <button class="nav-item inline-edit-hint" data-page="消息通知">消息通知</button>
           <div class="nav-sub">
@@ -9742,11 +9742,11 @@
       <div class="canvas-wrap">
         <div class="canvas-head">
           <strong>8 寸平板横屏原型</strong>
-          <span id="canvasLabel">切网提示</span>
+          <span id="canvasLabel">智能看护快捷设置 / 设置</span>
         </div>
 
         <div class="shell">
-          <div class="screen guide-page-mode">
+          <div class="screen settings-page-mode">
             <header class="topbar">
               <div class="screen-date inline-edit-hint">2026/5/7 周四</div>
               <div class="screen-status">
@@ -9767,7 +9767,7 @@
               <button class="screen-menu-item inline-edit-hint" data-page="实时监控区" data-scene="睡眠看护">主页</button>
               <button class="screen-menu-item inline-edit-hint" data-page="宝宝看护指标区" data-scene="睡眠看护">看护记录</button>
               <button class="screen-menu-item inline-edit-hint" data-page="日常活动统计" data-scene="活动" data-room="neo">录像回放</button>
-              <button class="screen-menu-item inline-edit-hint" data-page="智能看护快捷设置">设置</button>
+              <button class="screen-menu-item active inline-edit-hint" data-page="智能看护快捷设置">设置</button>
               <div class="screen-menu-spacer"></div>
               <button class="screen-menu-item inline-edit-hint" data-page="账号信息">账号</button>
             </nav>
@@ -10303,7 +10303,7 @@
               <header class="device-settings-head">
                 <div class="device-settings-title">
                   <button class="care-settings-back inline-edit-hint" type="button" data-action="device-settings-back" aria-label="返回">‹</button>
-                  <div><h2 id="deviceSettingsTitle" class="inline-edit-hint">设备设置</h2><p id="deviceSettingsSubtitle" class="inline-edit-hint">niki摄像头</p></div>
+                  <div><h2 id="deviceSettingsTitle" class="inline-edit-hint">设备设置</h2><p id="deviceSettingsSubtitle" class="inline-edit-hint">白噪声</p></div>
                 </div>
               </header>
               <div class="device-settings-scroll">
@@ -10374,8 +10374,8 @@
 
                 <div class="settings-nav-group-title inline-edit-hint">通用设置</div>
                 <button data-setting-panel="sleep" class="inline-edit-hint">息屏设置</button>
-                <button data-setting-panel="power" class="active inline-edit-hint">省电模式</button>
-                <button data-setting-panel="sleepMode" class="inline-edit-hint">睡眠模式</button>
+                <button data-setting-panel="power" class="inline-edit-hint">省电模式</button>
+                <button data-setting-panel="sleepMode" class="inline-edit-hint active">睡眠模式</button>
                 <button data-setting-panel="wifi" class="inline-edit-hint">Wi-Fi网络</button>
                 <button data-setting-panel="alarm" class="inline-edit-hint">闹钟</button>
                 <button data-setting-panel="general" class="inline-edit-hint">其他设置</button>
@@ -10486,7 +10486,7 @@
                   </div>
                 </div>
 
-                <div class="settings-panel" data-panel="sleepMode">
+                <div class="settings-panel active" data-panel="sleepMode">
                   <div class="settings-head">
                     <div><h2 class="inline-edit-hint">睡眠模式</h2><p class="inline-edit-hint">设置夜间低打扰的音量、亮度和通知提醒。</p></div>
                   </div>
@@ -10515,7 +10515,7 @@
                   </div>
                 </div>
 
-                <div class="settings-panel active" data-panel="power">
+                <div class="settings-panel" data-panel="power">
                   <div class="settings-head">
                     <div><h2 class="inline-edit-hint">省电模式</h2><p class="inline-edit-hint">开启后，息屏自动进入低功耗模式</p></div>
                     <span class="settings-chip inline-edit-hint">预计续航 +28%</span>
@@ -11233,7 +11233,7 @@
               </section>
             </main>
 
-            <main class="guide-page" id="guidePage" data-guide-state="network-switch-page">
+            <main class="guide-page" id="guidePage" data-guide-state="normal">
               <div class="guide-backdrop" aria-hidden="true"></div>
               <section class="alert-modal guide-network-switch" aria-label="切网提示">
                 <div class="guide-network-icon inline-edit-hint" aria-hidden="true">!</div>
@@ -11432,7 +11432,7 @@
             <div class="docs-card-head">
               <h3>功能描述</h3>
             </div>
-            <div class="docs-structured-list" data-docs-preview="features" contenteditable="true" tabindex="0" aria-label="功能描述内容，可直接编辑或粘贴图片"><div class="docs-outline-line level-1" data-level="1"><b class="docs-outline-index" contenteditable="false">1</b><div class="docs-outline-copy" spellcheck="false">当屏端与摄像头的点对点连接信号很弱，此时屏端与摄像头 均为联网状态，且他们之间的Wi-Fi连接质量还行，则展示这个 切网提示</div></div><div class="docs-outline-line level-2" data-level="2"><b class="docs-outline-index" contenteditable="false">1</b><div class="docs-outline-copy" spellcheck="false">点击切换网络，则屏端与该摄像头改为Wi-Fi连接（本地功能均走Wi-Fi连接）</div></div><div class="docs-outline-line level-2" data-level="2"><b class="docs-outline-index" contenteditable="false">2</b><div class="docs-outline-copy" spellcheck="false">点击关闭，关闭提示弹窗。关闭后，1分钟内不再展示</div></div><div class="docs-outline-line level-1" data-level="1"><b class="docs-outline-index" contenteditable="false">2</b><div class="docs-outline-copy" spellcheck="false">当屏端与摄像头的Wi-Fi连接信号很弱，此时屏端与摄像头的点对点连接质量还行，则展示这个 切网提示</div></div><div class="docs-outline-line level-2" data-level="2"><b class="docs-outline-index" contenteditable="false">1</b><div class="docs-outline-copy" spellcheck="false">点击切换网络，则屏端与该摄像头改为点对点连接（本地功能均走点对点连接）</div></div><div class="docs-outline-line level-2" data-level="2"><b class="docs-outline-index" contenteditable="false">2</b><div class="docs-outline-copy" spellcheck="false">点击关闭，关闭提示弹窗。关闭后，1分钟内不再展示</div></div></div>
+            <div class="docs-structured-list" data-docs-preview="features" contenteditable="true" tabindex="0" aria-label="功能描述内容，可直接编辑或粘贴图片"><div class="docs-outline-line level-1" data-level="1"><b class="docs-outline-index" contenteditable="false">1</b><div class="docs-outline-copy" spellcheck="false">展示屏端相关设置（快捷设置、通用设置），及设备管理模块</div></div><div class="docs-outline-line level-1" data-level="1"><b class="docs-outline-index" contenteditable="false">2</b><div class="docs-outline-copy" spellcheck="false">快捷设置：音量、亮度。调节实时生效</div></div><div class="docs-outline-line level-1" data-level="1"><b class="docs-outline-index" contenteditable="false">3</b><div class="docs-outline-copy" spellcheck="false">息屏设置：支持设置 息屏时间（默认1min）、主页常亮开关（默认关）、触屏唤醒开关（默认关）</div></div><div class="docs-outline-line level-1" data-level="1"><b class="docs-outline-index" contenteditable="false">4</b><div class="docs-outline-copy" spellcheck="false">省电模式：支持 省电模式开关、低电量自动进入省电模式。默认都开启</div></div><div class="docs-outline-line level-2" data-level="2"><b class="docs-outline-index" contenteditable="false">1</b><div class="docs-outline-copy" spellcheck="false">开启省电模式：息屏后，主控/Wi-Fi进入低功耗模式</div></div><div class="docs-outline-line level-2" data-level="2"><b class="docs-outline-index" contenteditable="false">2</b><div class="docs-outline-copy" spellcheck="false">关闭省电模式：正常息屏，主控/Wi-Fi均正常工作</div></div><div class="docs-outline-line level-1" data-level="1"><b class="docs-outline-index" contenteditable="false">5</b><div class="docs-outline-copy" spellcheck="false">睡眠模式：支持设置 睡眠模式开关/生效时段、夜间提醒音量、夜间屏幕亮度、夜间通知提醒（重要提醒/全部提醒/静默）</div></div><div class="docs-outline-line level-2" data-level="2"><b class="docs-outline-index" contenteditable="false">1</b><div class="docs-outline-copy" spellcheck="false">睡眠模式开关 开启后，才支持设置 生效时段、夜间提醒音量、夜间屏幕亮度、夜间通知提醒</div></div><div class="docs-outline-line level-2" data-level="2"><b class="docs-outline-index" contenteditable="false">2</b><div class="docs-outline-copy" spellcheck="false">夜间通知提醒-重要提醒：开启睡眠模式，仅接收重要提醒的告警通知</div></div><div class="docs-outline-line level-2" data-level="2"><b class="docs-outline-index" contenteditable="false">3</b><div class="docs-outline-copy" spellcheck="false">夜间通知提醒-全部提醒：开启睡眠模式，接收设备开启的全部告警通知（包括：重要提醒、一般提醒）</div></div><div class="docs-outline-line level-2" data-level="2"><b class="docs-outline-index" contenteditable="false">4</b><div class="docs-outline-copy" spellcheck="false">夜间通知提醒-静默：开启睡眠模式，不接收设备开启的全部告警通知（包括：重要提醒、一般提醒）</div></div><div class="docs-outline-line level-1" data-level="1"><b class="docs-outline-index" contenteditable="false">6</b><div class="docs-outline-copy" spellcheck="false">Wi-Fi网络：展示 Wi-Fi开关、屏端当前连接的Wi-Fi、之前已连接过的Wi-Fi（最多保存3个）、搜索到的可用Wi-Fi列表。Wi-Fi信息，需展示信号强度</div></div><div class="docs-outline-line level-2" data-level="2"><b class="docs-outline-index" contenteditable="false">1</b><div class="docs-outline-copy" spellcheck="false">切换环境，支持自动回连已连接过的Wi-Fi</div></div><div class="docs-outline-line level-1" data-level="1"><b class="docs-outline-index" contenteditable="false">7</b><div class="docs-outline-copy" spellcheck="false">闹钟：展示三个示例闹钟：喂养、午睡、换尿布。用户可设置 闹钟名称及时间。最多设置3个闹钟。</div></div><div class="docs-outline-line level-1" data-level="1"><b class="docs-outline-index" contenteditable="false">8</b><div class="docs-outline-copy" spellcheck="false">其他设置：包含 语言、时区、时间格式、温湿度单位、重量/长度单位</div></div><div class="docs-outline-line level-1" data-level="1"><b class="docs-outline-index" contenteditable="false">9</b><div class="docs-outline-copy" spellcheck="false">设备信息：展示屏端设备型号、设备系统版本、恢复出厂设置操作</div></div><div class="docs-outline-line level-2" data-level="2"><b class="docs-outline-index" contenteditable="false">1</b><div class="docs-outline-copy" spellcheck="false">设备系统版本：展示当前系统版本。云端有软件更新时，展示最新版本，支持手动更新</div></div><div class="docs-outline-line level-2" data-level="2"><b class="docs-outline-index" contenteditable="false">2</b><div class="docs-outline-copy" spellcheck="false">点击恢复出厂设置，二次提示用户确认：恢复出厂设置会清除本地所有设置，确定要执行吗？</div></div><div class="docs-outline-line level-1" data-level="1"><b class="docs-outline-index" contenteditable="false">10</b><div class="docs-outline-copy" spellcheck="false">帮助与反馈：展示 FAQ、联系方式、问题反馈</div></div><div class="docs-outline-line level-2" data-level="2"><b class="docs-outline-index" contenteditable="false">1</b><div class="docs-outline-copy" spellcheck="false">联系方式：展示 邮箱/电话及工作时间</div></div><div class="docs-outline-line level-2" data-level="2"><b class="docs-outline-index" contenteditable="false">2</b><div class="docs-outline-copy" spellcheck="false">问题反馈：可选择 勾选提交系统日志</div></div><div class="docs-outline-line level-1" data-level="1"><b class="docs-outline-index" contenteditable="false">11</b><div class="docs-outline-copy" spellcheck="false">设备管理模块：展示已添加的设备卡片，添加设备入口</div></div><div class="docs-outline-line level-2" data-level="2"><b class="docs-outline-index" contenteditable="false">1</b><div class="docs-outline-copy" spellcheck="false">点击BBM设备，进入设备设置页</div></div><div class="docs-outline-line level-2" data-level="2"><b class="docs-outline-index" contenteditable="false">2</b><div class="docs-outline-copy" spellcheck="false">点击其他生态设备（非BBM设备），进入设备详情页</div></div></div>
             <textarea class="docs-editor" id="docsFeatureList" hidden="" aria-label="功能描述，每行一条" style="height: 72px;"></textarea>
           </section>
           <section class="docs-card" tabindex="0">
@@ -12104,6 +12104,7 @@
       "  开启省电模式：息屏后，主控/Wi-Fi进入低功耗模式",
       "  关闭省电模式：正常息屏，主控/Wi-Fi均正常工作",
       "睡眠模式：支持设置 睡眠模式开关/生效时段、夜间提醒音量、夜间屏幕亮度、夜间通知提醒（重要提醒/全部提醒/静默）",
+      "  睡眠模式开关 开启后，才支持设置 生效时段、夜间提醒音量、夜间屏幕亮度、夜间通知提醒",
       "  夜间通知提醒-重要提醒：开启睡眠模式，仅接收重要提醒的告警通知",
       "  夜间通知提醒-全部提醒：开启睡眠模式，接收设备开启的全部告警通知（包括：重要提醒、一般提醒）",
       "  夜间通知提醒-静默：开启睡眠模式，不接收设备开启的全部告警通知（包括：重要提醒、一般提醒）",
@@ -16611,6 +16612,7 @@
     renderState();
     markInlineEditableText();
   </script>
+
 
 
 
