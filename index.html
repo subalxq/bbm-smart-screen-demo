@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh-CN" style="--prototype-scale: 0.67; --docs-width: 951px; --sidebar-width: 341px;"><head>
+<html lang="zh-CN" style="--prototype-scale: 0.67; --docs-width: 899px; --sidebar-width: 276px;"><head>
   <meta charset="UTF-8">
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -5254,6 +5254,22 @@
       background: rgba(82, 166, 255, 0.08);
     }
 
+    button.device-settings-item {
+      width: 100%;
+      border: 0;
+      border-bottom: 1px solid rgba(127, 151, 180, 0.10);
+      background: transparent;
+      text-align: left;
+      font-family: inherit;
+    }
+
+    button.device-settings-item .device-settings-item-value {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      justify-self: end;
+    }
+
     .device-settings-form {
       display: grid;
       gap: 14px;
@@ -5263,6 +5279,74 @@
     .device-settings-field {
       display: grid;
       gap: 7px;
+    }
+
+    .device-settings-note {
+      margin: 0;
+      border: 1px solid rgba(127, 151, 180, 0.14);
+      border-radius: 8px;
+      background: rgba(8, 18, 32, 0.34);
+      padding: 12px;
+      color: #9fb4d0;
+      font-size: 12px;
+      font-weight: 750;
+      line-height: 1.55;
+      white-space: pre-wrap;
+      word-break: break-word;
+    }
+
+    .device-settings-module {
+      overflow: hidden;
+      border: 1px solid rgba(127, 151, 180, 0.14);
+      border-radius: 8px;
+      background: rgba(8, 18, 32, 0.28);
+    }
+
+    .device-settings-module .device-settings-item {
+      border-bottom: 1px solid rgba(127, 151, 180, 0.10);
+    }
+
+    .device-settings-module .device-settings-note {
+      border: 0;
+      border-radius: 0;
+      background: transparent;
+      color: #9fb4d0;
+      font-size: 12px;
+      font-weight: 750;
+      line-height: 1.55;
+    }
+
+    .device-settings-module .device-settings-note *,
+    .device-settings-module > .inline-edit-hint:not(.device-settings-group-title):not(.device-settings-item),
+    .device-settings-module > .inline-edit-hint:not(.device-settings-group-title):not(.device-settings-item) * {
+      color: #9fb4d0;
+      font-size: 12px;
+      font-weight: 750;
+      line-height: 1.55;
+    }
+
+    .device-settings-note.inline-text-editing {
+      font-size: 12px;
+      font-weight: 750;
+      line-height: 1.55;
+    }
+
+    .inline-multiline-editor {
+      display: block;
+      width: 100%;
+      min-height: 52px;
+      border: 0;
+      outline: none;
+      background: transparent;
+      color: inherit;
+      font: inherit;
+      line-height: inherit;
+      resize: none;
+      padding: 0;
+      margin: 0;
+      overflow: hidden;
+      white-space: pre-wrap;
+      word-break: break-word;
     }
 
     .device-wifi-picker {
@@ -9713,16 +9797,16 @@
           <div class="nav-sub">
             <button class="nav-sub-item inline-edit-hint" data-page="日常活动统计" data-replay-state="noCard">未插卡</button>
           </div>
-          <button class="nav-item inline-edit-hint" data-page="智能看护快捷设置">设置</button>
+          <button class="nav-item active inline-edit-hint" data-page="智能看护快捷设置">设置</button>
           <div class="nav-sub">
-            <button class="nav-sub-item inline-edit-hint" data-page="设备设置">设备设置</button>
+            <button class="nav-sub-item active inline-edit-hint" data-page="设备设置">设备设置</button>
           </div>
           <button class="nav-item inline-edit-hint" data-page="账号信息">账号</button>
           <div class="nav-sub">
             <button class="nav-sub-item inline-edit-hint" data-page="账号信息" data-account-panel="signed-out">账号-未登录</button>
           </div>
           <button class="nav-item inline-edit-hint" data-page="控制中心">控制中心</button>
-          <button class="nav-item active inline-edit-hint" data-page="切网提示" spellcheck="false">弱网&amp;切网提示</button>
+          <button class="nav-item inline-edit-hint" data-page="切网提示" spellcheck="false">弱网切网提示</button>
           <button class="nav-item inline-edit-hint" data-page="消息通知">消息通知</button>
           <div class="nav-sub">
             <button class="nav-sub-item inline-edit-hint" data-page="断连通知">断连通知</button>
@@ -9742,11 +9826,11 @@
       <div class="canvas-wrap">
         <div class="canvas-head">
           <strong>8 寸平板横屏原型</strong>
-          <span id="canvasLabel">切网提示</span>
+          <span id="canvasLabel">设备设置 / niki摄像头</span>
         </div>
 
         <div class="shell">
-          <div class="screen guide-page-mode">
+          <div class="screen device-settings-page-mode">
             <header class="topbar">
               <div class="screen-date inline-edit-hint">2026/5/7 周四</div>
               <div class="screen-status">
@@ -10299,11 +10383,11 @@
               </section>
             </main>
 
-            <main class="device-settings-page" id="deviceSettingsPage" data-device-settings-panel="">
+            <main class="device-settings-page detail-open" id="deviceSettingsPage" data-device-settings-panel="wifi">
               <header class="device-settings-head">
                 <div class="device-settings-title">
                   <button class="care-settings-back inline-edit-hint" type="button" data-action="device-settings-back" aria-label="返回">‹</button>
-                  <div><h2 id="deviceSettingsTitle" class="inline-edit-hint">设备设置</h2><p id="deviceSettingsSubtitle" class="inline-edit-hint">白噪声</p></div>
+                  <div><h2 id="deviceSettingsTitle" class="inline-edit-hint">Wi-Fi网络</h2><p id="deviceSettingsSubtitle" class="inline-edit-hint">niki摄像头</p></div>
                 </div>
               </header>
               <div class="device-settings-scroll">
@@ -10318,34 +10402,29 @@
                 </section>
                 <section class="device-settings-detail info" aria-label="设备信息">
                   <div class="device-settings-list">
-                    <div class="device-settings-item"><span class="inline-edit-hint" spellcheck="false">设备名称</span><span class="inline-edit-hint" spellcheck="false">niki摄像头</span></div>
-                    <div class="device-settings-item"><span class="inline-edit-hint">SN</span><span class="inline-edit-hint">BBM-NK-26050701</span></div>
-                    <div class="device-settings-item"><span class="inline-edit-hint">MAC地址</span><span class="inline-edit-hint">8C:7A:3D:20:11:09</span></div>
-                    <div class="device-settings-item"><span class="inline-edit-hint">IP地址</span><span class="inline-edit-hint">192.168.1.108</span></div>
-                    <div class="device-settings-item"><span class="inline-edit-hint">Wi-Fi名称</span><span id="deviceWifiNameValue" class="inline-edit-hint">BBM_Home_2.4G</span></div>
-                    <div class="device-settings-item"><span class="inline-edit-hint">固件版本</span><span class="inline-edit-hint">V2.4.1 · 固件升级 ›</span></div>
+                    <div class="device-settings-item"><span class="inline-edit-hint" data-inline-edit-key="device-info-name-label" spellcheck="false">设备名称</span><span class="inline-edit-hint" data-inline-edit-key="device-info-name-value" spellcheck="false">niki摄像头</span></div>
+                    <button class="device-settings-item clickable" type="button" data-device-settings-panel-target="wifi"><span class="inline-edit-hint" data-inline-edit-key="device-info-wifi-label">Wi-Fi网络</span><span class="device-settings-item-value"><span class="device-wifi-name-display inline-edit-hint" data-inline-edit-key="device-info-wifi-value">BBM_Home_2.4G</span><i class="inline-edit-hint">›</i></span></button>
+                    <div class="device-settings-item"><span class="inline-edit-hint" data-inline-edit-key="device-info-model-label">设备型号</span><span class="inline-edit-hint" data-inline-edit-key="device-info-model-value">BBM-NK-CAM01</span></div>
+                    <div class="device-settings-item"><span class="inline-edit-hint" data-inline-edit-key="device-info-sn-label">SN</span><span class="inline-edit-hint" data-inline-edit-key="device-info-sn-value">BBM-NK-26050701</span></div>
+                    <div class="device-settings-item"><span class="inline-edit-hint" data-inline-edit-key="device-info-mac-label">MAC地址</span><span class="inline-edit-hint" data-inline-edit-key="device-info-mac-value">8C:7A:3D:20:11:09</span></div>
+                    <div class="device-settings-item"><span class="inline-edit-hint" data-inline-edit-key="device-info-ip-label">IP地址</span><span class="inline-edit-hint" data-inline-edit-key="device-info-ip-value">192.168.1.108</span></div>
+                    <div class="device-settings-item"><span class="inline-edit-hint" data-inline-edit-key="device-info-firmware-label">固件版本</span><span class="inline-edit-hint" data-inline-edit-key="device-info-firmware-value">V2.4.1 · 固件升级 ›</span></div>
                   </div>
                 </section>
                 <section class="device-settings-detail wifi" aria-label="Wi-Fi网络设置">
                   <div class="device-settings-form">
-                    <div class="device-settings-field">
-                      <label for="deviceWifiName" class="inline-edit-hint">Wi-Fi名称</label>
-                      <div class="device-wifi-picker" id="deviceWifiPicker">
-                        <input id="deviceWifiName" type="text" value="BBM_Home_2.4G" autocomplete="off" aria-haspopup="listbox" aria-expanded="false">
-                        <div class="device-wifi-options" role="listbox" aria-label="可用Wi-Fi列表">
-                          <button class="device-wifi-option" type="button" data-device-wifi-option="BBM_Home_2.4G"><strong class="inline-edit-hint">BBM_Home_2.4G</strong><span class="inline-edit-hint">已保存</span></button>
-                          <button class="device-wifi-option" type="button" data-device-wifi-option="BBM_Home_5G"><strong class="inline-edit-hint">BBM_Home_5G</strong><span class="inline-edit-hint">信号强</span></button>
-                          <button class="device-wifi-option" type="button" data-device-wifi-option="Nursery_5G"><strong class="inline-edit-hint">Nursery_5G</strong><span class="inline-edit-hint">信号强</span></button>
-                          <button class="device-wifi-option" type="button" data-device-wifi-option="LivingRoom_WiFi"><strong class="inline-edit-hint">LivingRoom_WiFi</strong><span class="inline-edit-hint">未搜索到</span></button>
-                        </div>
+                    <div class="device-settings-module">
+                      <div class="device-settings-group-title inline-edit-hint">当前连接的Wi-Fi</div>
+                      <div class="device-settings-list">
+                        <div class="device-settings-item"><span class="inline-edit-hint">Wi-Fi名称</span><span id="deviceWifiNameValue" class="inline-edit-hint">BBM_Home_2.4G</span></div>
                       </div>
                     </div>
-                    <div class="device-settings-field">
-                      <label for="deviceWifiPassword" class="inline-edit-hint">Wi-Fi密码</label>
-                      <input id="deviceWifiPassword" type="password" value="12345678" autocomplete="off">
+                    <div class="device-settings-module">
+                      <div class="device-settings-item"><span class="inline-edit-hint">网络扩展</span><button class="setting-switch off" type="button" aria-label="网络扩展"></button></div>
+                      <p class="device-settings-note inline-edit-hint" data-inline-multiline="true" spellcheck="false" data-inline-edit-key="#deviceSettingsPage&gt;div:nth-of-type(1)&gt;section:nth-of-type(3)&gt;div:nth-of-type(1)&gt;div:nth-of-type(2)&gt;p:nth-of-type(1)">开启后，摄像头与看护屏可通过Wi-Fi网络连接，扩展连接范围。但开启此功能会降低看护屏的续航时间，且Wi-Fi网络受路由器信号、网络波动影响，可能出现画面或告警延迟。看护屏与设备距离不是很远时，建议关闭此功能。
+
+注：需看护屏与摄像头都连接Wi-Fi网络后，才可开启该功能。</p>
                     </div>
-                    <button class="device-settings-primary inline-edit-hint" type="button" data-action="device-wifi-connect">连接</button>
-                    <div class="device-settings-connect-status" id="deviceWifiConnectStatus" aria-live="polite"></div>
                   </div>
                 </section>
                 <section class="device-settings-detail features" aria-label="功能设置">
@@ -11233,14 +11312,14 @@
               </section>
             </main>
 
-            <main class="guide-page" id="guidePage" data-guide-state="network-switch-page">
+            <main class="guide-page" id="guidePage" data-guide-state="normal">
               <div class="guide-backdrop" aria-hidden="true"></div>
               <section class="alert-modal guide-network-switch" aria-label="切网提示">
                 <div class="guide-network-icon inline-edit-hint" aria-hidden="true">!</div>
                 <div class="guide-network-copy">
-                  <strong class="inline-edit-hint" spellcheck="false">cam1连接信号弱，可将看护屏尽量靠近设备，或切换Wi-Fi/本地网络</strong>
+                  <strong class="inline-edit-hint" spellcheck="false">cam1连接信号弱，可将看护屏尽量靠近设备，或进行网络设置</strong>
                 </div>
-                <button class="alert-action inline-edit-hint" type="button">切换网络</button>
+                <button class="alert-action inline-edit-hint" type="button">去设置</button>
                 <button class="alert-close inline-edit-hint" type="button" aria-label="关闭">×</button>
               </section>
               <section class="guide-control-drawer" aria-label="下拉控制中心">
@@ -11419,8 +11498,8 @@
       <section class="docs-panel">
         <div class="docs-head">
           <div class="docs-head-main">
-            <input class="docs-title-input" id="docsTitle" type="text" value="实时监控区" aria-label="页面功能说明标题" style="width: 160px;">
-            <textarea class="docs-desc-input" id="docsDesc" aria-label="页面功能说明描述">默认进入宝宝实时监控主页。</textarea>
+            <input class="docs-title-input" id="docsTitle" type="text" value="设备设置" aria-label="页面功能说明标题" style="width: 103px;">
+            <textarea class="docs-desc-input" id="docsDesc" aria-label="页面功能说明描述">摄像头设备设置页</textarea>
           </div>
           <div class="docs-actions">
             <button class="docs-save" id="docsSaveHtml" type="button">保存HTML</button>
@@ -11432,8 +11511,26 @@
             <div class="docs-card-head">
               <h3>功能描述</h3>
             </div>
-            <div class="docs-structured-list" data-docs-preview="features" contenteditable="true" tabindex="0" aria-label="功能描述内容，可直接编辑或粘贴图片"><div class="docs-outline-line level-1" data-level="1"><b class="docs-outline-index" contenteditable="false">1</b><div class="docs-outline-copy" spellcheck="false">当屏端与摄像头的点对点连接信号弱，</div></div><div class="docs-outline-line level-2" data-level="2"><b class="docs-outline-index" contenteditable="false">1</b><div class="docs-outline-copy" spellcheck="false">若此时 屏端与摄像头的Wi-Fi连接质量还行，则展示 切网提示：cam1连接信号弱，可将看护屏尽量靠近设备，或切换Wi-F网络</div></div><div class="docs-outline-line level-3" data-level="3"><b class="docs-outline-index" contenteditable="false">1</b><div class="docs-outline-copy" spellcheck="false">点击切换网络，则屏端与该摄像头改为Wi-Fi连接（本地功能均走Wi-F连接）</div></div><div class="docs-outline-line level-3" data-level="3"><b class="docs-outline-index" contenteditable="false">2</b><div class="docs-outline-copy" spellcheck="false">点击关闭，关闭提示弹窗。关闭后，1分钟内不再展示</div></div><div class="docs-outline-line level-2" data-level="2"><b class="docs-outline-index" contenteditable="false">2</b><div class="docs-outline-copy" spellcheck="false">若此时 屏端与摄像头的Wi-Fi连接质量也弱/或断连情况，则展示 弱网提示：cam1连接信号弱，可将看护屏尽量靠近设备</div></div><div class="docs-outline-line level-3" data-level="3"><b class="docs-outline-index" contenteditable="false">1</b><div class="docs-outline-copy" spellcheck="false">点击关闭，关闭提示弹窗。关闭后，1分钟内不再展示</div></div><div class="docs-outline-line level-1" data-level="1"><b class="docs-outline-index" contenteditable="false">2</b><div class="docs-outline-copy" spellcheck="false">当屏端与摄像头的Wi-F连接信号弱，</div></div><div class="docs-outline-line level-2" data-level="2"><b class="docs-outline-index" contenteditable="false">1</b><div class="docs-outline-copy" spellcheck="false">若此时 屏端与摄像头的点对点连接质量还行，则展示 切网提示：cam1连接信号弱，可将看护屏尽量靠近设备，或切换本地网络</div></div><div class="docs-outline-line level-3" data-level="3"><b class="docs-outline-index" contenteditable="false">1</b><div class="docs-outline-copy" spellcheck="false">点击切换网络，则屏端与该摄像头改为点对点连接（本地功能均走点对点连接）</div></div><div class="docs-outline-line level-3" data-level="3"><b class="docs-outline-index" contenteditable="false">2</b><div class="docs-outline-copy" spellcheck="false">点击关闭，关闭提示弹窗。关闭后，1分钟内不再展示</div></div><div class="docs-outline-line level-2" data-level="2"><b class="docs-outline-index" contenteditable="false">2</b><div class="docs-outline-copy" spellcheck="false">若此时 屏端与摄像头的Wi-Fi连接质量也弱/或断连情况，则展示 弱网提示：cam1连接信号弱，可将看护屏尽量靠近设备</div></div><div class="docs-outline-line level-3" data-level="3"><b class="docs-outline-index" contenteditable="false">1</b><div class="docs-outline-copy" spellcheck="false">点击关闭，关闭提示弹窗。关闭后，1分钟内不再展示</div></div><div class="docs-outline-line level-1" data-level="1"><b class="docs-outline-index" contenteditable="false">3</b><div class="docs-outline-copy" spellcheck="false">当屏端与摄像头的Wi-Fi连接已断开，此时若屏端与摄像头有点对点连接，则自动切换到点对点连接；若屏端与摄像头的点对点连接已断开，则展示断连通知</div></div><div class="docs-outline-line level-1" data-level="1"><b class="docs-outline-index" contenteditable="false">4</b><div class="docs-outline-copy" spellcheck="false">屏端与摄像头的Wi-Fi接情况，包含：两者连接路由在同一局域网（路由通外网/不通外网），两者连接路由不在同一局域网（路由均通外网</div></div></div>
-            <textarea class="docs-editor" id="docsFeatureList" hidden="" aria-label="功能描述，每行一条" style="height: 72px;"></textarea>
+            <div class="docs-structured-list" data-docs-preview="features" contenteditable="true" tabindex="0" aria-label="功能描述内容，可直接编辑或粘贴图片"><div class="docs-outline-line level-1" data-level="1"><b class="docs-outline-index" contenteditable="false">1</b><div class="docs-outline-copy" spellcheck="false">摄像头设备设置页。同app设备设置页</div></div><div class="docs-outline-line level-1" data-level="1"><b class="docs-outline-index" contenteditable="false">2</b><div class="docs-outline-copy" spellcheck="false">宝宝信息：已绑定账号的云端设备才展示该信息。本地设备不展示该信息</div></div><div class="docs-outline-line level-2" data-level="2"><b class="docs-outline-index" contenteditable="false">1</b><div class="docs-outline-copy" spellcheck="false">支持修改关联的宝宝信息</div></div><div class="docs-outline-line level-1" data-level="1"><b class="docs-outline-index" contenteditable="false">3</b><div class="docs-outline-copy" spellcheck="false">设备信息：展示 设备名称、Wi-Fi网络、设备型号、SN、Mac地址、IP地址、固件版本</div></div><div class="docs-outline-line level-1" data-level="1"><b class="docs-outline-index" contenteditable="false">4</b><div class="docs-outline-copy" spellcheck="false">Wi-Fi网路-网络扩展开关：</div></div><div class="docs-outline-line level-2" data-level="2"><b class="docs-outline-index" contenteditable="false">1</b><div class="docs-outline-copy" spellcheck="false">屏端与摄像头均连接Wi-Fi网络时，才可开启此功能；否则提示用户：请先将看护屏与摄像头连接Wi-Fi网络</div></div><div class="docs-outline-line level-2" data-level="2"><b class="docs-outline-index" contenteditable="false">2</b><div class="docs-outline-copy" spellcheck="false">开启后，屏端与摄像头切到Wi-Fi连接（本地功能均走Wi-Fi连接）</div></div><div class="docs-outline-line level-2" data-level="2"><b class="docs-outline-index" contenteditable="false">3</b><div class="docs-outline-copy" spellcheck="false">关闭后，屏端与摄像头切到点对点连接</div></div><div class="docs-outline-line level-1" data-level="1"><b class="docs-outline-index" contenteditable="false">5</b><div class="docs-outline-copy" spellcheck="false">智能看护设置：包含 智能看护检测设置、通知设置和免打扰时段</div></div><div class="docs-outline-line level-1" data-level="1"><b class="docs-outline-index" contenteditable="false">6</b><div class="docs-outline-copy" spellcheck="false">功能设置：包含 画面设置、存储设置、电池管理（电池摄像头才有）、摄像头音量、指示灯开关、云台校准等</div></div><div class="docs-outline-line level-2" data-level="2"><b class="docs-outline-index" contenteditable="false">1</b><div class="docs-outline-copy" spellcheck="false">画面设置：画面翻转、夜视模式</div></div><div class="docs-outline-line level-2" data-level="2"><b class="docs-outline-index" contenteditable="false">2</b><div class="docs-outline-copy" spellcheck="false">存储设置：存储卡信息、录像方式（事件录制、始终录制）</div></div><div class="docs-outline-line level-2" data-level="2"><b class="docs-outline-index" contenteditable="false">3</b><div class="docs-outline-copy" spellcheck="false">电池管理：电池摄像头才有该设置。展示 充电状态、电量、电池模式、低电量自动进入省电模式开关及低电量阈值设置</div></div><div class="docs-outline-line level-2" data-level="2"><b class="docs-outline-index" contenteditable="false">4</b><div class="docs-outline-copy" spellcheck="false">云台校准：点击进行二次弹窗确认</div></div><div class="docs-outline-line level-1" data-level="1"><b class="docs-outline-index" contenteditable="false">7</b><div class="docs-outline-copy" spellcheck="false">云存储：待定</div></div><div class="docs-outline-line level-1" data-level="1"><b class="docs-outline-index" contenteditable="false">8</b><div class="docs-outline-copy" spellcheck="false">重启设备：点击进行二次弹窗确认</div></div><div class="docs-outline-line level-1" data-level="1"><b class="docs-outline-index" contenteditable="false">9</b><div class="docs-outline-copy" spellcheck="false">删除设备：点击进行二次弹窗确认。删除逻辑，分设备是否绑定到账号（云端设备、本地设备）</div></div><div class="docs-outline-line level-2" data-level="2"><b class="docs-outline-index" contenteditable="false">1</b><div class="docs-outline-copy" spellcheck="false">已绑定到账号：重置设备，清空所有设备设置，设备与账号解绑。手机app上的设备也同步解绑删除。</div></div><div class="docs-outline-line level-2" data-level="2"><b class="docs-outline-index" contenteditable="false">2</b><div class="docs-outline-copy" spellcheck="false">未绑定到账号：仅清空屏端的设备设置。解除屏端与设备的点对点连接</div></div></div>
+            <textarea class="docs-editor" id="docsFeatureList" hidden="" aria-label="功能描述，每行一条" style="height: 72px;">摄像头设备设置页。同app设备设置页
+宝宝信息：已绑定账号的云端设备才展示该信息。本地设备不展示该信息
+  支持修改关联的宝宝信息
+设备信息：展示 设备名称、Wi-Fi网络、设备型号、SN、Mac地址、IP地址、固件版本
+Wi-Fi网路-网络扩展开关：
+  屏端与摄像头均连接Wi-Fi网络时，才可开启此功能；否则提示用户：请先将看护屏与摄像头连接Wi-Fi网络
+  开启后，屏端与摄像头切到Wi-Fi连接（本地功能均走Wi-Fi连接）
+  关闭后，屏端与摄像头切到点对点连接
+智能看护设置：包含 智能看护检测设置、通知设置和免打扰时段
+功能设置：包含 画面设置、存储设置、电池管理（电池摄像头才有）、摄像头音量、指示灯开关、云台校准等
+  画面设置：画面翻转、夜视模式
+  存储设置：存储卡信息、录像方式（事件录制、始终录制）
+  电池管理：电池摄像头才有该设置。展示 充电状态、电量、电池模式、低电量自动进入省电模式开关及低电量阈值设置
+  云台校准：点击进行二次弹窗确认
+云存储：待定
+重启设备：点击进行二次弹窗确认
+删除设备：点击进行二次弹窗确认。删除逻辑，分设备是否绑定到账号（云端设备、本地设备）
+  已绑定到账号：重置设备，清空所有设备设置，设备与账号解绑。手机app上的设备也同步解绑删除。
+  未绑定到账号：仅清空屏端的设备设置。解除屏端与设备的点对点连接</textarea>
           </section>
           <section class="docs-card" tabindex="0">
             <div class="docs-card-head">
@@ -12439,7 +12536,11 @@
       "摄像头设备设置页。同app设备设置页",
       "宝宝信息：已绑定账号的云端设备才展示该信息。本地设备不展示该信息",
       "  支持修改关联的宝宝信息",
-      "设备信息：展示 设备名称、SN、Mac地址、IP地址、Wi-Fi网络、固件版本",
+      "设备信息：展示 设备名称、Wi-Fi网络、设备型号、SN、Mac地址、IP地址、固件版本",
+      "Wi-Fi网路-网络扩展开关：",
+      "  屏端与摄像头均连接Wi-Fi网络时，才可开启此功能；否则提示用户：请先将看护屏与摄像头连接Wi-Fi网络",
+      "  开启后，屏端与摄像头切到Wi-Fi连接（本地功能均走Wi-Fi连接）",
+      "  关闭后，屏端与摄像头切到点对点连接",
       "智能看护设置：包含 智能看护检测设置、通知设置和免打扰时段",
       "功能设置：包含 画面设置、存储设置、电池管理（电池摄像头才有）、摄像头音量、指示灯开关、云台校准等",
       "  画面设置：画面翻转、夜视模式",
@@ -12551,23 +12652,19 @@
     "ruleEditorVersion": 2
   },
   "切网提示": {
-    "title": "弱网&切网提示",
+    "title": "弱网切网提示",
     "desc": "",
     "bullets": [
-      "当屏端与摄像头的点对点连接信号弱，",
-      "  若此时 屏端与摄像头的Wi-Fi连接质量还行，则展示 切网提示：cam1连接信号弱，可将看护屏尽量靠近设备，或切换Wi-F网络",
-      "    点击切换网络，则屏端与该摄像头改为Wi-Fi连接（本地功能均走Wi-F连接）",
-      "    点击关闭，关闭提示弹窗。关闭后，1分钟内不再展示",
-      "  若此时 屏端与摄像头的Wi-Fi连接质量也弱/或断连情况，则展示 弱网提示：cam1连接信号弱，可将看护屏尽量靠近设备",
-      "    点击关闭，关闭提示弹窗。关闭后，1分钟内不再展示",
-      "当屏端与摄像头的Wi-F连接信号弱，",
-      "  若此时 屏端与摄像头的点对点连接质量还行，则展示 切网提示：cam1连接信号弱，可将看护屏尽量靠近设备，或切换本地网络",
-      "    点击切换网络，则屏端与该摄像头改为点对点连接（本地功能均走点对点连接）",
-      "    点击关闭，关闭提示弹窗。关闭后，1分钟内不再展示",
-      "  若此时 屏端与摄像头的Wi-Fi连接质量也弱/或断连情况，则展示 弱网提示：cam1连接信号弱，可将看护屏尽量靠近设备",
-      "    点击关闭，关闭提示弹窗。关闭后，1分钟内不再展示",
-      "当屏端与摄像头的Wi-Fi连接已断开，此时若屏端与摄像头有点对点连接，则自动切换到点对点连接；若屏端与摄像头的点对点连接已断开，则展示断连通知",
-      "屏端与摄像头的Wi-Fi接情况，包含：两者连接路由在同一局域网（路由通外网/不通外网），两者连接路由不在同一局域网（路由均通外网"
+      "当屏端与摄像头的点对点连接信号弱，则展示 切网提示：cam1连接信号弱，可将看护屏尽量靠近设备，或进行网络设置",
+      "  点击 去设置，跳转对应的设备设置-设备信息- Wi-Fi网络",
+      "  点击关闭，关闭提示弹窗。关闭后，1分钟内不再展示",
+      "当屏端与摄像头的Wi-F连接信号弱，则展示 切网提示：cam1连接信号弱，可将看护屏尽量靠近设备，或进行网络设置",
+      "  点击 去设置，跳转对应的设备设置-设备信息- Wi-Fi网络",
+      "  点击关闭，关闭提示弹窗。关闭后，1分钟内不再展示",
+      "当屏端与摄像头的Wi-Fi连接已断开，",
+      "  若屏端与摄像头有点对点连接，则自动切换到点对点连接",
+      "  若屏端与摄像头的点对点连接已断开，则展示断连通知",
+      "屏端与摄像头的Wi-Fi接情况，包含：两者连接路由在同一局域网（路由通外网/不通外网），两者连接路由不在同一局域网（路由均通外网）"
     ],
     "featureEditorVersion": 2,
     "rules": [],
@@ -12631,6 +12728,17 @@
       "  点击关闭，关闭提示弹窗。关闭后，1分钟内不再展示",
       "当屏端与摄像头的Wi-Fi连接已断开，此时若屏端与摄像头有点对点连接，则自动切换到点对点连接；若屏端与摄像头的点对点连接已断开，则展示断连通知",
       "上述 屏端与摄像头联网的Wi-Fi连接情况，包含：两者连接路由在同一局域网（路由通外网/不通外网），两者连接路由不在同一局域网（路由均通外网）"
+    ],
+    "featureEditorVersion": 2,
+    "rules": [],
+    "ruleEditorVersion": 2
+  },
+  "新手引导 / 切网提示": {
+    "title": "切网提示",
+    "desc": "主页上展示切换网络后的提示弹窗。",
+    "bullets": [
+      "在主页实时监控画面上弹出切网络提示",
+      "提示用户切换网络后，摄像头可能短暂离线，需要确认摄像头与屏端连接状态"
     ],
     "featureEditorVersion": 2,
     "rules": [],
@@ -13752,8 +13860,8 @@
       if (memoryDocsCache) return memoryDocsCache;
       try {
         const docs = {
-          ...readLocalStorageJson(docsStorageKey, {}),
-          ...getEmbeddedDocs()
+          ...getEmbeddedDocs(),
+          ...readLocalStorageJson(docsStorageKey, {})
         };
         let shouldPersist = false;
         if (!localStorage.getItem(docsImageCleanupKey)) {
@@ -13899,6 +14007,18 @@
       return aliases[key] || key;
     }
 
+    function hasDocsMetaContent(meta) {
+      if (!meta || typeof meta !== 'object') return false;
+      const hasText = (value) => String(value || '').trim().length > 0;
+      return Boolean(
+        hasText(meta.desc) ||
+        (Array.isArray(meta.bullets) && meta.bullets.some(hasText)) ||
+        (Array.isArray(meta.rules) && meta.rules.some(hasText)) ||
+        hasText(meta.featureHtml) ||
+        hasText(meta.ruleHtml)
+      );
+    }
+
     function migrateDocsKeyAliases(docs) {
       if (!docs || typeof docs !== 'object') return false;
       let changed = false;
@@ -13906,7 +14026,7 @@
         if (!docs[legacyKey] || legacyKey === canonicalKey) return;
         const legacy = docs[legacyKey];
         const current = docs[canonicalKey];
-        const shouldUseLegacy = !current || legacyKey.startsWith('切网提示 / ') || legacyKey === '智能看护快捷设置 / 设置' || legacyKey === '日常活动统计 / 录像回放' || legacyKey === '账号信息 / 账号';
+        const shouldUseLegacy = !hasDocsMetaContent(current);
         if (!shouldUseLegacy) return;
         docs[canonicalKey] = {
           ...legacy,
@@ -14070,6 +14190,33 @@
       }
     }
 
+    function renderDocsLinesIntoNode(linesSource, preview) {
+      if (!preview) return;
+      preview.textContent = '';
+      const lines = cleanDocsTextLines(linesSource);
+      lines.forEach((sourceLine) => {
+        const line = String(sourceLine);
+        const imageMatch = line.trim().match(/^!\[[^\]]*\]\((.+)\)$/);
+        if (imageMatch) {
+          const imageWrap = document.createElement('div');
+          imageWrap.className = 'docs-flow-image';
+          imageWrap.contentEditable = 'false';
+          imageWrap.tabIndex = 0;
+          const image = document.createElement('img');
+          image.src = resolveDocsImageSrc(imageMatch[1]);
+          image.alt = '\u7C98\u8D34\u56FE\u7247';
+          imageWrap.append(image);
+          preview.append(imageWrap);
+          return;
+        }
+        preview.append(createDocsOutlineLine(getDocsLineText(line), getDocsLineLevel(line)));
+      });
+      if (!preview.childNodes.length) {
+        preview.append(createDocsOutlineLine('', 1));
+      }
+      renumberDocsEditor(preview);
+    }
+
     function resizeDocsEditor(field) {
       if (!field) return;
       field.style.height = 'auto';
@@ -14154,30 +14301,7 @@
     }
 
     function renderDocsMarkdownEditor(linesSource, preview) {
-      if (!preview) return;
-      preview.textContent = '';
-      const lines = cleanDocsTextLines(linesSource);
-      lines.forEach((sourceLine) => {
-        const line = String(sourceLine);
-        const imageMatch = line.trim().match(/^!\[[^\]]*\]\((.+)\)$/);
-        if (imageMatch) {
-          const imageWrap = document.createElement('div');
-          imageWrap.className = 'docs-flow-image';
-          imageWrap.contentEditable = 'false';
-          imageWrap.tabIndex = 0;
-          const image = document.createElement('img');
-          image.src = resolveDocsImageSrc(imageMatch[1]);
-          image.alt = '\u7C98\u8D34\u56FE\u7247';
-          imageWrap.append(image);
-          preview.append(imageWrap);
-          return;
-        }
-        preview.append(createDocsOutlineLine(getDocsLineText(line), getDocsLineLevel(line)));
-      });
-      if (!preview.childNodes.length) {
-        preview.append(createDocsOutlineLine('', 1));
-      }
-      renumberDocsEditor(preview);
+      renderDocsLinesIntoNode(linesSource, preview);
     }
 
     function resolveDocsImageSrc(src) {
@@ -14466,6 +14590,30 @@
 
     function renderDocsPreviews() {
       safeSavePrototypeDocs();
+    }
+
+    function syncDocsPanelClone(clone, stored, context) {
+      if (!clone || !stored || !context) return;
+      const meta = stored[context.key] || {};
+      const cloneTitle = clone.querySelector('#docsTitle');
+      const cloneDesc = clone.querySelector('#docsDesc');
+      const cloneFeatureEditor = clone.querySelector('[data-docs-preview="features"]');
+      const cloneRuleEditor = clone.querySelector('[data-docs-preview="rules"]');
+      const cloneFeatureField = clone.querySelector('#docsFeatureList');
+      const cloneRuleField = clone.querySelector('#docsRuleList');
+      const rules = meta.rules || [];
+      if (cloneTitle) {
+        cloneTitle.setAttribute('value', meta.title || context.title || context.page);
+        cloneTitle.value = meta.title || context.title || context.page;
+      }
+      if (cloneDesc) {
+        cloneDesc.textContent = meta.desc || '';
+        cloneDesc.value = meta.desc || '';
+      }
+      renderDocsLinesIntoNode(meta.bullets || [], cloneFeatureEditor);
+      renderDocsLinesIntoNode(rules, cloneRuleEditor);
+      if (cloneFeatureField) cloneFeatureField.textContent = (meta.bullets || []).join('\n');
+      if (cloneRuleField) cloneRuleField.textContent = rules.join('\n');
     }
 
     function appendDocsImage(preview, dataUrl, insertionRange) {
@@ -14933,20 +15081,37 @@
       docsPreviews.forEach(syncDocsPreviewToField);
       safeSavePrototypeDocs();
       const stored = getStoredDocs();
+      const context = getDocsContext();
       const clone = document.documentElement.cloneNode(true);
       const cloneSaveButton = clone.querySelector('#docsSaveHtml');
       const cloneSaveStatus = clone.querySelector('#docsSaveStatus');
       if (cloneSaveButton) cloneSaveButton.removeAttribute('disabled');
       if (cloneSaveStatus) cloneSaveStatus.textContent = '\u5C1A\u672A\u4FDD\u5B58';
+      syncDocsPanelClone(clone, stored, context);
       const cloneDocs = clone.querySelector('#bbmSavedDocs');
       if (cloneDocs) {
         cloneDocs.textContent = JSON.stringify(stored, null, 2).replace(/</g, '\\u003C');
       }
       const html = `<!DOCTYPE html>\n${clone.outerHTML}\n`;
-      const blob = new Blob([html], { type: 'text/html;charset=utf-8' });
 
       try {
-        docsSaveStatus.textContent = '\u6B63\u5728\u4E0B\u8F7D\u6700\u65B0HTML';
+        if ('showSaveFilePicker' in window) {
+          docsSaveStatus.textContent = '\u8BF7\u9009\u62E9\u8981\u8986\u76D6\u7684HTML\u6587\u4EF6';
+          const handle = await window.showSaveFilePicker({
+            suggestedName: 'index.html',
+            types: [{
+              description: 'HTML',
+              accept: { 'text/html': ['.html'] }
+            }]
+          });
+          const writable = await handle.createWritable();
+          await writable.write(new Blob([html], { type: 'text/html;charset=utf-8' }));
+          await writable.close();
+          docsSaveStatus.textContent = '\u5DF2\u4FDD\u5B58\u5230\u9009\u62E9\u7684HTML\u6587\u4EF6';
+          return;
+        }
+        docsSaveStatus.textContent = '\u6D4F\u89C8\u5668\u4E0D\u652F\u6301\u76F4\u63A5\u8986\u76D6\uFF0C\u6B63\u5728\u4E0B\u8F7D\u5907\u7528HTML';
+        const blob = new Blob([html], { type: 'text/html;charset=utf-8' });
         const url = URL.createObjectURL(blob);
         const link = document.createElement('a');
         link.href = url;
@@ -14958,7 +15123,7 @@
           URL.revokeObjectURL(url);
           link.remove();
         }, 1000);
-        docsSaveStatus.textContent = '\u5DF2\u4E0B\u8F7D\u6700\u65B0HTML\uFF0C\u4E0D\u4F1A\u76F4\u63A5\u8986\u76D6\u5F53\u524D\u6587\u4EF6';
+        docsSaveStatus.textContent = '\u5DF2\u4E0B\u8F7Dindex.saved.html\uFF0C\u9700\u624B\u52A8\u66FF\u6362\u5F53\u524Dindex.html';
       } catch (error) {
         docsSaveStatus.textContent = error?.name === 'AbortError'
           ? '\u5DF2\u53D6\u6D88\u4FDD\u5B58'
@@ -15205,6 +15370,7 @@
 
     function getInlineEditKey(element) {
       if (!element) return '';
+      if (element.dataset?.inlineEditKey) return element.dataset.inlineEditKey;
       const ownIndex = (node) => {
         if (!node?.parentElement) return 0;
         return [...node.parentElement.children].filter((item) => item.tagName === node.tagName).indexOf(node) + 1;
@@ -15244,6 +15410,22 @@
     function beginInlineTextEdit(target) {
       if (!target || target.closest('[data-docs-preview], .docs-panel, .docs-image-preview')) return;
       const originalText = target.textContent;
+      if (target.dataset.inlineMultiline === 'true') {
+        const textarea = document.createElement('textarea');
+        textarea.className = 'inline-multiline-editor';
+        textarea.value = originalText;
+        textarea.spellcheck = false;
+        textarea.dataset.inlineEditOriginal = originalText;
+        textarea.dataset.inlineEditKey = getInlineEditKey(target);
+        textarea.dataset.inlineMultiline = 'true';
+        textarea.style.minHeight = `${Math.max(target.getBoundingClientRect().height, 52)}px`;
+        target.replaceWith(textarea);
+        textarea.focus({ preventScroll: true });
+        textarea.selectionStart = textarea.value.length;
+        textarea.selectionEnd = textarea.value.length;
+        textarea.classList.add('inline-text-editing');
+        return;
+      }
       target.dataset.inlineEditOriginal = originalText;
       target.contentEditable = 'true';
       target.spellcheck = false;
@@ -15257,14 +15439,36 @@
     }
 
     function finishInlineTextEdit(target, shouldCancel = false) {
-      if (!target || target.contentEditable !== 'true') return;
+      if (!target) return;
+      if (target.tagName === 'TEXTAREA' && target.classList.contains('inline-text-editing')) {
+        const originalText = target.dataset.inlineEditOriginal || '';
+        const key = target.dataset.inlineEditKey || '';
+        const nextText = shouldCancel ? originalText : target.value;
+        const replacement = document.createElement('p');
+        replacement.className = 'device-settings-note inline-edit-hint';
+        replacement.dataset.inlineMultiline = 'true';
+        replacement.setAttribute('spellcheck', 'false');
+        replacement.textContent = nextText;
+        if (key) replacement.dataset.inlineEditKey = key;
+        target.replaceWith(replacement);
+        if (!shouldCancel && key) {
+          const edits = getInlineTextEdits();
+          edits[key] = nextText;
+          setInlineTextEdits(edits);
+        }
+        markInlineEditableText();
+        return;
+      }
+      if (target.contentEditable !== 'true') return;
       const originalText = target.dataset.inlineEditOriginal || '';
       if (shouldCancel) target.textContent = originalText;
       if (!shouldCancel) {
         const key = getInlineEditKey(target);
         if (key) {
           const edits = getInlineTextEdits();
-          edits[key] = target.textContent;
+          edits[key] = target.dataset.inlineMultiline === 'true'
+            ? target.innerText.replace(/\u00a0/g, ' ').replace(/\n$/, '')
+            : target.textContent;
           setInlineTextEdits(edits);
         }
       }
@@ -15284,9 +15488,28 @@
     }, true);
 
     document.addEventListener('keydown', (event) => {
+      const textareaTarget = event.target.closest('.inline-multiline-editor.inline-text-editing');
+      if (textareaTarget) {
+        if (event.key === 'Escape') {
+          event.preventDefault();
+          finishInlineTextEdit(textareaTarget, true);
+          return;
+        }
+        if ((event.metaKey || event.ctrlKey) && event.key.toLowerCase() === 'enter') {
+          event.preventDefault();
+          finishInlineTextEdit(textareaTarget);
+          return;
+        }
+        return;
+      }
       const target = event.target.closest('.inline-text-editing');
       if (!target) return;
       if (event.key === 'Enter') {
+        if (target.dataset.inlineMultiline === 'true') {
+          event.preventDefault();
+          document.execCommand('insertLineBreak');
+          return;
+        }
         event.preventDefault();
         finishInlineTextEdit(target);
       }
@@ -15297,7 +15520,7 @@
     }, true);
 
     document.addEventListener('focusout', (event) => {
-      const target = event.target.closest('.inline-text-editing');
+      const target = event.target.closest('.inline-text-editing, .inline-multiline-editor.inline-text-editing');
       if (!target) return;
       finishInlineTextEdit(target);
     }, true);
@@ -16473,6 +16696,11 @@
         wifiNameInput.setAttribute('aria-expanded', String(clickedWifiInput));
         if (clickedInsideWifiPicker && !clickedWifiInput) return;
       }
+      const deviceNetworkSwitch = event.target.closest('.device-settings-detail.wifi .setting-switch');
+      if (deviceNetworkSwitch) {
+        deviceNetworkSwitch.classList.toggle('off');
+        return;
+      }
       const overviewSettingTarget = event.target.closest('.settings-overview [data-setting-panel]');
       if (overviewSettingTarget) {
         selectSettingPanel(overviewSettingTarget.dataset.settingPanel);
@@ -16844,6 +17072,17 @@
 
 
 
-<span style="position: fixed; left: -9999px; top: -9999px; visibility: hidden; white-space: pre; font: 900 21px Arial; letter-spacing: normal; padding: 2px 4px; border: 0.555556px solid rgba(0, 0, 0, 0);">弱网&amp;切网提示</span><span style="position: fixed; left: -9999px; top: -9999px; visibility: hidden; white-space: pre; font: 900 21px Arial; letter-spacing: normal; padding: 2px 4px; border: 0.555556px solid rgba(82, 166, 255, 0.62);">弱网&amp;切网提示</span>
+<span style="position: fixed; left: -9999px; top: -9999px; visibility: hidden; white-space: pre; font: 900 21px Arial; letter-spacing: normal; padding: 2px 4px; border: 0.555556px solid rgba(0, 0, 0, 0);">设备设置</span><span style="position: fixed; left: -9999px; top: -9999px; visibility: hidden; white-space: pre; font: 900 21px Arial; letter-spacing: normal; padding: 2px 4px; border: 0.625px solid rgba(0, 0, 0, 0);">设备设置</span><span style="position: fixed; left: -9999px; top: -9999px; visibility: hidden; white-space: pre; font: 900 21px Arial; letter-spacing: normal; padding: 2px 4px; border: 0.555556px solid rgba(0, 0, 0, 0);">设备设置</span><span style="position: fixed; left: -9999px; top: -9999px; visibility: hidden; white-space: pre; font: 900 21px Arial; letter-spacing: normal; padding: 2px 4px; border: 0.625px solid rgba(0, 0, 0, 0);">弱网切网提示</span><span style="position: fixed; left: -9999px; top: -9999px; visibility: hidden; white-space: pre; font: 900 21px Arial; letter-spacing: normal; padding: 2px 4px; border: 0.555556px solid rgba(0, 0, 0, 0);">弱网切网提示</span><span style="position: fixed; left: -9999px; top: -9999px; visibility: hidden; white-space: pre; font: 900 21px Arial; letter-spacing: normal; padding: 2px 4px; border: 0.625px solid rgba(0, 0, 0, 0);">弱网切网提示</span><span style="position: fixed; left: -9999px; top: -9999px; visibility: hidden; white-space: pre; font: 900 21px Arial; letter-spacing: normal; padding: 2px 4px; border: 0.555556px solid rgba(0, 0, 0, 0);">弱网切网提示</span><span style="position: fixed; left: -9999px; top: -9999px; visibility: hidden; white-space: pre; font: 900 21px Arial; letter-spacing: normal; padding: 2px 4px; border: 0.555556px solid rgba(0, 0, 0, 0);">弱网切网提示</span><span style="position: fixed; left: -9999px; top: -9999px; visibility: hidden; white-space: pre; font: 900 21px Arial; letter-spacing: normal; padding: 2px 4px; border: 0.555556px solid rgba(0, 0, 0, 0);">弱网切网提示</span><span style="position: fixed; left: -9999px; top: -9999px; visibility: hidden; white-space: pre; font: 900 21px Arial; letter-spacing: normal; padding: 2px 4px; border: 0.555556px solid rgba(82, 166, 255, 0.62);">弱网切网提示</span><span style="position: fixed; left: -9999px; top: -9999px; visibility: hidden; white-space: pre; font: 900 21px Arial; letter-spacing: normal; padding: 2px 4px; border: 0.555556px solid rgba(0, 0, 0, 0);">弱网&amp;切网提示</span><span style="position: fixed; left: -9999px; top: -9999px; visibility: hidden; white-space: pre; font: 900 21px Arial; letter-spacing: normal; padding: 2px 4px; border: 0.555556px solid rgba(0, 0, 0, 0);">弱网&amp;切网提示</span><span style="position: fixed; left: -9999px; top: -9999px; visibility: hidden; white-space: pre; font: 900 21px Arial; letter-spacing: normal; padding: 2px 4px; border: 0.555556px solid rgba(82, 166, 255, 0.62);">弱网&amp;切网提示</span>
+
+
+
+
+
+
+
+<div id="codex-browser-sidebar-comments-root" style="position: fixed; inset: 0px; pointer-events: none; z-index: 2147483647;"></div>
+
+
+
 
 </body></html>
