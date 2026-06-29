@@ -10063,14 +10063,14 @@
             <button class="nav-sub-item inline-edit-hint" data-page="实时监控区" data-view="singleFull">单画面全屏</button>
             <button class="nav-sub-item inline-edit-hint" data-page="实时监控区" data-view="split2Full">双画面全屏</button>
           </div>
-          <button class="nav-item active inline-edit-hint" data-page="宝宝看护指标区">看护记录</button>
+          <button class="nav-item inline-edit-hint" data-page="宝宝看护指标区">看护记录</button>
           <div class="nav-sub">
             <button class="nav-sub-item inline-edit-hint" data-page="宝宝看护指标区" data-care-state="signed-out">未登录引导</button>
             <button class="nav-sub-item inline-edit-hint" data-page="宝宝看护指标区" data-care-state="offline-guide">未联网引导</button>
             <button class="nav-sub-item inline-edit-hint" data-page="宝宝看护指标区" data-care-state="empty">无数据状态</button>
-            <button class="nav-sub-item active inline-edit-hint" data-page="智能看护设置">智能看护设置</button>
+            <button class="nav-sub-item inline-edit-hint" data-page="智能看护设置">智能看护设置</button>
           </div>
-          <button class="nav-item inline-edit-hint" data-page="日常活动统计" data-scene="活动" data-room="neo">录像回放</button>
+          <button class="nav-item active inline-edit-hint" data-page="日常活动统计" data-scene="活动" data-room="neo">录像回放</button>
           <div class="nav-sub">
             <button class="nav-sub-item inline-edit-hint" data-page="日常活动统计" data-replay-state="noCard">未插卡</button>
           </div>
@@ -10104,11 +10104,11 @@
       <div class="canvas-wrap">
         <div class="canvas-head">
           <strong>8 寸平板横屏原型</strong>
-          <span id="canvasLabel">智能看护设置 / 设置</span>
+          <span id="canvasLabel">日常活动统计 / 录像回放</span>
         </div>
 
         <div class="shell">
-          <div class="screen care-settings-page-mode">
+          <div class="screen replay-page-mode">
             <header class="topbar">
               <div class="screen-date inline-edit-hint">2026/5/7 周四</div>
               <div class="screen-status">
@@ -10127,8 +10127,8 @@
 
             <nav class="screen-menu" aria-label="屏内主菜单">
               <button class="screen-menu-item inline-edit-hint" data-page="实时监控区" data-scene="睡眠看护">主页</button>
-              <button class="screen-menu-item active inline-edit-hint" data-page="宝宝看护指标区" data-scene="睡眠看护">看护记录</button>
-              <button class="screen-menu-item inline-edit-hint" data-page="日常活动统计" data-scene="活动" data-room="neo">录像回放</button>
+              <button class="screen-menu-item inline-edit-hint" data-page="宝宝看护指标区" data-scene="睡眠看护">看护记录</button>
+              <button class="screen-menu-item active inline-edit-hint" data-page="日常活动统计" data-scene="活动" data-room="neo">录像回放</button>
               <button class="screen-menu-item inline-edit-hint" data-page="智能看护快捷设置">设置</button>
               <div class="screen-menu-spacer"></div>
               <button class="screen-menu-item inline-edit-hint" data-page="账号信息">账号</button>
@@ -10227,7 +10227,7 @@
                 </section>
               </div>
 
-              <aside class="right-panel" id="rightPanel" data-scene-panel="睡眠看护" data-monitor-view="single">
+              <aside class="right-panel" id="rightPanel" data-scene-panel="活动" data-monitor-view="single">
                 <div class="scene-mode-card scene-soothe">
                   <div class="scene-mode-top">
                     <div><div class="scene-mode-state"><span class="scene-mode-icon inline-edit-hint">☾</span><span class="scene-mode-state-text"><strong class="inline-edit-hint">niki平静</strong><span class="scene-mode-subtitle"></span></span></div></div>
@@ -10640,15 +10640,15 @@
                         <span id="eventFilterSummary" class="inline-edit-hint">全部事件类型</span><i class="inline-edit-hint">⌄</i>
                       </button>
                       <div class="event-filter-menu" role="listbox" aria-label="事件类型多选">
-                        <label class="event-filter-option"><input type="checkbox" data-event-filter="all" checked="">全部</label>
-                        <label class="event-filter-option"><input type="checkbox" data-event-filter="移动侦测">移动侦测</label>
-                        <label class="event-filter-option"><input type="checkbox" data-event-filter="宝宝不在位">宝宝不在位</label>
-                        <label class="event-filter-option"><input type="checkbox" data-event-filter="趴睡">趴睡</label>
-                        <label class="event-filter-option"><input type="checkbox" data-event-filter="遮脸">遮脸</label>
-                        <label class="event-filter-option"><input type="checkbox" data-event-filter="安全区域出界">安全区域出界</label>
-                        <label class="event-filter-option"><input type="checkbox" data-event-filter="危险区域靠近">危险区域靠近</label>
-                        <label class="event-filter-option"><input type="checkbox" data-event-filter="哭声">哭声</label>
-                        <label class="event-filter-option"><input type="checkbox" data-event-filter="异响">异响</label>
+                        <label class="event-filter-option"><input type="checkbox" data-event-filter="all" checked=""><span class="inline-edit-hint">全部</span></label>
+                        <label class="event-filter-option"><input type="checkbox" data-event-filter="移动侦测"><span class="inline-edit-hint" spellcheck="false">宝宝移动侦测</span></label>
+                        <label class="event-filter-option"><input type="checkbox" data-event-filter="宝宝不在位"><span class="inline-edit-hint">宝宝不在位</span></label>
+                        <label class="event-filter-option"><input type="checkbox" data-event-filter="趴睡"><span class="inline-edit-hint">趴睡</span></label>
+                        <label class="event-filter-option"><input type="checkbox" data-event-filter="遮脸"><span class="inline-edit-hint">遮脸</span></label>
+                        <label class="event-filter-option"><input type="checkbox" data-event-filter="安全区域出界"><span class="inline-edit-hint" spellcheck="false">离开安全区域</span></label>
+                        <label class="event-filter-option"><input type="checkbox" data-event-filter="危险区域靠近"><span class="inline-edit-hint" spellcheck="false">进入危险区域</span></label>
+                        <label class="event-filter-option"><input type="checkbox" data-event-filter="哭声"><span class="inline-edit-hint">哭声</span></label>
+                        <label class="event-filter-option"><input type="checkbox" data-event-filter="异响"><span class="inline-edit-hint">异响</span></label>
                       </div>
                     </div>
                     <div class="replay-events">
@@ -11819,8 +11819,8 @@
       <section class="docs-panel">
         <div class="docs-head">
           <div class="docs-head-main">
-            <input class="docs-title-input" id="docsTitle" type="text" value="智能看护设置" aria-label="页面功能说明标题" style="width: 145px;">
-            <textarea class="docs-desc-input" id="docsDesc" aria-label="页面功能说明描述">管理所有BBM设备的智能看护检测项、睡眠安抚设置和通知设置。</textarea>
+            <input class="docs-title-input" id="docsTitle" type="text" value="日常活动统计" aria-label="页面功能说明标题" style="width: 145px;">
+            <textarea class="docs-desc-input" id="docsDesc" aria-label="页面功能说明描述">沉淀宝宝日常事件记录，为成长分析和回看提供入口。</textarea>
           </div>
           <div class="docs-actions">
             <button class="docs-save" id="docsSaveHtml" type="button">保存HTML</button>
@@ -11832,31 +11832,24 @@
             <div class="docs-card-head">
               <h3>功能描述</h3>
             </div>
-            <div class="docs-structured-list" data-docs-preview="features" contenteditable="true" tabindex="0" aria-label="功能描述内容，可直接编辑或粘贴图片"><div class="docs-outline-line level-1" data-level="1"><b class="docs-outline-index" contenteditable="false">1</b><div class="docs-outline-copy" spellcheck="false">智能看护设置，包含 智能看护检测设置、通知设置和免打扰时段。</div></div><div class="docs-outline-line level-1" data-level="1"><b class="docs-outline-index" contenteditable="false">2</b><div class="docs-outline-copy" spellcheck="false">智能看护检测项：检测开关，默认全开启</div></div><div class="docs-outline-line level-1" data-level="1"><b class="docs-outline-index" contenteditable="false">3</b><div class="docs-outline-copy" spellcheck="false">宝宝移动侦测：检测到宝宝移动时自动录像。支持设置 检测开关、灵敏度、告警通知开关</div></div><div class="docs-outline-line level-1" data-level="1"><b class="docs-outline-index" contenteditable="false">4</b><div class="docs-outline-copy" spellcheck="false">宝宝在位检测：检测到宝宝离开画面时自动录像。支持设置 检测开关、告警通知开关</div></div><div class="docs-outline-line level-1" data-level="1"><b class="docs-outline-index" contenteditable="false">5</b><div class="docs-outline-copy" spellcheck="false">趴睡检测：检测到宝宝趴睡时自动录像。支持设置 检测开关、告警通知开关</div></div><div class="docs-outline-line level-1" data-level="1"><b class="docs-outline-index" contenteditable="false">6</b><div class="docs-outline-copy" spellcheck="false">遮脸检测：检测到宝宝口鼻遮挡时自动录像。支持设置 检测开关、告警通知开关</div></div><div class="docs-outline-line level-1" data-level="1"><b class="docs-outline-index" contenteditable="false">7</b><div class="docs-outline-copy" spellcheck="false">安全/危险区域：检测到宝宝离开安全区域/或进入危险区域时自动录像。支持设置 检测开关、告警通知开关、区域设置、在画面中显示区域开关</div></div><div class="docs-outline-line level-1" data-level="1"><b class="docs-outline-index" contenteditable="false">8</b><div class="docs-outline-copy" spellcheck="false">哭声检测：检测到宝宝哭声时自动录像。支持设置 检测开关、灵敏度、告警通知开关、安抚音设置、哭声放大开关</div></div><div class="docs-outline-line level-2" data-level="2"><b class="docs-outline-index" contenteditable="false">1</b><div class="docs-outline-copy" spellcheck="false">安抚音设置：自动安抚开关、安抚音选择。默认开自动安抚，检测到哭声自动播放安抚音，哭声停止安抚音停止</div></div><div class="docs-outline-line level-2" data-level="2"><b class="docs-outline-index" contenteditable="false">2</b><div class="docs-outline-copy" spellcheck="false">哭声放大开启，默认开启。检测到哭声时自动放大哭声音量</div></div><div class="docs-outline-line level-1" data-level="1"><b class="docs-outline-index" contenteditable="false">9</b><div class="docs-outline-copy" spellcheck="false">异响检测：检测到环境音量超过设定值时自动录像。支持设置 检测开关、灵敏度、告警通知开关</div></div><div class="docs-outline-line level-1" data-level="1"><b class="docs-outline-index" contenteditable="false">10</b><div class="docs-outline-copy" spellcheck="false">温湿度检测：检测到温湿度超过设定范围时自动录像。支持设置 检测开关、告警通知开关、温湿度范围</div></div><div class="docs-outline-line level-1" data-level="1"><b class="docs-outline-index" contenteditable="false">11</b><div class="docs-outline-copy" spellcheck="false">宝宝人脸标记开关：开启后，支持标记宝宝人脸</div></div><div class="docs-outline-line level-1" data-level="1"><b class="docs-outline-index" contenteditable="false">12</b><div class="docs-outline-copy" spellcheck="false">通知设置：支持设置 各检测项的通知开关、通知等级（分：重要提醒、一般提醒）。通知开关，默认开启趴睡/遮脸/哭声，均为重要提醒</div></div><div class="docs-outline-line level-2" data-level="2"><b class="docs-outline-index" contenteditable="false">1</b><div class="docs-outline-copy" spellcheck="false">一般提醒：亮屏+消息通知</div></div><div class="docs-outline-line level-2" data-level="2"><b class="docs-outline-index" contenteditable="false">2</b><div class="docs-outline-copy" spellcheck="false">重要提醒：亮屏+消息通知+报警音</div></div><div class="docs-outline-line level-1" data-level="1"><b class="docs-outline-index" contenteditable="false">13</b><div class="docs-outline-copy" spellcheck="false">免打扰时段：支持设置 免打扰时段。生效时段内，仅保留重要提醒的告警通知</div></div></div>
-            <textarea class="docs-editor" id="docsFeatureList" hidden="" aria-label="功能描述，每行一条" style="height: 72px;">智能看护设置，包含 智能看护检测设置、通知设置和免打扰时段。
-智能看护检测项：检测开关，默认全开启
-宝宝移动侦测：检测到宝宝移动时自动录像。支持设置 检测开关、灵敏度、告警通知开关
-宝宝在位检测：检测到宝宝离开画面时自动录像。支持设置 检测开关、告警通知开关
-趴睡检测：检测到宝宝趴睡时自动录像。支持设置 检测开关、告警通知开关
-遮脸检测：检测到宝宝口鼻遮挡时自动录像。支持设置 检测开关、告警通知开关
-安全/危险区域：检测到宝宝离开安全区域/或进入危险区域时自动录像。支持设置 检测开关、告警通知开关、区域设置、在画面中显示区域开关
-哭声检测：检测到宝宝哭声时自动录像。支持设置 检测开关、灵敏度、告警通知开关、安抚音设置、哭声放大开关
-  安抚音设置：自动安抚开关、安抚音选择。默认开自动安抚，检测到哭声自动播放安抚音，哭声停止安抚音停止
-  哭声放大开启，默认开启。检测到哭声时自动放大哭声音量
-异响检测：检测到环境音量超过设定值时自动录像。支持设置 检测开关、灵敏度、告警通知开关
-温湿度检测：检测到温湿度超过设定范围时自动录像。支持设置 检测开关、告警通知开关、温湿度范围
-宝宝人脸标记开关：开启后，支持标记宝宝人脸
-通知设置：支持设置 各检测项的通知开关、通知等级（分：重要提醒、一般提醒）。通知开关，默认开启趴睡/遮脸/哭声，均为重要提醒
-  一般提醒：亮屏+消息通知
-  重要提醒：亮屏+消息通知+报警音
-免打扰时段：支持设置 免打扰时段。生效时段内，仅保留重要提醒的告警通知</textarea>
+            <div class="docs-structured-list" data-docs-preview="features" contenteditable="true" tabindex="0" aria-label="功能描述内容，可直接编辑或粘贴图片"><div class="docs-outline-line level-1" data-level="1"><b class="docs-outline-index" contenteditable="false">1</b><div class="docs-outline-copy" spellcheck="false">支持查看设备的录像回放（包含：本地录像、云录像、相册）</div></div><div class="docs-outline-line level-1" data-level="1"><b class="docs-outline-index" contenteditable="false">2</b><div class="docs-outline-copy" spellcheck="false">本地录像：支持通过时间轴、事件记录查看录像</div></div><div class="docs-outline-line level-2" data-level="2"><b class="docs-outline-index" contenteditable="false">1</b><div class="docs-outline-copy" spellcheck="false">倍速：支持1、2、4、8倍</div></div><div class="docs-outline-line level-1" data-level="1"><b class="docs-outline-index" contenteditable="false">3</b><div class="docs-outline-copy" spellcheck="false">云录像：需登录账号，付费才支持。</div></div><div class="docs-outline-line level-1" data-level="1"><b class="docs-outline-index" contenteditable="false">4</b><div class="docs-outline-copy" spellcheck="false">相册：展示用户 截图、录像 保存在设备SD卡上的图片/视频</div></div><div class="docs-outline-line level-2" data-level="2"><b class="docs-outline-index" contenteditable="false">1</b><div class="docs-outline-copy" spellcheck="false">按日期分类展示，支持按日期筛选</div></div><div class="docs-outline-line level-2" data-level="2"><b class="docs-outline-index" contenteditable="false">2</b><div class="docs-outline-copy" spellcheck="false">支持全屏查看、删除</div></div><div class="docs-outline-line level-1" data-level="1"><b class="docs-outline-index" contenteditable="false">5</b><div class="docs-outline-copy" spellcheck="false">后续支持承接：精彩时刻、成长记录等入口。</div></div><div class="docs-outline-line level-1" data-level="1"><b class="docs-outline-index" contenteditable="false">6</b><div class="docs-outline-copy" spellcheck="false">事件类型：检测类型</div></div></div>
+            <textarea class="docs-editor" id="docsFeatureList" hidden="" aria-label="功能描述，每行一条" style="height: 72px;">支持查看设备的录像回放（包含：本地录像、云录像、相册）
+本地录像：支持通过时间轴、事件记录查看录像
+  倍速：支持1、2、4、8倍
+云录像：需登录账号，付费才支持。
+相册：展示用户 截图、录像 保存在设备SD卡上的图片/视频
+  按日期分类展示，支持按日期筛选
+  支持全屏查看、删除
+后续支持承接：精彩时刻、成长记录等入口。
+事件类型：检测类型</textarea>
           </section>
           <section class="docs-card" tabindex="0">
             <div class="docs-card-head">
               <h3>其他规则</h3>
             </div>
-            <div class="docs-structured-list" data-docs-preview="rules" contenteditable="true" tabindex="0" aria-label="其他规则内容，可直接编辑或粘贴图片"><div class="docs-outline-line level-1" data-level="1"><b class="docs-outline-index" contenteditable="false">1</b><div class="docs-outline-copy" spellcheck="false"><br></div></div></div>
-            <textarea class="docs-editor" id="docsRuleList" hidden="" aria-label="其他规则，每行一条" style="height: 72px;"></textarea>
+            <div class="docs-structured-list" data-docs-preview="rules" contenteditable="true" tabindex="0" aria-label="其他规则内容，可直接编辑或粘贴图片"><div class="docs-outline-line level-1" data-level="1"><b class="docs-outline-index" contenteditable="false">1</b><div class="docs-outline-copy" spellcheck="false">本地录像 页面状态：未插卡、存储卡异常、设备离线、无录像</div></div><div class="docs-outline-line level-1" data-level="1"><b class="docs-outline-index" contenteditable="false">2</b><div class="docs-outline-copy" spellcheck="false">相册页面状态：未插卡、存储卡异常、设备离线、无数据</div></div></div>
+            <textarea class="docs-editor" id="docsRuleList" hidden="" aria-label="其他规则，每行一条" style="height: 72px;">本地录像 页面状态：未插卡、存储卡异常、设备离线、无录像
+相册页面状态：未插卡、存储卡异常、设备离线、无数据</textarea>
           </section>
         </div>
       </section>
@@ -11884,7 +11877,10 @@
   "#careSettingsPage>section:nth-of-type(1)>section:nth-of-type(1)>div:nth-of-type(1)>section:nth-of-type(3)>div:nth-of-type(2)>div:nth-of-type(5)>div:nth-of-type(1)>span:nth-of-type(1)": "检测到宝宝离开安全区域/或进入危险区域时通知",
   "#careSettingsPage>section:nth-of-type(1)>section:nth-of-type(1)>div:nth-of-type(1)>section:nth-of-type(3)>div:nth-of-type(2)>div:nth-of-type(7)>div:nth-of-type(1)>span:nth-of-type(1)": "检测到环境音量超过限定值时通知",
   "#careSettingsPage>section:nth-of-type(1)>section:nth-of-type(1)>div:nth-of-type(1)>section:nth-of-type(3)>div:nth-of-type(2)>div:nth-of-type(8)>div:nth-of-type(1)>span:nth-of-type(1)": "检测到温度超出设定范围时通知",
-  "#careSettingsPage>section:nth-of-type(1)>section:nth-of-type(1)>div:nth-of-type(1)>section:nth-of-type(3)>div:nth-of-type(2)>div:nth-of-type(9)>div:nth-of-type(1)>span:nth-of-type(1)": "检测到湿度超出设定范围时通知"
+  "#careSettingsPage>section:nth-of-type(1)>section:nth-of-type(1)>div:nth-of-type(1)>section:nth-of-type(3)>div:nth-of-type(2)>div:nth-of-type(9)>div:nth-of-type(1)>span:nth-of-type(1)": "检测到湿度超出设定范围时通知",
+  "#eventTypeFilter>div:nth-of-type(1)>label:nth-of-type(2)>span:nth-of-type(1)": "宝宝移动侦测",
+  "#eventTypeFilter>div:nth-of-type(1)>label:nth-of-type(6)>span:nth-of-type(1)": "离开安全区域",
+  "#eventTypeFilter>div:nth-of-type(1)>label:nth-of-type(7)>span:nth-of-type(1)": "进入危险区域"
 }</script>
 
   <script id="bbmSavedDocs" type="application/json">{
@@ -11996,9 +11992,7 @@
       "本地录像 页面状态：未插卡、存储卡异常、设备离线、无录像",
       "相册页面状态：未插卡、存储卡异常、设备离线、无数据"
     ],
-    "ruleEditorVersion": 2,
-    "featureHtml": "",
-    "ruleHtml": ""
+    "ruleEditorVersion": 2
   },
   "智能看护设置": {
     "title": "智能看护设置",
@@ -17441,6 +17435,7 @@
     cleanupStaleInlineTextEdits();
     markInlineEditableText();
   </script>
+
 
 
 
