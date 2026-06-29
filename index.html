@@ -10070,7 +10070,7 @@
             <button class="nav-sub-item inline-edit-hint" data-page="宝宝看护指标区" data-care-state="empty">无数据状态</button>
             <button class="nav-sub-item inline-edit-hint" data-page="智能看护设置">智能看护设置</button>
           </div>
-          <button class="nav-item active inline-edit-hint" data-page="日常活动统计" data-scene="活动" data-room="neo">录像回放</button>
+          <button class="nav-item inline-edit-hint" data-page="日常活动统计" data-scene="活动" data-room="neo">录像回放</button>
           <div class="nav-sub">
             <button class="nav-sub-item inline-edit-hint" data-page="日常活动统计" data-replay-state="noCard">未插卡</button>
           </div>
@@ -10084,7 +10084,7 @@
           </div>
           <button class="nav-item inline-edit-hint" data-page="控制中心">控制中心</button>
           <button class="nav-item inline-edit-hint" data-page="切网提示" spellcheck="false">弱网切网提示</button>
-          <button class="nav-item inline-edit-hint" data-page="消息通知">消息通知</button>
+          <button class="nav-item active inline-edit-hint" data-page="消息通知">消息通知</button>
           <div class="nav-sub">
             <button class="nav-sub-item inline-edit-hint" data-page="断连通知">断连通知</button>
             <button class="nav-sub-item inline-edit-hint" data-page="低电量通知">低电量通知</button>
@@ -10104,11 +10104,11 @@
       <div class="canvas-wrap">
         <div class="canvas-head">
           <strong>8 寸平板横屏原型</strong>
-          <span id="canvasLabel">日常活动统计 / 录像回放</span>
+          <span id="canvasLabel">主页 / 消息通知</span>
         </div>
 
         <div class="shell">
-          <div class="screen replay-page-mode">
+          <div class="screen notification-page-mode">
             <header class="topbar">
               <div class="screen-date inline-edit-hint">2026/5/7 周四</div>
               <div class="screen-status">
@@ -10128,7 +10128,7 @@
             <nav class="screen-menu" aria-label="屏内主菜单">
               <button class="screen-menu-item inline-edit-hint" data-page="实时监控区" data-scene="睡眠看护">主页</button>
               <button class="screen-menu-item inline-edit-hint" data-page="宝宝看护指标区" data-scene="睡眠看护">看护记录</button>
-              <button class="screen-menu-item active inline-edit-hint" data-page="日常活动统计" data-scene="活动" data-room="neo">录像回放</button>
+              <button class="screen-menu-item inline-edit-hint" data-page="日常活动统计" data-scene="活动" data-room="neo">录像回放</button>
               <button class="screen-menu-item inline-edit-hint" data-page="智能看护快捷设置">设置</button>
               <div class="screen-menu-spacer"></div>
               <button class="screen-menu-item inline-edit-hint" data-page="账号信息">账号</button>
@@ -10140,7 +10140,7 @@
 
             <main class="content">
               <div class="monitor-stack">
-                <section class="monitor" id="monitor" style="--monitor-image: url(&quot;public/baby-sleep-overhead-rotated-monitor-16x9.png&quot;);">
+                <section class="monitor" id="monitor" style="--monitor-image: url(&quot;public/baby-face-covered.png&quot;);">
                   <div class="monitor-header">
                     <div class="monitor-left-tools">
                       <div class="live-pills">
@@ -10227,7 +10227,7 @@
                 </section>
               </div>
 
-              <aside class="right-panel" id="rightPanel" data-scene-panel="活动" data-monitor-view="single">
+              <aside class="right-panel" id="rightPanel" data-scene-panel="睡眠看护" data-monitor-view="single">
                 <div class="scene-mode-card scene-soothe">
                   <div class="scene-mode-top">
                     <div><div class="scene-mode-state"><span class="scene-mode-icon inline-edit-hint">☾</span><span class="scene-mode-state-text"><strong class="inline-edit-hint">niki平静</strong><span class="scene-mode-subtitle"></span></span></div></div>
@@ -10668,7 +10668,7 @@
               <header class="device-settings-head">
                 <div class="device-settings-title">
                   <button class="care-settings-back inline-edit-hint" type="button" data-action="device-settings-back" aria-label="返回">‹</button>
-                  <div><h2 id="deviceSettingsTitle" class="inline-edit-hint">设备设置</h2><p id="deviceSettingsSubtitle" class="inline-edit-hint">niki摄像头</p></div>
+                  <div><h2 id="deviceSettingsTitle" class="inline-edit-hint">设备设置</h2><p id="deviceSettingsSubtitle" class="inline-edit-hint">白噪声</p></div>
                 </div>
               </header>
               <div class="device-settings-scroll">
@@ -11191,7 +11191,7 @@
               <section class="alert-modal" id="alertModal" aria-label="消息通知弹窗">
                 <div class="alert-baby-icon" id="alertIcon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.5 14.5A6.8 6.8 0 0 1 9.5 6a7 7 0 1 0 8 8.5Z"></path><path d="M18.5 5.5v4M16.5 7.5h4"></path></svg></div>
                 <div class="alert-copy">
-                  <div class="alert-text inline-edit-hint" id="alertText" spellcheck="false">12:09 检测到niki遮脸</div>
+                  <div class="alert-text inline-edit-hint" id="alertText" spellcheck="false" data-inline-edit-key="#alertText:消息通知">12:09 检测到niki遮脸</div>
                   <div class="alert-detail-list" id="alertDetailList" hidden="">
                     <p class="inline-edit-hint">1、请确保摄像头上电</p>
                     <p><span class="inline-edit-hint">2、可将看护屏尽量靠近设备，或</span><button class="alert-detail-link inline-edit-hint" type="button" data-page-jump="设备设置" data-device-settings-source="monitor" data-device-settings-panel-jump="wifi">开启网络扩展</button></p>
@@ -11819,8 +11819,8 @@
       <section class="docs-panel">
         <div class="docs-head">
           <div class="docs-head-main">
-            <input class="docs-title-input" id="docsTitle" type="text" value="日常活动统计" aria-label="页面功能说明标题" style="width: 145px;">
-            <textarea class="docs-desc-input" id="docsDesc" aria-label="页面功能说明描述">沉淀宝宝日常事件记录，为成长分析和回看提供入口。</textarea>
+            <input class="docs-title-input" id="docsTitle" type="text" value="消息通知" aria-label="页面功能说明标题" style="width: 103px;">
+            <textarea class="docs-desc-input" id="docsDesc" aria-label="页面功能说明描述">展示告警通知、设备状态通知和系统通知。</textarea>
           </div>
           <div class="docs-actions">
             <button class="docs-save" id="docsSaveHtml" type="button">保存HTML</button>
@@ -11832,25 +11832,33 @@
             <div class="docs-card-head">
               <h3>功能描述</h3>
             </div>
-            <div class="docs-structured-list" data-docs-preview="features" contenteditable="true" tabindex="0" aria-label="功能描述内容，可直接编辑或粘贴图片"><div class="docs-outline-line level-1" data-level="1"><b class="docs-outline-index" contenteditable="false">1</b><div class="docs-outline-copy" spellcheck="false">支持查看设备的录像回放（包含：本地录像、云录像、相册）</div></div><div class="docs-outline-line level-1" data-level="1"><b class="docs-outline-index" contenteditable="false">2</b><div class="docs-outline-copy" spellcheck="false">本地录像：支持通过时间轴、事件记录查看录像</div></div><div class="docs-outline-line level-2" data-level="2"><b class="docs-outline-index" contenteditable="false">1</b><div class="docs-outline-copy" spellcheck="false">倍速：支持1、2、4、8倍</div></div><div class="docs-outline-line level-1" data-level="1"><b class="docs-outline-index" contenteditable="false">3</b><div class="docs-outline-copy" spellcheck="false">事件记录：若一个事件里包含多个事件类型，展示多个事件类型。支持通过事件类型，筛选事件记录</div></div><div class="docs-outline-line level-1" data-level="1"><b class="docs-outline-index" contenteditable="false">4</b><div class="docs-outline-copy" spellcheck="false">事件类型筛选：筛选包含选中类型的事件记录。默认全选，支持勾选多个/单个事件类型。</div></div><div class="docs-outline-line level-1" data-level="1"><b class="docs-outline-index" contenteditable="false">5</b><div class="docs-outline-copy" spellcheck="false">云录像：需登录账号，付费才支持。</div></div><div class="docs-outline-line level-1" data-level="1"><b class="docs-outline-index" contenteditable="false">6</b><div class="docs-outline-copy" spellcheck="false">相册：展示用户 截图、录像 保存在设备SD卡上的图片/视频</div></div><div class="docs-outline-line level-2" data-level="2"><b class="docs-outline-index" contenteditable="false">1</b><div class="docs-outline-copy" spellcheck="false">按日期分类展示，支持按日期筛选</div></div><div class="docs-outline-line level-2" data-level="2"><b class="docs-outline-index" contenteditable="false">2</b><div class="docs-outline-copy" spellcheck="false">支持全屏查看、删除</div></div><div class="docs-outline-line level-1" data-level="1"><b class="docs-outline-index" contenteditable="false">7</b><div class="docs-outline-copy" spellcheck="false">后续支持承接：精彩时刻、成长记录等入口。</div></div></div>
-            <textarea class="docs-editor" id="docsFeatureList" hidden="" aria-label="功能描述，每行一条" style="height: 72px;">支持查看设备的录像回放（包含：本地录像、云录像、相册）
-本地录像：支持通过时间轴、事件记录查看录像
-  倍速：支持1、2、4、8倍
-事件记录：若一个事件里包含多个事件类型，展示多个事件类型。支持通过事件类型，筛选事件记录
-事件类型筛选：筛选包含选中类型的事件记录。默认全选，支持勾选多个/单个事件类型。
-云录像：需登录账号，付费才支持。
-相册：展示用户 截图、录像 保存在设备SD卡上的图片/视频
-  按日期分类展示，支持按日期筛选
-  支持全屏查看、删除
-后续支持承接：精彩时刻、成长记录等入口。</textarea>
+            <div class="docs-structured-list" data-docs-preview="features" contenteditable="true" tabindex="0" aria-label="功能描述内容，可直接编辑或粘贴图片"><div class="docs-outline-line level-1" data-level="1"><b class="docs-outline-index" contenteditable="false">1</b><div class="docs-outline-copy" spellcheck="false">消息通知 包含：告警通知、设备状态通知、屏端低电量通知</div></div><div class="docs-outline-line level-1" data-level="1"><b class="docs-outline-index" contenteditable="false">2</b><div class="docs-outline-copy" spellcheck="false">告警通知：展示设备触发的告警通知。包含：宝宝移动侦测//趴睡/遮脸/安全区域出界/危险区域靠近/哭声/异响/温湿度异常</div></div><div class="docs-outline-line level-2" data-level="2"><b class="docs-outline-index" contenteditable="false">1</b><div class="docs-outline-copy" spellcheck="false">告警通知形式：一般提醒为 亮屏+告警通知；重要提醒为 亮屏+告警通知+报警音</div></div><div class="docs-outline-line level-2" data-level="2"><b class="docs-outline-index" contenteditable="false">2</b><div class="docs-outline-copy" spellcheck="false">展示 事件触发时间（时分）+告警文案</div></div><div class="docs-outline-line level-2" data-level="2"><b class="docs-outline-index" contenteditable="false">3</b><div class="docs-outline-copy" spellcheck="false">与人相关的告警，告警文案展示：检测到niki移动/趴睡/遮脸/安全区域出界/危险区域靠近/哭声</div></div><div class="docs-outline-line level-2" data-level="2"><b class="docs-outline-index" contenteditable="false">4</b><div class="docs-outline-copy" spellcheck="false">与人无关的告警，告警文案展示：检测到异响/温湿度低于设定值/高于设定值</div></div><div class="docs-outline-line level-2" data-level="2"><b class="docs-outline-index" contenteditable="false">5</b><div class="docs-outline-copy" spellcheck="false">若此时不在主页实时监控，告警通知展示 查看画面 按钮。点击 查看画面，跳转到主页的该设备实时监控，通知弹窗消失</div></div><div class="docs-outline-line level-2" data-level="2"><b class="docs-outline-index" contenteditable="false">6</b><div class="docs-outline-copy" spellcheck="false">若此时在主页实时监控，告警通知不展示 查看画面 按钮</div></div><div class="docs-outline-line level-2" data-level="2"><b class="docs-outline-index" contenteditable="false">7</b><div class="docs-outline-copy" spellcheck="false">告警通知，点击关闭，通知弹窗消失</div></div><div class="docs-outline-line level-2" data-level="2"><b class="docs-outline-index" contenteditable="false">8</b><div class="docs-outline-copy" spellcheck="false">同个设备触发多条告警通知，展示最新的告警通知（旧的告警通知被覆盖）</div></div><div class="docs-outline-line level-2" data-level="2"><b class="docs-outline-index" contenteditable="false">9</b><div class="docs-outline-copy" spellcheck="false">多个设备触发多条告警通知，展示多条告警通知</div></div><div class="docs-outline-line level-1" data-level="1"><b class="docs-outline-index" contenteditable="false">3</b><div class="docs-outline-copy" spellcheck="false">设备状态通知：包含 设备断连/存储卡异常/设备固件升级失败通知。默认开启通知，用户不可设置</div></div><div class="docs-outline-line level-2" data-level="2"><b class="docs-outline-index" contenteditable="false">1</b><div class="docs-outline-copy" spellcheck="false">设备断连的告警通知形式：亮屏+消息通知+报警音</div></div><div class="docs-outline-line level-2" data-level="2"><b class="docs-outline-index" contenteditable="false">2</b><div class="docs-outline-copy" spellcheck="false">其他告警通知形式：亮屏+消息通知</div></div><div class="docs-outline-line level-1" data-level="1"><b class="docs-outline-index" contenteditable="false">4</b><div class="docs-outline-copy" spellcheck="false">屏端低电量通知：屏端电量低于20%时通知。默认开启通知，用户不可设置</div></div><div class="docs-outline-line level-2" data-level="2"><b class="docs-outline-index" contenteditable="false">1</b><div class="docs-outline-copy" spellcheck="false">告警通知形式：亮屏+消息通知+报警音</div></div><div class="docs-outline-line level-1" data-level="1"><b class="docs-outline-index" contenteditable="false">5</b><div class="docs-outline-copy" spellcheck="false">报警音：默认一个系统音。报警音时长：默认一个最大时长30s</div></div><div class="docs-outline-line level-2" data-level="2"><b class="docs-outline-index" contenteditable="false">1</b><div class="docs-outline-copy" spellcheck="false">按电源键/音量键/或点击弹窗任意操作（查看画面/关闭），报警音停止</div></div></div>
+            <textarea class="docs-editor" id="docsFeatureList" hidden="" aria-label="功能描述，每行一条" style="height: 72px;">消息通知 包含：告警通知、设备状态通知、屏端低电量通知
+告警通知：展示设备触发的告警通知。包含：宝宝移动侦测//趴睡/遮脸/安全区域出界/危险区域靠近/哭声/异响/温湿度异常
+  告警通知形式：一般提醒为 亮屏+告警通知；重要提醒为 亮屏+告警通知+报警音
+  展示 事件触发时间（时分）+告警文案
+  与人相关的告警，告警文案展示：检测到niki移动/趴睡/遮脸/安全区域出界/危险区域靠近/哭声
+  与人无关的告警，告警文案展示：检测到异响/温湿度低于设定值/高于设定值
+  若此时不在主页实时监控，告警通知展示 查看画面 按钮。点击 查看画面，跳转到主页的该设备实时监控，通知弹窗消失
+  若此时在主页实时监控，告警通知不展示 查看画面 按钮
+  告警通知，点击关闭，通知弹窗消失
+  同个设备触发多条告警通知，展示最新的告警通知（旧的告警通知被覆盖）
+  多个设备触发多条告警通知，展示多条告警通知
+设备状态通知：包含 设备断连/存储卡异常/设备固件升级失败通知。默认开启通知，用户不可设置
+  设备断连的告警通知形式：亮屏+消息通知+报警音
+  其他告警通知形式：亮屏+消息通知
+屏端低电量通知：屏端电量低于20%时通知。默认开启通知，用户不可设置
+  告警通知形式：亮屏+消息通知+报警音
+报警音：默认一个系统音。报警音时长：默认一个最大时长30s
+  按电源键/音量键/或点击弹窗任意操作（查看画面/关闭），报警音停止</textarea>
           </section>
           <section class="docs-card" tabindex="0">
             <div class="docs-card-head">
               <h3>其他规则</h3>
             </div>
-            <div class="docs-structured-list" data-docs-preview="rules" contenteditable="true" tabindex="0" aria-label="其他规则内容，可直接编辑或粘贴图片"><div class="docs-outline-line level-1" data-level="1"><b class="docs-outline-index" contenteditable="false">1</b><div class="docs-outline-copy" spellcheck="false">本地录像 页面状态：未插卡、存储卡异常、设备离线、无录像</div></div><div class="docs-outline-line level-1" data-level="1"><b class="docs-outline-index" contenteditable="false">2</b><div class="docs-outline-copy" spellcheck="false">相册页面状态：未插卡、存储卡异常、设备离线、无数据</div></div></div>
-            <textarea class="docs-editor" id="docsRuleList" hidden="" aria-label="其他规则，每行一条" style="height: 72px;">本地录像 页面状态：未插卡、存储卡异常、设备离线、无录像
-相册页面状态：未插卡、存储卡异常、设备离线、无数据</textarea>
+            <div class="docs-structured-list" data-docs-preview="rules" contenteditable="true" tabindex="0" aria-label="其他规则内容，可直接编辑或粘贴图片"><div class="docs-outline-line level-1" data-level="1"><b class="docs-outline-index" contenteditable="false">1</b><div class="docs-outline-copy" spellcheck="false">告警通知设置，屏端与手机app独立设置，互不影响</div></div><div class="docs-outline-line level-1" data-level="1"><b class="docs-outline-index" contenteditable="false">2</b><div class="docs-outline-copy" spellcheck="false">屏端的告警通知设置，仅针对屏端，不影响手机app的告警通知设置</div></div></div>
+            <textarea class="docs-editor" id="docsRuleList" hidden="" aria-label="其他规则，每行一条" style="height: 72px;">告警通知设置，屏端与手机app独立设置，互不影响
+屏端的告警通知设置，仅针对屏端，不影响手机app的告警通知设置</textarea>
           </section>
         </div>
       </section>
@@ -11892,7 +11900,7 @@
   "#eventTypeFilter>div:nth-of-type(1)>label:nth-of-type(9)>span:nth-of-type(1)": "异响检测",
   "#careSettingsPage>section:nth-of-type(1)>section:nth-of-type(1)>div:nth-of-type(1)>section:nth-of-type(2)>div:nth-of-type(1)>button:nth-of-type(3)>div:nth-of-type(1)>strong:nth-of-type(1)": "宝宝趴睡检测",
   "#careSettingsPage>section:nth-of-type(1)>section:nth-of-type(1)>div:nth-of-type(1)>section:nth-of-type(2)>div:nth-of-type(1)>button:nth-of-type(4)>div:nth-of-type(1)>strong:nth-of-type(1)": "宝宝遮脸检测",
-  "#alertText": "12:09 检测到niki遮脸"
+  "#alertText:消息通知": "12:09 检测到niki遮脸"
 }</script>
 
   <script id="bbmSavedDocs" type="application/json">{
@@ -13941,64 +13949,77 @@
 
     function renderNotificationContent() {
       if (!alertModal || !alertIcon || !alertText) return;
-      const deviceNotificationMap = {
-        '\u65AD\u8FDE\u901A\u77E5': {
-          label: '\u65AD\u8FDE\u901A\u77E5\u5F39\u7A97',
-          text: 'cam1\u5DF2\u65AD\u5F00\u8FDE\u63A5',
+      const notificationEditKeyByPage = {
+        '消息通知': '#alertText:消息通知',
+        '断连通知': '#alertText:断连通知',
+        '低电量通知': '#alertText:低电量通知',
+        '存储卡异常通知': '#alertText:存储卡异常通知',
+        '设备固件升级失败通知': '#alertText:设备固件升级失败通知',
+        '干预通知': '#alertText:干预通知'
+      };
+      const defaultNotificationConfig = {
+        label: '消息通知弹窗',
+        text: '12:09 检测到消息',
+        action: '查看画面',
+        target: 'monitor',
+        icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.5 14.5A6.8 6.8 0 0 1 9.5 6a7 7 0 1 0 8 8.5Z"/><path d="M18.5 5.5v4M16.5 7.5h4"/></svg>',
+        detail: false
+      };
+      const notificationConfigMap = {
+        '消息通知': defaultNotificationConfig,
+        '断连通知': {
+          label: '断连通知弹窗',
+          text: 'cam1已断开连接',
           action: '',
           target: 'none',
           detail: true,
           icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M2.8 6.6C9-0.1 19-0.1 25.2 6.6"/><path d="M7.4 10.8c3.8-4 9.4-4 13.2 0"/><path d="M3 21 21 3"/></svg>'
         },
-        '\u4F4E\u7535\u91CF\u901A\u77E5': {
-          label: '\u4F4E\u7535\u91CF\u901A\u77E5\u5F39\u7A97',
-          text: 'monitor\u7535\u91CF\u4F4E\uFF0C\u8BF7\u53CA\u65F6\u5145\u7535',
+        '低电量通知': {
+          label: '低电量通知弹窗',
+          text: 'monitor电量低，请及时充电',
+          action: '',
+          target: 'none',
           icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="7" width="16" height="10" rx="2"/><path d="M21 11v2"/><path d="M7 11h4"/></svg>'
         },
-        '\u5B58\u50A8\u5361\u5F02\u5E38\u901A\u77E5': {
-          label: '\u5B58\u50A8\u5361\u5F02\u5E38\u901A\u77E5\u5F39\u7A97',
-          text: 'cam1\u5B58\u50A8\u5361\u5F02\u5E38\uFF0C\u8BF7\u68C0\u67E5\u6216\u66F4\u6362\u5B58\u50A8\u5361',
-          action: '\u67E5\u770B\u8BBE\u5907',
+        '存储卡异常通知': {
+          label: '存储卡异常通知弹窗',
+          text: 'cam1存储卡异常，请检查或更换存储卡',
+          action: '查看设备',
           target: 'none',
           icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h9l3 3v15H6z"/><path d="M9 17h6"/><path d="M12 8v4"/><path d="M12 15h.01"/></svg>'
         },
-        '\u8BBE\u5907\u56FA\u4EF6\u5347\u7EA7\u5931\u8D25\u901A\u77E5': {
-          label: '\u8BBE\u5907\u56FA\u4EF6\u5347\u7EA7\u5931\u8D25\u901A\u77E5\u5F39\u7A97',
-          text: '\u6444\u50CF\u5934\u56FA\u4EF6\u5347\u7EA7\u5931\u8D25\uFF0C\u8BF7\u7A0D\u540E\u91CD\u8BD5',
-          action: '\u67E5\u770B\u8BBE\u5907',
+        '设备固件升级失败通知': {
+          label: '设备固件升级失败通知弹窗',
+          text: '摄像头固件升级失败，请稍后重试',
+          action: '查看设备',
           target: 'none',
           icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v10"/><path d="m8 9 4 4 4-4"/><path d="M5 17a7 7 0 0 0 14 0"/><path d="M4 4 20 20"/></svg>'
+        },
+        '干预通知': {
+          label: '干预通知弹窗',
+          text: 'niki睡醒哭闹不停，可尝试去给他喂喂奶',
+          action: '查看画面',
+          target: 'monitor',
+          icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3h8v6a4 4 0 0 1-8 0V3Z"/><path d="M12 13v8"/><path d="M9 21h6"/><path d="M8 7h8"/></svg>'
         }
       };
-      const deviceNotification = deviceNotificationMap[appState.page];
+      const deviceNotification = notificationConfigMap[appState.page] || defaultNotificationConfig;
+      const pageEditKey = notificationEditKeyByPage[appState.page] || `#alertText:${appState.page}`;
+      const savedNotificationEdits = getInlineTextEdits();
+      const savedAlertText = savedNotificationEdits[pageEditKey] || (appState.page === '消息通知' ? savedNotificationEdits['#alertText'] : '');
       alertModal.classList.toggle('is-hidden', !notificationAlertVisible);
-      if (deviceNotification) {
-        alertModal.classList.remove('intervention-alert');
-        alertModal.classList.toggle('disconnect-alert', Boolean(deviceNotification.detail));
-        alertModal.setAttribute('aria-label', deviceNotification.label);
-        if (alertDetailList) alertDetailList.hidden = !deviceNotification.detail;
-        alertIcon.innerHTML = deviceNotification.icon;
-        alertText.textContent = deviceNotification.text;
-        setAlertAction(deviceNotification.action, deviceNotification.target);
-        return;
-      }
-      if (appState.page === '\u5E72\u9884\u901A\u77E5') {
-        alertModal.classList.add('intervention-alert');
-        alertModal.classList.remove('disconnect-alert');
-        if (alertDetailList) alertDetailList.hidden = true;
-        alertModal.setAttribute('aria-label', '\u5E72\u9884\u901A\u77E5\u5F39\u7A97');
-        alertIcon.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3h8v6a4 4 0 0 1-8 0V3Z"/><path d="M12 13v8"/><path d="M9 21h6"/><path d="M8 7h8"/></svg>';
-        alertText.textContent = 'niki\u7761\u9192\u54ED\u95F9\u4E0D\u505C\uFF0C\u53EF\u5C1D\u8BD5\u53BB\u7ED9\u4ED6\u5582\u5582\u5976';
-        setAlertAction('\u67E5\u770B\u753B\u9762', 'monitor');
-        return;
-      }
       alertModal.classList.remove('intervention-alert');
-      alertModal.classList.remove('disconnect-alert');
-      if (alertDetailList) alertDetailList.hidden = true;
-      alertModal.setAttribute('aria-label', '\u6D88\u606F\u901A\u77E5\u5F39\u7A97');
-      alertIcon.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.5 14.5A6.8 6.8 0 0 1 9.5 6a7 7 0 1 0 8 8.5Z"/><path d="M18.5 5.5v4M16.5 7.5h4"/></svg>';
-      alertText.textContent = '12:09 \u68C0\u6D4B\u5230niki\u906E\u8138';
-      setAlertAction('\u67E5\u770B\u753B\u9762', 'monitor');
+      alertModal.classList.toggle('disconnect-alert', Boolean(deviceNotification.detail));
+      if (appState.page === '干预通知') {
+        alertModal.classList.add('intervention-alert');
+      }
+      alertModal.setAttribute('aria-label', deviceNotification.label);
+      alertText.dataset.inlineEditKey = pageEditKey;
+      if (alertDetailList) alertDetailList.hidden = !deviceNotification.detail;
+      alertIcon.innerHTML = deviceNotification.icon;
+      alertText.textContent = savedAlertText || deviceNotification.text;
+      setAlertAction(deviceNotification.action, deviceNotification.target);
     }
 
     function getBabyCareStatus(status, options = {}) {
@@ -15751,12 +15772,21 @@
     const inlineTextStorageKey = 'bbm-inline-text-edits-v1';
 
     const staleInlineTextEditKeys = [
-      '#deviceSettingsPage>div:nth-of-type(1)>section:nth-of-type(3)>div:nth-of-type(1)>div:nth-of-type(2)>p:nth-of-type(1)'
+      '#deviceSettingsPage>div:nth-of-type(1)>section:nth-of-type(3)>div:nth-of-type(1)>div:nth-of-type(2)>p:nth-of-type(1)',
+      '#alertText'
     ];
 
     function cleanupStaleInlineTextEdits() {
       const edits = getInlineTextEdits();
       let changed = false;
+      if (Object.prototype.hasOwnProperty.call(edits, '#alertText')) {
+        const messageNotificationKey = '#alertText:消息通知';
+        if (!Object.prototype.hasOwnProperty.call(edits, messageNotificationKey) || !String(edits[messageNotificationKey] || '').trim()) {
+          edits[messageNotificationKey] = edits['#alertText'];
+        }
+        delete edits['#alertText'];
+        changed = true;
+      }
       staleInlineTextEditKeys.forEach((key) => {
         if (Object.prototype.hasOwnProperty.call(edits, key)) {
           delete edits[key];
@@ -17446,6 +17476,8 @@
     cleanupStaleInlineTextEdits();
     markInlineEditableText();
   </script>
+
+
 
 
 
