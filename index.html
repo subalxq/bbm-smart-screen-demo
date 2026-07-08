@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh-CN" style="--prototype-scale: 0.67; --docs-width: 899px; --sidebar-width: 283px;"><head>
+<html lang="zh-CN" style="--prototype-scale: 0.67; --docs-width: 843px; --sidebar-width: 283px;"><head>
   <meta charset="UTF-8">
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -71,6 +71,8 @@
       pointer-events: none;
       transform: translateX(0);
       transition: transform .24s ease;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
     }
 
     .docs-resizer {
@@ -170,7 +172,7 @@
       background: transparent;
       padding: 2px 4px;
       color: #f6fbff;
-      font-size: 21px;
+      font-size: 26px;
       font-weight: 900;
       outline: none;
       field-sizing: content;
@@ -185,9 +187,9 @@
       border-radius: 10px;
       background: transparent;
       padding: 4px;
-      color: #91a2ba;
-      font-size: 14px;
-      line-height: 1.38;
+      color: #b9c7da;
+      font-size: 18px;
+      line-height: 1.56;
       outline: none;
       resize: vertical;
     }
@@ -207,7 +209,7 @@
       background: rgba(255, 140, 77, 0.12);
       padding: 6px 10px;
       color: #ffb082;
-      font-size: 11px;
+      font-size: 14px;
       font-weight: 900;
     }
 
@@ -235,8 +237,8 @@
 
     .docs-save-status {
       max-width: 120px;
-      color: #91a2ba;
-      font-size: 10px;
+      color: #b3c1d4;
+      font-size: 13px;
       line-height: 1.4;
       text-align: right;
     }
@@ -271,7 +273,7 @@
     .docs-card h3 {
       margin: 0;
       color: #dcecff;
-      font-size: 16px;
+      font-size: 22px;
       font-weight: 900;
       line-height: 1.25;
     }
@@ -299,7 +301,7 @@
     .docs-structured-list:empty::before {
       color: rgba(145, 162, 186, 0.62);
       content: "\53EF\8F93\5165 Markdown\FF0C\652F\6301 Tab \7F29\8FDB\3001\5B50\6761\76EE\548C\76F4\63A5\7C98\8D34\56FE\7247";
-      font-size: 13px;
+      font-size: 16px;
     }
 
     .docs-structured-item {
@@ -307,9 +309,10 @@
       grid-template-columns: 36px minmax(0, 1fr);
       gap: 14px;
       align-items: start;
-      color: #b9c7da;
-      font-size: 16px;
-      line-height: 1.52;
+      color: #d6e1f0;
+      font-size: 20px;
+      line-height: 1.66;
+      font-weight: 650;
     }
 
     .docs-structured-index {
@@ -320,7 +323,7 @@
       border-radius: 10px;
       background: rgba(255, 140, 77, 0.14);
       color: #ffb082;
-      font-size: 15px;
+      font-size: 17px;
       font-weight: 900;
       user-select: none;
     }
@@ -329,14 +332,14 @@
       grid-template-columns: 30px minmax(0, 1fr);
       margin-left: 60px;
       gap: 12px;
-      font-size: 15px;
+      font-size: 19px;
     }
 
     .docs-structured-item.level-3 {
       grid-template-columns: 26px minmax(0, 1fr);
       margin-left: 104px;
       gap: 10px;
-      font-size: 14px;
+      font-size: 18px;
     }
 
     .docs-structured-item.level-2 .docs-structured-index,
@@ -358,21 +361,22 @@
       gap: 10px;
       align-items: start;
       margin-bottom: 8px;
-      color: #d6e1f0;
-      font-size: 16px;
-      line-height: 1.52;
+      color: #e3ecf8;
+      font-size: 20px;
+      line-height: 1.66;
+      font-weight: 650;
     }
 
     .docs-outline-line.level-2 {
       grid-template-columns: 32px minmax(0, 1fr);
       margin-left: 48px;
-      font-size: 15px;
+      font-size: 19px;
     }
 
     .docs-outline-line.level-3 {
       grid-template-columns: 28px minmax(0, 1fr);
       margin-left: 86px;
-      font-size: 14px;
+      font-size: 18px;
     }
 
     .docs-outline-index {
@@ -383,7 +387,7 @@
       border-radius: 10px;
       background: rgba(255, 140, 77, 0.12);
       color: #eaa077;
-      font-size: 13px;
+      font-size: 14px;
       font-weight: 900;
       user-select: none;
     }
@@ -425,9 +429,10 @@
 
     .docs-markdown-line {
       min-height: 1.48em;
-      color: #d6e1f0;
-      font-size: 16px;
-      line-height: 1.52;
+      color: #e3ecf8;
+      font-size: 20px;
+      line-height: 1.66;
+      font-weight: 650;
       white-space: pre-wrap;
       overflow-wrap: anywhere;
     }
@@ -546,10 +551,10 @@
       border-radius: 14px;
       background: rgba(9, 14, 24, 0.42);
       padding: 10px 12px;
-      color: #b9c7da;
+      color: #d6e1f0;
       font: inherit;
-      font-size: 13px;
-      line-height: 1.5;
+      font-size: 18px;
+      line-height: 1.62;
       outline: none;
       overflow: hidden;
       resize: none;
@@ -572,9 +577,10 @@
       display: grid;
       grid-template-columns: auto minmax(0, 1fr);
       gap: 9px;
-      color: #b9c7da;
-      font-size: 13px;
-      line-height: 1.45;
+      color: #d6e1f0;
+      font-size: 18px;
+      line-height: 1.62;
+      font-weight: 650;
     }
 
     .docs-list b {
@@ -585,7 +591,8 @@
       border-radius: 9px;
       background: rgba(255, 140, 77, 0.14);
       color: #ffb082;
-      font-size: 11px;
+      font-size: 14px;
+      font-weight: 900;
     }
 
     .panel {
@@ -602,6 +609,8 @@
       position: relative;
       display: flex;
       flex-direction: column;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
     }
 
     .sidebar-resizer {
@@ -658,14 +667,16 @@
 
     .side-head h1 {
       margin: 0;
-      font-size: 18px;
+      font-size: 20px;
       line-height: 1.15;
+      font-weight: 900;
     }
 
     .side-head p {
       margin: 5px 0 0;
-      color: var(--muted);
-      font-size: 12px;
+      color: #aebbd0;
+      font-size: 13px;
+      font-weight: 650;
     }
 
     .nav-scroll {
@@ -680,9 +691,9 @@
       border-radius: 12px;
       background: rgba(255, 255, 255, 0.06);
       padding: 9px 10px;
-      color: #d7e7fb;
-      font-size: 14px;
-      font-weight: 800;
+      color: #edf5ff;
+      font-size: 18px;
+      font-weight: 900;
       content: "\9875\9762\5BFC\822A";
     }
 
@@ -693,9 +704,9 @@
     .nav-group h2 {
       margin: 0 0 6px;
       padding: 0 6px;
-      color: #71819a;
-      font-size: 14px;
-      font-weight: 700;
+      color: #94a6bf;
+      font-size: 16px;
+      font-weight: 850;
       letter-spacing: 0;
       text-transform: none;
     }
@@ -705,15 +716,16 @@
       align-items: center;
       gap: 8px;
       width: 100%;
-      min-height: 40px;
+      min-height: 44px;
       margin-bottom: 4px;
       border: 1px solid transparent;
       border-radius: 14px;
       background: transparent;
       padding: 7px 11px;
-      color: #aab7c9;
-      font-size: 15px;
-      line-height: 1.25;
+      color: #c0ccdc;
+      font-size: 18px;
+      line-height: 1.4;
+      font-weight: 650;
       text-align: left;
     }
 
@@ -736,7 +748,7 @@
       border-color: rgba(82, 166, 255, 0.46);
       background: linear-gradient(90deg, rgba(82, 166, 255, 0.24), rgba(82, 166, 255, 0.08));
       color: #ffffff;
-      font-weight: 700;
+      font-weight: 900;
     }
 
     .nav-sub {
@@ -749,14 +761,15 @@
 
     .nav-sub-item {
       width: 100%;
-      min-height: 32px;
+      min-height: 36px;
       border: 1px solid transparent;
       border-radius: 11px;
       background: transparent;
       padding: 5px 9px;
-      color: #8fa0b7;
-      font-size: 14px;
-      line-height: 1.25;
+      color: #a9b7ca;
+      font-size: 17px;
+      line-height: 1.4;
+      font-weight: 650;
       text-align: left;
     }
 
@@ -769,7 +782,7 @@
       border-color: rgba(82, 166, 255, 0.42);
       background: rgba(82, 166, 255, 0.16);
       color: #ffffff;
-      font-weight: 700;
+      font-weight: 900;
     }
 
     .center {
@@ -867,7 +880,7 @@
     .screen-status {
       display: flex;
       align-items: center;
-      gap: 18px;
+      gap: 14px;
       color: #d7e6f8;
       font-size: 16px;
       font-weight: 700;
@@ -885,6 +898,20 @@
       width: 27px;
       height: 20px;
       color: #d7e6f8;
+    }
+
+    .status-svg {
+      display: block;
+      width: 23px;
+      height: 23px;
+      color: #d7e6f8;
+    }
+
+    .alarm-status-text {
+      color: #d7e6f8;
+      font-size: 13px;
+      font-weight: 900;
+      line-height: 1;
     }
 
     .battery-icon {
@@ -1221,6 +1248,107 @@
 
     .screen.offline-device-home .monitor-offline-state {
       display: grid;
+    }
+
+    .monitor-sleep-state {
+      position: absolute;
+      inset: 0;
+      z-index: 5;
+      display: none;
+      place-items: center;
+      background: rgba(3, 7, 13, 0.88);
+      color: #f4f8ff;
+      text-align: center;
+    }
+
+    .monitor.sleeping .monitor-sleep-state {
+      display: grid;
+    }
+
+    .monitor.sleeping::after {
+      filter: grayscale(1) brightness(0.35);
+    }
+
+    .monitor.split-2.sleeping .monitor-sleep-state,
+    .monitor.split-4.sleeping .monitor-sleep-state {
+      display: none;
+    }
+
+    .monitor-sleep-card {
+      display: grid;
+      justify-items: center;
+      gap: 14px;
+    }
+
+    .monitor-sleep-icon {
+      display: grid;
+      width: 62px;
+      height: 62px;
+      place-items: center;
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      border-radius: 20px;
+      background: rgba(255, 255, 255, 0.08);
+      color: #dcecff;
+    }
+
+    .monitor-sleep-icon svg {
+      width: 34px;
+      height: 34px;
+    }
+
+    .monitor-sleep-title {
+      color: #f7fbff;
+      font-size: 20px;
+      font-weight: 950;
+    }
+
+    .monitor-wake-btn {
+      min-width: 116px;
+      height: 38px;
+      border: 0;
+      border-radius: 12px;
+      background: linear-gradient(180deg, #52a6ff, #2563eb);
+      color: #fff;
+      font-size: 13px;
+      font-weight: 900;
+      box-shadow: 0 12px 28px rgba(37, 99, 235, 0.32);
+    }
+
+    .tile-sleep-state {
+      position: absolute;
+      inset: 0;
+      z-index: 6;
+      display: none;
+      place-items: center;
+      background: rgba(3, 7, 13, 0.88);
+      color: #f4f8ff;
+      text-align: center;
+    }
+
+    .camera-tile.sleeping .tile-sleep-state {
+      display: grid;
+    }
+
+    .camera-tile.sleeping::after {
+      position: absolute;
+      inset: 0;
+      z-index: 5;
+      background: rgba(3, 7, 13, 0.24);
+      content: "";
+      pointer-events: none;
+    }
+
+    .tile-sleep-state .monitor-sleep-card {
+      gap: 12px;
+      transform: scale(0.92);
+    }
+
+    .tile-sleep-state .monitor-sleep-title {
+      position: static;
+      left: auto;
+      bottom: auto;
+      z-index: auto;
+      font-size: 20px;
     }
 
     .offline-state-card {
@@ -2144,6 +2272,14 @@
       gap: 12px;
     }
 
+    .scene-status-heading {
+      margin-bottom: 8px;
+      color: #8fa0b9;
+      font-size: 12px;
+      font-weight: 800;
+      line-height: 1.2;
+    }
+
     .scene-mode-time span {
       display: block;
       color: #95a5bb;
@@ -2172,7 +2308,7 @@
 
     .scene-mode-state strong {
       color: #fff;
-      font-size: 22px;
+      font-size: 24px;
       line-height: 1.08;
     }
 
@@ -2183,9 +2319,9 @@
     .scene-mode-subtitle {
       display: block;
       margin-top: 4px;
-      color: #95a5bb;
-      font-size: 11px;
-      font-weight: 850;
+      color: #d6e4f5;
+      font-size: 13px;
+      font-weight: 900;
       line-height: 1.2;
     }
 
@@ -2759,7 +2895,7 @@
 
     .replay-top {
       display: grid;
-      grid-template-columns: minmax(0, 1fr) auto;
+      grid-template-columns: minmax(0, 1fr);
       align-items: center;
       gap: 12px;
       border-bottom: 1px solid var(--line);
@@ -2782,12 +2918,12 @@
     }
 
     .replay-top-actions {
-      grid-column: 2;
-      grid-row: 1;
       display: inline-flex;
       align-items: center;
-      justify-self: end;
+      justify-content: space-between;
       gap: 10px;
+      width: 100%;
+      margin-bottom: 12px;
     }
 
     .replay-device-select {
@@ -2820,7 +2956,7 @@
     }
 
     .replay-device-select select {
-      min-width: 78px;
+      min-width: 72px;
       border: 0;
       background: transparent;
       color: #f5f9ff;
@@ -2856,6 +2992,124 @@
       color: #dbe8f8;
       font-size: 13px;
       font-weight: 900;
+    }
+
+    .album-btn.active {
+      border-color: rgba(82, 166, 255, 0.72);
+      background: linear-gradient(180deg, #52a6ff, #2563eb);
+      color: #fff;
+    }
+
+    .replay-page.album-mode .replay-layout {
+      display: none;
+    }
+
+    .replay-page.album-mode .replay-top-actions {
+      display: none;
+    }
+
+    .album-panel {
+      display: none;
+      padding: 22px;
+      min-height: 0;
+      overflow: auto;
+      border-top: 1px solid rgba(134, 164, 202, 0.16);
+    }
+
+    .replay-page.album-mode .album-panel {
+      display: block;
+    }
+
+    .album-subtabs {
+      display: inline-flex;
+      gap: 8px;
+      padding: 4px;
+      margin-bottom: 16px;
+      border: 1px solid rgba(134, 164, 202, 0.20);
+      border-radius: 14px;
+      background: rgba(255, 255, 255, 0.04);
+    }
+
+    .album-subtab {
+      min-width: 86px;
+      height: 32px;
+      border: 0;
+      border-radius: 10px;
+      background: transparent;
+      color: #aebbd0;
+      font-size: 13px;
+      font-weight: 900;
+    }
+
+    .album-subtab.active {
+      background: linear-gradient(180deg, #52a6ff, #2563eb);
+      color: #fff;
+    }
+
+    .album-content {
+      display: none;
+    }
+
+    .album-content.active {
+      display: block;
+    }
+
+    .album-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .album-card {
+      border: 1px solid rgba(134, 164, 202, 0.22);
+      border-radius: 16px;
+      background: rgba(255, 255, 255, 0.055);
+      overflow: hidden;
+      color: #f7fbff;
+      text-align: left;
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05);
+    }
+
+    .album-thumb {
+      position: relative;
+      display: block;
+      aspect-ratio: 16 / 9;
+      background:
+        linear-gradient(180deg, rgba(9, 17, 31, 0.06), rgba(9, 17, 31, 0.38)),
+        url("public/baby-crib-overhead.jpg") center / cover;
+    }
+
+    .album-thumb::after {
+      content: "▶";
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      width: 42px;
+      height: 42px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.78);
+      color: #172033;
+      font-size: 16px;
+      font-weight: 900;
+    }
+
+    .album-card-copy {
+      display: grid;
+      gap: 6px;
+      padding: 12px 13px 13px;
+    }
+
+    .album-card-copy strong {
+      font-size: 14px;
+      line-height: 1.35;
+    }
+
+    .album-card-copy span {
+      font-size: 12px;
+      color: #9fb0c8;
     }
 
     .replay-layout {
@@ -3270,7 +3524,8 @@
 
     .event-replay-list {
       display: grid;
-      grid-template-rows: auto auto minmax(0, 1fr);
+      grid-template-rows: auto auto auto minmax(0, 1fr);
+      gap: 10px;
       min-height: 0;
       padding: 16px;
     }
@@ -3279,12 +3534,13 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      margin-bottom: 12px;
+      margin-bottom: 0;
     }
 
     .event-type-filter {
       position: relative;
-      margin: 0 0 12px;
+      z-index: 2;
+      margin: 0;
     }
 
     .event-filter-toggle {
@@ -3369,7 +3625,7 @@
       align-content: start;
       gap: 10px;
       min-height: 0;
-      overflow: hidden;
+      overflow: auto;
     }
 
     .event-empty-state {
@@ -3745,6 +4001,7 @@
     }
 
     .care-page[data-care-state="signed-out"] .care-hero-insight,
+    .care-page[data-care-state="signed-out"] .sleep-milestone-card,
     .care-page[data-care-state="signed-out"] .care-layout {
       display: none;
     }
@@ -3755,7 +4012,12 @@
       inset: 76px 20px 20px;
     }
 
-    .care-page[data-care-state="empty"] .care-hero-insight {
+    .care-page[data-care-state="empty"] .care-hero-insight,
+    .care-page[data-care-state="empty"] .sleep-milestone-card {
+      display: none;
+    }
+
+    .care-page[data-care-state="offline-guide"] .sleep-milestone-card {
       display: none;
     }
 
@@ -4469,6 +4731,7 @@
       align-items: flex-end;
       justify-content: space-between;
       gap: 12px;
+      flex-wrap: wrap;
     }
 
     .sleep-record-head h3 {
@@ -4631,8 +4894,8 @@
 
     .sleep-strip-chart {
       display: grid;
-      grid-template-rows: max-content max-content;
-      gap: 10px;
+      grid-template-rows: max-content;
+      gap: 0;
       min-height: max-content;
       overflow: visible;
       padding: 4px 2px 2px;
@@ -4641,21 +4904,56 @@
 
     .sleep-strip-scale {
       display: grid;
-      grid-template-columns: 42px repeat(5, 1fr);
+      grid-template-columns: 42px minmax(0, 1fr);
+      gap: 9px;
+      align-items: end;
       color: rgba(143, 160, 185, 0.82);
-      font-size: 9px;
+      font-size: 7px;
       font-weight: 650;
+      box-sizing: border-box;
     }
 
-    .sleep-strip-scale span:not(:first-child) {
+    .sleep-hour-scale {
+      position: relative;
+      height: 20px;
+      min-width: 0;
+    }
+
+    .sleep-hour-scale span {
+      position: absolute;
+      left: calc(var(--i) * 100% / 24);
+      bottom: 0;
+      transform: translateX(-50%);
       text-align: center;
+      white-space: nowrap;
+    }
+
+    .sleep-hour-scale span:first-child {
+      transform: translateX(0);
+    }
+
+    .sleep-hour-scale span:last-child {
+      transform: translateX(-100%);
+    }
+
+    .sleep-next-day-label {
+      position: absolute;
+      left: calc(var(--i) * 100% / 24);
+      top: 0;
+      transform: translateX(-50%);
+      color: rgba(143, 160, 185, 0.68);
+      font-size: 6px;
+      font-style: normal;
+      font-weight: 800;
+      line-height: 1;
+      white-space: nowrap;
     }
 
     .sleep-strip-rows {
       display: grid;
       grid-auto-rows: max-content;
       align-content: start;
-      gap: 8px;
+      gap: 4px;
       min-height: max-content;
       border: 1px solid rgba(127, 151, 180, 0.18);
       border-radius: 18px;
@@ -4747,6 +5045,7 @@
     }
 
     .care-page[data-care-state="empty"] .sleep-strip-chart,
+    .care-page[data-care-state="empty"] .sleep-milestone-card,
     .care-page[data-care-state="empty"] .sleep-summary-grid,
     .care-page[data-care-state="empty"] .sleep-record-data-grid,
     .care-page[data-care-state="empty"] .sleep-record-legend,
@@ -4788,7 +5087,7 @@
 
     .sleep-summary-grid {
       display: grid;
-      grid-template-columns: repeat(4, minmax(0, 1fr));
+      grid-template-columns: repeat(3, minmax(0, 1fr));
       gap: 8px;
       margin-top: 10px;
     }
@@ -4879,6 +5178,52 @@
       width: 42px;
       height: 42px;
       border-radius: 17px;
+    }
+
+    .sleep-milestone-card {
+      display: grid;
+      grid-template-columns: max-content minmax(0, 1fr);
+      gap: 12px;
+      align-items: center;
+      border: 1px solid rgba(127, 151, 180, 0.18);
+      border-radius: 18px;
+      background:
+        radial-gradient(circle at 12% 0%, rgba(126, 224, 192, 0.16), transparent 34%),
+        linear-gradient(180deg, rgba(30, 46, 73, 0.88), rgba(24, 38, 62, 0.86));
+      padding: 12px 14px;
+    }
+
+    .sleep-milestone-badge {
+      display: grid;
+      min-width: 58px;
+      height: 42px;
+      place-items: center;
+      border-radius: 14px;
+      background: rgba(126, 224, 192, 0.16);
+      color: #8bf0d0;
+      font-size: 14px;
+      font-weight: 950;
+      white-space: nowrap;
+    }
+
+    .sleep-milestone-copy {
+      display: grid;
+      gap: 4px;
+      min-width: 0;
+    }
+
+    .sleep-milestone-copy strong {
+      color: #f5f9ff;
+      font-size: 13px;
+      font-weight: 950;
+      line-height: 1.25;
+    }
+
+    .sleep-milestone-copy span {
+      color: #aebed2;
+      font-size: 11px;
+      font-weight: 750;
+      line-height: 1.45;
     }
 
     .care-data-panel {
@@ -10112,6 +10457,21 @@
             <header class="topbar">
               <div class="screen-date inline-edit-hint">2026/5/7 周四</div>
               <div class="screen-status">
+                <span class="status-icon" aria-label="静音">
+                  <svg class="status-svg" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M4 10v4h4l5 4V6L8 10H4Z"></path>
+                    <path d="m18 10 4 4"></path>
+                    <path d="m22 10-4 4"></path>
+                  </svg>
+                </span>
+                <span class="status-icon" aria-label="闹钟信息">
+                  <svg class="status-svg" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="13" r="6.2"></circle>
+                    <path d="M12 10v3.5l2.4 1.6"></path>
+                    <path d="M5 4.6 3.3 6.3"></path>
+                    <path d="M19 4.6l1.7 1.7"></path>
+                  </svg>
+                </span>
                 <span class="status-icon" aria-label="Wi-Fi信号">
                   <svg class="wifi-svg" viewBox="0 0 28 20" aria-hidden="true">
                     <path d="M2.8 6.6C9-0.1 19-0.1 25.2 6.6" fill="none" stroke="currentColor" stroke-width="2.7" stroke-linecap="round"></path>
@@ -10167,6 +10527,19 @@
                   </div>
 
                   <div class="monitor-click-target" id="monitorClickTarget" aria-label="进入单画面全屏"></div>
+                  <div class="monitor-sleep-state" id="monitorSleepState" aria-label="设备休眠状态">
+                    <div class="monitor-sleep-card">
+                      <span class="monitor-sleep-icon" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                          <path d="M21 12.8A8.6 8.6 0 1 1 11.2 3 6.9 6.9 0 0 0 21 12.8Z"></path>
+                          <path d="M7 15h7"></path>
+                          <path d="M9 18h4"></path>
+                        </svg>
+                      </span>
+                      <strong class="monitor-sleep-title inline-edit-hint">设备已休眠</strong>
+                      <button class="monitor-wake-btn inline-edit-hint" type="button" data-action="monitor-wake">唤醒设备</button>
+                    </div>
+                  </div>
 
                   <div class="multi-grid" id="multiGrid">
                     <button class="camera-tile active" data-room="niki" data-camera="婴儿床摄像头" style="--pos:center 56%;">
@@ -10175,28 +10548,84 @@
         <svg class="monitor-env-icon" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 14.76V5a4 4 0 0 0-8 0v9.76a6 6 0 1 0 8 0Z"></path><path d="M10 8v8"></path></svg>
       <strong class="inline-edit-hint">24.5°C</strong></span><span aria-label="湿度">
         <svg class="monitor-env-icon" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3.5S6 10.1 6 14.2a6 6 0 0 0 12 0C18 10.1 12 3.5 12 3.5Z"></path></svg>
-      <strong class="inline-edit-hint">55%</strong></span></span><span class="tile-sound" title="睡眠安抚" aria-label="睡眠安抚"><span class="sound-icon inline-edit-hint">♪</span>睡眠安抚</span></button>
+      <strong class="inline-edit-hint">55%</strong></span></span><span class="tile-sound" title="睡眠安抚" aria-label="睡眠安抚"><span class="sound-icon inline-edit-hint">♪</span>睡眠安抚</span>
+      <span class="tile-sleep-state" aria-label="设备休眠状态">
+        <span class="monitor-sleep-card">
+          <span class="monitor-sleep-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 12.8A8.6 8.6 0 1 1 11.2 3 6.9 6.9 0 0 0 21 12.8Z"></path>
+              <path d="M7 15h7"></path>
+              <path d="M9 18h4"></path>
+            </svg>
+          </span>
+          <strong class="monitor-sleep-title inline-edit-hint">设备已休眠</strong>
+          <span class="monitor-wake-btn inline-edit-hint" role="button" tabindex="0" data-action="monitor-wake">唤醒设备</span>
+        </span>
+      </span>
+    </button>
                     <button class="camera-tile" data-room="neo" data-camera="neo摄像头" style="--pos:58% 56%;">
                       <strong class="inline-edit-hint">neo</strong><span class="tile-setting" title="设置" aria-label="设置"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 15.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7Z"></path><path d="M19.4 15a1.8 1.8 0 0 0 .36 1.98l.04.04a2.16 2.16 0 0 1-3.05 3.05l-.04-.04a1.8 1.8 0 0 0-1.98-.36 1.8 1.8 0 0 0-1.1 1.66V21.4a2.16 2.16 0 0 1-4.32 0v-.07a1.8 1.8 0 0 0-1.1-1.66 1.8 1.8 0 0 0-1.98.36l-.04.04a2.16 2.16 0 0 1-3.05-3.05l.04-.04A1.8 1.8 0 0 0 4.6 15a1.8 1.8 0 0 0-1.66-1.1H2.86a2.16 2.16 0 0 1 0-4.32h.07A1.8 1.8 0 0 0 4.6 8a1.8 1.8 0 0 0-.36-1.98l-.04-.04a2.16 2.16 0 0 1 3.05-3.05l.04.04A1.8 1.8 0 0 0 9.27 3.3a1.8 1.8 0 0 0 1.1-1.66V1.6a2.16 2.16 0 0 1 4.32 0v.07a1.8 1.8 0 0 0 1.1 1.66 1.8 1.8 0 0 0 1.98-.36l.04-.04a2.16 2.16 0 0 1 3.05 3.05l-.04.04A1.8 1.8 0 0 0 19.4 8a1.8 1.8 0 0 0 1.66 1.1h.07a2.16 2.16 0 0 1 0 4.32h-.07A1.8 1.8 0 0 0 19.4 15Z"></path></svg></span>
                     <span class="tile-env-overlay" hidden=""><span aria-label="室温">
         <svg class="monitor-env-icon" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 14.76V5a4 4 0 0 0-8 0v9.76a6 6 0 1 0 8 0Z"></path><path d="M10 8v8"></path></svg>
       <strong class="inline-edit-hint">24.7°C</strong></span><span aria-label="湿度">
         <svg class="monitor-env-icon" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3.5S6 10.1 6 14.2a6 6 0 0 0 12 0C18 10.1 12 3.5 12 3.5Z"></path></svg>
-      <strong class="inline-edit-hint">54%</strong></span></span><span class="tile-sound" title="睡眠安抚" aria-label="睡眠安抚"><span class="sound-icon inline-edit-hint">♪</span>睡眠安抚</span></button>
+      <strong class="inline-edit-hint">54%</strong></span></span><span class="tile-sound" title="睡眠安抚" aria-label="睡眠安抚"><span class="sound-icon inline-edit-hint">♪</span>睡眠安抚</span>
+      <span class="tile-sleep-state" aria-label="设备休眠状态">
+        <span class="monitor-sleep-card">
+          <span class="monitor-sleep-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 12.8A8.6 8.6 0 1 1 11.2 3 6.9 6.9 0 0 0 21 12.8Z"></path>
+              <path d="M7 15h7"></path>
+              <path d="M9 18h4"></path>
+            </svg>
+          </span>
+          <strong class="monitor-sleep-title inline-edit-hint">设备已休眠</strong>
+          <span class="monitor-wake-btn inline-edit-hint" role="button" tabindex="0" data-action="monitor-wake">唤醒设备</span>
+        </span>
+      </span>
+    </button>
                     <button class="camera-tile" data-room="niki2" data-camera="niki2摄像头" style="--pos:50% 42%;">
                       <strong class="inline-edit-hint">niki2</strong><span class="tile-setting" title="设置" aria-label="设置"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 15.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7Z"></path><path d="M19.4 15a1.8 1.8 0 0 0 .36 1.98l.04.04a2.16 2.16 0 0 1-3.05 3.05l-.04-.04a1.8 1.8 0 0 0-1.98-.36 1.8 1.8 0 0 0-1.1 1.66V21.4a2.16 2.16 0 0 1-4.32 0v-.07a1.8 1.8 0 0 0-1.1-1.66 1.8 1.8 0 0 0-1.98.36l-.04.04a2.16 2.16 0 0 1-3.05-3.05l.04-.04A1.8 1.8 0 0 0 4.6 15a1.8 1.8 0 0 0-1.66-1.1H2.86a2.16 2.16 0 0 1 0-4.32h.07A1.8 1.8 0 0 0 4.6 8a1.8 1.8 0 0 0-.36-1.98l-.04-.04a2.16 2.16 0 0 1 3.05-3.05l.04.04A1.8 1.8 0 0 0 9.27 3.3a1.8 1.8 0 0 0 1.1-1.66V1.6a2.16 2.16 0 0 1 4.32 0v.07a1.8 1.8 0 0 0 1.1 1.66 1.8 1.8 0 0 0 1.98-.36l.04-.04a2.16 2.16 0 0 1 3.05 3.05l-.04.04A1.8 1.8 0 0 0 19.4 8a1.8 1.8 0 0 0 1.66 1.1h.07a2.16 2.16 0 0 1 0 4.32h-.07A1.8 1.8 0 0 0 19.4 15Z"></path></svg></span>
                     <span class="tile-env-overlay" hidden=""><span aria-label="室温">
         <svg class="monitor-env-icon" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 14.76V5a4 4 0 0 0-8 0v9.76a6 6 0 1 0 8 0Z"></path><path d="M10 8v8"></path></svg>
       <strong class="inline-edit-hint">24.3°C</strong></span><span aria-label="湿度">
         <svg class="monitor-env-icon" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3.5S6 10.1 6 14.2a6 6 0 0 0 12 0C18 10.1 12 3.5 12 3.5Z"></path></svg>
-      <strong class="inline-edit-hint">57%</strong></span></span><span class="tile-sound" title="睡眠安抚" aria-label="睡眠安抚"><span class="sound-icon inline-edit-hint">♪</span>睡眠安抚</span></button>
+      <strong class="inline-edit-hint">57%</strong></span></span><span class="tile-sound" title="睡眠安抚" aria-label="睡眠安抚"><span class="sound-icon inline-edit-hint">♪</span>睡眠安抚</span>
+      <span class="tile-sleep-state" aria-label="设备休眠状态">
+        <span class="monitor-sleep-card">
+          <span class="monitor-sleep-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 12.8A8.6 8.6 0 1 1 11.2 3 6.9 6.9 0 0 0 21 12.8Z"></path>
+              <path d="M7 15h7"></path>
+              <path d="M9 18h4"></path>
+            </svg>
+          </span>
+          <strong class="monitor-sleep-title inline-edit-hint">设备已休眠</strong>
+          <span class="monitor-wake-btn inline-edit-hint" role="button" tabindex="0" data-action="monitor-wake">唤醒设备</span>
+        </span>
+      </span>
+    </button>
                     <button class="camera-tile" data-room="niki3" data-camera="niki3摄像头" style="--pos:47% 50%;">
                       <strong class="inline-edit-hint">niki3</strong><span class="tile-setting" title="设置" aria-label="设置"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 15.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7Z"></path><path d="M19.4 15a1.8 1.8 0 0 0 .36 1.98l.04.04a2.16 2.16 0 0 1-3.05 3.05l-.04-.04a1.8 1.8 0 0 0-1.98-.36 1.8 1.8 0 0 0-1.1 1.66V21.4a2.16 2.16 0 0 1-4.32 0v-.07a1.8 1.8 0 0 0-1.1-1.66 1.8 1.8 0 0 0-1.98.36l-.04.04a2.16 2.16 0 0 1-3.05-3.05l.04-.04A1.8 1.8 0 0 0 4.6 15a1.8 1.8 0 0 0-1.66-1.1H2.86a2.16 2.16 0 0 1 0-4.32h.07A1.8 1.8 0 0 0 4.6 8a1.8 1.8 0 0 0-.36-1.98l-.04-.04a2.16 2.16 0 0 1 3.05-3.05l.04.04A1.8 1.8 0 0 0 9.27 3.3a1.8 1.8 0 0 0 1.1-1.66V1.6a2.16 2.16 0 0 1 4.32 0v.07a1.8 1.8 0 0 0 1.1 1.66 1.8 1.8 0 0 0 1.98-.36l.04-.04a2.16 2.16 0 0 1 3.05 3.05l-.04.04A1.8 1.8 0 0 0 19.4 8a1.8 1.8 0 0 0 1.66 1.1h.07a2.16 2.16 0 0 1 0 4.32h-.07A1.8 1.8 0 0 0 19.4 15Z"></path></svg></span>
                     <span class="tile-env-overlay" hidden=""><span aria-label="室温">
         <svg class="monitor-env-icon" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 14.76V5a4 4 0 0 0-8 0v9.76a6 6 0 1 0 8 0Z"></path><path d="M10 8v8"></path></svg>
       <strong class="inline-edit-hint">24.8°C</strong></span><span aria-label="湿度">
         <svg class="monitor-env-icon" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3.5S6 10.1 6 14.2a6 6 0 0 0 12 0C18 10.1 12 3.5 12 3.5Z"></path></svg>
-      <strong class="inline-edit-hint">56%</strong></span></span><span class="tile-sound" title="睡眠安抚" aria-label="睡眠安抚"><span class="sound-icon inline-edit-hint">♪</span>睡眠安抚</span></button>
+      <strong class="inline-edit-hint">56%</strong></span></span><span class="tile-sound" title="睡眠安抚" aria-label="睡眠安抚"><span class="sound-icon inline-edit-hint">♪</span>睡眠安抚</span>
+      <span class="tile-sleep-state" aria-label="设备休眠状态">
+        <span class="monitor-sleep-card">
+          <span class="monitor-sleep-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 12.8A8.6 8.6 0 1 1 11.2 3 6.9 6.9 0 0 0 21 12.8Z"></path>
+              <path d="M7 15h7"></path>
+              <path d="M9 18h4"></path>
+            </svg>
+          </span>
+          <strong class="monitor-sleep-title inline-edit-hint">设备已休眠</strong>
+          <span class="monitor-wake-btn inline-edit-hint" role="button" tabindex="0" data-action="monitor-wake">唤醒设备</span>
+        </span>
+      </span>
+    </button>
                   </div>
 
                   <div class="monitor-offline-state">
@@ -10216,7 +10645,7 @@
                       <span class="monitor-soothe-icon inline-edit-hint">♪</span>
                       <span class="monitor-soothe-copy"><strong class="inline-edit-hint">睡眠安抚</strong></span>
                     </button>
-                    <button class="icon-btn" title="休眠/唤醒"><span class="inline-edit-hint">◔</span><span class="action-label inline-edit-hint">休眠/唤醒</span></button>
+                    <button class="icon-btn" title="休眠/唤醒" data-action="monitor-sleep"><span class="inline-edit-hint">◔</span><span class="action-label inline-edit-hint">休眠/唤醒</span></button>
                     <button class="icon-btn" title="语音对讲"><span class="inline-edit-hint">☎</span><span class="action-label inline-edit-hint">对讲</span></button>
                     <button class="icon-btn" title="截图"><span class="inline-edit-hint">▣</span><span class="action-label inline-edit-hint">截图</span></button>
                     <button class="icon-btn" title="录像"><span class="inline-edit-hint">●</span><span class="action-label inline-edit-hint">录像</span></button>
@@ -10239,9 +10668,8 @@
                 <div class="scene-mode-card scene-sleep">
                   <div class="scene-split-status" id="sceneSplitStatus"></div>
                   <div class="scene-mode-top">
-                    <div><div class="scene-mode-state"><span class="scene-mode-icon inline-edit-hint">☾</span><span class="scene-mode-state-text"><strong id="sceneSleepTitle" class="inline-edit-hint">niki浅睡</strong><span class="scene-mode-subtitle inline-edit-hint" id="sceneSleepMeta">已入睡 59min</span></span></div></div>
+                    <div><div class="scene-status-heading inline-edit-hint" id="sceneSleepHeading">niki的状态</div><div class="scene-mode-state"><span class="scene-mode-icon inline-edit-hint">☾</span><span class="scene-mode-state-text"><strong id="sceneSleepTitle" class="inline-edit-hint">睡眠中</strong><span class="scene-mode-subtitle inline-edit-hint" id="sceneSleepMeta">已入睡2h40min</span></span></div></div>
                   </div>
-                  <div class="scene-mode-alert"><strong class="inline-edit-hint">检测到宝宝眼动活跃</strong><p class="inline-edit-hint">随时可能醒来，建议留意。</p></div>
                   <div class="scene-breath-card"><div class="scene-vitals-grid"><div class="scene-vital-item"><span class="inline-edit-hint">呼吸率</span><strong class="inline-edit-hint">28 br/min</strong></div><div class="scene-vital-item"><span class="inline-edit-hint">心率</span><strong class="inline-edit-hint">108 bpm</strong></div></div></div>
                   <div class="scene-env-grid"><div class="scene-env-card"><span class="inline-edit-hint">体温贴</span><strong class="inline-edit-hint">36.6°C</strong></div><div class="scene-env-card"><span class="inline-edit-hint">空气质量</span><strong class="inline-edit-hint">优</strong></div></div>
                 </div>
@@ -10271,8 +10699,8 @@
                   </div>
                   <div class="care-baby-info">
                     <select class="care-baby-select" aria-label="选择宝宝">
-                      <option selected="">cam1</option>
-                      <option>cam2</option>
+                      <option selected="">niki</option>
+                      <option>neo</option>
                     </select>
                   </div>
                 </div>
@@ -10303,22 +10731,22 @@
                 <span class="sleep-insight-icon">
                   <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l1.7 4.6L18 9.3l-4.3 1.7L12 16l-1.7-5L6 9.3l4.3-1.7L12 3Z"></path><path d="M19 14l.8 2.2L22 17l-2.2.8L19 20l-.8-2.2L16 17l2.2-.8L19 14Z"></path></svg>
                 </span>
-                <span id="sleepInsightText" class="inline-edit-hint">今日睡眠节律较规律，包含上午、午后、傍晚小睡和夜间长睡。夜醒 1 次，符合 3-6 个月宝宝常见睡眠节律。</span>
+                <span id="sleepInsightText" class="inline-edit-hint" spellcheck="false">今日睡眠节律较规律，包含上午、午后、傍晚小睡和夜间长睡。夜醒 1 次，符合 3-6 个月宝宝常见睡眠节律。</span>
               </div>
 
               <section class="care-layout">
                 <div class="sleep-record-card">
                   <div class="sleep-record-head">
-                    <div><h3 class="inline-edit-hint">睡眠记录</h3><p id="sleepRecordSubtitle" class="inline-edit-hint">今日 · 睡眠时段分布（08:00-次日08:00）</p></div>
+                    <div><h3 class="inline-edit-hint">睡眠记录</h3><p id="sleepRecordSubtitle" class="inline-edit-hint">睡眠时段分布（08:00-次日08:00）</p></div>
                     <div class="sleep-record-legend">
                       <span><i style="--c:#ad6670"></i>深睡</span>
                       <span><i style="--c:#e0a1aa"></i>浅睡</span>
-                      <span><i style="--c:#ffc928"></i>夜醒</span>
+                      <span><i style="--c:#ffc928"></i>清醒</span>
                     </div>
                   </div>
                   <div class="sleep-strip-chart" id="sleepChart" aria-label="今日睡眠水平时间轴，统计周期08:00至次日08:00">
-            <div class="sleep-strip-scale"><span></span><span class="inline-edit-hint">08:00</span><span class="inline-edit-hint">14:00</span><span class="inline-edit-hint">20:00</span><span class="inline-edit-hint">02:00</span><span class="inline-edit-hint">次日08:00</span></div>
             <div class="sleep-strip-rows">
+              <div class="sleep-strip-scale"><span></span><div class="sleep-hour-scale"><span style="--i:0" class="inline-edit-hint">08</span><span style="--i:1" class="inline-edit-hint">09</span><span style="--i:2" class="inline-edit-hint">10</span><span style="--i:3" class="inline-edit-hint">11</span><span style="--i:4" class="inline-edit-hint">12</span><span style="--i:5" class="inline-edit-hint">13</span><span style="--i:6" class="inline-edit-hint">14</span><span style="--i:7" class="inline-edit-hint">15</span><span style="--i:8" class="inline-edit-hint">16</span><span style="--i:9" class="inline-edit-hint">17</span><span style="--i:10" class="inline-edit-hint">18</span><span style="--i:11" class="inline-edit-hint">19</span><span style="--i:12" class="inline-edit-hint">20</span><span style="--i:13" class="inline-edit-hint">21</span><span style="--i:14" class="inline-edit-hint">22</span><span style="--i:15" class="inline-edit-hint">23</span><span style="--i:16" class="inline-edit-hint">00</span><span style="--i:17" class="inline-edit-hint">01</span><span style="--i:18" class="inline-edit-hint">02</span><span style="--i:19" class="inline-edit-hint">03</span><span style="--i:20" class="inline-edit-hint">04</span><span style="--i:21" class="inline-edit-hint">05</span><span style="--i:22" class="inline-edit-hint">06</span><span style="--i:23" class="inline-edit-hint">07</span><span style="--i:24" class="inline-edit-hint">08</span><em class="sleep-next-day-label inline-edit-hint" style="--i:16">次日</em></div></div>
               <div class="sleep-strip-row featured"><span class="sleep-strip-day inline-edit-hint">今日</span><div class="sleep-strip-track"><div class="sleep-strip-period" style="--start:4.2%;--width:5.2%"><span style="--seg:34%;--c:#ad6670"></span><span style="--seg:62%;--c:#e0a1aa"></span><span style="--seg:4%;--c:#ffc928"></span></div><div class="sleep-strip-period" style="--start:18.8%;--width:6.3%"><span style="--seg:36%;--c:#ad6670"></span><span style="--seg:60%;--c:#e0a1aa"></span><span style="--seg:4%;--c:#ffc928"></span></div><div class="sleep-strip-period" style="--start:35.4%;--width:3.1%"><span style="--seg:28%;--c:#ad6670"></span><span style="--seg:68%;--c:#e0a1aa"></span><span style="--seg:4%;--c:#ffc928"></span></div><div class="sleep-strip-period" style="--start:49%;--width:46.9%"><span style="--seg:38%;--c:#ad6670"></span><span style="--seg:58%;--c:#e0a1aa"></span><span style="--seg:4%;--c:#ffc928"></span></div></div></div>
             </div>
           </div>
@@ -10326,13 +10754,19 @@
                   <div class="sleep-summary-grid">
                     <div class="sleep-summary-card"><span id="sleepTotalLabel" class="inline-edit-hint">总睡眠</span><strong id="sleepTotalValue" style="--c:#f5f9ff" class="inline-edit-hint">14.8 h</strong><em id="sleepTotalPercent"></em></div>
                     <div class="sleep-summary-card"><span id="sleepDeepLabel" class="inline-edit-hint">深睡</span><strong id="sleepDeepValue" style="--c:#e68a98" class="inline-edit-hint">5.4 h</strong><em id="sleepDeepPercent" class="inline-edit-hint">36%</em></div>
-                    <div class="sleep-summary-card"><span id="sleepEfficiencyLabel" class="inline-edit-hint">睡眠效率</span><strong id="sleepEfficiencyValue" style="--c:#5adca2" class="inline-edit-hint">91%</strong><em id="sleepEfficiencyMeta" class="inline-edit-hint">较规律</em></div>
                     <div class="sleep-summary-card"><span id="sleepWakeLabel" class="inline-edit-hint">夜醒次数</span><strong id="sleepWakeValue" style="--c:#ffb03a" class="inline-edit-hint">1 次</strong><em id="sleepWakePercent"></em></div>
                   </div>
                   <div class="sleep-record-data-grid">
-                    <div class="sleep-summary-card"><span class="inline-edit-hint">遮脸</span><strong style="--c:#ff6f86" class="inline-edit-hint">0 次</strong><em></em></div>
+                    <div class="sleep-summary-card"><span class="inline-edit-hint" spellcheck="false">口鼻遮挡</span><strong style="--c:#ff6f86" class="inline-edit-hint">0 次</strong><em></em></div>
                     <div class="sleep-summary-card"><span class="inline-edit-hint">趴睡</span><strong style="--c:#ffb03a" class="inline-edit-hint">0 次</strong><em></em></div>
                     <div class="sleep-summary-card"><span class="inline-edit-hint">哭闹</span><strong style="--c:#e68a98" class="inline-edit-hint">1 次</strong><em></em></div>
+                  </div>
+                  <div class="sleep-milestone-card" aria-label="睡眠里程碑">
+                    <span class="sleep-milestone-badge inline-edit-hint">3-6月</span>
+                    <span class="sleep-milestone-copy">
+                      <strong class="" spellcheck="false"><div data-page-id="QbLLdULo2oIivIxlUBIc0seSnLf" data-lark-html-role="root" data-docx-has-block-data="false"><div class="old-record-id-Mx5edT38uo1PPFxmoUrcKokNnjc inline-edit-hint" spellcheck="false">睡眠周期逐渐稳定，夜间睡眠时间也逐步延长</div></div><span data-lark-record-data="{&quot;rootId&quot;:&quot;QbLLdULo2oIivIxlUBIc0seSnLf&quot;,&quot;text&quot;:{&quot;initialAttributedTexts&quot;:{&quot;text&quot;:{&quot;0&quot;:&quot;睡眠周期逐渐稳定并逐步接近成人模式，夜间睡眠时间也逐步延长。&quot;},&quot;attribs&quot;:{&quot;0&quot;:&quot;*0+u&quot;}},&quot;apool&quot;:{&quot;numToAttrib&quot;:{&quot;0&quot;:[&quot;author&quot;,&quot;7650017089587186920&quot;]},&quot;nextNum&quot;:1}},&quot;type&quot;:&quot;text&quot;,&quot;referenceRecordMap&quot;:{},&quot;extra&quot;:{&quot;channel&quot;:&quot;saas&quot;,&quot;isEqualBlockSelection&quot;:false,&quot;pasteRandomId&quot;:&quot;981b1620-e1ec-416a-89b9-5a8a514d1900&quot;,&quot;mention_page_title&quot;:{},&quot;external_mention_url&quot;:{}},&quot;isKeepQuoteContainer&quot;:false,&quot;isFromCode&quot;:false,&quot;selection&quot;:[{&quot;id&quot;:954,&quot;type&quot;:&quot;text&quot;,&quot;selection&quot;:{&quot;start&quot;:3,&quot;end&quot;:33},&quot;recordId&quot;:&quot;Mx5edT38uo1PPFxmoUrcKokNnjc&quot;}],&quot;payloadMap&quot;:{},&quot;isCut&quot;:false}" data-lark-record-format="docx/text" class="lark-record-clipboard"></span></strong>
+                      <span class="inline-edit-hint" spellcheck="false">建议保持固定入睡流程，白天小睡间隔约 2-3 小时，夜醒 1-2 次通常属于阶段内常见情况。</span>
+                    </span>
                   </div>
                 </div>
 
@@ -10344,13 +10778,18 @@
                   <div class="care-data-grid">
                     <div class="care-data-card">
                       <span class="care-data-icon" style="--c:#72d6ff"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 14.76V5a4 4 0 0 0-8 0v9.76a5 5 0 1 0 8 0Z"></path><path d="M18 8h4"></path><path d="M18 12h4"></path><path d="M18 16h4"></path></svg></span>
-                      <span><strong class="inline-edit-hint">环境数据</strong><span id="careEnvData" class="inline-edit-hint">平均温度 24.8℃ · 平均湿度 42%</span></span>
-                      <b class="care-data-value inline-edit-hint" id="careEnvStatus" style="--c:#72d6ff">24.8℃ / 42%</b>
+                      <span><strong class="inline-edit-hint" spellcheck="false">温度数据</strong><span id="careEnvData" class="inline-edit-hint" spellcheck="false">最低温度 22.8℃ · 最高温度&nbsp;26.8℃&nbsp;</span></span>
+                      <b class="care-data-value inline-edit-hint" id="careEnvStatus" style="--c:#72d6ff" spellcheck="false">平均24.8℃</b>
+                    </div>
+                    <div class="care-data-card">
+                      <span class="care-data-icon" style="--c:#7ee0c0"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3.5S6 10.2 6 14.5a6 6 0 0 0 12 0C18 10.2 12 3.5 12 3.5Z"></path><path d="M9.5 15.2a2.8 2.8 0 0 0 3.3 2.6"></path></svg></span>
+                      <span><strong class="inline-edit-hint">湿度数据</strong><span id="careHumidityData" class="inline-edit-hint">最低湿度 38% · 最高湿度 48%</span></span>
+                      <b class="care-data-value inline-edit-hint" id="careHumidityStatus" style="--c:#7ee0c0">平均42%</b>
                     </div>
                     <div class="care-data-card">
                       <span class="care-data-icon" style="--c:#ff8f7a"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 14.76V4a4 4 0 0 0-8 0v10.76a5 5 0 1 0 8 0Z"></path><path d="M10 6v7"></path><path d="M10 18h.01"></path></svg></span>
-                      <span><strong class="inline-edit-hint">体温贴数据</strong><span class="inline-edit-hint">平均体温 36.6℃ · 最高 37.1℃</span></span>
-                      <b class="care-data-value inline-edit-hint" style="--c:#ff8f7a">36.6℃</b>
+                      <span><strong class="inline-edit-hint">体温贴数据</strong><span id="careBodyTempData" class="inline-edit-hint">最低体温 36.1℃ · 最高体温 37.1℃</span></span>
+                      <b class="care-data-value inline-edit-hint" id="careBodyTempStatus" style="--c:#ff8f7a" spellcheck="false">平均36.6℃</b>
                     </div>
                     <div class="care-data-card">
                       <span class="care-data-icon" style="--c:#ffc66f"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3h8v6a4 4 0 0 1-8 0V3Z"></path><path d="M12 13v8"></path><path d="M9 21h6"></path></svg></span>
@@ -10408,7 +10847,7 @@
                       <h3 class="inline-edit-hint">智能看护检测</h3>
                       <div class="care-setting-list">
                         <span class="care-setting-group-label inline-edit-hint">行为检测</span>
-                        <button class="care-setting-item as-link" type="button"><div><strong class="inline-edit-hint" spellcheck="false">移动侦测</strong><span class="inline-edit-hint">检测开关、灵敏度、告警通知开关</span></div><span class="care-setting-arrow inline-edit-hint">›</span></button>
+                        <button class="care-setting-item as-link" type="button"><div><strong class="inline-edit-hint" spellcheck="false">移动侦测</strong><span class="inline-edit-hint">检测开关、灵敏度、告警通知开关</span></div><span class="care-setting-arrow inline-edit-hint" spellcheck="false">›</span></button>
                         <button class="care-setting-item as-link" type="button"><div><strong class="inline-edit-hint" spellcheck="false">宝宝移动检测</strong><span class="inline-edit-hint">检测开关、告警通知开关</span></div><span class="care-setting-arrow inline-edit-hint">›</span></button>
                         <button class="care-setting-item as-link" type="button"><div><strong class="inline-edit-hint" spellcheck="false">趴睡检测</strong><span class="inline-edit-hint">检测开关、告警通知开关</span></div><span class="care-setting-arrow inline-edit-hint">›</span></button>
                         <button class="care-setting-item as-link" type="button"><div><strong class="inline-edit-hint" spellcheck="false">口鼻遮挡检测</strong><span class="inline-edit-hint">检测开关、告警通知开关</span></div><span class="care-setting-arrow inline-edit-hint">›</span></button>
@@ -10430,12 +10869,12 @@
                       <div class="care-setting-rows">
                         <div class="care-setting-row"><div><strong class="inline-edit-hint">移动侦测通知</strong><span class="inline-edit-hint" spellcheck="false">检测到画面变化时通知</span></div><div class="segmented"><button type="button" class="inline-edit-hint">重要提醒</button><button class="active inline-edit-hint" type="button">一般提醒</button></div><button class="setting-switch" type="button" aria-label="移动侦测通知"></button></div>
                         <div class="care-setting-row"><div><strong class="inline-edit-hint" spellcheck="false">宝宝移动通知</strong><span class="inline-edit-hint" spellcheck="false">检测到宝宝移动时通知</span></div><div class="segmented"><button class="active inline-edit-hint" type="button">重要提醒</button><button type="button" class="inline-edit-hint">一般提醒</button></div><button class="setting-switch" type="button" aria-label="宝宝不在位通知"></button></div>
-                        <div class="care-setting-row"><div><strong class="inline-edit-hint">趴睡通知</strong><span class="inline-edit-hint" spellcheck="false">检测到宝宝趴睡时通知</span></div><div class="segmented"><button class="active inline-edit-hint" type="button">重要提醒</button><button type="button" class="inline-edit-hint">一般提醒</button></div><button class="setting-switch" type="button" aria-label="趴睡通知"></button></div>
+                        <div class="care-setting-row"><div><strong class="inline-edit-hint" spellcheck="false">趴睡通知</strong><span class="inline-edit-hint" spellcheck="false">检测到宝宝趴睡时通知</span></div><div class="segmented"><button class="active inline-edit-hint" type="button">重要提醒</button><button type="button" class="inline-edit-hint">一般提醒</button></div><button class="setting-switch" type="button" aria-label="趴睡通知"></button></div>
                         <div class="care-setting-row"><div><strong class="inline-edit-hint" spellcheck="false">口鼻遮挡通知</strong><span class="inline-edit-hint" spellcheck="false">检测到宝宝口鼻遮挡时通知</span></div><div class="segmented"><button class="active inline-edit-hint" type="button">重要提醒</button><button type="button" class="inline-edit-hint">一般提醒</button></div><button class="setting-switch" type="button" aria-label="遮脸通知"></button></div>
-                        <div class="care-setting-row"><div><strong class="inline-edit-hint">安全 / 危险区域通知</strong><span class="inline-edit-hint" spellcheck="false">检测到宝宝离开安全区域/或进入危险区域时通知</span></div><div class="segmented"><button class="active inline-edit-hint" type="button">重要提醒</button><button type="button" class="inline-edit-hint">一般提醒</button></div><button class="setting-switch" type="button" aria-label="安全危险区域通知"></button></div>
-                        <div class="care-setting-row"><div><strong class="inline-edit-hint">哭声通知</strong><span class="inline-edit-hint">检测到宝宝哭声时通知</span></div><div class="segmented"><button class="active inline-edit-hint" type="button">重要提醒</button><button type="button" class="inline-edit-hint">一般提醒</button></div><button class="setting-switch" type="button" aria-label="哭声通知"></button></div>
-                        <div class="care-setting-row"><div><strong class="inline-edit-hint">异响通知</strong><span class="inline-edit-hint" spellcheck="false">检测到环境音量超过限定值时通知</span></div><div class="segmented"><button type="button" class="inline-edit-hint">重要提醒</button><button class="active inline-edit-hint" type="button">一般提醒</button></div><button class="setting-switch" type="button" aria-label="异响通知"></button></div>
-                        <div class="care-setting-row"><div><strong class="inline-edit-hint">温度告警通知</strong><span class="inline-edit-hint" spellcheck="false">检测到温度超出设定范围时通知</span></div><div class="segmented"><button class="active inline-edit-hint" type="button">重要提醒</button><button type="button" class="inline-edit-hint">一般提醒</button></div><button class="setting-switch" type="button" aria-label="温度告警通知"></button></div>
+                        <div class="care-setting-row"><div><strong class="inline-edit-hint" spellcheck="false">安全 / 危险区域通知</strong><span class="inline-edit-hint" spellcheck="false">检测到宝宝离开安全区域/或进入危险区域时通知</span></div><div class="segmented"><button class="active inline-edit-hint" type="button">重要提醒</button><button type="button" class="inline-edit-hint">一般提醒</button></div><button class="setting-switch" type="button" aria-label="安全危险区域通知"></button></div>
+                        <div class="care-setting-row"><div><strong class="inline-edit-hint" spellcheck="false">哭声通知</strong><span class="inline-edit-hint">检测到宝宝哭声时通知</span></div><div class="segmented"><button class="active inline-edit-hint" type="button">重要提醒</button><button type="button" class="inline-edit-hint">一般提醒</button></div><button class="setting-switch" type="button" aria-label="哭声通知"></button></div>
+                        <div class="care-setting-row"><div><strong class="inline-edit-hint" spellcheck="false">异响通知</strong><span class="inline-edit-hint" spellcheck="false">检测到环境音量超过限定值时通知</span></div><div class="segmented"><button type="button" class="inline-edit-hint">重要提醒</button><button class="active inline-edit-hint" type="button">一般提醒</button></div><button class="setting-switch" type="button" aria-label="异响通知"></button></div>
+                        <div class="care-setting-row"><div><strong class="inline-edit-hint" spellcheck="false">温度告警通知</strong><span class="inline-edit-hint" spellcheck="false">检测到温度超出设定范围时通知</span></div><div class="segmented"><button class="active inline-edit-hint" type="button">重要提醒</button><button type="button" class="inline-edit-hint">一般提醒</button></div><button class="setting-switch" type="button" aria-label="温度告警通知"></button></div>
                         <div class="care-setting-row"><div><strong class="inline-edit-hint">湿度告警通知</strong><span class="inline-edit-hint" spellcheck="false">检测到湿度超出设定范围时通知</span></div><div class="segmented"><button class="active inline-edit-hint" type="button">重要提醒</button><button type="button" class="inline-edit-hint">一般提醒</button></div><button class="setting-switch" type="button" aria-label="湿度告警通知"></button></div>
                         <div class="care-setting-row"><div><strong class="inline-edit-hint">入睡通知</strong><span class="inline-edit-hint" spellcheck="false">识别到宝宝睡着时通知</span></div><div class="segmented"><button type="button" class="inline-edit-hint">重要提醒</button><button class="active inline-edit-hint" type="button">一般提醒</button></div><button class="setting-switch" type="button" aria-label="入睡通知"></button></div>
                         <div class="care-setting-row"><div><strong class="inline-edit-hint">睡醒通知</strong><span class="inline-edit-hint" spellcheck="false">识别到宝宝睡醒时通知</span></div><div class="segmented"><button type="button" class="inline-edit-hint">重要提醒</button><button class="active inline-edit-hint" type="button">一般提醒</button></div><button class="setting-switch" type="button" aria-label="睡醒通知"></button></div>
@@ -10570,20 +11009,6 @@
                   <button class="replay-tab inline-edit-hint" type="button">云录像</button>
                   <button class="album-btn inline-edit-hint" type="button">相册</button>
                 </div>
-                <div class="replay-top-actions">
-                  <label class="replay-device-select">
-                    <select aria-label="设备选择">
-                      <option selected="">cam1</option>
-                      <option>cam2</option>
-                      <option>cam3</option>
-                      <option>cam4</option>
-                    </select>
-                  </label>
-                  <button class="date-picker" type="button" aria-label="日期选择">
-                    <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="17" rx="3"></rect><path d="M8 2v4M16 2v4M3 10h18"></path></svg>
-                    2026/5/7
-                  </button>
-                </div>
               </div>
 
               <section class="replay-layout" aria-label="事件回放">
@@ -10626,6 +11051,20 @@
 
                 <aside class="replay-side">
                   <section class="event-replay-list">
+                    <div class="replay-top-actions">
+                      <label class="replay-device-select">
+                        <select aria-label="设备选择">
+                          <option selected="">cam1</option>
+                          <option>cam2</option>
+                          <option>cam3</option>
+                          <option>cam4</option>
+                        </select>
+                      </label>
+                      <button class="date-picker" type="button" aria-label="日期选择">
+                        <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="17" rx="3"></rect><path d="M8 2v4M16 2v4M3 10h18"></path></svg>
+                        2026/5/7
+                      </button>
+                    </div>
                     <div class="event-list-head">
                       <h3 class="inline-edit-hint">事件记录</h3>
                       <span class="settings-chip inline-edit-hint" id="eventCountChip">今日 5 条</span>
@@ -10639,7 +11078,7 @@
                         <label class="event-filter-option"><input type="checkbox" data-event-filter="移动侦测"><span class="inline-edit-hint" spellcheck="false">移动侦测</span></label>
                         <label class="event-filter-option"><input type="checkbox" data-event-filter="宝宝不在位"><span class="inline-edit-hint" spellcheck="false">宝宝移动</span></label>
                         <label class="event-filter-option"><input type="checkbox" data-event-filter="趴睡"><span class="inline-edit-hint" spellcheck="false">宝宝趴睡</span></label>
-                        <label class="event-filter-option"><input type="checkbox" data-event-filter="遮脸"><span class="inline-edit-hint" spellcheck="false">宝宝遮脸</span></label>
+                        <label class="event-filter-option"><input type="checkbox" data-event-filter="遮脸"><span class="inline-edit-hint" spellcheck="false">宝宝口鼻遮挡</span></label>
                         <label class="event-filter-option"><input type="checkbox" data-event-filter="安全区域出界"><span class="inline-edit-hint" spellcheck="false">宝宝离开安全区域</span></label>
                         <label class="event-filter-option"><input type="checkbox" data-event-filter="危险区域靠近"><span class="inline-edit-hint" spellcheck="false">宝宝进入危险区域</span></label>
                         <label class="event-filter-option"><input type="checkbox" data-event-filter="哭声"><span class="inline-edit-hint" spellcheck="false">宝宝哭声</span></label>
@@ -10648,7 +11087,7 @@
                     </div>
                     <div class="replay-events">
                       <button class="replay-event-card" type="button" data-event-type="移动侦测"><span class="event-thumb"></span><span><strong class="inline-edit-hint">12:09 检测到宝宝移动</strong></span></button>
-                      <button class="replay-event-card" type="button" data-event-type="遮脸"><span class="event-thumb"></span><span><strong class="inline-edit-hint">11:42 检测到宝宝遮脸</strong></span></button>
+                      <button class="replay-event-card" type="button" data-event-type="遮脸"><span class="event-thumb"></span><span><strong class="inline-edit-hint" spellcheck="false">11:42 检测到宝宝口鼻遮挡</strong></span></button>
                       <button class="replay-event-card" type="button" data-event-type="安全区域出界"><span class="event-thumb"></span><span><strong class="inline-edit-hint">10:28 检测到安全区域出界</strong></span></button>
                       <button class="replay-event-card" type="button" data-event-type="趴睡"><span class="event-thumb"></span><span><strong class="inline-edit-hint">09:18 检测到宝宝趴睡</strong></span></button>
                       <button class="replay-event-card" type="button" data-event-type="移动侦测"><span class="event-thumb"></span><span><strong class="inline-edit-hint">08:30 检测到宝宝移动</strong></span></button>
@@ -10657,13 +11096,41 @@
                   </section>
                 </aside>
               </section>
+
+              <section class="album-panel" aria-label="相册">
+                <div class="album-subtabs" role="tablist" aria-label="相册类型">
+                  <button class="album-subtab inline-edit-hint" type="button" data-album-tab="saved">相册</button>
+                  <button class="album-subtab active inline-edit-hint" type="button" data-album-tab="timeline">时光相册</button>
+                </div>
+                <div class="album-content" data-album-content="saved">
+                  <div class="album-grid">
+                    <button class="album-card" type="button"><span class="album-thumb"></span><span class="album-card-copy"><strong class="inline-edit-hint">录像 2026/5/13 20:42</strong></span></button>
+                    <button class="album-card" type="button"><span class="album-thumb"></span><span class="album-card-copy"><strong class="inline-edit-hint">截图 2026/5/13 18:16</strong></span></button>
+                    <button class="album-card" type="button"><span class="album-thumb"></span><span class="album-card-copy"><strong class="inline-edit-hint">录像 2026/5/12 21:08</strong></span></button>
+                    <button class="album-card" type="button"><span class="album-thumb"></span><span class="album-card-copy"><strong class="inline-edit-hint">截图 2026/5/11 09:35</strong></span></button>
+                    <button class="album-card" type="button"><span class="album-thumb"></span><span class="album-card-copy"><strong class="inline-edit-hint">录像 2026/5/10 15:20</strong></span></button>
+                    <button class="album-card" type="button"><span class="album-thumb"></span><span class="album-card-copy"><strong class="inline-edit-hint">截图 2026/5/9 10:12</strong></span></button>
+                  </div>
+                </div>
+                <div class="album-content active" data-album-content="timeline">
+                  <div class="album-grid">
+                    <button class="album-card" type="button"><span class="album-thumb"></span><span class="album-card-copy"><strong class="inline-edit-hint">第一次吃奶嘴</strong><span class="inline-edit-hint">2026/5/13 20:18</span></span></button>
+                    <button class="album-card" type="button"><span class="album-thumb"></span><span class="album-card-copy"><strong class="inline-edit-hint">第一次吃手</strong><span class="inline-edit-hint">2026/5/12 18:05</span></span></button>
+                    <button class="album-card" type="button"><span class="album-thumb"></span><span class="album-card-copy"><strong class="inline-edit-hint">第一次爬行</strong><span class="inline-edit-hint">2026/5/11 16:20</span></span></button>
+                    <button class="album-card" type="button"><span class="album-thumb"></span><span class="album-card-copy"><strong class="inline-edit-hint">第一次站立</strong><span class="inline-edit-hint">2026/5/10 15:36</span></span></button>
+                    <button class="album-card" type="button"><span class="album-thumb"></span><span class="album-card-copy"><strong class="inline-edit-hint">第一次坐起</strong><span class="inline-edit-hint">2026/5/9 12:09</span></span></button>
+                    <button class="album-card" type="button"><span class="album-thumb"></span><span class="album-card-copy"><strong class="inline-edit-hint">第一次翻身</strong><span class="inline-edit-hint">2026/5/8 08:30</span></span></button>
+                    <button class="album-card" type="button"><span class="album-thumb"></span><span class="album-card-copy"><strong class="inline-edit-hint">第一次哭闹</strong><span class="inline-edit-hint">2026/5/7 10:28</span></span></button>
+                  </div>
+                </div>
+              </section>
             </main>
 
             <main class="device-settings-page" id="deviceSettingsPage" data-device-settings-panel="">
               <header class="device-settings-head">
                 <div class="device-settings-title">
                   <button class="care-settings-back inline-edit-hint" type="button" data-action="device-settings-back" aria-label="返回">‹</button>
-                  <div><h2 id="deviceSettingsTitle" class="inline-edit-hint">设备设置</h2><p id="deviceSettingsSubtitle" class="inline-edit-hint">白噪声</p></div>
+                  <div><h2 id="deviceSettingsTitle" class="inline-edit-hint">设备设置</h2><p id="deviceSettingsSubtitle" class="inline-edit-hint">niki摄像头</p></div>
                 </div>
               </header>
               <div class="device-settings-scroll">
@@ -10673,7 +11140,7 @@
                   <button class="device-settings-entry" type="button" data-device-settings-panel-target="wifi"><span class="inline-edit-hint">设备网络</span><i class="inline-edit-hint">›</i></button>
                   <button class="device-settings-entry" type="button" data-page-jump="智能看护设置" data-care-settings-source="device"><span class="inline-edit-hint">智能看护设置</span><i class="inline-edit-hint">›</i></button>
                   <button class="device-settings-entry" type="button" data-device-settings-panel-target="features"><span class="inline-edit-hint">功能设置</span><i class="inline-edit-hint">›</i></button>
-                  <button class="device-settings-entry" type="button"><span class="inline-edit-hint">云存储</span><i class="inline-edit-hint">›</i></button>
+                  <button class="device-settings-entry" type="button"><span class="inline-edit-hint" spellcheck="false">云服务</span><i class="inline-edit-hint">›</i></button>
                   <button class="device-settings-entry" type="button"><span class="inline-edit-hint">重启设备</span><i class="inline-edit-hint">›</i></button>
                   <button class="device-settings-entry danger" type="button"><span class="inline-edit-hint">删除设备</span><i class="inline-edit-hint">›</i></button>
                 </section>
@@ -10784,12 +11251,12 @@
                   </div>
                   <div class="settings-overview-devices">
                     <div class="settings-empty-state inline-edit-hint">暂无设备</div>
-                    <button class="settings-overview-device-card device-page-card active" type="button" data-device-name="niki摄像头" data-device-group="niki">
+                    <button class="settings-overview-device-card device-page-card" type="button" data-device-name="niki摄像头" data-device-group="niki">
                       <div class="device-card-top"><span class="device-page-icon"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 10l4.5-2.6v9.2L15 14"></path><rect x="3" y="6" width="12" height="12" rx="3"></rect></svg></span><span class="device-online inline-edit-hint">在线</span></div>
                       <div class="device-page-main"><strong class="inline-edit-hint">niki摄像头</strong></div>
                       <div class="device-page-foot"><span class="device-switch" aria-hidden="true"></span></div>
                     </button>
-                    <button class="settings-overview-device-card device-page-card" type="button" data-device-name="neo摄像头" data-device-group="neo">
+                    <button class="settings-overview-device-card device-page-card active" type="button" data-device-name="neo摄像头" data-device-group="neo">
                       <div class="device-card-top"><span class="device-page-icon"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 10l4.5-2.6v9.2L15 14"></path><rect x="3" y="6" width="12" height="12" rx="3"></rect></svg></span><span class="device-online inline-edit-hint">在线</span></div>
                       <div class="device-page-main"><strong class="inline-edit-hint">neo摄像头</strong></div>
                       <div class="device-page-foot"><span class="device-switch" aria-hidden="true"></span></div>
@@ -11371,7 +11838,7 @@
                     </div>
                   </div>
 
-                  <div class="onboarding-screen" data-onboarding-panel="8">
+                  <div class="onboarding-screen active" data-onboarding-panel="8">
                     <div class="setup-form">
                       <h3 class="inline-edit-hint">填写宝宝信息</h3>
                       <p class="inline-edit-hint">补充宝宝基础信息，用于看护通知和睡眠分析建议等</p>
@@ -11398,7 +11865,7 @@
                     </div>
                   </div>
 
-                  <div class="onboarding-screen active" data-onboarding-panel="10">
+                  <div class="onboarding-screen" data-onboarding-panel="10">
                     <div class="setup-form">
                       <h3 class="inline-edit-hint">添加摄像头</h3>
                       <p class="inline-edit-hint">接通设备电源，确认设备指示灯亮起</p>
@@ -11563,7 +12030,7 @@
                   <div class="setup-actions">
                     <span></span>
                     <div class="setup-action-group">
-                      <button class="setup-secondary-btn inline-edit-hint" type="button" data-setup-prev="" hidden="" disabled="">上一步</button>
+                      <button class="setup-secondary-btn inline-edit-hint" type="button" data-setup-prev="">上一步</button>
                       <button class="setup-primary-btn inline-edit-hint" type="button" data-setup-next="" spellcheck="false">继续</button>
                     </div>
                   </div>
@@ -11749,7 +12216,7 @@
                   </button>
                   <button class="glass-tile control-toggle stack" type="button">
                     <span class="control-icon inline-edit-hint">◐</span>
-                    <span><span class="control-title inline-edit-hint">勿扰模式</span><span class="control-subtitle inline-edit-hint">不会接收任何告警通知</span></span>
+                    <span><span class="control-title inline-edit-hint">勿扰模式</span><span class="control-subtitle inline-edit-hint" spellcheck="false">不接收任何告警通知</span></span>
                   </button>
                   <div class="glass-tile vertical-slider brightness-slider">
                     <div class="vertical-track"><div class="vertical-fill" style="--value:72%"></div><b class="inline-edit-hint">☀</b></div>
@@ -11822,7 +12289,7 @@
       <section class="docs-panel">
         <div class="docs-head">
           <div class="docs-head-main">
-            <input class="docs-title-input" id="docsTitle" type="text" value="录像回放" aria-label="页面功能说明标题" style="width: 103px;">
+            <input class="docs-title-input" id="docsTitle" type="text" value="录像回放" aria-label="页面功能说明标题" style="width: 104px;">
             <textarea class="docs-desc-input" id="docsDesc" aria-label="页面功能说明描述">沉淀宝宝日常事件记录，为成长记录和回看提供入口。</textarea>
           </div>
           <div class="docs-actions">
@@ -11835,24 +12302,41 @@
             <div class="docs-card-head">
               <h3>功能描述</h3>
             </div>
-            <div class="docs-structured-list" data-docs-preview="features" contenteditable="true" tabindex="0" aria-label="功能描述内容，可直接编辑或粘贴图片"><div class="docs-outline-line level-1" data-level="1"><b class="docs-outline-index" contenteditable="false">1</b><div class="docs-outline-copy" spellcheck="false">支持查看设备的录像回放（包含：本地录像、云录像、相册）</div></div><div class="docs-outline-line level-1" data-level="1"><b class="docs-outline-index" contenteditable="false">2</b><div class="docs-outline-copy" spellcheck="false">本地录像：支持通过时间轴、事件记录查看录像</div></div><div class="docs-outline-line level-2" data-level="2"><b class="docs-outline-index" contenteditable="false">1</b><div class="docs-outline-copy" spellcheck="false">倍速：支持1、2、4、8倍</div></div><div class="docs-outline-line level-1" data-level="1"><b class="docs-outline-index" contenteditable="false">3</b><div class="docs-outline-copy" spellcheck="false">事件记录：若一个事件里包含多个事件类型，展示多个事件类型。支持通过事件类型，筛选事件记录</div></div><div class="docs-outline-line level-1" data-level="1"><b class="docs-outline-index" contenteditable="false">4</b><div class="docs-outline-copy" spellcheck="false">事件类型筛选：筛选包含选中类型的事件记录。默认全选，支持勾选多个/单个事件类型。</div></div><div class="docs-outline-line level-1" data-level="1"><b class="docs-outline-index" contenteditable="false">5</b><div class="docs-outline-copy" spellcheck="false">云录像：需登录账号，付费才支持。</div></div><div class="docs-outline-line level-1" data-level="1"><b class="docs-outline-index" contenteditable="false">6</b><div class="docs-outline-copy" spellcheck="false">相册：展示用户 截图、录像 保存在设备SD卡上的图片/视频</div></div><div class="docs-outline-line level-2" data-level="2"><b class="docs-outline-index" contenteditable="false">1</b><div class="docs-outline-copy" spellcheck="false">按日期分类展示，支持按日期筛选</div></div><div class="docs-outline-line level-2" data-level="2"><b class="docs-outline-index" contenteditable="false">2</b><div class="docs-outline-copy" spellcheck="false">支持全屏查看、删除</div></div><div class="docs-outline-line level-1" data-level="1"><b class="docs-outline-index" contenteditable="false">7</b><div class="docs-outline-copy" spellcheck="false">后续支持承接：时光相册、成长记录等入口。</div></div></div>
+            <div class="docs-structured-list" data-docs-preview="features" contenteditable="true" tabindex="0" aria-label="功能描述内容，可直接编辑或粘贴图片"><div class="docs-outline-line level-1" data-level="1"><b class="docs-outline-index" contenteditable="false">1</b><div class="docs-outline-copy" spellcheck="false">支持查看设备的录像回放（包含：本地录像、云录像、相册）</div></div><div class="docs-outline-line level-1" data-level="1"><b class="docs-outline-index" contenteditable="false">2</b><div class="docs-outline-copy" spellcheck="false">本地录像：按设备、日期维度，展示本地录像</div></div><div class="docs-outline-line level-2" data-level="2"><b class="docs-outline-index" contenteditable="false">1</b><div class="docs-outline-copy" spellcheck="false">设备，默认选择第一个设备，需记住上次选中的设备，下次进入页面，展示上次选中的设备</div></div><div class="docs-outline-line level-2" data-level="2"><b class="docs-outline-index" contenteditable="false">2</b><div class="docs-outline-copy" spellcheck="false">日期，默认选择今天</div></div><div class="docs-outline-line level-1" data-level="1"><b class="docs-outline-index" contenteditable="false">3</b><div class="docs-outline-copy" spellcheck="false">回放时间轴：固定使用 24 小时制，不跟随设备端时间制式</div></div><div class="docs-outline-line level-2" data-level="2"><b class="docs-outline-index" contenteditable="false">1</b><div class="docs-outline-copy" spellcheck="false">支持手动拖动时间轴，播放对应时间点的录像</div></div><div class="docs-outline-line level-2" data-level="2"><b class="docs-outline-index" contenteditable="false">2</b><div class="docs-outline-copy" spellcheck="false">拖到无录像时间点，自动定位到下个录像起始点</div></div><div class="docs-outline-line level-1" data-level="1"><b class="docs-outline-index" contenteditable="false">4</b><div class="docs-outline-copy" spellcheck="false">录像播放控制：截图、录像、倍速、声音开关、全屏</div></div><div class="docs-outline-line level-2" data-level="2"><b class="docs-outline-index" contenteditable="false">1</b><div class="docs-outline-copy" spellcheck="false">截图：截取当前画面，保存到设备SD卡，保存后显示2s缩略图预览。若设备未插SD卡，提示需插卡</div></div><div class="docs-outline-line level-2" data-level="2"><b class="docs-outline-index" contenteditable="false">2</b><div class="docs-outline-copy" spellcheck="false">录像：开始/停止录像，保存到设备SD卡，保存后显示2s视频缩略图预览。若设备未插SD卡，提示需插卡</div></div><div class="docs-outline-line level-2" data-level="2"><b class="docs-outline-index" contenteditable="false">3</b><div class="docs-outline-copy" spellcheck="false">倍速：支持1、2、4、8倍</div></div><div class="docs-outline-line level-2" data-level="2"><b class="docs-outline-index" contenteditable="false">4</b><div class="docs-outline-copy" spellcheck="false">声音开关：开启/关闭音频</div></div><div class="docs-outline-line level-2" data-level="2"><b class="docs-outline-index" contenteditable="false">5</b><div class="docs-outline-copy" spellcheck="false">全屏：点击进入全屏页面播放录像</div></div><div class="docs-outline-line level-1" data-level="1"><b class="docs-outline-index" contenteditable="false">5</b><div class="docs-outline-copy" spellcheck="false">事件记录：若一个事件里包含多个事件类型，展示多个事件类型。支持通过事件类型，筛选事件记录</div></div><div class="docs-outline-line level-2" data-level="2"><b class="docs-outline-index" contenteditable="false">1</b><div class="docs-outline-copy" spellcheck="false">点击某个事件记录，播放对应事件记录的录像</div></div><div class="docs-outline-line level-1" data-level="1"><b class="docs-outline-index" contenteditable="false">6</b><div class="docs-outline-copy" spellcheck="false">事件类型筛选：筛选包含选中类型的事件记录。默认全选，支持勾选多个/单个事件类型</div></div><div class="docs-outline-line level-1" data-level="1"><b class="docs-outline-index" contenteditable="false">7</b><div class="docs-outline-copy" spellcheck="false">云录像：需登录账号，付费才支持</div></div><div class="docs-outline-line level-1" data-level="1"><b class="docs-outline-index" contenteditable="false">8</b><div class="docs-outline-copy" spellcheck="false">相册：展示 相册、时光相册 两个tab</div></div><div class="docs-outline-line level-1" data-level="1"><b class="docs-outline-index" contenteditable="false">9</b><div class="docs-outline-copy" spellcheck="false">相册：展示用户 截图/录像 保存在设备SD卡上的图片/视频</div></div><div class="docs-outline-line level-2" data-level="2"><b class="docs-outline-index" contenteditable="false">1</b><div class="docs-outline-copy" spellcheck="false">按时间倒序展示。按日期分类展示，支持按日期筛选</div></div><div class="docs-outline-line level-2" data-level="2"><b class="docs-outline-index" contenteditable="false">2</b><div class="docs-outline-copy" spellcheck="false">支持全屏查看、删除</div></div><div class="docs-outline-line level-2" data-level="2"><b class="docs-outline-index" contenteditable="false">3</b><div class="docs-outline-copy" spellcheck="false">在SD卡上独立存储，不进行循环覆盖存储，存储空间不足时，截图/录像时提示用户空间不足</div></div><div class="docs-outline-line level-1" data-level="1"><b class="docs-outline-index" contenteditable="false">10</b><div class="docs-outline-copy" spellcheck="false">时光相册：展示宝宝 第一次哭闹/翻身/坐起/站立/爬行/吃手/吃奶嘴 的录像记录</div></div><div class="docs-outline-line level-2" data-level="2"><b class="docs-outline-index" contenteditable="false">1</b><div class="docs-outline-copy" spellcheck="false">按时间倒序展示</div></div><div class="docs-outline-line level-2" data-level="2"><b class="docs-outline-index" contenteditable="false">2</b><div class="docs-outline-copy" spellcheck="false">在SD卡上独立存储，不进行循环覆盖存储，存储空间不足时，覆盖事件/全天录像</div></div><div class="docs-outline-line level-2" data-level="2"><b class="docs-outline-index" contenteditable="false">3</b><div class="docs-outline-copy" spellcheck="false">表情识别：第一次 微笑、咧嘴 / 睁眼发呆 / 吐舌头，AI算法排二期开发，预计明年迭代上</div></div></div>
             <textarea class="docs-editor" id="docsFeatureList" hidden="" aria-label="功能描述，每行一条" style="height: 72px;">支持查看设备的录像回放（包含：本地录像、云录像、相册）
-本地录像：支持通过时间轴、事件记录查看录像
+本地录像：按设备、日期维度，展示本地录像
+  设备，默认选择第一个设备，需记住上次选中的设备，下次进入页面，展示上次选中的设备
+  日期，默认选择今天
+回放时间轴：固定使用 24 小时制，不跟随设备端时间制式
+  支持手动拖动时间轴，播放对应时间点的录像
+  拖到无录像时间点，自动定位到下个录像起始点
+录像播放控制：截图、录像、倍速、声音开关、全屏
+  截图：截取当前画面，保存到设备SD卡，保存后显示2s缩略图预览。若设备未插SD卡，提示需插卡
+  录像：开始/停止录像，保存到设备SD卡，保存后显示2s视频缩略图预览。若设备未插SD卡，提示需插卡
   倍速：支持1、2、4、8倍
+  声音开关：开启/关闭音频
+  全屏：点击进入全屏页面播放录像
 事件记录：若一个事件里包含多个事件类型，展示多个事件类型。支持通过事件类型，筛选事件记录
-事件类型筛选：筛选包含选中类型的事件记录。默认全选，支持勾选多个/单个事件类型。
-云录像：需登录账号，付费才支持。
-相册：展示用户 截图、录像 保存在设备SD卡上的图片/视频
-  按日期分类展示，支持按日期筛选
+  点击某个事件记录，播放对应事件记录的录像
+事件类型筛选：筛选包含选中类型的事件记录。默认全选，支持勾选多个/单个事件类型
+云录像：需登录账号，付费才支持
+相册：展示 相册、时光相册 两个tab
+相册：展示用户 截图/录像 保存在设备SD卡上的图片/视频
+  按时间倒序展示。按日期分类展示，支持按日期筛选
   支持全屏查看、删除
-后续支持承接：时光相册、成长记录等入口。</textarea>
+  在SD卡上独立存储，不进行循环覆盖存储，存储空间不足时，截图/录像时提示用户空间不足
+时光相册：展示宝宝 第一次哭闹/翻身/坐起/站立/爬行/吃手/吃奶嘴 的录像记录
+  按时间倒序展示
+  在SD卡上独立存储，不进行循环覆盖存储，存储空间不足时，覆盖事件/全天录像
+  表情识别：第一次 微笑、咧嘴 / 睁眼发呆 / 吐舌头，AI算法排二期开发，预计明年迭代上</textarea>
           </section>
           <section class="docs-card" tabindex="0">
             <div class="docs-card-head">
               <h3>其他规则</h3>
             </div>
-            <div class="docs-structured-list" data-docs-preview="rules" contenteditable="true" tabindex="0" aria-label="其他规则内容，可直接编辑或粘贴图片"><div class="docs-outline-line level-1" data-level="1"><b class="docs-outline-index" contenteditable="false">1</b><div class="docs-outline-copy" spellcheck="false">本地录像 页面状态：未插卡、存储卡异常、设备离线、无录像</div></div><div class="docs-outline-line level-1" data-level="1"><b class="docs-outline-index" contenteditable="false">2</b><div class="docs-outline-copy" spellcheck="false">相册页面状态：未插卡、存储卡异常、设备离线、无数据</div></div></div>
+            <div class="docs-structured-list" data-docs-preview="rules" contenteditable="true" tabindex="0" aria-label="其他规则内容，可直接编辑或粘贴图片"><div class="docs-outline-line level-1" data-level="1"><b class="docs-outline-index" contenteditable="false">1</b><div class="docs-outline-copy" spellcheck="false">本地录像 页面状态：未插卡、存储卡异常、设备离线、无录像</div></div><div class="docs-outline-line level-1" data-level="1"><b class="docs-outline-index" contenteditable="false">2</b><div class="docs-outline-copy" spellcheck="false">云录像 页面状态：未登录账号、未付费、已付费</div></div><div class="docs-outline-line level-1" data-level="1"><b class="docs-outline-index" contenteditable="false">3</b><div class="docs-outline-copy" spellcheck="false">相册页面状态：未插卡、存储卡异常、设备离线、无数据</div></div></div>
             <textarea class="docs-editor" id="docsRuleList" hidden="" aria-label="其他规则，每行一条" style="height: 72px;">本地录像 页面状态：未插卡、存储卡异常、设备离线、无录像
+云录像 页面状态：未登录账号、未付费、已付费
 相册页面状态：未插卡、存储卡异常、设备离线、无数据</textarea>
           </section>
         </div>
@@ -11890,15 +12374,37 @@
   "#careSettingsPage>section:nth-of-type(1)>section:nth-of-type(1)>div:nth-of-type(1)>section:nth-of-type(3)>div:nth-of-type(2)>div:nth-of-type(1)>div:nth-of-type(1)>span:nth-of-type(1)": "检测到画面变化时通知",
   "#eventTypeFilter>div:nth-of-type(1)>label:nth-of-type(3)>span:nth-of-type(1)": "宝宝移动",
   "#eventTypeFilter>div:nth-of-type(1)>label:nth-of-type(4)>span:nth-of-type(1)": "宝宝趴睡",
-  "#eventTypeFilter>div:nth-of-type(1)>label:nth-of-type(5)>span:nth-of-type(1)": "宝宝遮脸",
+  "#eventTypeFilter>div:nth-of-type(1)>label:nth-of-type(5)>span:nth-of-type(1)": "宝宝口鼻遮挡",
   "#eventTypeFilter>div:nth-of-type(1)>label:nth-of-type(8)>span:nth-of-type(1)": "宝宝哭声",
   "#eventTypeFilter>div:nth-of-type(1)>label:nth-of-type(9)>span:nth-of-type(1)": "异响检测",
   "#careSettingsPage>section:nth-of-type(1)>section:nth-of-type(1)>div:nth-of-type(1)>section:nth-of-type(2)>div:nth-of-type(1)>button:nth-of-type(3)>div:nth-of-type(1)>strong:nth-of-type(1)": "趴睡检测",
   "#careSettingsPage>section:nth-of-type(1)>section:nth-of-type(1)>div:nth-of-type(1)>section:nth-of-type(2)>div:nth-of-type(1)>button:nth-of-type(4)>div:nth-of-type(1)>strong:nth-of-type(1)": "口鼻遮挡检测",
-  "#alertText:消息通知": "12:09 检测到niki遮脸",
+  "#alertText:消息通知": "12:09 检测到宝宝口鼻遮挡",
   "#careSettingsPage>section:nth-of-type(1)>section:nth-of-type(1)>div:nth-of-type(1)>section:nth-of-type(3)>div:nth-of-type(2)>div:nth-of-type(4)>div:nth-of-type(1)>strong:nth-of-type(1)": "口鼻遮挡通知",
   "#careSettingsPage>section:nth-of-type(1)>section:nth-of-type(1)>div:nth-of-type(1)>section:nth-of-type(3)>div:nth-of-type(2)>div:nth-of-type(10)>div:nth-of-type(1)>span:nth-of-type(1)": "识别到宝宝睡着时通知",
-  "#careSettingsPage>section:nth-of-type(1)>section:nth-of-type(1)>div:nth-of-type(1)>section:nth-of-type(3)>div:nth-of-type(2)>div:nth-of-type(11)>div:nth-of-type(1)>span:nth-of-type(1)": "识别到宝宝睡醒时通知"
+  "#careSettingsPage>section:nth-of-type(1)>section:nth-of-type(1)>div:nth-of-type(1)>section:nth-of-type(3)>div:nth-of-type(2)>div:nth-of-type(11)>div:nth-of-type(1)>span:nth-of-type(1)": "识别到宝宝睡醒时通知",
+  "#carePage>section:nth-of-type(2)>div:nth-of-type(1)>div:nth-of-type(5)>div:nth-of-type(1)>span:nth-of-type(1)": "口鼻遮挡",
+  "#carePage>section:nth-of-type(2)>aside:nth-of-type(1)>div:nth-of-type(2)>div:nth-of-type(1)>span:nth-of-type(2)>strong:nth-of-type(1)": "温度数据",
+  "#careEnvStatus": "平均24.8℃",
+  "#careEnvData": "最低温度 22.8℃ · 最高温度 26.8℃ ",
+  "#careHumidityData": "最低湿度 38% · 最高湿度 48%",
+  "#careHumidityStatus": "平均42%",
+  "#careBodyTempData": "最低体温 36.1℃ · 最高体温 37.1℃",
+  "#careBodyTempStatus": "平均36.6℃",
+  "#controlPage>section:nth-of-type(1)>div:nth-of-type(2)>button:nth-of-type(3)>span:nth-of-type(2)>span:nth-of-type(2)": "不接收任何告警通知",
+  "#deviceSettingsPage>div:nth-of-type(1)>section:nth-of-type(1)>button:nth-of-type(6)>span:nth-of-type(1)": "云服务",
+  "#alertText:干预通知": "宝宝哭闹不停，可尝试去给他喂喂奶",
+  "#replayPage>section:nth-of-type(1)>aside:nth-of-type(1)>section:nth-of-type(1)>div:nth-of-type(4)>button:nth-of-type(2)>span:nth-of-type(2)>strong:nth-of-type(1)": "11:42 检测到宝宝口鼻遮挡",
+  "#carePage>section:nth-of-type(2)>div:nth-of-type(1)>div:nth-of-type(6)>span:nth-of-type(2)>strong:nth-of-type(1)": "睡眠周期逐渐稳定，夜间睡眠时间也逐步延长",
+  "#carePage>section:nth-of-type(2)>div:nth-of-type(1)>div:nth-of-type(6)>span:nth-of-type(2)>strong:nth-of-type(1)>div:nth-of-type(1)>div:nth-of-type(1)": "睡眠周期逐渐稳定，夜间睡眠时间也逐步延长",
+  "#carePage>section:nth-of-type(2)>div:nth-of-type(1)>div:nth-of-type(6)>span:nth-of-type(2)>span:nth-of-type(1)": "建议保持固定入睡流程，白天小睡间隔约 2-3 小时，夜醒 1-2 次通常属于阶段内常见情况。",
+  "#careSettingsPage>section:nth-of-type(1)>section:nth-of-type(1)>div:nth-of-type(1)>section:nth-of-type(2)>div:nth-of-type(1)>button:nth-of-type(1)>span:nth-of-type(1)": "›",
+  "#careSettingsPage>section:nth-of-type(1)>section:nth-of-type(1)>div:nth-of-type(1)>section:nth-of-type(3)>div:nth-of-type(2)>div:nth-of-type(3)>div:nth-of-type(1)>strong:nth-of-type(1)": "趴睡通知",
+  "#careSettingsPage>section:nth-of-type(1)>section:nth-of-type(1)>div:nth-of-type(1)>section:nth-of-type(3)>div:nth-of-type(2)>div:nth-of-type(5)>div:nth-of-type(1)>strong:nth-of-type(1)": "安全 / 危险区域通知",
+  "#careSettingsPage>section:nth-of-type(1)>section:nth-of-type(1)>div:nth-of-type(1)>section:nth-of-type(3)>div:nth-of-type(2)>div:nth-of-type(6)>div:nth-of-type(1)>strong:nth-of-type(1)": "哭声通知",
+  "#careSettingsPage>section:nth-of-type(1)>section:nth-of-type(1)>div:nth-of-type(1)>section:nth-of-type(3)>div:nth-of-type(2)>div:nth-of-type(7)>div:nth-of-type(1)>strong:nth-of-type(1)": "异响通知",
+  "#careSettingsPage>section:nth-of-type(1)>section:nth-of-type(1)>div:nth-of-type(1)>section:nth-of-type(3)>div:nth-of-type(2)>div:nth-of-type(8)>div:nth-of-type(1)>strong:nth-of-type(1)": "温度告警通知",
+  "#sleepInsightText": "今日睡眠节律较规律，包含上午、午后、傍晚小睡和夜间长睡。夜醒 1 次，符合 3-6 个月宝宝常见睡眠节律。"
 }</script>
 
   <script id="bbmSavedDocs" type="application/json">{
@@ -11987,28 +12493,43 @@
       "看护数据区域聚合睡眠、环境、喂养和换尿布数据。",
       "智能看护设置入口，跳转到智能看护设置页面。"
     ],
-    "ruleEditorVersion": 2,
-    "featureHtml": "",
-    "ruleHtml": ""
+    "ruleEditorVersion": 2
   },
   "日常活动统计": {
     "title": "录像回放",
     "desc": "沉淀宝宝日常事件记录，为成长记录和回看提供入口。",
     "bullets": [
       "支持查看设备的录像回放（包含：本地录像、云录像、相册）",
-      "本地录像：支持通过时间轴、事件记录查看录像",
+      "本地录像：按设备、日期维度，展示本地录像",
+      "  设备，默认选择第一个设备，需记住上次选中的设备，下次进入页面，展示上次选中的设备",
+      "  日期，默认选择今天",
+      "回放时间轴：固定使用 24 小时制，不跟随设备端时间制式",
+      "  支持手动拖动时间轴，播放对应时间点的录像",
+      "  拖到无录像时间点，自动定位到下个录像起始点",
+      "录像播放控制：截图、录像、倍速、声音开关、全屏",
+      "  截图：截取当前画面，保存到设备SD卡，保存后显示2s缩略图预览。若设备未插SD卡，提示需插卡",
+      "  录像：开始/停止录像，保存到设备SD卡，保存后显示2s视频缩略图预览。若设备未插SD卡，提示需插卡",
       "  倍速：支持1、2、4、8倍",
+      "  声音开关：开启/关闭音频",
+      "  全屏：点击进入全屏页面播放录像",
       "事件记录：若一个事件里包含多个事件类型，展示多个事件类型。支持通过事件类型，筛选事件记录",
-      "事件类型筛选：筛选包含选中类型的事件记录。默认全选，支持勾选多个/单个事件类型。",
-      "云录像：需登录账号，付费才支持。",
-      "相册：展示用户 截图、录像 保存在设备SD卡上的图片/视频",
-      "  按日期分类展示，支持按日期筛选",
+      "  点击某个事件记录，播放对应事件记录的录像",
+      "事件类型筛选：筛选包含选中类型的事件记录。默认全选，支持勾选多个/单个事件类型",
+      "云录像：需登录账号，付费才支持",
+      "相册：展示 相册、时光相册 两个tab",
+      "相册：展示用户 截图/录像 保存在设备SD卡上的图片/视频",
+      "  按时间倒序展示。按日期分类展示，支持按日期筛选",
       "  支持全屏查看、删除",
-      "后续支持承接：时光相册、成长记录等入口。"
+      "  在SD卡上独立存储，不进行循环覆盖存储，存储空间不足时，截图/录像时提示用户空间不足",
+      "时光相册：展示宝宝 第一次哭闹/翻身/坐起/站立/爬行/吃手/吃奶嘴 的录像记录",
+      "  按时间倒序展示",
+      "  在SD卡上独立存储，不进行循环覆盖存储，存储空间不足时，覆盖事件/全天录像",
+      "  表情识别：第一次 微笑、咧嘴 / 睁眼发呆 / 吐舌头，AI算法排二期开发，预计明年迭代上"
     ],
     "featureEditorVersion": 2,
     "rules": [
       "本地录像 页面状态：未插卡、存储卡异常、设备离线、无录像",
+      "云录像 页面状态：未登录账号、未付费、已付费",
       "相册页面状态：未插卡、存储卡异常、设备离线、无数据"
     ],
     "ruleEditorVersion": 2
@@ -12022,7 +12543,7 @@
       "移动侦测：检测到画面变化时自动录像。支持设置 检测开关、灵敏度、告警通知开关",
       "宝宝移动检测：检测到宝宝移动时自动录像。支持设置 检测开关、告警通知开关",
       "趴睡检测：检测到宝宝趴睡时自动录像。支持设置 检测开关、告警通知开关",
-      "遮脸检测：检测到宝宝口鼻遮挡时自动录像。支持设置 检测开关、告警通知开关",
+      "口鼻遮挡检测：检测到宝宝口鼻遮挡时自动录像。支持设置 检测开关、告警通知开关",
       "安全/危险区域：检测到宝宝离开安全区域/或进入危险区域时自动录像。支持设置 检测开关、告警通知开关、区域设置、在画面中显示区域开关",
       "哭声检测：检测到宝宝哭声时自动录像。支持设置 检测开关、灵敏度、告警通知开关、安抚音设置、哭声放大开关",
       "  安抚音设置：自动安抚开关、安抚音选择。默认开自动安抚，检测到哭声自动播放安抚音，哭声结束后再播60s",
@@ -12072,12 +12593,13 @@
       "闹钟：展示三个示例闹钟：喂养、午睡、换尿布。用户可设置 闹钟名称及时间。最多设置3个闹钟。",
       "其他设置：包含 语言、时区、时间格式、温湿度单位、重量/长度单位",
       "设备信息：展示屏端设备型号、设备系统版本、恢复出厂设置操作",
-      "  设备系统版本：展示当前系统版本。云端有软件更新时，展示最新版本，支持手动更新",
+      "  设备系统版本：展示当前系统版本。云端有软件更新时，展示最新版本，支持手动OTA更新",
       "  点击恢复出厂设置，二次提示用户确认：恢复出厂设置会清除本地所有设置，确定要执行吗？",
       "帮助与反馈：展示 FAQ、联系方式、问题反馈",
       "  联系方式：展示 邮箱/电话及工作时间",
       "  问题反馈：可选择 勾选提交系统日志",
       "设备管理模块：展示已添加的设备卡片，添加设备入口",
+      "  设备状态：在线、离线、已关闭/已休眠",
       "  点击BBM设备，进入设备设置页",
       "  点击其他生态设备（非BBM设备），进入设备详情页"
     ],
@@ -12137,7 +12659,7 @@
       "  告警通知形式：一般提醒为 亮屏+告警通知；重要提醒为 亮屏+告警通知+报警音",
       "  展示 事件触发时间（时分）+告警文案",
       "  与人相关的告警，告警文案展示：检测到宝宝移动/趴睡/口鼻遮挡/离开安全区域/进入危险区域/哭声",
-      "  与人无关的告警，告警文案展示：检测到异响/温湿度低于设定值/高于设定值",
+      "  与人无关的告警，告警文案展示：检测到移动/异响/温湿度低于设定值/温湿度高于设定值",
       "  若此时不在主页实时监控，告警通知展示 查看画面 按钮。点击 查看画面，跳转到主页的该设备实时监控，通知弹窗消失",
       "  若此时在主页实时监控，告警通知不展示 查看画面 按钮",
       "  告警通知，点击关闭，通知弹窗消失",
@@ -12149,7 +12671,7 @@
       "屏端低电量通知：屏端电量低于20%时通知。默认开启通知，用户不可设置",
       "  告警通知形式：亮屏+消息通知+报警音",
       "报警音：默认一个系统音。报警音时长：默认一个最大时长30s",
-      "  按电源键/音量键/或点击弹窗任意操作（查看画面/关闭），报警音停止"
+      "  按电源键/音量键/或点击屏幕任意位置，报警音停止"
     ],
     "featureEditorVersion": 2,
     "rules": [
@@ -12222,10 +12744,11 @@
     "title": "屏保页面",
     "desc": "屏端待机时展示时间与宝宝看护快捷记录入口。",
     "bullets": [
-      "屏端自动息屏后，展示该屏保页面。展示：日期/时间、天气、宝宝当前睡眠状态、手动喂养记录入口",
-      "天气：按用户时区/或连接的Wi-Fi信息，屏端联网时，获取展示",
-      "宝宝当前睡眠状态：展示 睡着、睡醒、平静、活跃等状态（具体参考睡眠检测算法）。宝宝在位时才展示，不在位/设备离线时不展示",
-      "手动喂养记录入口：提供记喂养、记睡眠和换尿布三个快捷入口。点击可进行快捷记录"
+      "屏端达到息屏时间后，展示该屏保页面。展示：日期/时间、天气、宝宝当前睡眠状态、手动喂养记录入口",
+      "屏保页面无任何操作3分钟后，自动息屏",
+      "天气：屏端联网时，按用户时区/或连接的Wi-Fi信息，获取展示",
+      "宝宝当前睡眠状态：展示 睡眠中、睡醒、将睡、将醒。宝宝在位时才展示，不在位/设备离线时不展示",
+      "手动喂养记录入口：提供记喂养、记睡眠和换尿布三个快捷入口。点击可进行快捷记录。同手机app的喂养记录模块"
     ],
     "featureEditorVersion": 2,
     "rules": [],
@@ -12338,36 +12861,34 @@
       "主页展示3个模块：实时画面、当前看护状态卡片、其他生态设备控制。以及状态栏信息",
       "目前支持接入的设备类型：BM08S设备，及后续对接过协议的Wi-Fi设备/蓝牙网关设备",
       "实时画面：展示BBM设备（BM08S及其后续BBM设备）的实时监控画面。画面上，显示live图标、设备温湿度数据、当前时间（年月日时分秒）",
-      "  支持单画面/双画面实时监控。最多2路画面同时查看（Wi-Fi Halow 点对点带宽限制）",
+      "  支持单/双画面实时监控。最多2路画面同时查看（Wi-Fi Halow 点对点带宽限制）",
       "  当BBM设备数=1 时，展示单画面实时监控",
       "  当BBM设备数=2 时，默认选中 全部设备 进行双画面展示。支持切换任意单设备/或全部设备 进行展示",
       "  当BBM设备数>2时，默认选中 全部设备 进行双画面展示，支持滑页，滑到下一页查看。支持切换任意单设备/或全部设备 进行展示",
       "  单画面：展示 睡眠安抚、休眠/唤醒、对讲、截图、录像、声音开关、仅音频、设置入口",
       "  双画面：展示 睡眠安抚、设置入口",
-      "    睡眠安抚：支持 安抚音播停、安抚音选择、安抚音播放模式（单曲播/循环播）、安抚音定时时间（不定时/定时5/10/20/30min）",
-      "    休眠/唤醒：开启后，摄像头休眠（音视频断流，不检测不报警不录像），只能接收指令。关闭后，恢复正常工作",
-      "    对讲：点击开启对讲，再次点击结束对讲；静音时点击对讲，自动取消静音并开始播放音频；对讲结束后声音开关回到对讲前状态",
-      "    截图：截取当前画面，保存到设备SD卡，保存后显示2s缩略图预览。若设备未插SD卡，提示需插卡",
-      "    录像：开始/停止录像，保存到设备SD卡，保存后显示2s视频缩略图预览。若设备未插SD卡，提示需插卡",
-      "    声音开关：开启/关闭音频，控制设备端音频接收",
-      "    仅音频：点击提示弹窗：开启此功能，息屏后仍能保持音频传输。开启后，省电模式将自动关闭，是否开启？",
-      "当前看护状态卡片：展示BBM设备宝宝当前看护状态、呼吸率/心率、体温贴/空气质量数据（需接入体温贴、空气净化器设备）。根据实时画面，展示相应的看护状态卡片。",
-      "宝宝当前看护状态",
-      "  宝宝睡着情况：展示宝宝当前睡眠状态（浅睡/深睡）、本次入睡时长、详细看护状态及建议（是否在安抚中、是否眼动活跃可能醒来、是否熟睡安稳中）",
-      "  宝宝醒着情况：展示宝宝当前活跃状态（平静/活跃）、详细看护状态及建议（是否在安抚中、是否开始入睡状态）、",
-      "  宝宝不在画面中情况：展示“未检测到宝宝”提示",
+      "睡眠安抚：支持 安抚音播停、安抚音选择（单曲/循环）、安抚音音量、安抚音定时时间（不定时/定时10/15/20/30min）",
+      "休眠/唤醒：开启后，摄像头休眠（音视频断流，不检测不报警不录像），只能接收指令。关闭后，恢复正常工作",
+      "对讲：点击开启对讲，再次点击结束对讲；静音时点击对讲，自动取消静音并开始播放音频；对讲结束后声音开关回到对讲前状态",
+      "截图：截取当前画面，保存到设备SD卡，保存后显示2s缩略图预览。若设备未插SD卡，提示需插卡",
+      "录像：开始/停止录像，保存到设备SD卡，保存后显示2s视频缩略图预览。若设备未插SD卡，提示需插卡",
+      "声音开关：开启/关闭音频，控制设备端音频接收",
+      "仅音频：点击提示弹窗：开启此功能，息屏后仍能保持音频传输。开启后，省电模式将自动关闭，是否开启？",
+      "当前看护状态卡片：展示 宝宝当前睡眠状态、呼吸率/心率、体温贴/空气质量数据（需接入体温贴、空气净化器设备）。根据实时画面，展示相应的看护状态卡片。",
+      "宝宝当前睡眠状态：展示 睡眠中、醒着、将睡、将醒",
+      "  睡眠中状态：同步展示 已入睡时长（精确到 分钟）",
+      "  宝宝不在画面状态：展示 空",
       "呼吸率/心率：展示每分钟数据",
       "  宝宝睡着情况：展示每分钟数据",
       "  宝宝醒着情况：根据宝宝状态展示，平静时可测得就展示；活跃情况不可测得就不展示",
       "  宝宝不在画面中情况：不展示数据",
       "体温贴/空气质量数据：接入体温贴、空气净化器设备时展示。根据测量机制，更新数据",
       "其他生态设备控制区：展示后续接入的其他设备（非BBM设备）",
-      "状态栏信息：日期/星期、时间、屏端Wi-Fi信息、屏端电量、设备连接的信号强度、闹钟信息、静音",
+      "状态栏信息：日期/星期、时间、屏端Wi-Fi信息、屏端电量、闹钟信息、静音",
       "  日期/星期：展示 年月日/星期，按时区展示",
       "  时间：展示 时分，按时区展示",
       "  屏端Wi-Fi信息：已联网，展示Wi-Fi信号强度；未联网，展示Wi-Fi断连图标",
       "  屏端电量：展示电量进度+电量百分比数值。电量低于20%，电量标红。充电时，展示充电状态",
-      "  设备连接的信号强度：展示屏端与设备连接的信号强度。有几个设备，展示几个设备连接的信号强度。如果屏端与设备为点对点连接，展示为点对点连接的信号强度；如果与设备为Wi-Fi连接，展示为Wi-Fi连接的信号强度",
       "  闹钟信息：如果用户已设置闹钟，展示闹钟图标；否则不展示",
       "  静音：如果用户已关闭音量，展示静音图标；否则不展示"
     ],
@@ -12497,9 +13018,7 @@
     ],
     "featureEditorVersion": 2,
     "rules": [],
-    "ruleEditorVersion": 2,
-    "featureHtml": "",
-    "ruleHtml": ""
+    "ruleEditorVersion": 2
   },
   "实时监控区 / 二画面全屏": {
     "title": "二画面全屏",
@@ -12525,23 +13044,27 @@
   },
   "宝宝看护指标区 / 智能看护": {
     "title": "看护记录",
-    "desc": "聚合睡眠、环境、行为体征等相关指标，分析宝宝睡眠行为数据，给出看护/育儿建议。",
+    "desc": "聚合睡眠、环境、手动喂养相关数据，给出睡眠/看护建议",
     "bullets": [
-      "按设备维度，天/周/月 时间维度，汇总睡眠时长、睡眠异常行为、环境、体温贴、手动喂养/换尿布/小睡记录。",
-      "睡眠记录：睡眠时长、睡眠异常行为",
-      "睡眠时长：展示 每天深睡/浅睡/清醒 时间轴、每天总睡眠时长、深睡时长、睡眠效率",
-      "  睡眠效率：太小月龄统计没意义？按月龄来，超过6个月龄，才展示",
-      "睡眠异常行为：展示 每天夜醒次数、遮脸/趴睡/哭闹次数。",
+      "按设备维度，天/周/月 时间维度，汇总睡眠、环境、体温贴、手动喂养/换尿布/小睡记录的数据。",
+      "  天维度的数据，统计周期为：当日8:00-次日8:00（包含一天的日间/夜间睡眠统计）",
+      "睡眠记录：展示 睡眠时间轴、睡眠数据统计",
+      "睡眠时间轴：展示每天 8:00-次日8:00 的深睡/浅睡/清醒时长 时间轴。",
+      "  睡眠时间轴，包含用户手动记录的小睡时间段。用户记录的小睡时间段用另一种颜色标识。",
+      "睡眠数据统计：展示 每天总睡眠时长、深睡时长、夜醒次数、口鼻遮挡/趴睡/哭闹次数。",
+      "  总睡眠时长，包含用户手动记录的小睡时长。",
       "  次数计算机制，详见算法逻辑",
-      "  夜醒次数：默认统计周期20:00-8:00（支持用户手动设置）",
-      "环境数据：展示 平均温湿度数据、加湿器/空气质量数据（需接入加湿器/空气净化器等环境设备）。",
-      "  温湿度数据卡片：点击可进入详细页面，展示温湿度曲线",
-      "体温贴数据：展示 平均体温、最高体温、最低体温。（需接入体温贴）",
-      "  体温贴数据卡片：点击可进入详细页面，展示体温曲线",
-      "喂养/换尿布/小睡记录：展示手动记录的喂养/换尿布/小睡数据。",
+      "  夜醒次数：默认统计周期20:00-8:00",
+      "看护记录：展示 环境温湿度、空气质量数据（需接入空气净化器等环境设备）",
+      "温湿度数据：展示 平均温湿度、最高/最低温湿度数据",
+      "  温湿度数据卡片：点击可进入详细页面，展示温湿度曲线、平均温湿度、最高/最低温湿度数据",
+      "体温贴数据：展示 平均体温、最高/最低体温数据（需接入体温贴）",
+      "  体温贴数据卡片：点击可进入详细页面，展示体温曲线、平均体温、最高/最低体温数据",
+      "喂养/换尿布/小睡记录：展示手动记录的喂养/换尿布/小睡数据",
       "  数据卡片：点击可进入详细页面，展示详情记录",
-      "周/月维度数据，主要展示 睡眠/行为数据的分析，考虑付费支持。",
-      "AI看护建议：针对睡眠看护数据，展示AI总结性分析建议。详见智能体逻辑",
+      "周/月维度数据：主要聚焦 睡眠数据的分析，考虑付费支持。",
+      "睡眠建议：结合睡眠数据+宝宝月龄，展示睡眠建议。需生成完一天的睡眠数据后，才展示。否则不展示。详见BM08S智慧屏PRD-睡眠建议的逻辑",
+      "睡眠里程碑：展示不同月龄宝宝睡眠特征与建议",
       "智能看护设置入口，跳转到智能看护设置页面。"
     ],
     "featureEditorVersion": 2,
@@ -12563,7 +13086,7 @@
       "本地录像：支持通过时间轴、事件记录查看录像",
       "  倍速：支持1、2、4、8倍",
       "云录像：需登录账号，付费才支持。",
-      "相册：展示用户 截图、录像 保存在设备SD卡上的图片/视频",
+      "相册：展示两个tab：相册、时光相册。相册展示用户截图/录像保存的图片/视频；时光相册展示宝宝第一次哭闹/翻身/坐起/站立/爬行/吃手/吃奶嘴的录像记录。均按时间倒序排列展示",
       "  按日期分类展示，支持按日期筛选",
       "  支持全屏查看、删除",
       "后续支持承接：精彩时刻、成长记录等入口。",
@@ -12677,36 +13200,34 @@
       "主页展示3个模块：实时画面、当前看护状态卡片、其他生态设备控制。以及状态栏信息",
       "目前支持接入的设备类型：BM08S设备，及后续对接过协议的Wi-Fi设备/蓝牙网关设备",
       "实时画面：展示BBM设备（BM08S及其后续BBM设备）的实时监控画面。画面上，显示live图标、设备温湿度数据、当前时间（年月日时分秒）",
-      "  支持单画面/双画面实时监控。最多2路画面同时查看（Wi-Fi Halow 点对点带宽限制）",
+      "  支持单/双画面实时监控。最多2路画面同时查看（Wi-Fi Halow 点对点带宽限制）",
       "  当BBM设备数=1 时，展示单画面实时监控",
       "  当BBM设备数=2 时，默认选中 全部设备 进行双画面展示。支持切换任意单设备/或全部设备 进行展示",
       "  当BBM设备数>2时，默认选中 全部设备 进行双画面展示，支持滑页，滑到下一页查看。支持切换任意单设备/或全部设备 进行展示",
       "  单画面：展示 睡眠安抚、休眠/唤醒、对讲、截图、录像、声音开关、仅音频、设置入口",
       "  双画面：展示 睡眠安抚、设置入口",
-      "    睡眠安抚：支持 安抚音播停、安抚音选择、安抚音播放模式（单曲播/循环播）、安抚音定时时间（不定时/定时5/10/20/30min）",
-      "    休眠/唤醒：开启后，摄像头休眠（音视频断流，不检测不报警不录像），只能接收指令。关闭后，恢复正常工作",
-      "    对讲：点击开启对讲，再次点击结束对讲；静音时点击对讲，自动取消静音并开始播放音频；对讲结束后声音开关回到对讲前状态",
-      "    截图：截取当前画面，保存到设备SD卡，保存后显示2s缩略图预览。若设备未插SD卡，提示需插卡",
-      "    录像：开始/停止录像，保存到设备SD卡，保存后显示2s视频缩略图预览。若设备未插SD卡，提示需插卡",
-      "    声音开关：开启/关闭音频，控制设备端音频接收",
-      "    仅音频：点击提示弹窗：开启此功能，息屏后仍能保持音频传输。开启后，省电模式将自动关闭，是否开启？",
-      "当前看护状态卡片：展示BBM设备宝宝当前看护状态、呼吸率/心率、体温贴/空气质量数据（需接入体温贴、空气净化器设备）。根据实时画面，展示相应的看护状态卡片。",
-      "宝宝当前看护状态",
-      "  宝宝睡着情况：展示宝宝当前睡眠状态（浅睡/深睡）、本次入睡时长、详细看护状态及建议（是否在安抚中、是否眼动活跃可能醒来、是否熟睡安稳中）",
-      "  宝宝醒着情况：展示宝宝当前活跃状态（平静/活跃）、详细看护状态及建议（是否在安抚中、是否开始入睡状态）、",
-      "  宝宝不在画面中情况：展示“未检测到宝宝”提示",
+      "睡眠安抚：支持 安抚音播停、安抚音选择（单曲/循环）、安抚音音量、安抚音定时时间（不定时/定时10/15/20/30min）",
+      "休眠/唤醒：开启后，摄像头休眠（音视频断流，不检测不报警不录像），只能接收指令。关闭后，恢复正常工作",
+      "对讲：点击开启对讲，再次点击结束对讲；静音时点击对讲，自动取消静音并开始播放音频；对讲结束后声音开关回到对讲前状态",
+      "截图：截取当前画面，保存到设备SD卡，保存后显示2s缩略图预览。若设备未插SD卡，提示需插卡",
+      "录像：开始/停止录像，保存到设备SD卡，保存后显示2s视频缩略图预览。若设备未插SD卡，提示需插卡",
+      "声音开关：开启/关闭音频，控制设备端音频接收",
+      "仅音频：点击提示弹窗：开启此功能，息屏后仍能保持音频传输。开启后，省电模式将自动关闭，是否开启？",
+      "当前看护状态卡片：展示 宝宝当前睡眠状态、呼吸率/心率、体温贴/空气质量数据（需接入体温贴、空气净化器设备）。根据实时画面，展示相应的看护状态卡片。",
+      "宝宝当前睡眠状态：展示 睡眠中、醒着、将睡、将醒",
+      "  睡眠中状态：同步展示 已入睡时长（精确到 分钟）",
+      "  宝宝不在画面状态：展示 空",
       "呼吸率/心率：展示每分钟数据",
       "  宝宝睡着情况：展示每分钟数据",
       "  宝宝醒着情况：根据宝宝状态展示，平静时可测得就展示；活跃情况不可测得就不展示",
       "  宝宝不在画面中情况：不展示数据",
       "体温贴/空气质量数据：接入体温贴、空气净化器设备时展示。根据测量机制，更新数据",
       "其他生态设备控制区：展示后续接入的其他设备（非BBM设备）",
-      "状态栏信息：日期/星期、时间、屏端Wi-Fi信息、屏端电量、设备连接的信号强度、闹钟信息、静音",
+      "状态栏信息：日期/星期、时间、屏端Wi-Fi信息、屏端电量、闹钟信息、静音",
       "  日期/星期：展示 年月日/星期，按时区展示",
       "  时间：展示 时分，按时区展示",
       "  屏端Wi-Fi信息：已联网，展示Wi-Fi信号强度；未联网，展示Wi-Fi断连图标",
       "  屏端电量：展示电量进度+电量百分比数值。电量低于20%，电量标红。充电时，展示充电状态",
-      "  设备连接的信号强度：展示屏端与设备连接的信号强度。有几个设备，展示几个设备连接的信号强度。如果屏端与设备为点对点连接，展示为点对点连接的信号强度；如果与设备为Wi-Fi连接，展示为Wi-Fi连接的信号强度",
       "  闹钟信息：如果用户已设置闹钟，展示闹钟图标；否则不展示",
       "  静音：如果用户已关闭音量，展示静音图标；否则不展示"
     ],
@@ -12715,9 +13236,7 @@
       "设备实时监控画面 状态：设备离线、设备休眠",
       "当前看护状态卡片 状态：设备离线/未检测到数据状态、宝宝睡着状态、宝宝醒着状态"
     ],
-    "ruleEditorVersion": 2,
-    "featureHtml": "",
-    "ruleHtml": ""
+    "ruleEditorVersion": 2
   },
   "实时监控区 / 主页-多画面": {
     "title": "主页-多画面",
@@ -12740,9 +13259,7 @@
     ],
     "featureEditorVersion": 2,
     "rules": [],
-    "ruleEditorVersion": 2,
-    "featureHtml": "",
-    "ruleHtml": ""
+    "ruleEditorVersion": 2
   },
   "宝宝看护指标区 / 未登录状态": {
     "title": "未登录状态",
@@ -12907,10 +13424,13 @@
       "智能看护设置：包含 智能看护检测设置、通知设置和免打扰时段",
       "功能设置：包含 画面设置、存储设置、电池管理（电池摄像头才有）、摄像头音量、指示灯开关、云台校准等",
       "  画面设置：画面翻转、夜视模式",
-      "  存储设置：存储卡信息、录像方式（事件录制、始终录制）",
+      "  存储设置：存储卡信息、录像方式（事件录制、始终录制）、格式化存储卡。需根据 SD卡状态呈现不同界面。",
+      "    正常状态：显示剩余容量/总容量，提供格式化入口（二次确认后执行格式化）。",
+      "    异常状态：显示\"存储卡异常，建议格式化后重新使用\"，提供格式化入口（二次确认后执行格式化）。",
+      "    未插入：显示\"未检测到存储卡\"，不显示容量信息，不提供格式化入口。",
       "  电池管理：电池摄像头才有该设置。展示 充电状态、电量、电池模式、低电量自动进入省电模式开关及低电量阈值设置",
       "  云台校准：点击进行二次弹窗确认",
-      "云存储：待定",
+      "云服务：展示云服务页",
       "重启设备：点击进行二次弹窗确认",
       "删除设备：点击进行二次弹窗确认。删除逻辑，分设备是否绑定到账号（云端设备、本地设备）",
       "  已绑定到账号：重置设备，清空所有设备设置，设备与账号解绑。手机app上的设备也同步解绑删除。",
@@ -12925,14 +13445,14 @@
     "title": "电源关机",
     "desc": "",
     "bullets": [
+      "亮屏情况，按电源键，屏端直接息屏",
+      "息屏情况，按电源键，屏端直接亮屏",
       "长按电源键3s，展示该页面。支持选择 关机、重启",
       "关机时，展示关机动画"
     ],
     "featureEditorVersion": 2,
     "rules": [],
-    "ruleEditorVersion": 2,
-    "featureHtml": "",
-    "ruleHtml": ""
+    "ruleEditorVersion": 2
   },
   "智能看护快捷设置 / 睡眠模式": {
     "title": "睡眠模式",
@@ -13009,9 +13529,7 @@
     ],
     "featureEditorVersion": 2,
     "rules": [],
-    "ruleEditorVersion": 2,
-    "featureHtml": "",
-    "ruleHtml": ""
+    "ruleEditorVersion": 2
   },
   "宝宝看护指标区 / 未登录引导": {
     "title": "未登录引导",
@@ -13021,9 +13539,7 @@
     ],
     "featureEditorVersion": 2,
     "rules": [],
-    "ruleEditorVersion": 2,
-    "featureHtml": "",
-    "ruleHtml": ""
+    "ruleEditorVersion": 2
   },
   "切网提示": {
     "title": "弱网切网提示",
@@ -13397,8 +13913,8 @@
         state: '\u6D45\u7761',
         statusType: 'asleep',
         icon: '\u263E',
-        time: '59<small>min</small>',
-        meta: '\u5DF2\u5165\u7761 59min',
+        time: '2h40<small>min</small>',
+        meta: '\u5DF2\u5165\u77612h40min',
         alertTitle: '\u68C0\u6D4B\u5230\u5B9D\u5B9D\u773C\u52A8\u6D3B\u8DC3',
         alertText: '\u968F\u65F6\u53EF\u80FD\u9192\u6765\uFF0C\u5EFA\u8BAE\u7559\u610F\u3002',
         badge: '\u91CD\u70B9\u770B\u62A4'
@@ -13483,7 +13999,7 @@
 
     const careRangeData = {
       day: {
-        subtitle: '今日 · 睡眠时段分布（08:00-次日08:00）',
+        subtitle: '睡眠时段分布（08:00-次日08:00）',
         chartLabel: '今日睡眠水平时间轴，统计周期08:00至次日08:00',
         chartType: 'strip',
         rows: [
@@ -13525,7 +14041,9 @@
         cards: {
           sleep: ['总时长 14.8h · 深睡 5.4h · 夜醒 1 次', '规律'],
           behavior: ['口鼻遮挡 0 次 · 趴睡 0 次 · 哭闹 1 次', '1'],
-          env: ['\u5E73\u5747\u6E29\u5EA6 24.8\u2103 \u00B7 \u5E73\u5747\u6E7F\u5EA6 42%', '24.8\u2103 / 42%'],
+          env: ['\u6700\u4F4E\u6E29\u5EA6 22.8\u2103 \u00B7 \u6700\u9AD8\u6E29\u5EA6 26.8\u2103', '\u5E73\u574724.8\u2103'],
+          humidity: ['\u6700\u4F4E\u6E7F\u5EA6 38% \u00B7 \u6700\u9AD8\u6E7F\u5EA6 48%', '\u5E73\u574742%'],
+          bodyTemp: ['\u6700\u4F4E\u4F53\u6E29 36.1\u2103 \u00B7 \u6700\u9AD8\u4F53\u6E29 37.1\u2103', '\u5E73\u574736.6\u2103'],
           feeding: ['\u5582\u5976 4 \u6B21 \u00B7 \u6700\u8FD1 11:40 \u00B7 \u603B\u91CF 520ml', '4'],
           diaper: ['\u6362\u5C3F\u5E03 3 \u6B21 \u00B7 \u4FBF\u4FBF 1 \u6B21 \u00B7 \u5C3F\u6E7F 2 \u6B21', '3'],
           nap: ['\u5C0F\u7761 2 \u6B21 \u00B7 \u603B\u65F6\u957F 1h35m', '2']
@@ -13571,7 +14089,9 @@
         cards: {
           sleep: ['平均总时长 14.6h · 平均深睡 5.3h · 夜醒 8 次', '规律'],
           behavior: ['口鼻遮挡 0 次 · 趴睡 0 次 · 哭闹 8 次', '8'],
-          env: ['\u5E73\u5747\u6E29\u5EA6 24.6\u2103 \u00B7 \u5E73\u5747\u6E7F\u5EA6 45%', '24.6\u2103 / 45%'],
+          env: ['\u6700\u4F4E\u6E29\u5EA6 22.4\u2103 \u00B7 \u6700\u9AD8\u6E29\u5EA6 27.1\u2103', '\u5E73\u574724.6\u2103'],
+          humidity: ['\u6700\u4F4E\u6E7F\u5EA6 39% \u00B7 \u6700\u9AD8\u6E7F\u5EA6 52%', '\u5E73\u574745%'],
+          bodyTemp: ['\u6700\u4F4E\u4F53\u6E29 36.2\u2103 \u00B7 \u6700\u9AD8\u4F53\u6E29 37.1\u2103', '\u5E73\u574736.6\u2103'],
           feeding: ['\u5582\u5976 27 \u6B21 \u00B7 \u65E5\u5747 5.1 \u6B21 \u00B7 \u603B\u91CF 3620ml', '27'],
           diaper: ['\u6362\u5C3F\u5E03 24 \u6B21 \u00B7 \u4FBF\u4FBF 7 \u6B21 \u00B7 \u5C3F\u6E7F 17 \u6B21', '24'],
           nap: ['\u5C0F\u7761 10 \u6B21 \u00B7 \u65E5\u5747 1h20m', '10']
@@ -13614,7 +14134,9 @@
         cards: {
           sleep: ['\u6708\u5747\u603B\u65F6\u957F 12.2h \u00B7 \u6708\u5747\u6DF1\u7761 4.9h \u00B7 \u591C\u9192\u8D8B\u52BF\u4E0B\u964D', '\u5E73\u7A33'],
           behavior: ['\u53E3\u9F3B\u906E\u6321 6 \u6B21 \u00B7 \u8DB4\u7761 3 \u6B21 \u00B7 \u54ED\u95F9 28 \u6B21', '37'],
-          env: ['\u5E73\u5747\u6E29\u5EA6 24.7\u2103 \u00B7 \u5E73\u5747\u6E7F\u5EA6 44%', '24.7\u2103 / 44%'],
+          env: ['\u6700\u4F4E\u6E29\u5EA6 21.9\u2103 \u00B7 \u6700\u9AD8\u6E29\u5EA6 27.3\u2103', '\u5E73\u574724.7\u2103'],
+          humidity: ['\u6700\u4F4E\u6E7F\u5EA6 37% \u00B7 \u6700\u9AD8\u6E7F\u5EA6 53%', '\u5E73\u574744%'],
+          bodyTemp: ['\u6700\u4F4E\u4F53\u6E29 36.1\u2103 \u00B7 \u6700\u9AD8\u4F53\u6E29 37.2\u2103', '\u5E73\u574736.6\u2103'],
           feeding: ['\u5582\u5976 118 \u6B21 \u00B7 \u65E5\u5747 4.8 \u6B21 \u00B7 \u603B\u91CF 15800ml', '118'],
           diaper: ['\u6362\u5C3F\u5E03 96 \u6B21 \u00B7 \u4FBF\u4FBF 26 \u6B21 \u00B7 \u5C3F\u6E7F 70 \u6B21', '96'],
           nap: ['\u5C0F\u7761 42 \u6B21 \u00B7 \u65E5\u5747 1h25m', '42']
@@ -13664,10 +14186,14 @@
     const canvasLabel = document.getElementById('canvasLabel');
     const fullscreenRoomPill = document.getElementById('fullscreenRoomPill');
     const sleepSootheShortcut = document.getElementById('sleepSootheShortcut');
+    const sceneSleepHeading = document.getElementById('sceneSleepHeading');
     const replayPage = document.getElementById('replayPage');
     const settingsPage = document.getElementById('settingsPage');
     const accountPage = document.getElementById('accountPage');
     const deviceSettingsPage = document.getElementById('deviceSettingsPage');
+    const replaySourceButtons = document.querySelectorAll('#replayPage .replay-tab, #replayPage .album-btn');
+    const albumSubTabs = document.querySelectorAll('[data-album-tab]');
+    const albumContents = document.querySelectorAll('[data-album-content]');
     const replayVideoPlayer = document.querySelector('#replayPage .video-player');
     const replayFullscreenButton = document.querySelector('[data-replay-action="fullscreen"]');
     const replayEventDrawerButton = document.querySelector('[data-replay-action="toggle-events"]');
@@ -13727,6 +14253,21 @@
     const babyInfoCards = document.querySelectorAll('.baby-info-card');
     const editableInfoRows = document.querySelectorAll('.editable-info-row');
     const tiles = document.querySelectorAll('.camera-tile');
+    const tileSleepStateMarkup = `
+      <span class="tile-sleep-state" aria-label="设备休眠状态">
+        <span class="monitor-sleep-card">
+          <span class="monitor-sleep-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 12.8A8.6 8.6 0 1 1 11.2 3 6.9 6.9 0 0 0 21 12.8Z"></path>
+              <path d="M7 15h7"></path>
+              <path d="M9 18h4"></path>
+            </svg>
+          </span>
+          <strong class="monitor-sleep-title inline-edit-hint">设备已休眠</strong>
+          <span class="monitor-wake-btn inline-edit-hint" role="button" tabindex="0" data-action="monitor-wake">唤醒设备</span>
+        </span>
+      </span>
+    `;
     const rightPanel = document.getElementById('rightPanel');
     const onboardingSteps = document.querySelectorAll('.onboarding-step');
     const onboardingPanels = document.querySelectorAll('.onboarding-screen');
@@ -13760,6 +14301,7 @@
     const replayEventCards = document.querySelectorAll('[data-event-type]');
     const eventCountChip = document.getElementById('eventCountChip');
     const eventEmptyState = document.querySelector('.event-empty-state');
+    const sceneSleepIcon = document.querySelector('.scene-sleep .scene-mode-top .scene-mode-icon');
     const sceneSleepTitle = document.getElementById('sceneSleepTitle');
     const sceneSleepMeta = document.getElementById('sceneSleepMeta');
     const sceneSplitStatus = document.getElementById('sceneSplitStatus');
@@ -13791,6 +14333,8 @@
       sleep: [document.getElementById('careSleepData'), document.getElementById('careSleepStatus')],
       behavior: [document.getElementById('careBehaviorData'), document.getElementById('careBehaviorStatus')],
       env: [document.getElementById('careEnvData'), document.getElementById('careEnvStatus')],
+      humidity: [document.getElementById('careHumidityData'), document.getElementById('careHumidityStatus')],
+      bodyTemp: [document.getElementById('careBodyTempData'), document.getElementById('careBodyTempStatus')],
       feeding: [document.getElementById('careFeedingData'), document.getElementById('careFeedingStatus')],
       diaper: [document.getElementById('careDiaperData'), document.getElementById('careDiaperStatus')],
       nap: [document.getElementById('careNapData'), document.getElementById('careNapStatus')]
@@ -13824,6 +14368,14 @@
       )).join('');
     }
 
+    function renderSleepHourScale() {
+      const hours = Array.from({ length: 25 }, (_, index) => (8 + index) % 24);
+      return `<div class="sleep-strip-scale"><span></span><div class="sleep-hour-scale">${hours.map((hour, index) => {
+        const label = String(hour).padStart(2, '0');
+        return `<span style="--i:${index}">${label}</span>`;
+      }).join('')}<em class="sleep-next-day-label" style="--i:16">次日</em></div></div>`;
+    }
+
     function renderCareRange() {
       const data = careRangeData[appState.careRange] || careRangeData.day;
       const showMonthAnalysis = data.chartType === 'analysis';
@@ -13840,8 +14392,8 @@
           sleepChart.className = 'sleep-strip-chart';
           sleepChart.style.gridTemplateColumns = '';
           sleepChart.innerHTML = `
-            <div class="sleep-strip-scale"><span></span><span>08:00</span><span>14:00</span><span>20:00</span><span>02:00</span><span>次日08:00</span></div>
             <div class="sleep-strip-rows">
+              ${renderSleepHourScale()}
               ${data.rows.map((row) => (
                 `<div class="sleep-strip-row${row.featured ? ' featured' : ''}"><span class="sleep-strip-day">${row.label}</span><div class="sleep-strip-track">${row.periods.map((item) => (
                   `<div class="sleep-strip-period" style="--start:${item.start}%;--width:${item.width}%"><span style="--seg:${item.deep}%;--c:#ad6670"></span><span style="--seg:${item.light}%;--c:#e0a1aa"></span><span style="--seg:${item.wake}%;--c:#ffc928"></span></div>`
@@ -14020,9 +14572,11 @@
       const isSoothe = Boolean(options.isSoothe);
       if (isOffline) {
         return {
-          icon: status.icon,
-          title: '\u672A\u68C0\u6D4B\u5230\u5B9D\u5B9D',
+          icon: '',
+          title: '--',
+          statusTitle: '--',
           meta: '',
+          statusMeta: '',
           time: '',
           showAdvice: false,
           adviceTitle: '',
@@ -14031,20 +14585,25 @@
       }
       if (status.statusType === 'noBaby') {
         return {
-          icon: status.icon,
-          title: status.state,
+          icon: '',
+          title: '--',
+          statusTitle: '--',
           meta: '',
+          statusMeta: '',
           time: '',
           showAdvice: false,
           adviceTitle: '',
           adviceText: ''
         };
       }
+      const stateIcon = status.statusType === 'asleep' ? status.icon : '\u2600';
       if (isSoothe) {
         return {
-          icon: status.icon,
+          icon: stateIcon,
           title: status.statusType === 'asleep' ? `${status.baby}${status.state}` : `${status.baby}${status.state}`,
+          statusTitle: status.statusType === 'asleep' ? '\u7761\u7720\u4E2D' : '\u9192\u7740',
           meta: status.meta,
+          statusMeta: status.statusType === 'asleep' ? status.meta : '',
           time: status.statusType === 'asleep' ? status.time : '',
           showAdvice: true,
           adviceTitle: '\u5DF2\u5F00\u542F\u767D\u566A\u58F0',
@@ -14052,9 +14611,11 @@
         };
       }
       return {
-        icon: status.icon,
+        icon: stateIcon,
         title: `${status.baby}${status.state}`,
+        statusTitle: status.statusType === 'asleep' ? '\u7761\u7720\u4E2D' : '\u9192\u7740',
         meta: status.meta,
+        statusMeta: status.statusType === 'asleep' ? status.meta : '',
         time: status.statusType === 'asleep' ? status.time : '',
         showAdvice: true,
         adviceTitle: status.alertTitle,
@@ -14080,9 +14641,6 @@
       const currentBaby = babyStatusByRoom[appState.room] || babyStatusByRoom['niki'];
       const currentStatus = getBabyCareStatus(currentBaby, { isOffline, isSoothe: appState.scene === '\u5165\u7761\u5B89\u629A' });
       const currentMetrics = splitCareMetrics[appState.room] || splitCareMetrics.niki;
-      const sleepAlert = document.querySelector('.scene-sleep > .scene-mode-alert');
-      const sleepAlertTitle = sleepAlert && sleepAlert.querySelector('strong');
-      const sleepAlertDesc = sleepAlert && sleepAlert.querySelector('p');
       const sleepValues = document.querySelectorAll('.scene-sleep .scene-vital-item strong, .scene-sleep .scene-env-card strong');
       const normalSleepValues = [currentMetrics.breath, currentMetrics.heart, currentMetrics.bodyTemp, currentMetrics.airQuality];
       if (monitorTempValue) monitorTempValue.textContent = isOffline ? '--' : currentMetrics.temp;
@@ -14100,14 +14658,17 @@
         overlay.hidden = !isSplitView;
       });
       if (sceneSleepTitle) {
-        sceneSleepTitle.textContent = currentStatus.title;
+        sceneSleepTitle.textContent = currentStatus.statusTitle || currentStatus.title;
       }
       if (sceneSleepMeta) {
-        sceneSleepMeta.textContent = currentStatus.meta;
+        sceneSleepMeta.textContent = currentStatus.statusMeta || currentStatus.meta;
       }
-      if (sleepAlert) sleepAlert.hidden = !currentStatus.showAdvice;
-      if (sleepAlertTitle) sleepAlertTitle.textContent = currentStatus.adviceTitle;
-      if (sleepAlertDesc) sleepAlertDesc.textContent = currentStatus.adviceText;
+      if (sceneSleepIcon) {
+        sceneSleepIcon.textContent = currentStatus.icon || '';
+      }
+      if (sceneSleepHeading) {
+        sceneSleepHeading.textContent = `${currentBaby.baby}\u7684\u72B6\u6001`;
+      }
       sleepValues.forEach((item, index) => {
         item.textContent = isOffline ? '--' : normalSleepValues[index];
       });
@@ -14120,13 +14681,11 @@
         const status = babyStatusByRoom[roomName];
         const view = getBabyCareStatus(status, { isSoothe: appState.scene === '\u5165\u7761\u5B89\u629A' });
         const metrics = splitCareMetrics[roomName] || splitCareMetrics.niki;
-        const showSplitAdvice = view.showAdvice && status.statusType !== 'awake';
         return `
           <div class="scene-split-card">
             <div class="scene-mode-top">
-              <div><div class="scene-mode-state"><span class="scene-mode-icon">${view.icon}</span><span class="scene-mode-state-text"><strong>${view.title}</strong>${view.meta ? `<span class="scene-mode-subtitle">${view.meta}</span>` : ''}</span></div></div>
+              <div><div class="scene-status-heading">${status.baby}\u7684\u72B6\u6001</div><div class="scene-mode-state"><span class="scene-mode-icon">${view.icon}</span><span class="scene-mode-state-text"><strong>${view.statusTitle || view.title}</strong>${(view.statusMeta || view.meta) ? `<span class="scene-mode-subtitle">${view.statusMeta || view.meta}</span>` : ''}</span></div></div>
             </div>
-            ${showSplitAdvice ? `<div class="scene-mode-alert"><strong>${view.adviceTitle}</strong><p>${view.adviceText}</p></div>` : ''}
             <div class="scene-split-metrics" aria-label="${status.baby}\u4F53\u5F81\u4E0E\u73AF\u5883\u6570\u636E">
               <div class="scene-split-metric"><span>\u547C\u5438\u7387</span><strong>${metrics.breath}</strong></div>
               <div class="scene-split-metric"><span>\u5FC3\u7387</span><strong>${metrics.heart}</strong></div>
@@ -16148,6 +16707,9 @@
       tiles.forEach((tile) => {
         const selected = showSplit ? tile.dataset.room === appState.selectedSplitRoom : tile.dataset.room === appState.room;
         tile.classList.toggle('active', selected);
+        if (!showSplit) {
+          tile.classList.remove('sleeping');
+        }
       });
       navButtons.forEach((button) => {
         const page = button.dataset.page || button.textContent.trim();
@@ -16639,6 +17201,12 @@
       });
     }
 
+    tiles.forEach((tile) => {
+      if (!tile.querySelector('.tile-sleep-state')) {
+        tile.insertAdjacentHTML('beforeend', tileSleepStateMarkup);
+      }
+    });
+
     if (sleepSootheShortcut) {
       sleepSootheShortcut.addEventListener('click', () => {
         appState.page = '\u5B9E\u65F6\u76D1\u63A7\u533A';
@@ -16680,6 +17248,22 @@
       });
     }
 
+    replaySourceButtons.forEach((button) => {
+      button.addEventListener('click', () => {
+        const isAlbum = button.classList.contains('album-btn');
+        replayPage?.classList.toggle('album-mode', isAlbum);
+        replaySourceButtons.forEach((item) => item.classList.toggle('active', item === button));
+      });
+    });
+
+    albumSubTabs.forEach((button) => {
+      button.addEventListener('click', () => {
+        const target = button.dataset.albumTab;
+        albumSubTabs.forEach((item) => item.classList.toggle('active', item === button));
+        albumContents.forEach((item) => item.classList.toggle('active', item.dataset.albumContent === target));
+      });
+    });
+
     careRangeButtons.forEach((button) => {
       button.addEventListener('click', () => {
         appState.careRange = button.dataset.careRange || 'day';
@@ -16699,6 +17283,9 @@
 
     tiles.forEach((tile) => {
       tile.addEventListener('click', (event) => {
+        if (event.target.closest('[data-action="monitor-wake"]') || event.target.closest('.tile-sleep-state')) {
+          return;
+        }
         if (event.target.closest('.tile-setting')) {
           event.stopPropagation();
           appState.device = tile.dataset.camera || 'niki\u6444\u50CF\u5934';
@@ -17249,6 +17836,28 @@
         activatePage('\u5B9D\u5B9D\u770B\u62A4\u6307\u6807\u533A');
         return;
       }
+      if (action.dataset.action === 'monitor-sleep') {
+        const isSplitMonitor = monitor?.classList.contains('split-2') || monitor?.classList.contains('split-4');
+        if (isSplitMonitor) {
+          monitor.classList.remove('sleeping');
+          const selectedTile = document.querySelector('.camera-tile.active') || document.querySelector('.camera-tile');
+          selectedTile?.classList.add('sleeping');
+        } else {
+          tiles.forEach((tile) => tile.classList.remove('sleeping'));
+          monitor?.classList.add('sleeping');
+        }
+        return;
+      }
+      if (action.dataset.action === 'monitor-wake') {
+        const sleepTile = action.closest('.camera-tile');
+        if (sleepTile) {
+          sleepTile.classList.remove('sleeping');
+        } else {
+          monitor?.classList.remove('sleeping');
+          tiles.forEach((tile) => tile.classList.remove('sleeping'));
+        }
+        return;
+      }
       if (action.dataset.action === 'exit-fullscreen') {
         const fallbackView = {
           singleFull: 'single',
@@ -17471,6 +18080,26 @@
     cleanupStaleInlineTextEdits();
     markInlineEditableText();
   </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
