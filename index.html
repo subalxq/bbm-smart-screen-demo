@@ -1285,6 +1285,49 @@
       display: none;
     }
 
+    .monitor-loading-state,
+    .tile-loading-state {
+      position: absolute;
+      inset: 0;
+      z-index: 6;
+      display: none;
+      place-items: center;
+      background: rgba(3, 7, 13, 0.76);
+      color: #f4f8ff;
+      text-align: center;
+      backdrop-filter: blur(3px);
+    }
+
+    .monitor.loading .monitor-loading-state,
+    .camera-tile.loading .tile-loading-state {
+      display: grid;
+    }
+
+    .monitor.split-2.loading .monitor-loading-state,
+    .monitor.split-4.loading .monitor-loading-state {
+      display: none;
+    }
+
+    .loading-state-card {
+      display: grid;
+      justify-items: center;
+      gap: 12px;
+    }
+
+    .loading-state-spinner {
+      width: 36px;
+      height: 36px;
+      border: 3px solid rgba(255, 255, 255, 0.24);
+      border-top-color: #52a6ff;
+      border-radius: 50%;
+    }
+
+    .loading-state-card strong {
+      color: #f7fbff;
+      font-size: 16px;
+      font-weight: 900;
+    }
+
     .monitor-sleep-card {
       display: grid;
       justify-items: center;
@@ -1345,6 +1388,15 @@
       inset: 0;
       z-index: 5;
       background: rgba(3, 7, 13, 0.24);
+      content: "";
+      pointer-events: none;
+    }
+
+    .camera-tile.loading::after {
+      position: absolute;
+      inset: 0;
+      z-index: 5;
+      background: rgba(3, 7, 13, 0.30);
       content: "";
       pointer-events: none;
     }
@@ -2208,18 +2260,7 @@
     }
 
     .multi-camera-page-dots {
-      position: absolute;
-      left: 50%;
-      bottom: 62px;
-      display: flex;
-      align-items: center;
-      gap: 7px;
-      border-radius: 999px;
-      background: rgba(8, 17, 30, 0.56);
-      padding: 7px 9px;
-      transform: translateX(-50%);
-      backdrop-filter: blur(10px);
-      pointer-events: auto;
+      display: none;
     }
 
     .multi-camera-page-dot {
@@ -7300,6 +7341,10 @@
       display: grid;
     }
 
+    .guide-page[data-guide-state="step-2"] .guide-control-drawer {
+      display: grid;
+    }
+
     .guide-network-switch .alert-modal {
       width: min(700px, 88vw);
     }
@@ -7338,14 +7383,21 @@
     .guide-backdrop {
       position: absolute;
       inset: 0;
+      z-index: 1;
       background:
         radial-gradient(circle at 49% 42%, transparent 0 21%, rgba(5, 10, 18, 0.38) 29%, rgba(5, 10, 18, 0.48) 100%);
       pointer-events: none;
     }
 
+    .guide-page[data-guide-state="step-2"] .guide-backdrop {
+      background: rgba(5, 10, 18, 0.68);
+      backdrop-filter: blur(2px);
+    }
+
     .guide-tip {
       position: absolute;
-      display: grid;
+      z-index: 3;
+      display: none;
       grid-template-columns: 34px 1fr;
       gap: 10px 12px;
       width: 306px;
@@ -7355,6 +7407,11 @@
       padding: 14px;
       box-shadow: 0 18px 45px rgba(0, 0, 0, 0.30);
       pointer-events: auto;
+    }
+
+    .guide-page[data-guide-state="step-1"] .guide-tip.warning,
+    .guide-page[data-guide-state="step-2"] .guide-tip.control-center {
+      display: grid;
     }
 
     .guide-tip::after {
@@ -7377,58 +7434,29 @@
       top: 34px;
     }
 
-    .guide-tip.settings {
-      top: 372px;
-      left: 92px;
-    }
-
-    .guide-tip.settings::after {
-      left: -52px;
-      top: 36px;
-      width: 50px;
-      transform: rotate(180deg);
-    }
-
     .guide-tip.control-center {
-      top: 330px;
-      left: 430px;
+      top: 18px;
+      left: 4px;
     }
 
     .guide-tip.control-center::after {
-      left: -58px;
+      right: -56px;
       top: 34px;
-      width: 56px;
-      transform: rotate(180deg);
     }
 
-    .guide-control-drawer {
+    .guide-page .guide-control-drawer.control-panel {
       display: none;
       position: absolute;
       top: 18px;
-      right: 24px;
+      right: 4px;
       z-index: 2;
-      width: 390px;
-      gap: 12px;
-      border: 1px solid rgba(255, 255, 255, 0.18);
-      border-radius: 0 0 24px 24px;
-      background:
-        linear-gradient(180deg, rgba(45, 88, 145, 0.92), rgba(21, 39, 68, 0.90)),
-        rgba(13, 25, 44, 0.82);
-      padding: 18px 18px 20px;
-      box-shadow: 0 26px 68px rgba(0, 0, 0, 0.34), inset 0 1px 0 rgba(255, 255, 255, 0.12);
-      backdrop-filter: blur(22px);
+      width: 500px;
+      max-width: none;
+      grid-column: auto;
     }
 
-    .guide-control-drawer::before {
-      position: absolute;
-      top: -10px;
-      left: 50%;
-      width: 54px;
-      height: 4px;
-      border-radius: 999px;
-      background: rgba(255, 255, 255, 0.45);
-      content: "";
-      transform: translateX(-50%);
+    .guide-page[data-guide-state="step-2"] .guide-control-drawer.control-panel {
+      display: grid;
     }
 
     .guide-control-head {
@@ -7549,6 +7577,48 @@
       font-size: 12px;
       font-weight: 900;
       white-space: nowrap;
+    }
+
+    .guide-flow-actions {
+      grid-column: 1 / -1;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 10px;
+      margin-top: 4px;
+      border-top: 1px solid rgba(134, 164, 202, 0.24);
+      padding-top: 12px;
+      pointer-events: auto;
+    }
+
+    .guide-flow-progress {
+      min-width: 58px;
+      color: #a9bbd1;
+      font-size: 12px;
+      font-weight: 800;
+      text-align: center;
+    }
+
+    .guide-flow-btn {
+      min-width: 72px;
+      height: 34px;
+      border: 1px solid rgba(82, 166, 255, 0.42);
+      border-radius: 6px;
+      background: rgba(82, 166, 255, 0.14);
+      color: #d7ecff;
+      padding: 0 14px;
+      font-size: 12px;
+      font-weight: 900;
+    }
+
+    .guide-flow-btn.primary {
+      border-color: #2d8cff;
+      background: #2d8cff;
+      color: #fff;
+    }
+
+    .guide-flow-btn:disabled {
+      opacity: 0.36;
     }
 
     .power-page {
@@ -10779,7 +10849,7 @@
           <button class="nav-item inline-edit-hint" data-page="屏端初始化向导" data-onboarding-jump="10">添加设备（未配对好）</button>
           <button class="nav-item active inline-edit-hint" data-page="实时监控区">主页</button>
           <div class="nav-sub">
-            <button class="nav-sub-item inline-edit-hint" data-page="实时监控区" data-view="dualHome" data-home-sub-page="dualDevice">多设备主页</button>
+            <button class="nav-sub-item active inline-edit-hint" data-page="实时监控区" data-view="dualHome" data-home-sub-page="dualDevice">多设备主页</button>
             <button class="nav-sub-item inline-edit-hint" data-page="实时监控区" data-view="single" data-home-sub-page="offlineDevice">设备离线主页</button>
             <button class="nav-sub-item inline-edit-hint" data-page="实时监控区" data-view="singleFull">单画面全屏</button>
             <button class="nav-sub-item inline-edit-hint" data-page="实时监控区" data-view="split2Full">双画面全屏</button>
@@ -10828,11 +10898,11 @@
       <div class="canvas-wrap">
         <div class="canvas-head">
           <strong>8 寸平板横屏原型</strong>
-          <span id="canvasLabel">实时监控区 / niki / 睡眠看护</span>
+          <span id="canvasLabel">实时监控区 / 全部设备 / 睡眠看护</span>
         </div>
 
         <div class="shell">
-          <div class="screen base-home">
+          <div class="screen dual-device-home">
             <header class="topbar">
               <div class="screen-date inline-edit-hint">2026/5/7 周四</div>
               <div class="screen-status">
@@ -10874,17 +10944,17 @@
             </nav>
 
             <div class="tabs-bar">
-              <div class="tab-group" id="roomTabs"><button class="tab-btn active inline-edit-hint" data-room="niki">cam1</button></div>
+              <div class="tab-group" id="roomTabs"><button class="tab-btn active inline-edit-hint" data-room="全部设备">全部设备</button><button class="tab-btn inline-edit-hint" data-room="niki">cam1</button><button class="tab-btn inline-edit-hint" data-room="neo">cam2</button><button class="tab-btn inline-edit-hint" data-room="niki2">cam3</button><button class="tab-btn inline-edit-hint" data-room="niki3">cam4</button></div>
             </div>
 
             <main class="content">
               <div class="monitor-stack">
-                <section class="monitor" id="monitor" style="--monitor-image: url(&quot;public/baby-sleep-overhead-rotated-monitor-16x9-lite.jpg&quot;);">
+                <section class="monitor split-2" id="monitor" style="--monitor-image: url(&quot;public/baby-sleep-overhead-rotated-monitor-16x9-lite.jpg&quot;);">
                   <div class="monitor-header">
                     <div class="monitor-left-tools">
                       <div class="live-pills">
-                        <span class="cam-name fullscreen-room-pill inline-edit-hint" id="fullscreenRoomPill" hidden="">niki · niki</span>
-                        <time class="monitor-timestamp inline-edit-hint" id="monitorTimestamp" data-monitor-timestamp="" datetime="2026-07-16T21:15:52">2026年07月16日 21:15:52</time>
+                        <span class="cam-name fullscreen-room-pill inline-edit-hint" id="fullscreenRoomPill" hidden="">全部设备</span>
+                        <time class="monitor-timestamp inline-edit-hint" id="monitorTimestamp" data-monitor-timestamp="" datetime="2026-07-17T20:38:07">2026年07月17日 20:38:07</time>
                       </div>
                     </div>
                     <button class="monitor-setting" type="button" title="设备设置" aria-label="设备设置" data-page-jump="设备设置" data-device-settings-source="monitor">
@@ -10909,11 +10979,17 @@
                       <button class="monitor-wake-btn inline-edit-hint" type="button" data-action="monitor-wake">唤醒设备</button>
                     </div>
                   </div>
+                  <div class="monitor-loading-state" id="monitorLoadingState" aria-label="画面加载中" role="status" aria-live="polite">
+                    <div class="loading-state-card">
+                      <span class="loading-state-spinner" aria-hidden="true"></span>
+                      <strong class="inline-edit-hint">画面加载中</strong>
+                    </div>
+                  </div>
 
                   <div class="multi-grid" id="multiGrid">
                     <button class="camera-tile active" data-room="niki" data-camera="婴儿床摄像头" style="--pos:center 56%;">
                       <strong class="inline-edit-hint">niki</strong><span class="tile-setting" title="设置" aria-label="设置"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 15.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7Z"></path><path d="M19.4 15a1.8 1.8 0 0 0 .36 1.98l.04.04a2.16 2.16 0 0 1-3.05 3.05l-.04-.04a1.8 1.8 0 0 0-1.98-.36 1.8 1.8 0 0 0-1.1 1.66V21.4a2.16 2.16 0 0 1-4.32 0v-.07a1.8 1.8 0 0 0-1.1-1.66 1.8 1.8 0 0 0-1.98.36l-.04.04a2.16 2.16 0 0 1-3.05-3.05l.04-.04A1.8 1.8 0 0 0 4.6 15a1.8 1.8 0 0 0-1.66-1.1H2.86a2.16 2.16 0 0 1 0-4.32h.07A1.8 1.8 0 0 0 4.6 8a1.8 1.8 0 0 0-.36-1.98l-.04-.04a2.16 2.16 0 0 1 3.05-3.05l.04.04A1.8 1.8 0 0 0 9.27 3.3a1.8 1.8 0 0 0 1.1-1.66V1.6a2.16 2.16 0 0 1 4.32 0v.07a1.8 1.8 0 0 0 1.1 1.66 1.8 1.8 0 0 0 1.98-.36l.04-.04a2.16 2.16 0 0 1 3.05 3.05l-.04.04A1.8 1.8 0 0 0 19.4 8a1.8 1.8 0 0 0 1.66 1.1h.07a2.16 2.16 0 0 1 0 4.32h-.07A1.8 1.8 0 0 0 19.4 15Z"></path></svg></span>
-                    <time class="tile-timestamp inline-edit-hint" data-monitor-timestamp="" datetime="2026-07-16T21:15:52">2026年07月16日 21:15:52</time><span class="tile-sound" title="安抚音" aria-label="安抚音" aria-expanded="false" aria-controls="sootheDrawer"><span class="sound-icon inline-edit-hint">♪</span>安抚音</span>
+                    <time class="tile-timestamp inline-edit-hint" data-monitor-timestamp="" datetime="2026-07-17T20:38:07">2026年07月17日 20:38:07</time><span class="tile-sound" title="安抚音" aria-label="安抚音" aria-expanded="false" aria-controls="sootheDrawer"><span class="sound-icon inline-edit-hint">♪</span>安抚音</span>
       <span class="tile-sleep-state" aria-label="设备休眠状态">
         <span class="monitor-sleep-card">
           <span class="monitor-sleep-icon" aria-hidden="true">
@@ -10925,12 +11001,19 @@
           </span>
           <strong class="monitor-sleep-title inline-edit-hint">设备已休眠</strong>
           <span class="monitor-wake-btn inline-edit-hint" role="button" tabindex="0" data-action="monitor-wake">唤醒设备</span>
+        </span>
+      </span>
+    
+      <span class="tile-loading-state" aria-label="画面加载中" role="status">
+        <span class="loading-state-card">
+          <span class="loading-state-spinner" aria-hidden="true"></span>
+          <strong class="inline-edit-hint">画面加载中</strong>
         </span>
       </span>
     </button>
                     <button class="camera-tile" data-room="neo" data-camera="neo摄像头" style="--pos:58% 56%;">
                       <strong class="inline-edit-hint">neo</strong><span class="tile-setting" title="设置" aria-label="设置"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 15.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7Z"></path><path d="M19.4 15a1.8 1.8 0 0 0 .36 1.98l.04.04a2.16 2.16 0 0 1-3.05 3.05l-.04-.04a1.8 1.8 0 0 0-1.98-.36 1.8 1.8 0 0 0-1.1 1.66V21.4a2.16 2.16 0 0 1-4.32 0v-.07a1.8 1.8 0 0 0-1.1-1.66 1.8 1.8 0 0 0-1.98.36l-.04.04a2.16 2.16 0 0 1-3.05-3.05l.04-.04A1.8 1.8 0 0 0 4.6 15a1.8 1.8 0 0 0-1.66-1.1H2.86a2.16 2.16 0 0 1 0-4.32h.07A1.8 1.8 0 0 0 4.6 8a1.8 1.8 0 0 0-.36-1.98l-.04-.04a2.16 2.16 0 0 1 3.05-3.05l.04.04A1.8 1.8 0 0 0 9.27 3.3a1.8 1.8 0 0 0 1.1-1.66V1.6a2.16 2.16 0 0 1 4.32 0v.07a1.8 1.8 0 0 0 1.1 1.66 1.8 1.8 0 0 0 1.98-.36l.04-.04a2.16 2.16 0 0 1 3.05 3.05l-.04.04A1.8 1.8 0 0 0 19.4 8a1.8 1.8 0 0 0 1.66 1.1h.07a2.16 2.16 0 0 1 0 4.32h-.07A1.8 1.8 0 0 0 19.4 15Z"></path></svg></span>
-                    <time class="tile-timestamp inline-edit-hint" data-monitor-timestamp="" datetime="2026-07-16T21:15:52">2026年07月16日 21:15:52</time><span class="tile-sound" title="安抚音" aria-label="安抚音" aria-expanded="false" aria-controls="sootheDrawer"><span class="sound-icon inline-edit-hint">♪</span>安抚音</span>
+                    <time class="tile-timestamp inline-edit-hint" data-monitor-timestamp="" datetime="2026-07-17T20:38:07">2026年07月17日 20:38:07</time><span class="tile-sound" title="安抚音" aria-label="安抚音" aria-expanded="false" aria-controls="sootheDrawer"><span class="sound-icon inline-edit-hint">♪</span>安抚音</span>
       <span class="tile-sleep-state" aria-label="设备休眠状态">
         <span class="monitor-sleep-card">
           <span class="monitor-sleep-icon" aria-hidden="true">
@@ -10944,10 +11027,17 @@
           <span class="monitor-wake-btn inline-edit-hint" role="button" tabindex="0" data-action="monitor-wake">唤醒设备</span>
         </span>
       </span>
+    
+      <span class="tile-loading-state" aria-label="画面加载中" role="status">
+        <span class="loading-state-card">
+          <span class="loading-state-spinner" aria-hidden="true"></span>
+          <strong class="inline-edit-hint">画面加载中</strong>
+        </span>
+      </span>
     </button>
-                    <button class="camera-tile" data-room="niki2" data-camera="niki2摄像头" style="--pos:50% 42%;">
+                    <button class="camera-tile page-hidden" data-room="niki2" data-camera="niki2摄像头" style="--pos:50% 42%;">
                       <strong class="inline-edit-hint">niki2</strong><span class="tile-setting" title="设置" aria-label="设置"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 15.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7Z"></path><path d="M19.4 15a1.8 1.8 0 0 0 .36 1.98l.04.04a2.16 2.16 0 0 1-3.05 3.05l-.04-.04a1.8 1.8 0 0 0-1.98-.36 1.8 1.8 0 0 0-1.1 1.66V21.4a2.16 2.16 0 0 1-4.32 0v-.07a1.8 1.8 0 0 0-1.1-1.66 1.8 1.8 0 0 0-1.98.36l-.04.04a2.16 2.16 0 0 1-3.05-3.05l.04-.04A1.8 1.8 0 0 0 4.6 15a1.8 1.8 0 0 0-1.66-1.1H2.86a2.16 2.16 0 0 1 0-4.32h.07A1.8 1.8 0 0 0 4.6 8a1.8 1.8 0 0 0-.36-1.98l-.04-.04a2.16 2.16 0 0 1 3.05-3.05l.04.04A1.8 1.8 0 0 0 9.27 3.3a1.8 1.8 0 0 0 1.1-1.66V1.6a2.16 2.16 0 0 1 4.32 0v.07a1.8 1.8 0 0 0 1.1 1.66 1.8 1.8 0 0 0 1.98-.36l.04-.04a2.16 2.16 0 0 1 3.05 3.05l-.04.04A1.8 1.8 0 0 0 19.4 8a1.8 1.8 0 0 0 1.66 1.1h.07a2.16 2.16 0 0 1 0 4.32h-.07A1.8 1.8 0 0 0 19.4 15Z"></path></svg></span>
-                    <time class="tile-timestamp inline-edit-hint" data-monitor-timestamp="" datetime="2026-07-16T21:15:52">2026年07月16日 21:15:52</time><span class="tile-sound" title="安抚音" aria-label="安抚音" aria-expanded="false" aria-controls="sootheDrawer"><span class="sound-icon inline-edit-hint">♪</span>安抚音</span>
+                    <time class="tile-timestamp inline-edit-hint" data-monitor-timestamp="" datetime="2026-07-17T20:38:07">2026年07月17日 20:38:07</time><span class="tile-sound" title="安抚音" aria-label="安抚音" aria-expanded="false" aria-controls="sootheDrawer"><span class="sound-icon inline-edit-hint">♪</span>安抚音</span>
       <span class="tile-sleep-state" aria-label="设备休眠状态">
         <span class="monitor-sleep-card">
           <span class="monitor-sleep-icon" aria-hidden="true">
@@ -10961,10 +11051,17 @@
           <span class="monitor-wake-btn inline-edit-hint" role="button" tabindex="0" data-action="monitor-wake">唤醒设备</span>
         </span>
       </span>
+    
+      <span class="tile-loading-state" aria-label="画面加载中" role="status">
+        <span class="loading-state-card">
+          <span class="loading-state-spinner" aria-hidden="true"></span>
+          <strong class="inline-edit-hint">画面加载中</strong>
+        </span>
+      </span>
     </button>
-                    <button class="camera-tile" data-room="niki3" data-camera="niki3摄像头" style="--pos:47% 50%;">
+                    <button class="camera-tile page-hidden loading" data-room="niki3" data-camera="niki3摄像头" style="--pos:47% 50%;">
                       <strong class="inline-edit-hint">niki3</strong><span class="tile-setting" title="设置" aria-label="设置"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 15.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7Z"></path><path d="M19.4 15a1.8 1.8 0 0 0 .36 1.98l.04.04a2.16 2.16 0 0 1-3.05 3.05l-.04-.04a1.8 1.8 0 0 0-1.98-.36 1.8 1.8 0 0 0-1.1 1.66V21.4a2.16 2.16 0 0 1-4.32 0v-.07a1.8 1.8 0 0 0-1.1-1.66 1.8 1.8 0 0 0-1.98.36l-.04.04a2.16 2.16 0 0 1-3.05-3.05l.04-.04A1.8 1.8 0 0 0 4.6 15a1.8 1.8 0 0 0-1.66-1.1H2.86a2.16 2.16 0 0 1 0-4.32h.07A1.8 1.8 0 0 0 4.6 8a1.8 1.8 0 0 0-.36-1.98l-.04-.04a2.16 2.16 0 0 1 3.05-3.05l.04.04A1.8 1.8 0 0 0 9.27 3.3a1.8 1.8 0 0 0 1.1-1.66V1.6a2.16 2.16 0 0 1 4.32 0v.07a1.8 1.8 0 0 0 1.1 1.66 1.8 1.8 0 0 0 1.98-.36l.04-.04a2.16 2.16 0 0 1 3.05 3.05l-.04.04A1.8 1.8 0 0 0 19.4 8a1.8 1.8 0 0 0 1.66 1.1h.07a2.16 2.16 0 0 1 0 4.32h-.07A1.8 1.8 0 0 0 19.4 15Z"></path></svg></span>
-                    <time class="tile-timestamp inline-edit-hint" data-monitor-timestamp="" datetime="2026-07-16T21:15:52">2026年07月16日 21:15:52</time><span class="tile-sound" title="安抚音" aria-label="安抚音" aria-expanded="false" aria-controls="sootheDrawer"><span class="sound-icon inline-edit-hint">♪</span>安抚音</span>
+                    <time class="tile-timestamp inline-edit-hint" data-monitor-timestamp="" datetime="2026-07-17T20:38:07">2026年07月17日 20:38:07</time><span class="tile-sound" title="安抚音" aria-label="安抚音" aria-expanded="false" aria-controls="sootheDrawer"><span class="sound-icon inline-edit-hint">♪</span>安抚音</span>
       <span class="tile-sleep-state" aria-label="设备休眠状态">
         <span class="monitor-sleep-card">
           <span class="monitor-sleep-icon" aria-hidden="true">
@@ -10976,12 +11073,19 @@
           </span>
           <strong class="monitor-sleep-title inline-edit-hint">设备已休眠</strong>
           <span class="monitor-wake-btn inline-edit-hint" role="button" tabindex="0" data-action="monitor-wake">唤醒设备</span>
+        </span>
+      </span>
+    
+      <span class="tile-loading-state" aria-label="画面加载中" role="status">
+        <span class="loading-state-card">
+          <span class="loading-state-spinner" aria-hidden="true"></span>
+          <strong class="inline-edit-hint">画面加载中</strong>
         </span>
       </span>
     </button>
                   </div>
 
-                  <div class="multi-camera-pager" id="multiCameraPager" aria-label="实时画面分页" hidden="">
+                  <div class="multi-camera-pager" id="multiCameraPager" aria-label="实时画面分页">
                     <button class="multi-camera-page-arrow previous inline-edit-hint" id="multiCameraPrev" type="button" title="上一页" aria-label="上一页" disabled="">‹</button>
                     <div class="multi-camera-page-dots" id="multiCameraPageDots" aria-label="选择实时画面页"><button class="multi-camera-page-dot active" type="button" data-multi-camera-page="0" aria-label="第 1 页" aria-current="page"></button><button class="multi-camera-page-dot" type="button" data-multi-camera-page="1" aria-label="第 2 页" aria-current="false"></button></div>
                     <button class="multi-camera-page-arrow next inline-edit-hint" id="multiCameraNext" type="button" title="下一页" aria-label="下一页">›</button>
@@ -11087,7 +11191,7 @@
                 </section>
               </div>
 
-              <aside class="right-panel" id="rightPanel" data-scene-panel="睡眠看护" data-monitor-view="single">
+              <aside class="right-panel" id="rightPanel" data-scene-panel="睡眠看护" data-monitor-view="split2">
                 <div class="scene-mode-card scene-soothe">
                   <div class="scene-mode-top">
                     <div><div class="scene-mode-state"><span class="scene-mode-icon inline-edit-hint">☾</span><span class="scene-mode-state-text"><strong class="inline-edit-hint">niki平静</strong><span class="scene-mode-subtitle"></span></span></div></div>
@@ -11097,7 +11201,23 @@
                   <div class="scene-env-grid"><div class="scene-env-card"><span class="inline-edit-hint">体温贴</span><strong class="inline-edit-hint">36.6°C</strong></div><div class="scene-env-card"><span class="inline-edit-hint">空气质量</span><strong class="inline-edit-hint">优</strong></div></div>
                 </div>
                 <div class="scene-mode-card scene-sleep">
-                  <div class="scene-split-status" id="sceneSplitStatus"></div>
+                  <div class="scene-split-status" id="sceneSplitStatus">
+          <div class="scene-split-card">
+            <div class="scene-mode-top">
+              <div><div class="scene-status-heading inline-edit-hint">niki的状态</div><div class="scene-mode-state"><span class="scene-mode-icon inline-edit-hint">☾</span><span class="scene-mode-state-text"><strong class="inline-edit-hint">睡眠中</strong><span class="scene-mode-subtitle inline-edit-hint">已入睡2h40min</span></span></div></div>
+            </div>
+            <div class="scene-breath-card"><div class="scene-vitals-grid"><div class="scene-vital-item"><span class="inline-edit-hint">呼吸率</span><strong class="inline-edit-hint">28 br/min</strong></div><div class="scene-vital-item"><span class="inline-edit-hint">心率</span><strong class="inline-edit-hint">108 bpm</strong></div></div><div class="scene-vitals-grid scene-room-env-grid"><div class="scene-vital-item"><span class="inline-edit-hint">温度</span><strong data-room-temperature="" class="inline-edit-hint">24.5°C</strong></div><div class="scene-vital-item"><span class="inline-edit-hint">湿度</span><strong data-room-humidity="" class="inline-edit-hint">55%</strong></div></div></div>
+            <div class="scene-env-grid"><div class="scene-env-card"><span class="inline-edit-hint">体温贴</span><strong class="inline-edit-hint">36.6°C</strong></div><div class="scene-env-card"><span class="inline-edit-hint">空气质量</span><strong class="inline-edit-hint">优</strong></div></div>
+          </div>
+        
+          <div class="scene-split-card">
+            <div class="scene-mode-top">
+              <div><div class="scene-status-heading inline-edit-hint">neo的状态</div><div class="scene-mode-state"><span class="scene-mode-icon inline-edit-hint">☀</span><span class="scene-mode-state-text"><strong class="inline-edit-hint">已醒来</strong></span></div></div>
+            </div>
+            <div class="scene-breath-card"><div class="scene-vitals-grid"><div class="scene-vital-item"><span class="inline-edit-hint">呼吸率</span><strong class="inline-edit-hint">--</strong></div><div class="scene-vital-item"><span class="inline-edit-hint">心率</span><strong class="inline-edit-hint">--</strong></div></div><div class="scene-vitals-grid scene-room-env-grid"><div class="scene-vital-item"><span class="inline-edit-hint">温度</span><strong data-room-temperature="" class="inline-edit-hint">24.7°C</strong></div><div class="scene-vital-item"><span class="inline-edit-hint">湿度</span><strong data-room-humidity="" class="inline-edit-hint">54%</strong></div></div></div>
+            <div class="scene-env-grid"><div class="scene-env-card"><span class="inline-edit-hint">体温贴</span><strong class="inline-edit-hint">36.5°C</strong></div><div class="scene-env-card"><span class="inline-edit-hint">空气质量</span><strong class="inline-edit-hint">良</strong></div></div>
+          </div>
+        </div>
                   <div class="scene-mode-top">
                     <div><div class="scene-status-heading inline-edit-hint" id="sceneSleepHeading">niki的状态</div><div class="scene-mode-state"><span class="scene-mode-icon inline-edit-hint">☾</span><span class="scene-mode-state-text"><strong id="sceneSleepTitle" class="inline-edit-hint">睡眠中</strong><span class="scene-mode-subtitle inline-edit-hint" id="sceneSleepMeta">已入睡2h40min</span></span></div></div>
                   </div>
@@ -11552,7 +11672,7 @@
               <header class="device-settings-head">
                 <div class="device-settings-title">
                   <button class="care-settings-back inline-edit-hint" type="button" data-action="device-settings-back" aria-label="返回">‹</button>
-                  <div><h2 id="deviceSettingsTitle" class="inline-edit-hint">设备设置</h2><p id="deviceSettingsSubtitle" class="inline-edit-hint">婴儿床摄像头</p></div>
+                  <div><h2 id="deviceSettingsTitle" class="inline-edit-hint">设备设置</h2><p id="deviceSettingsSubtitle" class="inline-edit-hint">白噪声</p></div>
                 </div>
               </header>
               <div class="device-settings-scroll">
@@ -12482,7 +12602,7 @@
               </section>
             </main>
 
-            <main class="guide-page" id="guidePage" data-guide-state="normal">
+            <main class="guide-page" id="guidePage" data-guide-state="step-1">
               <div class="guide-backdrop" aria-hidden="true"></div>
               <div class="guide-network-switch" aria-label="切网提示">
                 <section class="alert-modal" aria-label="本地连接信号弱提示">
@@ -12510,58 +12630,65 @@
                   <button class="alert-close inline-edit-hint" type="button" aria-label="关闭">×</button>
                 </section>
               </div>
-              <section class="guide-control-drawer" aria-label="下拉控制中心">
-                <div class="guide-control-head">
-                  <strong class="inline-edit-hint">控制中心</strong>
-                  <span class="inline-edit-hint">12:09</span>
-                </div>
-                <div class="guide-control-grid">
-                  <div class="guide-control-tile wide active">
-                    <span class="guide-control-icon inline-edit-hint">⌁</span>
-                    <span><strong class="inline-edit-hint">Wi-Fi</strong><span class="inline-edit-hint">已连接</span></span>
+              <section class="guide-control-drawer control-panel" id="guideControlDrawer" aria-label="下拉控制中心"><div class="control-panel-head">
+                  <h2 class="inline-edit-hint">控制中心</h2>
+                  <button class="control-settings-btn" type="button" aria-label="设置">
+                    <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M12 15.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7Z"></path>
+                      <path d="M19.4 15a1.8 1.8 0 0 0 .36 1.98l.04.04a2.16 2.16 0 0 1-3.05 3.05l-.04-.04a1.8 1.8 0 0 0-1.98-.36 1.8 1.8 0 0 0-1.1 1.66V21.4a2.16 2.16 0 0 1-4.32 0v-.07a1.8 1.8 0 0 0-1.1-1.66 1.8 1.8 0 0 0-1.98.36l-.04.04a2.16 2.16 0 0 1-3.05-3.05l.04-.04A1.8 1.8 0 0 0 4.6 15a1.8 1.8 0 0 0-1.66-1.1H2.86a2.16 2.16 0 0 1 0-4.32h.07A1.8 1.8 0 0 0 4.6 8a1.8 1.8 0 0 0-.36-1.98l-.04-.04a2.16 2.16 0 0 1 3.05-3.05l.04.04A1.8 1.8 0 0 0 9.27 3.3a1.8 1.8 0 0 0 1.1-1.66V1.6a2.16 2.16 0 0 1 4.32 0v.07a1.8 1.8 0 0 0 1.1 1.66 1.8 1.8 0 0 0 1.98-.36l.04-.04a2.16 2.16 0 0 1 3.05 3.05l-.04.04A1.8 1.8 0 0 0 19.4 8a1.8 1.8 0 0 0 1.66 1.1h.07a2.16 2.16 0 0 1 0 4.32h-.07A1.8 1.8 0 0 0 19.4 15Z"></path>
+                    </svg>
+                  </button>
+                </div><div class="control-grid">
+                  <button class="glass-tile control-toggle stack active" type="button">
+                    <span class="control-icon">
+                      <svg class="control-svg" viewBox="0 0 28 20" aria-hidden="true">
+                        <path d="M2.8 6.6C9-0.1 19-0.1 25.2 6.6" fill="none" stroke="currentColor" stroke-width="2.7" stroke-linecap="round"></path>
+                        <path d="M7.4 10.8c3.8-4 9.4-4 13.2 0" fill="none" stroke="currentColor" stroke-width="2.7" stroke-linecap="round"></path>
+                        <path d="M11.6 14.8c1.5-1.4 3.3-1.4 4.8 0" fill="none" stroke="currentColor" stroke-width="2.7" stroke-linecap="round"></path>
+                        <circle cx="14" cy="18" r="1.7" fill="currentColor"></circle>
+                      </svg>
+                    </span>
+                    <span><span class="control-title inline-edit-hint">Wi-Fi</span><span class="control-subtitle inline-edit-hint">36170 · 已连接</span></span>
+                  </button>
+                  <button class="glass-tile control-toggle stack" type="button">
+                    <span class="control-icon inline-edit-hint">◒</span>
+                    <span><span class="control-title inline-edit-hint">睡眠模式</span><span class="control-subtitle inline-edit-hint">22:00 - 08:00</span></span>
+                  </button>
+                  <button class="glass-tile control-toggle stack" type="button">
+                    <span class="control-icon inline-edit-hint">◐</span>
+                    <span><span class="control-title inline-edit-hint">勿扰模式</span><span class="control-subtitle inline-edit-hint" spellcheck="false">不接收任何告警通知</span></span>
+                  </button>
+                  <button class="glass-tile control-toggle stack power-saving-control active" type="button" role="switch" aria-checked="true">
+                    <span class="control-icon inline-edit-hint" aria-hidden="true">◐</span>
+                    <span><span class="control-title inline-edit-hint">省电模式</span><span class="control-subtitle inline-edit-hint" aria-live="polite">已开启</span></span>
+                  </button>
+                  <div class="glass-tile vertical-slider brightness-slider">
+                    <div class="vertical-track"><div class="vertical-fill" style="--value:72%"></div><b class="inline-edit-hint">☀</b></div>
+                    <span class="control-subtitle inline-edit-hint">亮度</span>
                   </div>
-                  <div class="guide-control-tile wide">
-                    <span class="guide-control-icon inline-edit-hint">◒</span>
-                    <span><strong class="inline-edit-hint">睡眠模式</strong><span class="inline-edit-hint">未开启</span></span>
+                  <div class="glass-tile vertical-slider volume-slider">
+                    <div class="vertical-track"><div class="vertical-fill" style="--value:36%"></div><b class="inline-edit-hint">♪</b></div>
+                    <span class="control-subtitle inline-edit-hint">音量</span>
                   </div>
-                  <div class="guide-control-tile">
-                    <span class="guide-control-icon inline-edit-hint">☀</span>
-                    <strong class="inline-edit-hint">亮度</strong>
-                    <span class="inline-edit-hint">72%</span>
-                  </div>
-                  <div class="guide-control-tile">
-                    <span class="guide-control-icon inline-edit-hint">♪</span>
-                    <strong class="inline-edit-hint">音量</strong>
-                    <span class="inline-edit-hint">36%</span>
-                  </div>
-                  <div class="guide-control-tile">
-                    <span class="guide-control-icon inline-edit-hint">◐</span>
-                    <strong class="inline-edit-hint">省电</strong>
-                    <span class="inline-edit-hint">关闭</span>
-                  </div>
-                  <div class="guide-control-tile">
-                    <span class="guide-control-icon inline-edit-hint">⌛</span>
-                    <strong class="inline-edit-hint">息屏</strong>
-                    <span class="inline-edit-hint">1min</span>
-                  </div>
-                </div>
-              </section>
+                  <button class="glass-tile sleep-control-card" type="button">
+                    <span><span class="control-title inline-edit-hint">息屏设置</span><span class="control-subtitle inline-edit-hint">1 分钟后自动息屏</span></span>
+                    <span class="settings-chip inline-edit-hint">1min</span>
+                  </button>
+                </div></section>
               <section class="guide-tip warning" aria-label="防啸叫提醒">
                 <span class="guide-step inline-edit-hint">1</span>
                 <div class="guide-copy">
                   <strong class="inline-edit-hint">防啸叫提醒</strong>
-                  <span class="inline-edit-hint">显示器不要离摄像头设备太近，不然可能会引起啸叫。</span>
+                  <span class="inline-edit-hint">看护屏尽量不要离摄像头太近，避免引起啸叫</span>
                 </div>
-              </section>
-              <section class="guide-tip settings" aria-label="息屏设置的位置">
-                <span class="guide-step inline-edit-hint">2</span>
-                <div class="guide-copy">
-                  <strong class="inline-edit-hint">基础功能设置</strong>
-                  <span class="inline-edit-hint">进入设置，可添加设备，调整息屏设置等。</span>
-                </div>
+                <nav class="guide-flow-actions" id="guideFlowActions" aria-label="新手引导步骤">
+                  <button class="guide-flow-btn inline-edit-hint" id="guidePrevButton" type="button" disabled="">上一步</button>
+                  <span class="guide-flow-progress inline-edit-hint" id="guideProgress">1 / 2</span>
+                  <button class="guide-flow-btn primary inline-edit-hint" id="guideNextButton" type="button">下一步</button>
+                </nav>
               </section>
               <section class="guide-tip control-center" aria-label="快捷设置">
-                <span class="guide-step inline-edit-hint">3</span>
+                <span class="guide-step inline-edit-hint">2</span>
                 <div class="guide-copy">
                   <strong class="inline-edit-hint">快捷设置</strong>
                   <span class="inline-edit-hint">进入控制中心，可进行音量、亮度等快捷设置。</span>
@@ -12585,7 +12712,7 @@
             </main>
 
             <main class="control-page" id="controlPage">
-              <section class="control-panel" aria-label="控制中心">
+              <section class="control-panel" id="controlPanelSource" aria-label="控制中心">
                 <div class="control-panel-head">
                   <h2 class="inline-edit-hint">控制中心</h2>
                   <button class="control-settings-btn" type="button" aria-label="设置">
@@ -12691,8 +12818,8 @@
       <section class="docs-panel">
         <div class="docs-head">
           <div class="docs-head-main">
-            <input class="docs-title-input" id="docsTitle" type="text" value="主页" aria-label="页面功能说明标题" style="width: 96px;">
-            <textarea class="docs-desc-input" id="docsDesc" aria-label="页面功能说明描述">默认进入宝宝实时监控主页，展示实时监控画面和当前看护状态</textarea>
+            <input class="docs-title-input" id="docsTitle" type="text" value="多设备主页" aria-label="页面功能说明标题" style="width: 150px;">
+            <textarea class="docs-desc-input" id="docsDesc" aria-label="页面功能说明描述">默认进入宝宝实时监控主页，展示实时监控画面，当前看护状态</textarea>
           </div>
           <div class="docs-actions">
             <button class="docs-save" id="docsSaveHtml" type="button">保存HTML</button>
@@ -12704,63 +12831,22 @@
             <div class="docs-card-head">
               <h3>功能描述</h3>
             </div>
-            <div class="docs-structured-list" data-docs-preview="features" contenteditable="true" tabindex="0" aria-label="功能描述内容，可直接编辑或粘贴图片"><div class="docs-outline-line level-1" data-level="1"><b class="docs-outline-index" contenteditable="false">1</b><div class="docs-outline-copy" spellcheck="false">目前支持接入的设备类型：BBM设备（包含婴儿床）、及后续对接过协议的Wi-Fi设备/蓝牙网关设备</div></div><div class="docs-outline-line level-1" data-level="1"><b class="docs-outline-index" contenteditable="false">2</b><div class="docs-outline-copy" spellcheck="false">主页展示2个模块：实时画面、看护状态卡片</div></div><div class="docs-outline-line level-1" data-level="1"><b class="docs-outline-index" contenteditable="false">3</b><div class="docs-outline-copy" spellcheck="false">实时画面：展示BBM设备的实时监控画面</div></div><div class="docs-outline-line level-2" data-level="2"><b class="docs-outline-index" contenteditable="false">1</b><div class="docs-outline-copy" spellcheck="false">当BBM设备数=1 时，设备tab选中该设备，展示单画面实时监控</div></div><div class="docs-outline-line level-2" data-level="2"><b class="docs-outline-index" contenteditable="false">2</b><div class="docs-outline-copy" spellcheck="false">实时画面显示当前时间（年月日时分秒）</div></div><div class="docs-outline-line level-2" data-level="2"><b class="docs-outline-index" contenteditable="false">3</b><div class="docs-outline-copy" spellcheck="false">实时画面功能按钮 包含：安抚音、休眠/唤醒、对讲、截图、录像、声音开关、音频模式、设置入口</div></div><div class="docs-outline-line level-3" data-level="3"><b class="docs-outline-index" contenteditable="false">1</b><div class="docs-outline-copy" spellcheck="false">点击 实时画面 非功能按钮区域，隐藏/显示 功能按钮</div></div><div class="docs-outline-line level-3" data-level="3"><b class="docs-outline-index" contenteditable="false">2</b><div class="docs-outline-copy" spellcheck="false">双击 实时画面 非功能按钮区域，进入全屏页面</div></div><div class="docs-outline-line level-3" data-level="3"><b class="docs-outline-index" contenteditable="false">3</b><div class="docs-outline-copy" spellcheck="false">在 实时画面 非功能按钮区域，双指捏合支持缩放画面，最大放大至4倍</div></div><div class="docs-outline-line level-2" data-level="2"><b class="docs-outline-index" contenteditable="false">4</b><div class="docs-outline-copy" spellcheck="false">安抚音：支持设置 安抚音播停、安抚音选择、安抚音音量、安抚音定时时间（不定时/定时10/15/20/30min）</div></div><div class="docs-outline-line level-3" data-level="3"><b class="docs-outline-index" contenteditable="false">1</b><div class="docs-outline-copy" spellcheck="false">点击按钮，弹出半模态弹窗。弹窗内，安抚音播放默认暂停、安抚音默认选中第一个、默认音量50%、默认不定时</div></div><div class="docs-outline-line level-3" data-level="3"><b class="docs-outline-index" contenteditable="false">2</b><div class="docs-outline-copy" spellcheck="false">安抚音播放时，按钮变为播放态；安抚音暂停时，按钮变为常规态</div></div><div class="docs-outline-line level-3" data-level="3"><b class="docs-outline-index" contenteditable="false">3</b><div class="docs-outline-copy" spellcheck="false">点击弹窗内任一设置，立即生效</div></div><div class="docs-outline-line level-3" data-level="3"><b class="docs-outline-index" contenteditable="false">4</b><div class="docs-outline-copy" spellcheck="false">再次点击按钮/或点击弹窗外其他空白区域，弹窗收起</div></div><div class="docs-outline-line level-3" data-level="3"><b class="docs-outline-index" contenteditable="false">5</b><div class="docs-outline-copy" spellcheck="false">需记忆用户的设置，下次点击按钮，展示用户上次的设置</div></div><div class="docs-outline-line level-2" data-level="2"><b class="docs-outline-index" contenteditable="false">5</b><div class="docs-outline-copy" spellcheck="false">休眠/唤醒：支持快捷休眠设备，一键隐私模式</div></div><div class="docs-outline-line level-3" data-level="3"><b class="docs-outline-index" contenteditable="false">1</b><div class="docs-outline-copy" spellcheck="false">开启后，摄像头休眠（音视频断流，不检测不报警不录像），只能接收指令。</div></div><div class="docs-outline-line level-3" data-level="3"><b class="docs-outline-index" contenteditable="false">2</b><div class="docs-outline-copy" spellcheck="false">关闭后，恢复正常实时监控</div></div><div class="docs-outline-line level-2" data-level="2"><b class="docs-outline-index" contenteditable="false">6</b><div class="docs-outline-copy" spellcheck="false">对讲：支持与设备进行双向语音</div></div><div class="docs-outline-line level-3" data-level="3"><b class="docs-outline-index" contenteditable="false">1</b><div class="docs-outline-copy" spellcheck="false">首次点击对讲，展示提示弹窗。点击确认，开启对讲；点击取消，不开启对讲</div></div><div class="docs-outline-line level-3" data-level="3"><b class="docs-outline-index" contenteditable="false">2</b><div class="docs-outline-copy" spellcheck="false">点击开启对讲，再次点击结束对讲</div></div><div class="docs-outline-line level-3" data-level="3"><b class="docs-outline-index" contenteditable="false">3</b><div class="docs-outline-copy" spellcheck="false">开启对讲时，若声音开关关闭，自动开启声音开关播放音频；关闭对讲后，声音开关回到关闭状态</div></div><div class="docs-outline-line level-2" data-level="2"><b class="docs-outline-index" contenteditable="false">7</b><div class="docs-outline-copy" spellcheck="false">截图：截取当前画面，保存到设备SD卡，保存后显示2s缩略图预览。若设备未插SD卡，提示需插卡</div></div><div class="docs-outline-line level-2" data-level="2"><b class="docs-outline-index" contenteditable="false">8</b><div class="docs-outline-copy" spellcheck="false">录像：开始/停止录像，保存到设备SD卡，保存后显示2s视频缩略图预览。若设备未插SD卡，提示需插卡</div></div><div class="docs-outline-line level-2" data-level="2"><b class="docs-outline-index" contenteditable="false">9</b><div class="docs-outline-copy" spellcheck="false">声音开关：开启/关闭音频，控制设备端音频接收</div></div><div class="docs-outline-line level-2" data-level="2"><b class="docs-outline-index" contenteditable="false">10</b><div class="docs-outline-copy" spellcheck="false">音频模式：点击时，弹出提示弹窗</div></div><div class="docs-outline-line level-3" data-level="3"><b class="docs-outline-index" contenteditable="false">1</b><div class="docs-outline-copy" spellcheck="false">提示弹窗：开启此功能，息屏后仍能保持音频传输。开启后，省电模式将自动关闭，是否开启？</div></div><div class="docs-outline-line level-3" data-level="3"><b class="docs-outline-index" contenteditable="false">2</b><div class="docs-outline-copy" spellcheck="false">弹窗点击确认，开启音频模式；点击取消，不开启音频模式</div></div><div class="docs-outline-line level-3" data-level="3"><b class="docs-outline-index" contenteditable="false">3</b><div class="docs-outline-copy" spellcheck="false">弹窗内，勾选不再提示。下次点击按钮，不再弹出提示弹窗</div></div><div class="docs-outline-line level-2" data-level="2"><b class="docs-outline-index" contenteditable="false">11</b><div class="docs-outline-copy" spellcheck="false">设备入口：点击，跳转设备设置页</div></div><div class="docs-outline-line level-2" data-level="2"><b class="docs-outline-index" contenteditable="false">12</b><div class="docs-outline-copy" spellcheck="false">实时画面 状态：正常出流、设备离线、设备休眠</div></div><div class="docs-outline-line level-1" data-level="1"><b class="docs-outline-index" contenteditable="false">4</b><div class="docs-outline-copy" spellcheck="false">看护状态卡片：展示当前设备 宝宝睡眠状态、呼吸率/心率、环境温湿度。根据实时画面，展示相应的看护状态卡片。</div></div><div class="docs-outline-line level-2" data-level="2"><b class="docs-outline-index" contenteditable="false">1</b><div class="docs-outline-copy" spellcheck="false">宝宝睡眠状态：包含 睡眠中、已醒来、将睡、将醒。从设备端实时获取</div></div><div class="docs-outline-line level-3" data-level="3"><b class="docs-outline-index" contenteditable="false">1</b><div class="docs-outline-copy" spellcheck="false">睡眠中状态：展示 睡眠中 + 本次入睡时长（精确到分钟）</div></div><div class="docs-outline-line level-3" data-level="3"><b class="docs-outline-index" contenteditable="false">2</b><div class="docs-outline-copy" spellcheck="false">其他状态（已醒来/将睡/将醒）：展示 已醒来/将睡/将醒</div></div><div class="docs-outline-line level-3" data-level="3"><b class="docs-outline-index" contenteditable="false">3</b><div class="docs-outline-copy" spellcheck="false">宝宝不在画面：不展示该状态</div></div><div class="docs-outline-line level-3" data-level="3"><b class="docs-outline-index" contenteditable="false">4</b><div class="docs-outline-copy" spellcheck="false">设备离线：不展示该状态</div></div><div class="docs-outline-line level-2" data-level="2"><b class="docs-outline-index" contenteditable="false">2</b><div class="docs-outline-copy" spellcheck="false">呼吸率/心率：展示每分钟数据</div></div><div class="docs-outline-line level-3" data-level="3"><b class="docs-outline-index" contenteditable="false">1</b><div class="docs-outline-copy" spellcheck="false">宝宝不在画面中情况：不展示数据</div></div><div class="docs-outline-line level-3" data-level="3"><b class="docs-outline-index" contenteditable="false">2</b><div class="docs-outline-copy" spellcheck="false">未检测到数据情况：不展示数据</div></div><div class="docs-outline-line level-3" data-level="3"><b class="docs-outline-index" contenteditable="false">3</b><div class="docs-outline-copy" spellcheck="false">设备离线：不展示数据</div></div><div class="docs-outline-line level-2" data-level="2"><b class="docs-outline-index" contenteditable="false">3</b><div class="docs-outline-copy" spellcheck="false">环境温湿度：展示当前设备的温湿度数据</div></div><div class="docs-outline-line level-3" data-level="3"><b class="docs-outline-index" contenteditable="false">1</b><div class="docs-outline-copy" spellcheck="false">设备离线：不展示数据</div></div></div>
-            <textarea class="docs-editor" id="docsFeatureList" hidden="" aria-label="功能描述，每行一条" style="height: 72px;">目前支持接入的设备类型：BBM设备（包含婴儿床）、及后续对接过协议的Wi-Fi设备/蓝牙网关设备
-主页展示2个模块：实时画面、看护状态卡片
-实时画面：展示BBM设备的实时监控画面
-  当BBM设备数=1 时，设备tab选中该设备，展示单画面实时监控
-  实时画面显示当前时间（年月日时分秒）
-  实时画面功能按钮 包含：安抚音、休眠/唤醒、对讲、截图、录像、声音开关、音频模式、设置入口
-    点击 实时画面 非功能按钮区域，隐藏/显示 功能按钮
-    双击 实时画面 非功能按钮区域，进入全屏页面
-    在 实时画面 非功能按钮区域，双指捏合支持缩放画面，最大放大至4倍
-  安抚音：支持设置 安抚音播停、安抚音选择、安抚音音量、安抚音定时时间（不定时/定时10/15/20/30min）
-    点击按钮，弹出半模态弹窗。弹窗内，安抚音播放默认暂停、安抚音默认选中第一个、默认音量50%、默认不定时
-    安抚音播放时，按钮变为播放态；安抚音暂停时，按钮变为常规态
-    点击弹窗内任一设置，立即生效
-    再次点击按钮/或点击弹窗外其他空白区域，弹窗收起
-    需记忆用户的设置，下次点击按钮，展示用户上次的设置
-  休眠/唤醒：支持快捷休眠设备，一键隐私模式
-    开启后，摄像头休眠（音视频断流，不检测不报警不录像），只能接收指令。
-    关闭后，恢复正常实时监控
-  对讲：支持与设备进行双向语音
-    首次点击对讲，展示提示弹窗。点击确认，开启对讲；点击取消，不开启对讲
-    点击开启对讲，再次点击结束对讲
-    开启对讲时，若声音开关关闭，自动开启声音开关播放音频；关闭对讲后，声音开关回到关闭状态
-  截图：截取当前画面，保存到设备SD卡，保存后显示2s缩略图预览。若设备未插SD卡，提示需插卡
-  录像：开始/停止录像，保存到设备SD卡，保存后显示2s视频缩略图预览。若设备未插SD卡，提示需插卡
-  声音开关：开启/关闭音频，控制设备端音频接收
-  音频模式：点击时，弹出提示弹窗
-    提示弹窗：开启此功能，息屏后仍能保持音频传输。开启后，省电模式将自动关闭，是否开启？
-    弹窗点击确认，开启音频模式；点击取消，不开启音频模式
-    弹窗内，勾选不再提示。下次点击按钮，不再弹出提示弹窗
-  设备入口：点击，跳转设备设置页
-  实时画面 状态：正常出流、设备离线、设备休眠
-看护状态卡片：展示当前设备 宝宝睡眠状态、呼吸率/心率、环境温湿度。根据实时画面，展示相应的看护状态卡片。
-  宝宝睡眠状态：包含 睡眠中、已醒来、将睡、将醒。从设备端实时获取
-    睡眠中状态：展示 睡眠中 + 本次入睡时长（精确到分钟）
-    其他状态（已醒来/将睡/将醒）：展示 已醒来/将睡/将醒
-    宝宝不在画面：不展示该状态
-    设备离线：不展示该状态
-  呼吸率/心率：展示每分钟数据
-    宝宝不在画面中情况：不展示数据
-    未检测到数据情况：不展示数据
-    设备离线：不展示数据
-  环境温湿度：展示当前设备的温湿度数据
-    设备离线：不展示数据</textarea>
+            <div class="docs-structured-list" data-docs-preview="features" contenteditable="true" tabindex="0" aria-label="功能描述内容，可直接编辑或粘贴图片"><div class="docs-outline-line level-1" data-level="1"><b class="docs-outline-index" contenteditable="false">1</b><div class="docs-outline-copy" spellcheck="false">实时画面：当BBM设备数≧2时，最多2路实时画面同时查看（Wi-Fi Halow 点对点带宽限制）</div></div><div class="docs-outline-line level-2" data-level="2"><b class="docs-outline-index" contenteditable="false">1</b><div class="docs-outline-copy" spellcheck="false">当BBM设备数=2 时，设备tab默认选中全部设备，进行双画面实时监控展示</div></div><div class="docs-outline-line level-2" data-level="2"><b class="docs-outline-index" contenteditable="false">2</b><div class="docs-outline-copy" spellcheck="false">当BBM设备数&gt;2时，设备tab默认选中全部设备，进行双画面实时监控展示；支持滑页，滑到下一页查看</div></div><div class="docs-outline-line level-2" data-level="2"><b class="docs-outline-index" contenteditable="false">3</b><div class="docs-outline-copy" spellcheck="false">设备tab支持切换任意单设备/或全部设备 进行展示</div></div><div class="docs-outline-line level-2" data-level="2"><b class="docs-outline-index" contenteditable="false">4</b><div class="docs-outline-copy" spellcheck="false">设备tab选中全部设备时，实时画面默认选中第一个画面，画面内的功能按钮针对选中的画面生效</div></div><div class="docs-outline-line level-2" data-level="2"><b class="docs-outline-index" contenteditable="false">5</b><div class="docs-outline-copy" spellcheck="false">点击 实时画面 非功能按钮区域，切换选中的画面</div></div><div class="docs-outline-line level-2" data-level="2"><b class="docs-outline-index" contenteditable="false">6</b><div class="docs-outline-copy" spellcheck="false">双击 实时画面 非功能按钮区域，进入全屏页面</div></div><div class="docs-outline-line level-1" data-level="1"><b class="docs-outline-index" contenteditable="false">2</b><div class="docs-outline-copy" spellcheck="false">看护状态卡片：根据实时画面，展示相应的两个看护状态卡片。</div></div></div>
+            <textarea class="docs-editor" id="docsFeatureList" hidden="" aria-label="功能描述，每行一条" style="height: 72px;">实时画面：当BBM设备数≧2时，最多2路实时画面同时查看（Wi-Fi Halow 点对点带宽限制）
+  当BBM设备数=2 时，设备tab默认选中全部设备，进行双画面实时监控展示
+  当BBM设备数&gt;2时，设备tab默认选中全部设备，进行双画面实时监控展示；支持滑页，滑到下一页查看
+  设备tab支持切换任意单设备/或全部设备 进行展示
+  设备tab选中全部设备时，实时画面默认选中第一个画面，画面内的功能按钮针对选中的画面生效
+  点击 实时画面 非功能按钮区域，切换选中的画面
+  双击 实时画面 非功能按钮区域，进入全屏页面
+看护状态卡片：根据实时画面，展示相应的两个看护状态卡片。</textarea>
           </section>
           <section class="docs-card" tabindex="0">
             <div class="docs-card-head">
               <h3>其他规则</h3>
             </div>
-            <div class="docs-structured-list" data-docs-preview="rules" contenteditable="true" tabindex="0" aria-label="其他规则内容，可直接编辑或粘贴图片"><div class="docs-outline-line level-1" data-level="1"><b class="docs-outline-index" contenteditable="false">1</b><div class="docs-outline-copy" spellcheck="false">状态栏信息：日期/星期、时间、屏端Wi-Fi信息、屏端电量、闹钟信息、静音</div></div><div class="docs-outline-line level-2" data-level="2"><b class="docs-outline-index" contenteditable="false">1</b><div class="docs-outline-copy" spellcheck="false">日期/星期：展示 年月日/星期，按时区展示</div></div><div class="docs-outline-line level-2" data-level="2"><b class="docs-outline-index" contenteditable="false">2</b><div class="docs-outline-copy" spellcheck="false">时间：展示 时分，按时区展示</div></div><div class="docs-outline-line level-2" data-level="2"><b class="docs-outline-index" contenteditable="false">3</b><div class="docs-outline-copy" spellcheck="false">屏端Wi-Fi信息：已联网，展示Wi-Fi信号强度；未联网，展示Wi-Fi断连图标</div></div><div class="docs-outline-line level-2" data-level="2"><b class="docs-outline-index" contenteditable="false">4</b><div class="docs-outline-copy" spellcheck="false">屏端电量：展示电量进度+电量百分比数值。电量低于20%，电量标红。充电时，展示充电状态</div></div><div class="docs-outline-line level-2" data-level="2"><b class="docs-outline-index" contenteditable="false">5</b><div class="docs-outline-copy" spellcheck="false">闹钟信息：如果用户已设置闹钟，展示闹钟图标；否则不展示</div></div><div class="docs-outline-line level-2" data-level="2"><b class="docs-outline-index" contenteditable="false">6</b><div class="docs-outline-copy" spellcheck="false">静音：如果用户已关闭音量，展示静音图标；否则不展示</div></div></div>
-            <textarea class="docs-editor" id="docsRuleList" hidden="" aria-label="其他规则，每行一条" style="height: 72px;">状态栏信息：日期/星期、时间、屏端Wi-Fi信息、屏端电量、闹钟信息、静音
-  日期/星期：展示 年月日/星期，按时区展示
-  时间：展示 时分，按时区展示
-  屏端Wi-Fi信息：已联网，展示Wi-Fi信号强度；未联网，展示Wi-Fi断连图标
-  屏端电量：展示电量进度+电量百分比数值。电量低于20%，电量标红。充电时，展示充电状态
-  闹钟信息：如果用户已设置闹钟，展示闹钟图标；否则不展示
-  静音：如果用户已关闭音量，展示静音图标；否则不展示</textarea>
+            <div class="docs-structured-list" data-docs-preview="rules" contenteditable="true" tabindex="0" aria-label="其他规则内容，可直接编辑或粘贴图片"><div class="docs-outline-line level-1" data-level="1"><b class="docs-outline-index" contenteditable="false">1</b><div class="docs-outline-copy" spellcheck="false"><br></div></div></div>
+            <textarea class="docs-editor" id="docsRuleList" hidden="" aria-label="其他规则，每行一条" style="height: 72px;"></textarea>
           </section>
         </div>
       </section>
@@ -13292,9 +13378,9 @@
       "  当BBM设备数=1 时，设备tab选中该设备，展示单画面实时监控",
       "  实时画面显示当前时间（年月日时分秒）",
       "  实时画面功能按钮 包含：安抚音、休眠/唤醒、对讲、截图、录像、声音开关、音频模式、设置入口",
-      "    点击 实时画面 非功能按钮区域，隐藏/显示 功能按钮",
-      "    双击 实时画面 非功能按钮区域，进入全屏页面",
-      "    在 实时画面 非功能按钮区域，双指捏合支持缩放画面，最大放大至4倍",
+      "    点击 实时画面 非功能区，隐藏/显示 功能按钮",
+      "    双击 实时画面 非功能区，进入全屏页面",
+      "    在 实时画面，双指捏合支持缩放画面，最大放大至4倍",
       "  安抚音：支持设置 安抚音播停、安抚音选择、安抚音音量、安抚音定时时间（不定时/定时10/15/20/30min）",
       "    点击按钮，弹出半模态弹窗。弹窗内，安抚音播放默认暂停、安抚音默认选中第一个、默认音量50%、默认不定时",
       "    安抚音播放时，按钮变为播放态；安抚音暂停时，按钮变为常规态",
@@ -13372,9 +13458,7 @@
     ],
     "featureEditorVersion": 2,
     "rules": [],
-    "ruleEditorVersion": 2,
-    "featureHtml": "",
-    "ruleHtml": ""
+    "ruleEditorVersion": 2
   },
   "实时监控区 / 睡眠看护": {
     "title": "睡眠看护",
@@ -13451,9 +13535,7 @@
     ],
     "featureEditorVersion": 2,
     "rules": [],
-    "ruleEditorVersion": 2,
-    "featureHtml": "",
-    "ruleHtml": ""
+    "ruleEditorVersion": 2
   },
   "实时监控区 / 二画面全屏": {
     "title": "二画面全屏",
@@ -13646,9 +13728,7 @@
     ],
     "featureEditorVersion": 2,
     "rules": [],
-    "ruleEditorVersion": 2,
-    "featureHtml": "",
-    "ruleHtml": ""
+    "ruleEditorVersion": 2
   },
   "实时监控区 / 主页-生态设备-多画面": {
     "title": "主页-生态设备-多画面",
@@ -13818,7 +13898,7 @@
     "bullets": [
       "用户第一次添加/同步设备完成，进入主页实时监控后，展示新手引导",
       "新手引导只展示一次，后续不再展示",
-      "新手引导，包含：防啸叫提醒、基础功能设置（添加设备、息屏设置）入口提示、控制中心-快捷设置入口提示"
+      "新手引导包含两步：防啸叫提醒、控制中心快捷设置引导"
     ],
     "featureEditorVersion": 2,
     "rules": [],
@@ -14356,7 +14436,7 @@
       replayState: 'normal',
       careRange: 'day',
       careState: 'normal',
-      guideState: 'normal',
+      guideState: 'step-1',
       accountPanel: 'account',
       noDeviceContext: false,
       noDeviceMenuPage: '\u5B9E\u65F6\u76D1\u63A7\u533A',
@@ -14760,6 +14840,14 @@
         </span>
       </span>
     `;
+    const tileLoadingStateMarkup = `
+      <span class="tile-loading-state" aria-label="画面加载中" role="status">
+        <span class="loading-state-card">
+          <span class="loading-state-spinner" aria-hidden="true"></span>
+          <strong class="inline-edit-hint">画面加载中</strong>
+        </span>
+      </span>
+    `;
     const rightPanel = document.getElementById('rightPanel');
     const onboardingSteps = document.querySelectorAll('.onboarding-step');
     const onboardingPanels = document.querySelectorAll('.onboarding-screen');
@@ -14784,6 +14872,16 @@
     const alertCloseButton = document.querySelector('.alert-close');
     const guideNetworkSwitch = document.querySelector('.guide-network-switch');
     const guideNetworkCloseButton = document.querySelector('.guide-network-switch .alert-close');
+    const guideControlDrawer = document.getElementById('guideControlDrawer');
+    const controlPanelSource = document.getElementById('controlPanelSource');
+    const guideFlowActions = document.getElementById('guideFlowActions');
+    const guidePrevButton = document.getElementById('guidePrevButton');
+    const guideNextButton = document.getElementById('guideNextButton');
+    const guideProgress = document.getElementById('guideProgress');
+    if (guideControlDrawer && controlPanelSource) {
+      guideControlDrawer.replaceChildren(...Array.from(controlPanelSource.children, (child) => child.cloneNode(true)));
+      guideControlDrawer.querySelectorAll('[id]').forEach((node) => node.removeAttribute('id'));
+    }
     const careNetworkAlert = document.querySelector('.care-network-alert');
     const careNetworkCloseButton = document.querySelector('.care-network-close');
     const eventTypeFilter = document.getElementById('eventTypeFilter');
@@ -15123,14 +15221,16 @@
         niki2: { breath: '--', heart: '--', temp: '24.3\u00B0C', humidity: '57%', bodyTemp: '--', airQuality: '\u4F18' },
         niki3: { breath: '30 br/min', heart: '112 bpm', temp: '24.8\u00B0C', humidity: '56%', bodyTemp: '36.6\u00B0C', airQuality: '\u4F18' }
       };
+      const emptyCareMetrics = { breath: '--', heart: '--', temp: '--', humidity: '--', bodyTemp: '--', airQuality: '--' };
+      const isCurrentRoomLoading = appState.room === 'niki3';
       const currentBaby = babyStatusByRoom[appState.room] || babyStatusByRoom['niki'];
-      const currentStatus = getBabyCareStatus(currentBaby, { isOffline, isSoothe: appState.scene === '\u5165\u7761\u5B89\u629A' });
-      const currentMetrics = splitCareMetrics[appState.room] || splitCareMetrics.niki;
+      const currentStatus = getBabyCareStatus(currentBaby, { isOffline: isOffline || isCurrentRoomLoading, isSoothe: appState.scene === '\u5165\u7761\u5B89\u629A' });
+      const currentMetrics = isCurrentRoomLoading ? emptyCareMetrics : (splitCareMetrics[appState.room] || splitCareMetrics.niki);
       const sleepVitalValues = document.querySelectorAll('.scene-sleep > .scene-breath-card > .scene-vitals-grid:first-child .scene-vital-item strong');
       const sleepEnvironmentValues = document.querySelectorAll('.scene-sleep > .scene-env-grid .scene-env-card strong');
       const staticRoomTemperatureValues = document.querySelectorAll('.scene-mode-card > .scene-breath-card [data-room-temperature]');
       const staticRoomHumidityValues = document.querySelectorAll('.scene-mode-card > .scene-breath-card [data-room-humidity]');
-      const unavailableValue = isOffline ? '--' : null;
+      const unavailableValue = (isOffline || isCurrentRoomLoading) ? '--' : null;
       sleepVitalValues.forEach((item, index) => {
         item.textContent = unavailableValue || [currentMetrics.breath, currentMetrics.heart][index];
       });
@@ -15162,8 +15262,9 @@
       }
       sceneSplitStatus.innerHTML = splitRooms.map((roomName) => {
         const status = babyStatusByRoom[roomName];
-        const view = getBabyCareStatus(status, { isSoothe: appState.scene === '\u5165\u7761\u5B89\u629A' });
-        const metrics = splitCareMetrics[roomName] || splitCareMetrics.niki;
+        const isRoomLoading = roomName === 'niki3';
+        const view = getBabyCareStatus(status, { isOffline: isRoomLoading, isSoothe: appState.scene === '\u5165\u7761\u5B89\u629A' });
+        const metrics = isRoomLoading ? emptyCareMetrics : (splitCareMetrics[roomName] || splitCareMetrics.niki);
         return `
           <div class="scene-split-card">
             <div class="scene-mode-top">
@@ -15193,6 +15294,7 @@
         tile.classList.toggle('page-hidden', showSplit2 && tilePage !== appState.multiCameraPage);
       });
 
+      // Keep side arrows and swipe paging; the dots above the action bar stay hidden.
       if (multiCameraPager) multiCameraPager.hidden = !hasPagination;
       if (!hasPagination) return;
 
@@ -17311,17 +17413,18 @@
       if (showSplit && showSplit2) appState.monitorOverlaysHidden = false;
       monitor.classList.toggle('split-2', showSplit && showSplit2);
       monitor.classList.toggle('split-4', showSplit && showSplit4);
+      monitor.classList.toggle('loading', isMonitorPage && !showSplit && appState.room === 'niki3');
       if (showSplit && !roomSets[appState.view]?.includes(appState.selectedSplitRoom)) {
         appState.selectedSplitRoom = 'niki';
       }
       renderMultiCameraPage(showSplit && showSplit2);
       screen.classList.toggle('fullscreen-mode', isFull);
       screen.classList.toggle('full-single', appState.view === 'singleFull');
-      screen.classList.toggle('base-home', isMonitorPage && appState.homeSubPage === 'baseHome');
-      screen.classList.toggle('single-device-home', isMonitorPage && appState.homeSubPage === 'singleDevice');
-      screen.classList.toggle('dual-device-home', isMonitorPage && appState.homeSubPage === 'dualDevice');
-      screen.classList.toggle('ecological-device-home', isMonitorPage && (appState.homeSubPage === '\u7761\u7720\u770B\u62A4' || appState.homeSubPage === 'split2'));
-      screen.classList.toggle('offline-device-home', isMonitorPage && appState.homeSubPage === 'offlineDevice');
+      screen.classList.toggle('base-home', isMonitorPage && !isFull && appState.homeSubPage === 'baseHome');
+      screen.classList.toggle('single-device-home', isMonitorPage && !isFull && appState.homeSubPage === 'singleDevice');
+      screen.classList.toggle('dual-device-home', isMonitorPage && !isFull && appState.homeSubPage === 'dualDevice');
+      screen.classList.toggle('ecological-device-home', isMonitorPage && !isFull && (appState.homeSubPage === '\u7761\u7720\u770B\u62A4' || appState.homeSubPage === 'split2'));
+      screen.classList.toggle('offline-device-home', isMonitorPage && !isFull && appState.homeSubPage === 'offlineDevice');
       screen.classList.remove('activity-scene');
       screen.classList.toggle('device-page-mode', isDevicePage);
       screen.classList.toggle('device-settings-page-mode', isDeviceSettingsPage);
@@ -17351,7 +17454,27 @@
       }
       const guidePage = document.getElementById('guidePage');
       if (guidePage) {
-        guidePage.dataset.guideState = isNetworkSwitchPage ? 'network-switch-page' : (appState.guideState || 'normal');
+        guidePage.dataset.guideState = isNetworkSwitchPage ? 'network-switch-page' : (appState.guideState || 'step-1');
+        const guideStep = Math.min(Math.max(Number(String(appState.guideState).split('-')[1]) || 1, 1), 2);
+        const activeGuideTip = guidePage.querySelector(guideStep === 1 ? '.guide-tip.warning' : '.guide-tip.control-center');
+        if (guideFlowActions && activeGuideTip && guideFlowActions.parentElement !== activeGuideTip) {
+          activeGuideTip.append(guideFlowActions);
+        }
+        if (guideStep === 2 && guideControlDrawer && activeGuideTip) {
+          const panelHead = guideControlDrawer.querySelector('.control-panel-head');
+          const titleY = panelHead?.offsetTop || 0;
+          const connectorWidth = 58;
+          const titleClearance = 12;
+          const gap = connectorWidth + titleClearance;
+          activeGuideTip.style.left = `${Math.max(4, guideControlDrawer.offsetLeft - activeGuideTip.offsetWidth - gap)}px`;
+          activeGuideTip.style.top = `${Math.max(4, guideControlDrawer.offsetTop + titleY)}px`;
+        } else if (activeGuideTip) {
+          activeGuideTip.style.removeProperty('left');
+          activeGuideTip.style.removeProperty('top');
+        }
+        if (guideProgress) guideProgress.textContent = `${guideStep} / 2`;
+        if (guidePrevButton) guidePrevButton.disabled = guideStep === 1;
+        if (guideNextButton) guideNextButton.textContent = guideStep === 2 ? '\u5B8C\u6210' : '\u4E0B\u4E00\u6B65';
       }
       if (guideNetworkSwitch && isNetworkSwitchPage) {
         guideNetworkSwitch.classList.remove('is-hidden');
@@ -17455,6 +17578,7 @@
       tiles.forEach((tile) => {
         const selected = showSplit ? tile.dataset.room === appState.selectedSplitRoom : tile.dataset.room === appState.room;
         tile.classList.toggle('active', selected);
+        tile.classList.toggle('loading', showSplit && tile.dataset.room === 'niki3');
         if (!showSplit) {
           tile.classList.remove('sleeping');
         }
@@ -17604,12 +17728,16 @@
 
     function enterSingleFullscreenView() {
       if (appState.homeSubPage === 'offlineDevice') return;
+      const targetRoom = appState.room !== '\u5168\u90E8\u8BBE\u5907'
+        ? appState.room
+        : (appState.selectedSplitRoom || 'niki');
       rememberFullscreenReturnState();
       appState.page = '\u5B9E\u65F6\u76D1\u63A7\u533A';
       appState.view = 'singleFull';
-      appState.room = 'niki';
+      appState.room = targetRoom;
+      appState.selectedSplitRoom = targetRoom;
+      appState.device = roomMeta[targetRoom]?.camera || appState.device;
       appState.scene = '\u7761\u7720\u770B\u62A4';
-      appState.homeSubPage = 'singleDevice';
       renderState();
     }
 
@@ -17698,7 +17826,7 @@
           appState.careState = 'normal';
         }
         if (targetPage === '\u65B0\u624B\u5F15\u5BFC') {
-          appState.guideState = 'normal';
+          appState.guideState = 'step-1';
         }
         if (button.dataset.page === '\u5B9E\u65F6\u76D1\u63A7\u533A' || button.dataset.page === '\u6D88\u606F\u901A\u77E5' || button.dataset.page === '\u5E72\u9884\u901A\u77E5' || button.dataset.page === '\u65AD\u8FDE\u901A\u77E5' || button.dataset.page === '\u4F4E\u7535\u91CF\u901A\u77E5' || button.dataset.page === '\u5B58\u50A8\u5361\u5F02\u5E38\u901A\u77E5' || button.dataset.page === '\u8BBE\u5907\u56FA\u4EF6\u5347\u7EA7\u5931\u8D25\u901A\u77E5') {
           appState.view = 'single';
@@ -17768,6 +17896,7 @@
         }
         if (button.dataset.page === '\u65B0\u624B\u5F15\u5BFC') {
           appState.noDeviceContext = false;
+          appState.guideState = 'step-1';
           activatePage(button.dataset.page);
           return;
         }
@@ -17895,7 +18024,7 @@
         return;
       }
       if (cameraTile) return;
-      if (appState.view === 'single' || appState.view === 'singleFull') {
+      if (appState.room !== '\u5168\u90E8\u8BBE\u5907' || appState.view === 'single' || appState.view === 'singleFull') {
         enterSingleFullscreenView();
         return;
       }
@@ -18032,6 +18161,9 @@
     tiles.forEach((tile) => {
       if (!tile.querySelector('.tile-sleep-state')) {
         tile.insertAdjacentHTML('beforeend', tileSleepStateMarkup);
+      }
+      if (!tile.querySelector('.tile-loading-state')) {
+        tile.insertAdjacentHTML('beforeend', tileLoadingStateMarkup);
       }
     });
 
@@ -18236,7 +18368,8 @@
     });
 
     multiGrid?.addEventListener('pointerdown', (event) => {
-      if (multiCameraPager?.hidden || event.button !== 0 || event.target.closest('.tile-setting, .tile-sound, .tile-sleep-state')) return;
+      const hasSwipePages = monitor.classList.contains('split-2') && Math.ceil(tiles.length / 2) > 1;
+      if (!hasSwipePages || event.button !== 0 || event.target.closest('.tile-setting, .tile-sound, .tile-sleep-state')) return;
       multiCameraSwipeStart = { x: event.clientX, y: event.clientY, pointerId: event.pointerId, captured: false };
     });
 
@@ -18429,6 +18562,32 @@
         editableInfoRows.forEach((item) => item.classList.remove('editing'));
         button.classList.add('editing');
       });
+    });
+
+    function getGuideStep() {
+      return Math.min(Math.max(Number(String(appState.guideState).split('-')[1]) || 1, 1), 2);
+    }
+
+    guidePrevButton?.addEventListener('click', () => {
+      appState.guideState = `step-${Math.max(getGuideStep() - 1, 1)}`;
+      renderState();
+    });
+
+    guideNextButton?.addEventListener('click', () => {
+      const currentStep = getGuideStep();
+      if (currentStep < 2) {
+        appState.guideState = `step-${currentStep + 1}`;
+        renderState();
+        return;
+      }
+      setDocsContext('\u5B9E\u65F6\u76D1\u63A7\u533A', '\u4E3B\u9875');
+      appState.guideState = 'step-1';
+      appState.page = '\u5B9E\u65F6\u76D1\u63A7\u533A';
+      appState.view = 'single';
+      appState.room = 'niki';
+      appState.scene = '\u7761\u7720\u770B\u62A4';
+      appState.homeSubPage = 'baseHome';
+      renderState();
     });
 
     onboardingSteps.forEach((button) => {
@@ -19134,6 +19293,8 @@
     cleanupStaleInlineTextEdits();
     markInlineEditableText();
   </script>
+
+
 
 
 
