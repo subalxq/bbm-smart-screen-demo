@@ -1,7 +1,4 @@
-<!DOCTYPE html>
-<!DOCTYPE html>
-<!DOCTYPE html>
-<html lang="zh-CN" style="--prototype-scale: 0.67; --docs-width: 777px; --sidebar-width: 283px;"><head>
+<!DOCTYPE html><html lang="zh-CN" style="--prototype-scale: 0.67; --docs-width: 816px; --sidebar-width: 298px;"><head>
   <meta charset="UTF-8">
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -1447,7 +1444,7 @@
       inset: 0;
       z-index: 2;
       display: block;
-      cursor: zoom-in;
+      cursor: pointer;
     }
 
     .monitor.split-2 .monitor-click-target,
@@ -1481,7 +1478,8 @@
     }
 
     .monitor-soothe-shortcut.active {
-      background: rgba(17, 24, 39, 0.40);
+      background: rgba(37, 99, 235, 0.78);
+      box-shadow: 0 8px 20px rgba(37, 99, 235, 0.30);
     }
 
     .monitor-soothe-icon {
@@ -1495,6 +1493,37 @@
       color: #fff;
       font-size: 15px;
       font-weight: 900;
+    }
+
+    .soothe-playing-bars {
+      display: inline-flex;
+      height: 15px;
+      align-items: center;
+      gap: 2px;
+    }
+
+    .soothe-playing-bars i {
+      display: block;
+      width: 2px;
+      height: 7px;
+      border-radius: 999px;
+      background: currentColor;
+      animation: soothe-bar 0.72s ease-in-out infinite alternate;
+    }
+
+    .soothe-playing-bars i:nth-child(2) {
+      height: 13px;
+      animation-delay: -0.24s;
+    }
+
+    .soothe-playing-bars i:nth-child(3) {
+      height: 9px;
+      animation-delay: -0.48s;
+    }
+
+    @keyframes soothe-bar {
+      from { transform: scaleY(0.55); }
+      to { transform: scaleY(1); }
     }
 
     .monitor-soothe-copy {
@@ -1530,37 +1559,15 @@
       display: block;
     }
 
-    .monitor-env-overlay {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      border-radius: 999px;
-      background: rgba(17, 24, 39, 0.48);
-      padding: 7px 10px;
-      color: rgba(255, 255, 255, 0.90);
-      font-size: 11px;
-      font-weight: 850;
-      backdrop-filter: blur(12px);
-      white-space: nowrap;
-    }
-
-    .monitor-env-overlay span {
+    .monitor-timestamp {
       display: inline-flex;
       align-items: center;
-      gap: 5px;
-    }
-
-    .monitor-env-overlay strong {
-      color: #fff;
+      color: rgba(255, 255, 255, 0.96);
       font-size: 12px;
-      font-weight: 950;
-    }
-
-    .monitor-env-icon {
-      display: block;
-      width: 13px;
-      height: 13px;
-      color: rgba(255, 255, 255, 0.92);
+      font-weight: 850;
+      font-variant-numeric: tabular-nums;
+      text-shadow: 0 1px 3px rgba(0, 0, 0, 0.88), 0 0 7px rgba(0, 0, 0, 0.64);
+      white-space: nowrap;
     }
 
     .live-pills {
@@ -1570,7 +1577,6 @@
       align-items: center;
     }
 
-    .live-pill,
     .cam-name {
       border-radius: 999px;
       background: rgba(255, 255, 255, 0.20);
@@ -1579,14 +1585,6 @@
       font-size: 12px;
       font-weight: 700;
       backdrop-filter: blur(12px);
-    }
-
-    .live-pill.live {
-      background: rgba(242, 76, 84, 0.92);
-    }
-
-    .screen.offline-device-home .live-pill.live {
-      background: rgba(143, 160, 185, 0.72);
     }
 
     .screen.offline-device-home .monitor-header {
@@ -1624,13 +1622,7 @@
       color: #9fadbf;
     }
 
-    .screen.single-device-home .scene-sleep .scene-env-grid,
-    .screen.dual-device-home .scene-sleep .scene-env-grid,
     .screen.offline-device-home .scene-sleep .scene-env-grid {
-      display: none;
-    }
-
-    .screen.offline-device-home .scene-sleep .scene-clothing-advice {
       display: none;
     }
 
@@ -1667,6 +1659,91 @@
       backdrop-filter: blur(12px);
     }
 
+    .monitor-capture-toast {
+      position: absolute;
+      top: 16px;
+      left: 50%;
+      z-index: 11;
+      border: 1px solid rgba(255, 255, 255, 0.22);
+      border-radius: 8px;
+      background: rgba(8, 17, 30, 0.88);
+      padding: 9px 14px;
+      color: #fff;
+      font-size: 12px;
+      font-weight: 850;
+      line-height: 1.35;
+      white-space: nowrap;
+      box-shadow: 0 14px 34px rgba(0, 0, 0, 0.36);
+      transform: translateX(-50%);
+      backdrop-filter: blur(12px);
+      animation: capture-toast-in 160ms ease-out;
+      pointer-events: none;
+    }
+
+    .monitor-capture-toast[hidden] { display: none; }
+
+    @keyframes capture-toast-in {
+      from { opacity: 0; transform: translate(-50%, -7px); }
+      to { opacity: 1; transform: translate(-50%, 0); }
+    }
+
+    .monitor-screenshot-preview {
+      position: absolute;
+      left: 14px;
+      bottom: 14px;
+      z-index: 8;
+      display: grid;
+      width: 156px;
+      gap: 6px;
+      border: 1px solid rgba(255, 255, 255, 0.54);
+      border-radius: 8px;
+      background: rgba(8, 17, 30, 0.82);
+      padding: 6px;
+      color: #fff;
+      box-shadow: 0 16px 38px rgba(0, 0, 0, 0.40);
+      backdrop-filter: blur(10px);
+      animation: screenshot-preview-in 160ms ease-out;
+      pointer-events: none;
+    }
+
+    .monitor-screenshot-preview[hidden] { display: none; }
+
+    .monitor-screenshot-thumbnail {
+      position: relative;
+      display: grid;
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      place-items: center;
+      border-radius: 5px;
+      background-color: #111b2c;
+      background-position: center;
+      background-size: cover;
+      overflow: hidden;
+    }
+
+    .monitor-video-preview-icon {
+      display: none;
+      width: 34px;
+      height: 34px;
+      place-items: center;
+      border: 1px solid rgba(255, 255, 255, 0.72);
+      border-radius: 50%;
+      background: rgba(7, 12, 22, 0.70);
+      color: #fff;
+      font-size: 14px;
+      padding-left: 2px;
+      box-shadow: 0 5px 16px rgba(0, 0, 0, 0.34);
+    }
+
+    .monitor-screenshot-preview.video-preview .monitor-video-preview-icon {
+      display: grid;
+    }
+
+    @keyframes screenshot-preview-in {
+      from { opacity: 0; transform: translateY(8px) scale(0.96); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
     .monitor-actions {
       position: absolute;
       right: 14px;
@@ -1678,33 +1755,31 @@
     }
 
     .screen.fullscreen-mode .monitor-actions {
-      right: 50%;
-      bottom: 22px;
-      transform: translateX(50%);
-      gap: 10px;
-      padding: 8px;
-      border: 1px solid rgba(255, 255, 255, 0.18);
-      border-radius: 18px;
-      background: rgba(7, 12, 22, 0.50);
-      backdrop-filter: blur(16px);
+      right: auto;
+      left: 50%;
+      bottom: 14px;
+      transform: translateX(-50%);
+      justify-content: center;
+      gap: 8px;
+      padding: 0;
+      border: 0;
+      border-radius: 0;
+      background: transparent;
+      backdrop-filter: none;
     }
 
-    .monitor.split-2 .monitor-actions,
     .monitor.split-4 .monitor-actions {
       display: none;
     }
 
-    .screen.fullscreen-mode .monitor.split-2 .monitor-actions,
     .screen.fullscreen-mode .monitor.split-4 .monitor-actions {
       display: flex;
     }
 
-    .monitor.split-2 .monitor-soothe-shortcut,
     .monitor.split-4 .monitor-soothe-shortcut {
       display: none;
     }
 
-    .screen.fullscreen-mode .monitor.split-2 .monitor-soothe-shortcut,
     .screen.fullscreen-mode .monitor.split-4 .monitor-soothe-shortcut {
       display: inline-flex;
     }
@@ -1714,15 +1789,9 @@
       display: none;
     }
 
-    .monitor.split-2 .monitor-header .monitor-env-overlay,
-    .monitor.split-4 .monitor-header .monitor-env-overlay {
-      display: none !important;
-    }
-
     .monitor.split-2 > .monitor-header,
     .monitor.split-4 > .monitor-header {
-      inset: 10px auto auto 10px;
-      width: auto;
+      display: none;
     }
 
     .icon-btn {
@@ -1748,6 +1817,157 @@
       white-space: nowrap;
     }
 
+    .icon-btn.audio-only-active {
+      border: 1px solid rgba(82, 166, 255, 0.86);
+      background: rgba(37, 125, 235, 0.84);
+      box-shadow: 0 0 0 3px rgba(82, 166, 255, 0.16), 0 8px 22px rgba(24, 92, 181, 0.30);
+    }
+
+    .icon-btn.sound-muted {
+      border: 1px solid rgba(174, 190, 211, 0.24);
+      background: rgba(17, 24, 39, 0.64);
+      color: rgba(220, 230, 243, 0.70);
+    }
+
+    .sound-muted .sound-toggle-icon {
+      color: #ffb2b6;
+    }
+
+    .icon-btn.recording-active {
+      border: 1px solid rgba(255, 112, 118, 0.88);
+      background: rgba(211, 47, 58, 0.88);
+      box-shadow: 0 0 0 3px rgba(242, 76, 84, 0.16), 0 8px 22px rgba(154, 30, 38, 0.30);
+    }
+
+    .recording-active .recording-icon {
+      animation: recording-pulse 1s ease-in-out infinite;
+    }
+
+    @keyframes recording-pulse {
+      0%, 100% { opacity: 0.62; }
+      50% { opacity: 1; }
+    }
+
+    .icon-btn.intercom-active {
+      border: 1px solid rgba(82, 166, 255, 0.86);
+      background: rgba(37, 125, 235, 0.84);
+      box-shadow: 0 0 0 3px rgba(82, 166, 255, 0.16), 0 8px 22px rgba(24, 92, 181, 0.30);
+    }
+
+    .intercom-active .intercom-icon {
+      animation: intercom-pulse 1.4s ease-in-out infinite;
+    }
+
+    @keyframes intercom-pulse {
+      0%, 100% { opacity: 0.72; transform: scale(0.92); }
+      50% { opacity: 1; transform: scale(1.08); }
+    }
+
+    .intercom-confirm-modal {
+      position: absolute;
+      inset: 0;
+      z-index: 12;
+      display: grid;
+      place-items: center;
+      background: rgba(5, 10, 20, 0.58);
+      padding: 24px;
+      backdrop-filter: blur(6px);
+    }
+
+    .intercom-confirm-modal[hidden] { display: none; }
+
+    .intercom-confirm-dialog {
+      display: grid;
+      width: min(430px, 92%);
+      gap: 14px;
+      border: 1px solid rgba(134, 164, 202, 0.30);
+      border-radius: 8px;
+      background: linear-gradient(180deg, rgba(24, 36, 58, 0.99), rgba(12, 21, 36, 0.99));
+      padding: 22px;
+      color: #f7fbff;
+      box-shadow: 0 26px 68px rgba(0, 0, 0, 0.46);
+    }
+
+    .intercom-confirm-head {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .intercom-confirm-icon {
+      display: grid;
+      width: 42px;
+      height: 42px;
+      flex: 0 0 auto;
+      place-items: center;
+      border-radius: 50%;
+      background: rgba(82, 166, 255, 0.18);
+      color: #8fc8ff;
+      font-size: 20px;
+      font-weight: 900;
+    }
+
+    .intercom-confirm-dialog h3 {
+      margin: 0;
+      font-size: 18px;
+      font-weight: 900;
+    }
+
+    .intercom-confirm-dialog p {
+      margin: 0;
+      color: #b8c7da;
+      font-size: 14px;
+      font-weight: 700;
+      line-height: 1.7;
+    }
+
+    .audio-only-skip {
+      display: inline-flex;
+      width: fit-content;
+      align-items: center;
+      gap: 8px;
+      color: #c3d0e1;
+      font-size: 12px;
+      font-weight: 750;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .audio-only-skip input {
+      width: 16px;
+      height: 16px;
+      margin: 0;
+      accent-color: #287de8;
+    }
+
+    .intercom-confirm-actions {
+      display: flex;
+      justify-content: flex-end;
+      gap: 10px;
+      margin-top: 4px;
+    }
+
+    .intercom-confirm-actions button {
+      min-width: 92px;
+      height: 38px;
+      border-radius: 8px;
+      padding: 0 15px;
+      font-size: 13px;
+      font-weight: 900;
+    }
+
+    .intercom-cancel {
+      border: 1px solid rgba(134, 164, 202, 0.28);
+      background: rgba(255, 255, 255, 0.06);
+      color: #c8d7eb;
+    }
+
+    .intercom-confirm {
+      border: 1px solid rgba(82, 166, 255, 0.72);
+      background: #287de8;
+      color: #fff;
+    }
+
     .fullscreen-only {
       display: none;
     }
@@ -1756,17 +1976,172 @@
       display: inline-flex;
     }
 
-    .screen.fullscreen-mode .icon-btn {
-      min-width: 70px;
-      height: 40px;
-      border-radius: 14px;
-      padding: 0 12px;
-      background: rgba(17, 24, 39, 0.62);
-      font-size: 13px;
+    .monitor.overlays-hidden .monitor-actions,
+    .monitor.overlays-hidden .soothe-drawer {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
     }
 
-    .screen.fullscreen-mode .action-label {
-      display: inline;
+    .monitor.overlays-hidden .monitor-header .monitor-setting,
+    .monitor.overlays-hidden .monitor-header .fullscreen-room-pill {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+    }
+
+    .monitor.overlays-hidden .camera-tile > strong,
+    .monitor.overlays-hidden .camera-tile .tile-setting,
+    .monitor.overlays-hidden .camera-tile .tile-sound {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+    }
+
+    .soothe-drawer {
+      position: absolute;
+      right: 14px;
+      bottom: 62px;
+      z-index: 5;
+      display: grid;
+      width: min(470px, calc(100% - 28px));
+      gap: 14px;
+      border: 1px solid rgba(173, 211, 255, 0.34);
+      border-radius: 18px;
+      background: rgba(10, 20, 35, 0.96);
+      padding: 16px;
+      box-shadow: 0 22px 48px rgba(0, 0, 0, 0.42), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+      color: #f3f8ff;
+      backdrop-filter: blur(22px);
+    }
+
+    .soothe-drawer[hidden] {
+      display: none;
+    }
+
+    .screen.fullscreen-mode .soothe-drawer {
+      right: 50%;
+      bottom: 78px;
+      transform: translateX(50%);
+    }
+
+    .soothe-drawer-head,
+    .soothe-drawer-row,
+    .soothe-drawer-label,
+    .soothe-volume-line {
+      display: flex;
+      align-items: center;
+    }
+
+    .soothe-drawer-head,
+    .soothe-drawer-row {
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .soothe-drawer-head strong {
+      font-size: 16px;
+      font-weight: 800;
+    }
+
+    .soothe-drawer-head span,
+    .soothe-drawer-label,
+    .soothe-volume-value {
+      color: #aebed3;
+      font-size: 12px;
+      font-weight: 600;
+    }
+
+    .soothe-sound-list,
+    .soothe-timer-list {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 8px;
+    }
+
+    .soothe-sound-option,
+    .soothe-timer-option {
+      min-width: 0;
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      border-radius: 10px;
+      background: rgba(255, 255, 255, 0.06);
+      padding: 9px 6px;
+      color: #dce9f8;
+      font-size: 12px;
+      font-weight: 650;
+      white-space: nowrap;
+    }
+
+    .soothe-sound-option {
+      display: grid;
+      gap: 4px;
+      justify-items: center;
+    }
+
+    .soothe-sound-option span {
+      color: #8fc6ff;
+      font-size: 16px;
+    }
+
+    .soothe-sound-option.active,
+    .soothe-timer-option.active {
+      border-color: rgba(82, 166, 255, 0.86);
+      background: rgba(82, 166, 255, 0.20);
+      color: #fff;
+    }
+
+    .soothe-play-toggle {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 7px;
+      min-width: 116px;
+      height: 36px;
+      border: 1px solid rgba(82, 166, 255, 0.72);
+      border-radius: 10px;
+      background: rgba(82, 166, 255, 0.22);
+      color: #fff;
+      font-size: 13px;
+      font-weight: 750;
+    }
+
+    .soothe-volume-line {
+      gap: 10px;
+    }
+
+    .soothe-volume-line input {
+      width: min(250px, 58vw);
+      accent-color: #52a6ff;
+    }
+
+    .soothe-timer-list {
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+    }
+
+    @media (max-width: 700px) {
+      .soothe-drawer {
+        right: 8px;
+        bottom: 56px;
+        width: calc(100% - 16px);
+        padding: 13px;
+      }
+
+      .screen.fullscreen-mode .soothe-drawer {
+        right: 50%;
+        bottom: 72px;
+      }
+
+      .soothe-sound-list,
+      .soothe-timer-list {
+        gap: 5px;
+      }
+
+      .soothe-sound-option,
+      .soothe-timer-option {
+        padding-left: 3px;
+        padding-right: 3px;
+        font-size: 11px;
+      }
     }
 
     .multi-grid {
@@ -1785,9 +2160,10 @@
     .monitor.split-2 .multi-grid {
       grid-template-columns: repeat(2, minmax(0, 1fr));
       grid-template-rows: 1fr;
+      touch-action: pan-y;
     }
 
-    .monitor.split-2 .camera-tile:nth-child(n+3) { display: none; }
+    .camera-tile.page-hidden { display: none !important; }
 
     .monitor.split-4 .multi-grid {
       grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -1795,6 +2171,77 @@
     }
 
     .monitor.split-4 .camera-tile:nth-child(n+5) { display: none; }
+
+    .multi-camera-pager {
+      position: absolute;
+      inset: 0;
+      z-index: 4;
+      pointer-events: none;
+    }
+
+    .multi-camera-pager[hidden] { display: none; }
+
+    .multi-camera-page-arrow {
+      position: absolute;
+      top: 50%;
+      display: grid;
+      width: 38px;
+      height: 54px;
+      place-items: center;
+      border: 1px solid rgba(255, 255, 255, 0.28);
+      border-radius: 8px;
+      background: rgba(8, 17, 30, 0.64);
+      color: #fff;
+      font-size: 28px;
+      line-height: 1;
+      transform: translateY(-50%);
+      backdrop-filter: blur(10px);
+      pointer-events: auto;
+    }
+
+    .multi-camera-page-arrow.previous { left: 12px; }
+    .multi-camera-page-arrow.next { right: 12px; }
+
+    .multi-camera-page-arrow:disabled {
+      opacity: 0.28;
+      cursor: default;
+    }
+
+    .multi-camera-page-dots {
+      position: absolute;
+      left: 50%;
+      bottom: 62px;
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      border-radius: 999px;
+      background: rgba(8, 17, 30, 0.56);
+      padding: 7px 9px;
+      transform: translateX(-50%);
+      backdrop-filter: blur(10px);
+      pointer-events: auto;
+    }
+
+    .multi-camera-page-dot {
+      width: 7px;
+      height: 7px;
+      border: 0;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.42);
+      padding: 0;
+    }
+
+    .multi-camera-page-dot.active {
+      width: 19px;
+      border-radius: 999px;
+      background: #52a6ff;
+    }
+
+    .monitor.overlays-hidden .multi-camera-pager {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+    }
 
     .camera-tile {
       position: relative;
@@ -1836,6 +2283,19 @@
       backdrop-filter: blur(12px);
     }
 
+    .camera-tile .tile-sound.active {
+      background: rgba(37, 99, 235, 0.82);
+      box-shadow: 0 8px 20px rgba(37, 99, 235, 0.30);
+    }
+
+    .monitor.split-2 .camera-tile .tile-sound {
+      display: none;
+    }
+
+    .camera-tile .tile-sound .soothe-playing-bars {
+      height: 13px;
+    }
+
     .camera-tile .tile-setting {
       position: absolute;
       top: 10px;
@@ -1852,61 +2312,19 @@
       backdrop-filter: blur(12px);
     }
 
-    .tile-env-overlay {
+    .tile-timestamp {
       position: absolute;
       top: 10px;
       left: 10px;
       z-index: 3;
       display: inline-flex;
       align-items: center;
-      gap: 12px;
       width: max-content;
-      min-width: max-content;
-      max-width: none;
-      min-height: 30px;
-      border: 1px solid rgba(255, 255, 255, 0.18);
-      border-radius: 999px;
-      background: rgba(83, 86, 96, 0.86);
-      padding: 5px 12px;
-      box-shadow: 0 10px 22px rgba(0, 0, 0, 0.24);
-      backdrop-filter: blur(14px);
       color: rgba(255, 255, 255, 0.96);
-      font-size: 12px;
+      font-size: 10px;
       font-weight: 900;
-      box-sizing: border-box;
-      white-space: nowrap;
-      flex-wrap: nowrap;
-    }
-
-    .monitor.split-2 .camera-tile:first-child .tile-env-overlay,
-    .monitor.split-4 .camera-tile:first-child .tile-env-overlay {
-      left: 78px;
-    }
-
-    .tile-env-overlay span {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      justify-content: center;
-      flex: 0 0 auto;
-      min-width: max-content;
-      white-space: nowrap;
-    }
-
-    .tile-env-overlay .monitor-env-icon {
-      flex: 0 0 13px;
-      width: 13px;
-      height: 13px;
-      color: rgba(255, 255, 255, 0.92);
-    }
-
-    .tile-env-overlay strong {
-      color: #fff;
-      font-size: 12px;
-      font-weight: 950;
-      line-height: 1;
-      display: inline-block;
-      min-width: max-content;
+      font-variant-numeric: tabular-nums;
+      text-shadow: 0 1px 3px rgba(0, 0, 0, 0.88), 0 0 7px rgba(0, 0, 0, 0.64);
       white-space: nowrap;
     }
 
@@ -1933,16 +2351,6 @@
       left: 10px;
       bottom: 10px;
       font-size: 12px;
-    }
-
-    .camera-tile .tile-env-overlay strong {
-      position: static;
-      left: auto;
-      bottom: auto;
-      z-index: auto;
-      display: inline;
-      font-size: 12px;
-      line-height: 1;
     }
 
     .right-panel {
@@ -2130,17 +2538,14 @@
       display: none;
     }
 
-    .right-panel[data-monitor-view="split2"] .scene-sleep .scene-breath-card,
-    .right-panel[data-monitor-view="split2"] .scene-sleep .scene-env-grid,
-    .right-panel[data-monitor-view="split2Full"] .scene-sleep .scene-breath-card,
-    .right-panel[data-monitor-view="split2Full"] .scene-sleep .scene-env-grid,
-    .right-panel[data-monitor-view="split2Full"] .scene-sleep .scene-clothing-advice,
-    .right-panel[data-monitor-view="split4"] .scene-sleep .scene-breath-card,
-    .right-panel[data-monitor-view="split4"] .scene-sleep .scene-env-grid,
-    .right-panel[data-monitor-view="split4"] .scene-sleep .scene-clothing-advice,
-    .right-panel[data-monitor-view="split4Full"] .scene-sleep .scene-breath-card,
-    .right-panel[data-monitor-view="split4Full"] .scene-sleep .scene-env-grid,
-    .right-panel[data-monitor-view="split4Full"] .scene-sleep .scene-clothing-advice {
+    .right-panel[data-monitor-view="split2"] .scene-sleep > .scene-breath-card,
+    .right-panel[data-monitor-view="split2"] .scene-sleep > .scene-env-grid,
+    .right-panel[data-monitor-view="split2Full"] .scene-sleep > .scene-breath-card,
+    .right-panel[data-monitor-view="split2Full"] .scene-sleep > .scene-env-grid,
+    .right-panel[data-monitor-view="split4"] .scene-sleep > .scene-breath-card,
+    .right-panel[data-monitor-view="split4"] .scene-sleep > .scene-env-grid,
+    .right-panel[data-monitor-view="split4Full"] .scene-sleep > .scene-breath-card,
+    .right-panel[data-monitor-view="split4Full"] .scene-sleep > .scene-env-grid {
       display: none;
     }
 
@@ -2151,19 +2556,28 @@
       display: grid;
       gap: 10px;
       min-height: 0;
+      flex: 1 1 auto;
+      align-content: start;
+      overflow-y: auto;
+    }
+
+    .right-panel[data-monitor-view="split2"] .scene-sleep .scene-split-status,
+    .right-panel[data-monitor-view="split2Full"] .scene-sleep .scene-split-status {
+      grid-template-rows: repeat(2, minmax(0, 1fr));
+      align-content: stretch;
+      overflow: hidden;
     }
 
     .right-panel[data-monitor-view="split2"] .scene-sleep {
       min-height: 100%;
+      align-items: stretch;
     }
 
-    .right-panel[data-monitor-view="split2"] .scene-sleep .scene-split-status {
-      flex: 0 1 auto;
-    }
-
-    .right-panel[data-monitor-view="split2"] .scene-sleep .scene-clothing-advice {
-      flex: 0 0 auto;
-      margin-top: auto;
+    .right-panel[data-monitor-view="split2Full"] .scene-sleep,
+    .right-panel[data-monitor-view="split4"] .scene-sleep,
+    .right-panel[data-monitor-view="split4Full"] .scene-sleep {
+      min-height: 100%;
+      align-items: stretch;
     }
 
     .right-panel[data-monitor-view="split2"] .scene-sleep > .scene-mode-top,
@@ -2190,37 +2604,29 @@
       align-items: flex-start;
     }
 
-    .right-panel[data-monitor-view="split4"] .scene-split-card,
-    .right-panel[data-monitor-view="split4Full"] .scene-split-card,
-    .right-panel[data-monitor-view="split2"] .scene-split-card,
-    .right-panel[data-monitor-view="split2Full"] .scene-split-card {
-      gap: 6px;
-      padding: 8px;
-    }
-
     .scene-split-card strong {
       display: block;
       color: #fff;
-      font-size: 17px;
-      line-height: 1.2;
+      font-size: 24px;
+      line-height: 1.08;
     }
 
     .scene-split-card span {
       display: block;
-      margin-top: 5px;
+      margin-top: 4px;
       color: #9fadbf;
-      font-size: 11px;
-      font-weight: 800;
+      font-size: 13px;
+      font-weight: 900;
     }
 
     .scene-split-card .scene-mode-alert {
-      padding: 10px;
+      padding: 10px 0 10px 12px;
     }
 
     .scene-split-card .scene-mode-alert p {
-      margin-top: 3px;
-      font-size: 10px;
-      line-height: 1.45;
+      margin-top: 6px;
+      font-size: 12px;
+      line-height: 1.55;
     }
 
     .scene-split-metrics {
@@ -2254,40 +2660,81 @@
       white-space: nowrap;
     }
 
-    .right-panel[data-monitor-view="split4"] .scene-split-card .scene-mode-alert,
-    .right-panel[data-monitor-view="split4Full"] .scene-split-card .scene-mode-alert,
-    .right-panel[data-monitor-view="split2"] .scene-split-card .scene-mode-alert,
-    .right-panel[data-monitor-view="split2Full"] .scene-split-card .scene-mode-alert {
-      padding: 7px 0 7px 9px;
+    .right-panel[data-monitor-view="split2"] .scene-split-card,
+    .right-panel[data-monitor-view="split2Full"] .scene-split-card,
+    .right-panel[data-monitor-view="split4"] .scene-split-card,
+    .right-panel[data-monitor-view="split4Full"] .scene-split-card {
+      min-height: 0;
     }
 
-    .right-panel[data-monitor-view="split4"] .scene-split-card .scene-mode-alert p,
-    .right-panel[data-monitor-view="split4Full"] .scene-split-card .scene-mode-alert p,
-    .right-panel[data-monitor-view="split2"] .scene-split-card .scene-mode-alert p,
-    .right-panel[data-monitor-view="split2Full"] .scene-split-card .scene-mode-alert p {
-      display: none;
+    .right-panel[data-monitor-view="split2"] .scene-split-card,
+    .right-panel[data-monitor-view="split2Full"] .scene-split-card {
+      gap: 6px;
+      overflow: hidden;
+      padding: 9px 10px;
     }
 
-    .right-panel[data-monitor-view="split4"] .scene-split-metrics,
-    .right-panel[data-monitor-view="split4Full"] .scene-split-metrics,
-    .right-panel[data-monitor-view="split2"] .scene-split-metrics,
-    .right-panel[data-monitor-view="split2Full"] .scene-split-metrics {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 4px;
-    }
-
-    .right-panel[data-monitor-view="split4"] .scene-split-metric,
-    .right-panel[data-monitor-view="split4Full"] .scene-split-metric,
-    .right-panel[data-monitor-view="split2"] .scene-split-metric,
-    .right-panel[data-monitor-view="split2Full"] .scene-split-metric {
-      padding: 5px 6px;
-    }
-
-    .right-panel[data-monitor-view="split4"] .scene-split-card .scene-split-metric strong,
-    .right-panel[data-monitor-view="split4Full"] .scene-split-card .scene-split-metric strong,
-    .right-panel[data-monitor-view="split2"] .scene-split-card .scene-split-metric strong,
-    .right-panel[data-monitor-view="split2Full"] .scene-split-card .scene-split-metric strong {
+    .right-panel[data-monitor-view="split2"] .scene-split-card .scene-status-heading,
+    .right-panel[data-monitor-view="split2Full"] .scene-split-card .scene-status-heading {
+      margin-bottom: 4px;
       font-size: 10px;
+    }
+
+    .right-panel[data-monitor-view="split2"] .scene-split-card .scene-mode-state,
+    .right-panel[data-monitor-view="split2Full"] .scene-split-card .scene-mode-state {
+      gap: 8px;
+    }
+
+    .right-panel[data-monitor-view="split2"] .scene-split-card .scene-mode-icon,
+    .right-panel[data-monitor-view="split2Full"] .scene-split-card .scene-mode-icon {
+      width: 30px;
+      height: 30px;
+      border-radius: 10px;
+      font-size: 16px;
+    }
+
+    .right-panel[data-monitor-view="split2"] .scene-split-card .scene-mode-state strong,
+    .right-panel[data-monitor-view="split2Full"] .scene-split-card .scene-mode-state strong {
+      font-size: 18px;
+    }
+
+    .right-panel[data-monitor-view="split2"] .scene-split-card .scene-mode-subtitle,
+    .right-panel[data-monitor-view="split2Full"] .scene-split-card .scene-mode-subtitle {
+      margin-top: 2px;
+      font-size: 10px;
+    }
+
+    .right-panel[data-monitor-view="split2"] .scene-split-card .scene-breath-card,
+    .right-panel[data-monitor-view="split2Full"] .scene-split-card .scene-breath-card {
+      padding-top: 6px;
+    }
+
+    .right-panel[data-monitor-view="split2"] .scene-split-card .scene-vitals-grid,
+    .right-panel[data-monitor-view="split2Full"] .scene-split-card .scene-vitals-grid {
+      gap: 6px;
+    }
+
+    .right-panel[data-monitor-view="split2"] .scene-split-card .scene-room-env-grid,
+    .right-panel[data-monitor-view="split2Full"] .scene-split-card .scene-room-env-grid {
+      margin-top: 6px;
+    }
+
+    .right-panel[data-monitor-view="split2"] .scene-split-card .scene-vital-item,
+    .right-panel[data-monitor-view="split2Full"] .scene-split-card .scene-vital-item {
+      gap: 3px;
+      border-radius: 9px;
+      padding: 6px 7px;
+    }
+
+    .right-panel[data-monitor-view="split2"] .scene-split-card .scene-vital-item span,
+    .right-panel[data-monitor-view="split2Full"] .scene-split-card .scene-vital-item span {
+      margin-top: 0;
+      font-size: 9px;
+    }
+
+    .right-panel[data-monitor-view="split2"] .scene-split-card .scene-vital-item strong,
+    .right-panel[data-monitor-view="split2Full"] .scene-split-card .scene-vital-item strong {
+      font-size: 13px;
     }
 
     .scene-split-pill {
@@ -2388,37 +2835,18 @@
     }
 
     .scene-split-card .scene-mode-icon {
-      width: 30px;
-      height: 30px;
-      border-radius: 12px;
-      font-size: 15px;
+      width: 38px;
+      height: 38px;
+      border-radius: 14px;
+      font-size: 20px;
     }
 
     .scene-split-card .scene-mode-state {
-      gap: 8px;
+      gap: 10px;
     }
 
     .scene-split-card .scene-mode-state strong {
-      font-size: 16px;
-    }
-
-    .right-panel[data-monitor-view="split4"] .scene-split-card .scene-mode-icon,
-    .right-panel[data-monitor-view="split4Full"] .scene-split-card .scene-mode-icon {
-      width: 26px;
-      height: 26px;
-      border-radius: 10px;
-      font-size: 13px;
-    }
-
-    .right-panel[data-monitor-view="split4"] .scene-split-card .scene-mode-state strong,
-    .right-panel[data-monitor-view="split4Full"] .scene-split-card .scene-mode-state strong {
-      font-size: 14px;
-    }
-
-    .right-panel[data-monitor-view="split4"] .scene-split-card .scene-mode-subtitle,
-    .right-panel[data-monitor-view="split4Full"] .scene-split-card .scene-mode-subtitle {
-      margin-top: 2px;
-      font-size: 10px;
+      font-size: 24px;
     }
 
     .scene-mode-alert {
@@ -2478,6 +2906,10 @@
       gap: 10px;
     }
 
+    .scene-room-env-grid {
+      margin-top: 10px;
+    }
+
     .scene-vital-item {
       display: grid;
       gap: 5px;
@@ -2512,48 +2944,6 @@
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 10px;
-    }
-
-    .scene-clothing-advice {
-      display: grid;
-      gap: 9px;
-      margin-top: auto;
-      border: 1px solid rgba(127, 151, 180, 0.22);
-      border-radius: 18px;
-      background:
-        radial-gradient(circle at 18% 0%, rgba(126, 224, 192, 0.13), transparent 42%),
-        rgba(255, 255, 255, 0.055);
-      padding: 14px 15px 16px;
-      box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.035);
-    }
-
-    .scene-clothing-head {
-      display: block;
-    }
-
-    .scene-clothing-title {
-      color: #f5f9ff;
-      font-size: 14px;
-      font-weight: 900;
-      line-height: 1.2;
-    }
-
-    .scene-clothing-chip {
-      border-radius: 999px;
-      background: rgba(126, 224, 192, 0.14);
-      padding: 5px 10px;
-      color: #8bf0d0;
-      font-size: 10px;
-      font-weight: 900;
-      white-space: nowrap;
-    }
-
-    .scene-clothing-copy {
-      margin: 0;
-      color: #cdd9e8;
-      font-size: 12px;
-      font-weight: 800;
-      line-height: 1.55;
     }
 
     .parenting-note {
@@ -2705,14 +3095,39 @@
       padding: 10px 12px;
     }
 
-    .screen.single-device-home .device-strip,
-    .screen.dual-device-home .device-strip,
+    .screen.base-home .device-strip,
+    .screen.base-home .scene-env-grid {
+      display: none;
+    }
+
+    .screen.base-home .content {
+      grid-row: 3 / 5;
+    }
+
+    .screen.dual-device-home .device-strip {
+      display: none;
+    }
+
+    .screen.dual-device-home .scene-sleep .scene-env-grid {
+      display: none;
+    }
+
+    .screen.ecological-device-home .scene-env-grid {
+      display: none;
+    }
+
+    .screen.dual-device-home .content {
+      grid-row: 3 / 5;
+    }
+
+    .screen.dual-device-home .scene-split-card .scene-split-metric:nth-child(n + 3) {
+      display: none;
+    }
+
     .screen.offline-device-home .device-strip {
       display: none;
     }
 
-    .screen.single-device-home .content,
-    .screen.dual-device-home .content,
     .screen.offline-device-home .content,
     .screen.no-device-page-mode .content {
       grid-row: 3 / 5;
@@ -9070,7 +9485,7 @@
     .control-grid {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
-      grid-template-rows: repeat(4, 74px);
+      grid-template-rows: repeat(5, 74px);
       gap: 12px;
       min-height: 0;
     }
@@ -9145,6 +9560,7 @@
 
     .vertical-slider {
       display: grid;
+      grid-template-rows: minmax(0, 1fr) auto;
       align-content: stretch;
       justify-items: center;
       gap: 10px;
@@ -9153,18 +9569,19 @@
 
     .vertical-slider.brightness-slider {
       grid-column: 4;
-      grid-row: 1 / 5;
+      grid-row: 1 / 6;
     }
 
     .vertical-slider.volume-slider {
       grid-column: 3;
-      grid-row: 1 / 5;
+      grid-row: 1 / 6;
     }
 
     .vertical-track {
       position: relative;
       width: 62px;
-      height: 232px;
+      height: 100%;
+      min-height: 232px;
       overflow: hidden;
       border-radius: 28px;
       background: rgba(255, 255, 255, 0.18);
@@ -9210,9 +9627,14 @@
       color: #244061;
     }
 
-    .sleep-control-card {
+    .power-saving-control {
       grid-column: 1 / 3;
       grid-row: 4;
+    }
+
+    .sleep-control-card {
+      grid-column: 1 / 3;
+      grid-row: 5;
       display: grid;
       grid-template-columns: minmax(0, 1fr) auto;
       align-items: center;
@@ -10352,21 +10774,19 @@
       <div class="nav-scroll">
         <section class="nav-group">
           <h2 class="inline-edit-hint">一级模块</h2>
-          <button class="nav-item inline-edit-hint" data-page="全局说明">全局说明</button>
           <button class="nav-item inline-edit-hint" data-page="屏端初始化向导">屏端初始化向导</button>
           <button class="nav-item inline-edit-hint" data-page="屏端初始化向导" data-onboarding-jump="4" data-onboarding-mode="paired-add">添加设备（已配对好）</button>
           <button class="nav-item inline-edit-hint" data-page="屏端初始化向导" data-onboarding-jump="10">添加设备（未配对好）</button>
-          <button class="nav-item inline-edit-hint" data-page="无设备页">无设备页</button>
-          <button class="nav-item inline-edit-hint" data-page="新手引导">新手引导</button>
-          <button class="nav-item inline-edit-hint" data-page="实时监控区">主页</button>
+          <button class="nav-item active inline-edit-hint" data-page="实时监控区">主页</button>
           <div class="nav-sub">
-            <button class="nav-sub-item inline-edit-hint" data-page="实时监控区" data-view="single">单IPC主页</button>
-            <button class="nav-sub-item inline-edit-hint" data-page="实时监控区" data-view="dualHome" data-home-sub-page="dualDevice">多IPC主页</button>
+            <button class="nav-sub-item inline-edit-hint" data-page="实时监控区" data-view="dualHome" data-home-sub-page="dualDevice">多设备主页</button>
             <button class="nav-sub-item inline-edit-hint" data-page="实时监控区" data-view="single" data-home-sub-page="offlineDevice">设备离线主页</button>
-            <button class="nav-sub-item inline-edit-hint" data-page="实时监控区" data-scene="睡眠看护">主页-睡眠看护</button>
-            <button class="nav-sub-item inline-edit-hint" data-page="实时监控区" data-view="split2">主页-多画面</button>
             <button class="nav-sub-item inline-edit-hint" data-page="实时监控区" data-view="singleFull">单画面全屏</button>
             <button class="nav-sub-item inline-edit-hint" data-page="实时监控区" data-view="split2Full">双画面全屏</button>
+            <button class="nav-sub-item inline-edit-hint" data-page="新手引导">新手引导</button>
+            <button class="nav-sub-item inline-edit-hint" data-page="无设备页">无设备页</button>
+            <button class="nav-sub-item inline-edit-hint" data-page="实时监控区" data-scene="睡眠看护">主页-生态设备</button>
+            <button class="nav-sub-item inline-edit-hint" data-page="实时监控区" data-view="split2">主页-生态设备-多画面</button>
           </div>
           <button class="nav-item inline-edit-hint" data-page="宝宝看护指标区">看护记录</button>
           <div class="nav-sub">
@@ -10375,7 +10795,7 @@
             <button class="nav-sub-item inline-edit-hint" data-page="宝宝看护指标区" data-care-state="empty">无数据状态</button>
             <button class="nav-sub-item inline-edit-hint" data-page="智能看护设置">智能看护设置</button>
           </div>
-          <button class="nav-item active inline-edit-hint" data-page="日常活动统计" data-scene="活动" data-room="neo">录像回放</button>
+          <button class="nav-item inline-edit-hint" data-page="日常活动统计" data-scene="活动" data-room="neo">录像回放</button>
           <div class="nav-sub">
             <button class="nav-sub-item inline-edit-hint" data-page="日常活动统计" data-replay-state="noCard">未插卡</button>
           </div>
@@ -10408,11 +10828,11 @@
       <div class="canvas-wrap">
         <div class="canvas-head">
           <strong>8 寸平板横屏原型</strong>
-          <span id="canvasLabel">日常活动统计 / 录像回放</span>
+          <span id="canvasLabel">实时监控区 / niki / 睡眠看护</span>
         </div>
 
         <div class="shell">
-          <div class="screen replay-page-mode">
+          <div class="screen base-home">
             <header class="topbar">
               <div class="screen-date inline-edit-hint">2026/5/7 周四</div>
               <div class="screen-status">
@@ -10445,9 +10865,9 @@
             </header>
 
             <nav class="screen-menu" aria-label="屏内主菜单">
-              <button class="screen-menu-item inline-edit-hint" data-page="实时监控区" data-scene="睡眠看护">主页</button>
+              <button class="screen-menu-item active inline-edit-hint" data-page="实时监控区" data-scene="睡眠看护">主页</button>
               <button class="screen-menu-item inline-edit-hint" data-page="宝宝看护指标区" data-scene="睡眠看护">看护记录</button>
-              <button class="screen-menu-item active inline-edit-hint" data-page="日常活动统计" data-scene="活动" data-room="neo">录像回放</button>
+              <button class="screen-menu-item inline-edit-hint" data-page="日常活动统计" data-scene="活动" data-room="neo">录像回放</button>
               <button class="screen-menu-item inline-edit-hint" data-page="智能看护快捷设置">设置</button>
               <div class="screen-menu-spacer"></div>
               <button class="screen-menu-item inline-edit-hint" data-page="账号信息">账号</button>
@@ -10463,18 +10883,8 @@
                   <div class="monitor-header">
                     <div class="monitor-left-tools">
                       <div class="live-pills">
-                        <span class="live-pill live inline-edit-hint">Live</span>
                         <span class="cam-name fullscreen-room-pill inline-edit-hint" id="fullscreenRoomPill" hidden="">niki · niki</span>
-                        <div class="monitor-env-overlay" aria-label="实时环境温湿度">
-                          <span aria-label="室温">
-                            <svg class="monitor-env-icon" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 14.76V5a4 4 0 0 0-8 0v9.76a6 6 0 1 0 8 0Z"></path><path d="M10 8v8"></path></svg>
-                            <strong id="monitorTempValue" class="inline-edit-hint">24.5°C</strong>
-                          </span>
-                          <span aria-label="湿度">
-                            <svg class="monitor-env-icon" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3.5S6 10.1 6 14.2a6 6 0 0 0 12 0C18 10.1 12 3.5 12 3.5Z"></path></svg>
-                            <strong id="monitorHumidityValue" class="inline-edit-hint">55%</strong>
-                          </span>
-                        </div>
+                        <time class="monitor-timestamp inline-edit-hint" id="monitorTimestamp" data-monitor-timestamp="" datetime="2026-07-16T21:15:52">2026年07月16日 21:15:52</time>
                       </div>
                     </div>
                     <button class="monitor-setting" type="button" title="设备设置" aria-label="设备设置" data-page-jump="设备设置" data-device-settings-source="monitor">
@@ -10485,7 +10895,7 @@
                     </button>
                   </div>
 
-                  <div class="monitor-click-target" id="monitorClickTarget" aria-label="进入单画面全屏"></div>
+                  <div class="monitor-click-target" id="monitorClickTarget" aria-label="切换画面信息显示"></div>
                   <div class="monitor-sleep-state" id="monitorSleepState" aria-label="设备休眠状态">
                     <div class="monitor-sleep-card">
                       <span class="monitor-sleep-icon" aria-hidden="true">
@@ -10503,11 +10913,7 @@
                   <div class="multi-grid" id="multiGrid">
                     <button class="camera-tile active" data-room="niki" data-camera="婴儿床摄像头" style="--pos:center 56%;">
                       <strong class="inline-edit-hint">niki</strong><span class="tile-setting" title="设置" aria-label="设置"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 15.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7Z"></path><path d="M19.4 15a1.8 1.8 0 0 0 .36 1.98l.04.04a2.16 2.16 0 0 1-3.05 3.05l-.04-.04a1.8 1.8 0 0 0-1.98-.36 1.8 1.8 0 0 0-1.1 1.66V21.4a2.16 2.16 0 0 1-4.32 0v-.07a1.8 1.8 0 0 0-1.1-1.66 1.8 1.8 0 0 0-1.98.36l-.04.04a2.16 2.16 0 0 1-3.05-3.05l.04-.04A1.8 1.8 0 0 0 4.6 15a1.8 1.8 0 0 0-1.66-1.1H2.86a2.16 2.16 0 0 1 0-4.32h.07A1.8 1.8 0 0 0 4.6 8a1.8 1.8 0 0 0-.36-1.98l-.04-.04a2.16 2.16 0 0 1 3.05-3.05l.04.04A1.8 1.8 0 0 0 9.27 3.3a1.8 1.8 0 0 0 1.1-1.66V1.6a2.16 2.16 0 0 1 4.32 0v.07a1.8 1.8 0 0 0 1.1 1.66 1.8 1.8 0 0 0 1.98-.36l.04-.04a2.16 2.16 0 0 1 3.05 3.05l-.04.04A1.8 1.8 0 0 0 19.4 8a1.8 1.8 0 0 0 1.66 1.1h.07a2.16 2.16 0 0 1 0 4.32h-.07A1.8 1.8 0 0 0 19.4 15Z"></path></svg></span>
-                    <span class="tile-env-overlay" hidden=""><span aria-label="室温">
-        <svg class="monitor-env-icon" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 14.76V5a4 4 0 0 0-8 0v9.76a6 6 0 1 0 8 0Z"></path><path d="M10 8v8"></path></svg>
-      <strong class="inline-edit-hint">24.5°C</strong></span><span aria-label="湿度">
-        <svg class="monitor-env-icon" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3.5S6 10.1 6 14.2a6 6 0 0 0 12 0C18 10.1 12 3.5 12 3.5Z"></path></svg>
-      <strong class="inline-edit-hint">55%</strong></span></span><span class="tile-sound" title="睡眠安抚" aria-label="睡眠安抚"><span class="sound-icon inline-edit-hint">♪</span>睡眠安抚</span>
+                    <time class="tile-timestamp inline-edit-hint" data-monitor-timestamp="" datetime="2026-07-16T21:15:52">2026年07月16日 21:15:52</time><span class="tile-sound" title="安抚音" aria-label="安抚音" aria-expanded="false" aria-controls="sootheDrawer"><span class="sound-icon inline-edit-hint">♪</span>安抚音</span>
       <span class="tile-sleep-state" aria-label="设备休眠状态">
         <span class="monitor-sleep-card">
           <span class="monitor-sleep-icon" aria-hidden="true">
@@ -10524,11 +10930,7 @@
     </button>
                     <button class="camera-tile" data-room="neo" data-camera="neo摄像头" style="--pos:58% 56%;">
                       <strong class="inline-edit-hint">neo</strong><span class="tile-setting" title="设置" aria-label="设置"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 15.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7Z"></path><path d="M19.4 15a1.8 1.8 0 0 0 .36 1.98l.04.04a2.16 2.16 0 0 1-3.05 3.05l-.04-.04a1.8 1.8 0 0 0-1.98-.36 1.8 1.8 0 0 0-1.1 1.66V21.4a2.16 2.16 0 0 1-4.32 0v-.07a1.8 1.8 0 0 0-1.1-1.66 1.8 1.8 0 0 0-1.98.36l-.04.04a2.16 2.16 0 0 1-3.05-3.05l.04-.04A1.8 1.8 0 0 0 4.6 15a1.8 1.8 0 0 0-1.66-1.1H2.86a2.16 2.16 0 0 1 0-4.32h.07A1.8 1.8 0 0 0 4.6 8a1.8 1.8 0 0 0-.36-1.98l-.04-.04a2.16 2.16 0 0 1 3.05-3.05l.04.04A1.8 1.8 0 0 0 9.27 3.3a1.8 1.8 0 0 0 1.1-1.66V1.6a2.16 2.16 0 0 1 4.32 0v.07a1.8 1.8 0 0 0 1.1 1.66 1.8 1.8 0 0 0 1.98-.36l.04-.04a2.16 2.16 0 0 1 3.05 3.05l-.04.04A1.8 1.8 0 0 0 19.4 8a1.8 1.8 0 0 0 1.66 1.1h.07a2.16 2.16 0 0 1 0 4.32h-.07A1.8 1.8 0 0 0 19.4 15Z"></path></svg></span>
-                    <span class="tile-env-overlay" hidden=""><span aria-label="室温">
-        <svg class="monitor-env-icon" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 14.76V5a4 4 0 0 0-8 0v9.76a6 6 0 1 0 8 0Z"></path><path d="M10 8v8"></path></svg>
-      <strong class="inline-edit-hint">24.7°C</strong></span><span aria-label="湿度">
-        <svg class="monitor-env-icon" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3.5S6 10.1 6 14.2a6 6 0 0 0 12 0C18 10.1 12 3.5 12 3.5Z"></path></svg>
-      <strong class="inline-edit-hint">54%</strong></span></span><span class="tile-sound" title="睡眠安抚" aria-label="睡眠安抚"><span class="sound-icon inline-edit-hint">♪</span>睡眠安抚</span>
+                    <time class="tile-timestamp inline-edit-hint" data-monitor-timestamp="" datetime="2026-07-16T21:15:52">2026年07月16日 21:15:52</time><span class="tile-sound" title="安抚音" aria-label="安抚音" aria-expanded="false" aria-controls="sootheDrawer"><span class="sound-icon inline-edit-hint">♪</span>安抚音</span>
       <span class="tile-sleep-state" aria-label="设备休眠状态">
         <span class="monitor-sleep-card">
           <span class="monitor-sleep-icon" aria-hidden="true">
@@ -10545,11 +10947,7 @@
     </button>
                     <button class="camera-tile" data-room="niki2" data-camera="niki2摄像头" style="--pos:50% 42%;">
                       <strong class="inline-edit-hint">niki2</strong><span class="tile-setting" title="设置" aria-label="设置"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 15.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7Z"></path><path d="M19.4 15a1.8 1.8 0 0 0 .36 1.98l.04.04a2.16 2.16 0 0 1-3.05 3.05l-.04-.04a1.8 1.8 0 0 0-1.98-.36 1.8 1.8 0 0 0-1.1 1.66V21.4a2.16 2.16 0 0 1-4.32 0v-.07a1.8 1.8 0 0 0-1.1-1.66 1.8 1.8 0 0 0-1.98.36l-.04.04a2.16 2.16 0 0 1-3.05-3.05l.04-.04A1.8 1.8 0 0 0 4.6 15a1.8 1.8 0 0 0-1.66-1.1H2.86a2.16 2.16 0 0 1 0-4.32h.07A1.8 1.8 0 0 0 4.6 8a1.8 1.8 0 0 0-.36-1.98l-.04-.04a2.16 2.16 0 0 1 3.05-3.05l.04.04A1.8 1.8 0 0 0 9.27 3.3a1.8 1.8 0 0 0 1.1-1.66V1.6a2.16 2.16 0 0 1 4.32 0v.07a1.8 1.8 0 0 0 1.1 1.66 1.8 1.8 0 0 0 1.98-.36l.04-.04a2.16 2.16 0 0 1 3.05 3.05l-.04.04A1.8 1.8 0 0 0 19.4 8a1.8 1.8 0 0 0 1.66 1.1h.07a2.16 2.16 0 0 1 0 4.32h-.07A1.8 1.8 0 0 0 19.4 15Z"></path></svg></span>
-                    <span class="tile-env-overlay" hidden=""><span aria-label="室温">
-        <svg class="monitor-env-icon" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 14.76V5a4 4 0 0 0-8 0v9.76a6 6 0 1 0 8 0Z"></path><path d="M10 8v8"></path></svg>
-      <strong class="inline-edit-hint">24.3°C</strong></span><span aria-label="湿度">
-        <svg class="monitor-env-icon" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3.5S6 10.1 6 14.2a6 6 0 0 0 12 0C18 10.1 12 3.5 12 3.5Z"></path></svg>
-      <strong class="inline-edit-hint">57%</strong></span></span><span class="tile-sound" title="睡眠安抚" aria-label="睡眠安抚"><span class="sound-icon inline-edit-hint">♪</span>睡眠安抚</span>
+                    <time class="tile-timestamp inline-edit-hint" data-monitor-timestamp="" datetime="2026-07-16T21:15:52">2026年07月16日 21:15:52</time><span class="tile-sound" title="安抚音" aria-label="安抚音" aria-expanded="false" aria-controls="sootheDrawer"><span class="sound-icon inline-edit-hint">♪</span>安抚音</span>
       <span class="tile-sleep-state" aria-label="设备休眠状态">
         <span class="monitor-sleep-card">
           <span class="monitor-sleep-icon" aria-hidden="true">
@@ -10566,11 +10964,7 @@
     </button>
                     <button class="camera-tile" data-room="niki3" data-camera="niki3摄像头" style="--pos:47% 50%;">
                       <strong class="inline-edit-hint">niki3</strong><span class="tile-setting" title="设置" aria-label="设置"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 15.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7Z"></path><path d="M19.4 15a1.8 1.8 0 0 0 .36 1.98l.04.04a2.16 2.16 0 0 1-3.05 3.05l-.04-.04a1.8 1.8 0 0 0-1.98-.36 1.8 1.8 0 0 0-1.1 1.66V21.4a2.16 2.16 0 0 1-4.32 0v-.07a1.8 1.8 0 0 0-1.1-1.66 1.8 1.8 0 0 0-1.98.36l-.04.04a2.16 2.16 0 0 1-3.05-3.05l.04-.04A1.8 1.8 0 0 0 4.6 15a1.8 1.8 0 0 0-1.66-1.1H2.86a2.16 2.16 0 0 1 0-4.32h.07A1.8 1.8 0 0 0 4.6 8a1.8 1.8 0 0 0-.36-1.98l-.04-.04a2.16 2.16 0 0 1 3.05-3.05l.04.04A1.8 1.8 0 0 0 9.27 3.3a1.8 1.8 0 0 0 1.1-1.66V1.6a2.16 2.16 0 0 1 4.32 0v.07a1.8 1.8 0 0 0 1.1 1.66 1.8 1.8 0 0 0 1.98-.36l.04-.04a2.16 2.16 0 0 1 3.05 3.05l-.04.04A1.8 1.8 0 0 0 19.4 8a1.8 1.8 0 0 0 1.66 1.1h.07a2.16 2.16 0 0 1 0 4.32h-.07A1.8 1.8 0 0 0 19.4 15Z"></path></svg></span>
-                    <span class="tile-env-overlay" hidden=""><span aria-label="室温">
-        <svg class="monitor-env-icon" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 14.76V5a4 4 0 0 0-8 0v9.76a6 6 0 1 0 8 0Z"></path><path d="M10 8v8"></path></svg>
-      <strong class="inline-edit-hint">24.8°C</strong></span><span aria-label="湿度">
-        <svg class="monitor-env-icon" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3.5S6 10.1 6 14.2a6 6 0 0 0 12 0C18 10.1 12 3.5 12 3.5Z"></path></svg>
-      <strong class="inline-edit-hint">56%</strong></span></span><span class="tile-sound" title="睡眠安抚" aria-label="睡眠安抚"><span class="sound-icon inline-edit-hint">♪</span>睡眠安抚</span>
+                    <time class="tile-timestamp inline-edit-hint" data-monitor-timestamp="" datetime="2026-07-16T21:15:52">2026年07月16日 21:15:52</time><span class="tile-sound" title="安抚音" aria-label="安抚音" aria-expanded="false" aria-controls="sootheDrawer"><span class="sound-icon inline-edit-hint">♪</span>安抚音</span>
       <span class="tile-sleep-state" aria-label="设备休眠状态">
         <span class="monitor-sleep-card">
           <span class="monitor-sleep-icon" aria-hidden="true">
@@ -10587,6 +10981,12 @@
     </button>
                   </div>
 
+                  <div class="multi-camera-pager" id="multiCameraPager" aria-label="实时画面分页" hidden="">
+                    <button class="multi-camera-page-arrow previous inline-edit-hint" id="multiCameraPrev" type="button" title="上一页" aria-label="上一页" disabled="">‹</button>
+                    <div class="multi-camera-page-dots" id="multiCameraPageDots" aria-label="选择实时画面页"><button class="multi-camera-page-dot active" type="button" data-multi-camera-page="0" aria-label="第 1 页" aria-current="page"></button><button class="multi-camera-page-dot" type="button" data-multi-camera-page="1" aria-label="第 2 页" aria-current="false"></button></div>
+                    <button class="multi-camera-page-arrow next inline-edit-hint" id="multiCameraNext" type="button" title="下一页" aria-label="下一页">›</button>
+                  </div>
+
                   <div class="monitor-offline-state">
                     <div class="offline-state-card">
                       <span class="offline-state-icon inline-edit-hint">!</span>
@@ -10599,29 +10999,101 @@
                     </div>
                   </div>
 
+                  <div class="monitor-capture-toast" id="monitorCaptureToast" role="status" aria-live="polite" hidden=""></div>
+
+                  <div class="monitor-screenshot-preview" id="monitorScreenshotPreview" role="status" aria-live="polite" hidden="">
+                    <div class="monitor-screenshot-thumbnail" id="monitorScreenshotThumbnail" aria-hidden="true"><b class="monitor-video-preview-icon inline-edit-hint">▶</b></div>
+                  </div>
+
                   <div class="monitor-actions">
-                    <button class="monitor-soothe-shortcut" id="sleepSootheShortcut" type="button" aria-label="睡眠安抚">
+                    <button class="monitor-soothe-shortcut" id="sleepSootheShortcut" type="button" aria-label="安抚音" aria-expanded="false" aria-controls="sootheDrawer">
                       <span class="monitor-soothe-icon inline-edit-hint">♪</span>
-                      <span class="monitor-soothe-copy"><strong class="inline-edit-hint">睡眠安抚</strong></span>
+                      <span class="monitor-soothe-copy"><strong class="inline-edit-hint">安抚音</strong></span>
                     </button>
                     <button class="icon-btn" title="休眠/唤醒" data-action="monitor-sleep"><span class="inline-edit-hint">◔</span><span class="action-label inline-edit-hint">休眠/唤醒</span></button>
-                    <button class="icon-btn" title="语音对讲"><span class="inline-edit-hint">☎</span><span class="action-label inline-edit-hint">对讲</span></button>
-                    <button class="icon-btn" title="截图"><span class="inline-edit-hint">▣</span><span class="action-label inline-edit-hint">截图</span></button>
-                    <button class="icon-btn" title="录像"><span class="inline-edit-hint">●</span><span class="action-label inline-edit-hint">录像</span></button>
-                    <button class="icon-btn" title="声音"><span class="inline-edit-hint">◕</span><span class="action-label inline-edit-hint">声音</span></button>
-                    <button class="icon-btn" title="仅音频"><span class="inline-edit-hint">◉</span><span class="action-label inline-edit-hint">仅音频</span></button>
+                    <button class="icon-btn" id="monitorIntercomButton" type="button" title="语音对讲" data-action="monitor-intercom" aria-pressed="false" aria-label="开启对讲"><span class="intercom-icon inline-edit-hint">☎</span><span class="action-label inline-edit-hint" id="monitorIntercomLabel">对讲</span></button>
+                    <button class="icon-btn" type="button" title="截图" data-action="monitor-screenshot"><span class="inline-edit-hint">▣</span><span class="action-label inline-edit-hint">截图</span></button>
+                    <button class="icon-btn" id="monitorRecordingButton" type="button" title="录像" data-action="monitor-recording" aria-pressed="false" aria-label="开始录像"><span class="recording-icon inline-edit-hint">●</span><span class="action-label inline-edit-hint" id="monitorRecordingLabel">录像</span></button>
+                    <button class="icon-btn" id="monitorSoundToggle" type="button" title="关闭声音" data-action="monitor-sound" aria-pressed="true" aria-label="关闭声音"><span class="sound-toggle-icon inline-edit-hint" id="monitorSoundIcon">◕</span><span class="action-label inline-edit-hint" id="monitorSoundLabel">声音开</span></button>
+                    <button class="icon-btn" id="monitorAudioOnlyToggle" type="button" title="开启音频模式" data-action="monitor-audio-only" aria-pressed="false" aria-label="开启音频模式"><span class="inline-edit-hint">◉</span><span class="action-label inline-edit-hint" id="monitorAudioOnlyLabel">音频模式</span></button>
                     <button class="icon-btn fullscreen-only" title="退出全屏" data-action="exit-fullscreen"><span class="inline-edit-hint">×</span><span class="action-label inline-edit-hint">退出全屏</span></button>
                   </div>
+                  <section class="soothe-drawer" id="sootheDrawer" aria-label="安抚音控制" hidden="">
+                    <div class="soothe-drawer-head">
+                      <div>
+                        <strong class="inline-edit-hint">安抚音</strong>
+                        <span id="sootheSelectionLabel" class="inline-edit-hint">白噪声 · 未播放</span>
+                      </div>
+                    </div>
+                    <div class="soothe-drawer-row">
+                      <span class="soothe-drawer-label inline-edit-hint">选择安抚音</span>
+                      <button class="soothe-play-toggle" id="soothePlayToggle" type="button"><span id="soothePlayIcon" class="inline-edit-hint">▶</span><span id="soothePlayLabel" class="inline-edit-hint">播放</span></button>
+                    </div>
+                    <div class="soothe-sound-list" id="sootheSoundList">
+                      <button class="soothe-sound-option active" type="button" data-soothe-sound="白噪声"><span class="inline-edit-hint">≋</span>白噪声</button>
+                      <button class="soothe-sound-option" type="button" data-soothe-sound="摇篮曲"><span class="inline-edit-hint">♪</span>摇篮曲</button>
+                      <button class="soothe-sound-option" type="button" data-soothe-sound="雨声"><span class="inline-edit-hint">∿</span>雨声</button>
+                      <button class="soothe-sound-option" type="button" data-soothe-sound="心跳声"><span class="inline-edit-hint">♡</span>心跳声</button>
+                      <button class="soothe-sound-option" type="button" data-soothe-sound="海浪声"><span class="inline-edit-hint">≈</span>海浪声</button>
+                      <button class="soothe-sound-option" type="button" data-soothe-sound="风扇声"><span class="inline-edit-hint">✣</span>风扇声</button>
+                      <button class="soothe-sound-option" type="button" data-soothe-sound="森林声"><span class="inline-edit-hint">♧</span>森林声</button>
+                      <button class="soothe-sound-option" type="button" data-soothe-sound="嘘声"><span class="inline-edit-hint">〰</span>嘘声</button>
+                    </div>
+                    <div class="soothe-drawer-row">
+                      <span class="soothe-drawer-label inline-edit-hint">安抚音音量</span>
+                      <div class="soothe-volume-line">
+                        <input id="sootheVolume" type="range" min="0" max="100" value="36" aria-label="安抚音音量">
+                        <span class="soothe-volume-value inline-edit-hint" id="sootheVolumeValue">36%</span>
+                      </div>
+                    </div>
+                    <div class="soothe-drawer-row">
+                      <span class="soothe-drawer-label inline-edit-hint">安抚音定时</span>
+                    </div>
+                    <div class="soothe-timer-list" id="sootheTimerList">
+                      <button class="soothe-timer-option active inline-edit-hint" type="button" data-soothe-timer="不定时">不定时</button>
+                      <button class="soothe-timer-option inline-edit-hint" type="button" data-soothe-timer="10min">10min</button>
+                      <button class="soothe-timer-option inline-edit-hint" type="button" data-soothe-timer="15min">15min</button>
+                      <button class="soothe-timer-option inline-edit-hint" type="button" data-soothe-timer="20min">20min</button>
+                      <button class="soothe-timer-option inline-edit-hint" type="button" data-soothe-timer="30min">30min</button>
+                    </div>
+                  </section>
+                  <section class="intercom-confirm-modal" id="intercomConfirmModal" aria-label="开启对讲提示" hidden="">
+                    <div class="intercom-confirm-dialog" role="dialog" aria-modal="true" aria-labelledby="intercomConfirmTitle" aria-describedby="intercomConfirmDesc">
+                      <div class="intercom-confirm-head">
+                        <span class="intercom-confirm-icon inline-edit-hint" aria-hidden="true">☎</span>
+                        <h3 id="intercomConfirmTitle" class="inline-edit-hint">开启对讲</h3>
+                      </div>
+                      <p id="intercomConfirmDesc" class="inline-edit-hint">尽量将看护屏与设备保持一定距离，避免引起啸叫。</p>
+                      <div class="intercom-confirm-actions">
+                        <button class="intercom-cancel inline-edit-hint" type="button" data-action="intercom-cancel">取消</button>
+                        <button class="intercom-confirm inline-edit-hint" type="button" data-action="intercom-confirm">确认</button>
+                      </div>
+                    </div>
+                  </section>
+                  <section class="intercom-confirm-modal" id="audioOnlyConfirmModal" aria-label="开启音频模式提示" hidden="">
+                    <div class="intercom-confirm-dialog" role="dialog" aria-modal="true" aria-labelledby="audioOnlyConfirmTitle" aria-describedby="audioOnlyConfirmDesc">
+                      <div class="intercom-confirm-head">
+                        <span class="intercom-confirm-icon inline-edit-hint" aria-hidden="true">◉</span>
+                        <h3 id="audioOnlyConfirmTitle" class="inline-edit-hint">开启音频模式</h3>
+                      </div>
+                      <p id="audioOnlyConfirmDesc" class="inline-edit-hint">开启此功能，息屏后仍能保持音频传输。开启后，省电模式将自动关闭，是否开启？</p>
+                      <label class="audio-only-skip"><input id="audioOnlySkipPrompt" type="checkbox"><span class="inline-edit-hint">不再提示</span></label>
+                      <div class="intercom-confirm-actions">
+                        <button class="intercom-cancel inline-edit-hint" type="button" data-action="audio-only-cancel">取消</button>
+                        <button class="intercom-confirm inline-edit-hint" type="button" data-action="audio-only-confirm">确认</button>
+                      </div>
+                    </div>
+                  </section>
                 </section>
               </div>
 
-              <aside class="right-panel" id="rightPanel" data-scene-panel="活动" data-monitor-view="single">
+              <aside class="right-panel" id="rightPanel" data-scene-panel="睡眠看护" data-monitor-view="single">
                 <div class="scene-mode-card scene-soothe">
                   <div class="scene-mode-top">
                     <div><div class="scene-mode-state"><span class="scene-mode-icon inline-edit-hint">☾</span><span class="scene-mode-state-text"><strong class="inline-edit-hint">niki平静</strong><span class="scene-mode-subtitle"></span></span></div></div>
                   </div>
                   <div class="scene-mode-alert"><strong class="inline-edit-hint">已开启白噪声</strong><p class="inline-edit-hint">正在轻柔安抚宝宝入睡。</p></div>
-                  <div class="scene-breath-card"><div class="scene-vitals-grid"><div class="scene-vital-item"><span class="inline-edit-hint">呼吸率</span><strong class="inline-edit-hint">30 br/min</strong></div><div class="scene-vital-item"><span class="inline-edit-hint">心率</span><strong class="inline-edit-hint">112 bpm</strong></div></div></div>
+                  <div class="scene-breath-card"><div class="scene-vitals-grid"><div class="scene-vital-item"><span class="inline-edit-hint">呼吸率</span><strong class="inline-edit-hint">30 br/min</strong></div><div class="scene-vital-item"><span class="inline-edit-hint">心率</span><strong class="inline-edit-hint">112 bpm</strong></div></div><div class="scene-vitals-grid scene-room-env-grid"><div class="scene-vital-item"><span class="inline-edit-hint">温度</span><strong class="inline-edit-hint" data-room-temperature="">24.5°C</strong></div><div class="scene-vital-item"><span class="inline-edit-hint">湿度</span><strong class="inline-edit-hint" data-room-humidity="">55%</strong></div></div></div>
                   <div class="scene-env-grid"><div class="scene-env-card"><span class="inline-edit-hint">体温贴</span><strong class="inline-edit-hint">36.6°C</strong></div><div class="scene-env-card"><span class="inline-edit-hint">空气质量</span><strong class="inline-edit-hint">优</strong></div></div>
                 </div>
                 <div class="scene-mode-card scene-sleep">
@@ -10629,21 +11101,15 @@
                   <div class="scene-mode-top">
                     <div><div class="scene-status-heading inline-edit-hint" id="sceneSleepHeading">niki的状态</div><div class="scene-mode-state"><span class="scene-mode-icon inline-edit-hint">☾</span><span class="scene-mode-state-text"><strong id="sceneSleepTitle" class="inline-edit-hint">睡眠中</strong><span class="scene-mode-subtitle inline-edit-hint" id="sceneSleepMeta">已入睡2h40min</span></span></div></div>
                   </div>
-                  <div class="scene-breath-card"><div class="scene-vitals-grid"><div class="scene-vital-item"><span class="inline-edit-hint">呼吸率</span><strong class="inline-edit-hint">28 br/min</strong></div><div class="scene-vital-item"><span class="inline-edit-hint">心率</span><strong class="inline-edit-hint">108 bpm</strong></div></div></div>
+                  <div class="scene-breath-card"><div class="scene-vitals-grid"><div class="scene-vital-item"><span class="inline-edit-hint">呼吸率</span><strong class="inline-edit-hint">28 br/min</strong></div><div class="scene-vital-item"><span class="inline-edit-hint">心率</span><strong class="inline-edit-hint">108 bpm</strong></div></div><div class="scene-vitals-grid scene-room-env-grid"><div class="scene-vital-item"><span class="inline-edit-hint">温度</span><strong class="inline-edit-hint" data-room-temperature="">24.5°C</strong></div><div class="scene-vital-item"><span class="inline-edit-hint">湿度</span><strong class="inline-edit-hint" data-room-humidity="">55%</strong></div></div></div>
                   <div class="scene-env-grid"><div class="scene-env-card"><span class="inline-edit-hint">体温贴</span><strong class="inline-edit-hint">36.6°C</strong></div><div class="scene-env-card"><span class="inline-edit-hint">空气质量</span><strong class="inline-edit-hint">优</strong></div></div>
-                  <div class="scene-clothing-advice" aria-label="宝宝穿衣建议">
-                    <div class="scene-clothing-head">
-                      <strong class="scene-clothing-title inline-edit-hint">今日穿衣推荐</strong>
-                    </div>
-                    <p class="scene-clothing-copy inline-edit-hint">长袖连体衣 + 薄开衫，配柔软长裤。早晚外出时再加一层薄外套。</p>
-                  </div>
                 </div>
                 <div class="scene-mode-card scene-wakeup">
                   <div class="scene-mode-top">
                     <div><div class="scene-mode-state"><span class="scene-mode-icon inline-edit-hint">◌</span><span class="scene-mode-state-text"><strong class="inline-edit-hint">niki浅睡中</strong><span class="scene-mode-subtitle inline-edit-hint">安抚时长 12m</span></span></div></div>
                   </div>
                   <div class="scene-mode-alert"><strong class="inline-edit-hint">正在轻柔安抚</strong><p class="inline-edit-hint">已开启低音量安抚音，帮助宝宝睡醒后平稳过渡。</p></div>
-                  <div class="scene-breath-card"><div class="scene-vitals-grid"><div class="scene-vital-item"><span class="inline-edit-hint">呼吸率</span><strong class="inline-edit-hint">31 br/min</strong></div><div class="scene-vital-item"><span class="inline-edit-hint">心率</span><strong class="inline-edit-hint">116 bpm</strong></div></div></div>
+                  <div class="scene-breath-card"><div class="scene-vitals-grid"><div class="scene-vital-item"><span class="inline-edit-hint">呼吸率</span><strong class="inline-edit-hint">31 br/min</strong></div><div class="scene-vital-item"><span class="inline-edit-hint">心率</span><strong class="inline-edit-hint">116 bpm</strong></div></div><div class="scene-vitals-grid scene-room-env-grid"><div class="scene-vital-item"><span class="inline-edit-hint">温度</span><strong class="inline-edit-hint" data-room-temperature="">24.5°C</strong></div><div class="scene-vital-item"><span class="inline-edit-hint">湿度</span><strong class="inline-edit-hint" data-room-humidity="">55%</strong></div></div></div>
                   <div class="scene-env-grid"><div class="scene-env-card"><span class="inline-edit-hint">体温贴</span><strong class="inline-edit-hint">36.6°C</strong></div><div class="scene-env-card"><span class="inline-edit-hint">空气质量</span><strong class="inline-edit-hint">良</strong></div></div>
                 </div>
               </aside>
@@ -11067,10 +11533,9 @@
 
               <section class="album-panel" aria-label="相册">
                 <div class="album-subtabs" role="tablist" aria-label="相册类型">
-                  <button class="album-subtab inline-edit-hint" type="button" data-album-tab="saved">相册</button>
-                  <button class="album-subtab active inline-edit-hint" type="button" data-album-tab="timeline">时光相册</button>
+                  <button class="album-subtab active inline-edit-hint" type="button" data-album-tab="saved">相册</button>
                 </div>
-                <div class="album-content" data-album-content="saved">
+                <div class="album-content active" data-album-content="saved">
                   <div class="album-grid">
                     <button class="album-card" type="button"><span class="album-thumb"></span><span class="album-card-copy"><strong class="inline-edit-hint">录像 2026/5/13 20:42</strong></span></button>
                     <button class="album-card" type="button"><span class="album-thumb"></span><span class="album-card-copy"><strong class="inline-edit-hint">截图 2026/5/13 18:16</strong></span></button>
@@ -11080,17 +11545,6 @@
                     <button class="album-card" type="button"><span class="album-thumb"></span><span class="album-card-copy"><strong class="inline-edit-hint">截图 2026/5/9 10:12</strong></span></button>
                   </div>
                 </div>
-                <div class="album-content active" data-album-content="timeline">
-                  <div class="album-grid">
-                    <button class="album-card" type="button"><span class="album-thumb"></span><span class="album-card-copy"><strong class="inline-edit-hint">第一次吃奶嘴</strong><span class="inline-edit-hint">2026/5/13 20:18</span></span></button>
-                    <button class="album-card" type="button"><span class="album-thumb"></span><span class="album-card-copy"><strong class="inline-edit-hint">第一次吃手</strong><span class="inline-edit-hint">2026/5/12 18:05</span></span></button>
-                    <button class="album-card" type="button"><span class="album-thumb"></span><span class="album-card-copy"><strong class="inline-edit-hint">第一次爬行</strong><span class="inline-edit-hint">2026/5/11 16:20</span></span></button>
-                    <button class="album-card" type="button"><span class="album-thumb"></span><span class="album-card-copy"><strong class="inline-edit-hint">第一次站立</strong><span class="inline-edit-hint">2026/5/10 15:36</span></span></button>
-                    <button class="album-card" type="button"><span class="album-thumb"></span><span class="album-card-copy"><strong class="inline-edit-hint">第一次坐起</strong><span class="inline-edit-hint">2026/5/9 12:09</span></span></button>
-                    <button class="album-card" type="button"><span class="album-thumb"></span><span class="album-card-copy"><strong class="inline-edit-hint">第一次翻身</strong><span class="inline-edit-hint">2026/5/8 08:30</span></span></button>
-                    <button class="album-card" type="button"><span class="album-thumb"></span><span class="album-card-copy"><strong class="inline-edit-hint">第一次哭闹</strong><span class="inline-edit-hint">2026/5/7 10:28</span></span></button>
-                  </div>
-                </div>
               </section>
             </main>
 
@@ -11098,7 +11552,7 @@
               <header class="device-settings-head">
                 <div class="device-settings-title">
                   <button class="care-settings-back inline-edit-hint" type="button" data-action="device-settings-back" aria-label="返回">‹</button>
-                  <div><h2 id="deviceSettingsTitle" class="inline-edit-hint">设备设置</h2><p id="deviceSettingsSubtitle" class="inline-edit-hint">白噪声</p></div>
+                  <div><h2 id="deviceSettingsTitle" class="inline-edit-hint">设备设置</h2><p id="deviceSettingsSubtitle" class="inline-edit-hint">婴儿床摄像头</p></div>
                 </div>
               </header>
               <div class="device-settings-scroll">
@@ -11165,10 +11619,10 @@
                 <div class="settings-nav-group-title inline-edit-hint">通用设置</div>
                 <button data-setting-panel="sleep" class="inline-edit-hint">息屏设置</button>
                 <button data-setting-panel="power" class="inline-edit-hint">省电模式</button>
-                <button data-setting-panel="sleepMode" class="inline-edit-hint">睡眠模式</button>
+                <button data-setting-panel="sleepMode" class="active inline-edit-hint">睡眠模式</button>
                 <button data-setting-panel="wifi" class="inline-edit-hint">Wi-Fi网络</button>
                 <button data-setting-panel="alarm" class="inline-edit-hint">闹钟</button>
-                <button data-setting-panel="general" class="active inline-edit-hint">其他设置</button>
+                <button data-setting-panel="general" class="inline-edit-hint">其他设置</button>
                 <button data-setting-panel="deviceInfo" class="inline-edit-hint">设备信息</button>
                 <button data-setting-panel="support" class="inline-edit-hint">帮助与反馈</button>
 
@@ -11276,7 +11730,7 @@
                   </div>
                 </div>
 
-                <div class="settings-panel" data-panel="sleepMode">
+                <div class="settings-panel active" data-panel="sleepMode">
                   <div class="settings-head">
                     <div><h2 class="inline-edit-hint">睡眠模式</h2><p class="inline-edit-hint">设置夜间低打扰的音量、亮度和通知提醒。</p></div>
                   </div>
@@ -11424,7 +11878,7 @@
                   </section>
                 </div>
 
-                <div class="settings-panel active" data-panel="general">
+                <div class="settings-panel" data-panel="general">
                   <div class="settings-head"><div><h2 class="inline-edit-hint">其他设置</h2><p class="inline-edit-hint">语言、时区、单位和时间格式。</p></div></div>
                   <div class="settings-general-stack">
                     <div class="settings-simple-grid">
@@ -11465,10 +11919,10 @@
               </section>
             </main>
 
-            <main class="account-page signed-out-mode" id="accountPage">
+            <main class="account-page" id="accountPage">
               <nav class="account-nav" aria-label="账号分类">
                 <button class="inline-edit-hint" data-account-panel="baby">宝宝信息</button>
-                <button data-account-panel="account" class="inline-edit-hint">账号信息</button>
+                <button data-account-panel="account" class="active inline-edit-hint">账号信息</button>
                 <button data-account-panel="share" class="inline-edit-hint">设备分享</button>
                 <button data-account-panel="privacy" class="inline-edit-hint">隐私与条款</button>
               </nav>
@@ -11525,7 +11979,7 @@
                   </div>
                 </div>
 
-                <div class="account-panel" data-panel="account">
+                <div class="account-panel active" data-panel="account">
                   <div class="account-head">
                     <div>
                       <h2 class="inline-edit-hint">账号信息</h2>
@@ -11589,7 +12043,7 @@
                   </div>
                 </div>
 
-                <div class="account-panel active" data-panel="signed-out">
+                <div class="account-panel" data-panel="signed-out">
                   <div class="account-grid account-grid-single">
                     <section class="account-card">
                       <h3 class="inline-edit-hint">账号未登录</h3>
@@ -11621,7 +12075,7 @@
               <section class="alert-modal" id="alertModal" aria-label="消息通知弹窗">
                 <div class="alert-baby-icon" id="alertIcon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.5 14.5A6.8 6.8 0 0 1 9.5 6a7 7 0 1 0 8 8.5Z"></path><path d="M18.5 5.5v4M16.5 7.5h4"></path></svg></div>
                 <div class="alert-copy">
-                  <div class="alert-text inline-edit-hint" id="alertText" spellcheck="false" data-inline-edit-key="#alertText:日常活动统计">12:09 检测到消息</div>
+                  <div class="alert-text inline-edit-hint" id="alertText" spellcheck="false" data-inline-edit-key="#alertText:实时监控区">12:09 检测到消息</div>
                   <div class="alert-detail-list" id="alertDetailList" hidden="">
                     <p class="inline-edit-hint">1、请确保摄像头上电</p>
                     <p><span class="inline-edit-hint">2、可将看护屏尽量靠近设备，或</span><button class="alert-detail-link inline-edit-hint" type="button" data-page-jump="设备设置" data-device-settings-source="monitor" data-device-settings-panel-jump="wifi">开启网络扩展</button></p>
@@ -12161,6 +12615,10 @@
                     <span class="control-icon inline-edit-hint">◐</span>
                     <span><span class="control-title inline-edit-hint">勿扰模式</span><span class="control-subtitle inline-edit-hint" spellcheck="false">不接收任何告警通知</span></span>
                   </button>
+                  <button class="glass-tile control-toggle stack power-saving-control active" id="controlPowerSavingToggle" type="button" role="switch" aria-checked="true">
+                    <span class="control-icon inline-edit-hint" aria-hidden="true">◐</span>
+                    <span><span class="control-title inline-edit-hint">省电模式</span><span class="control-subtitle inline-edit-hint" id="controlPowerSavingStatus" aria-live="polite">已开启</span></span>
+                  </button>
                   <div class="glass-tile vertical-slider brightness-slider">
                     <div class="vertical-track"><div class="vertical-fill" style="--value:72%"></div><b class="inline-edit-hint">☀</b></div>
                     <span class="control-subtitle inline-edit-hint">亮度</span>
@@ -12221,6 +12679,7 @@
                 </button>
               </div>
             </section>
+
           </div>
         </div>
       </div>
@@ -12232,8 +12691,8 @@
       <section class="docs-panel">
         <div class="docs-head">
           <div class="docs-head-main">
-            <input class="docs-title-input" id="docsTitle" type="text" value="录像回放" aria-label="页面功能说明标题" style="width: 123px;">
-            <textarea class="docs-desc-input" id="docsDesc" aria-label="页面功能说明描述">沉淀宝宝日常事件记录，为成长记录和回看提供入口。</textarea>
+            <input class="docs-title-input" id="docsTitle" type="text" value="主页" aria-label="页面功能说明标题" style="width: 96px;">
+            <textarea class="docs-desc-input" id="docsDesc" aria-label="页面功能说明描述">默认进入宝宝实时监控主页，展示实时监控画面和当前看护状态</textarea>
           </div>
           <div class="docs-actions">
             <button class="docs-save" id="docsSaveHtml" type="button">保存HTML</button>
@@ -12245,37 +12704,63 @@
             <div class="docs-card-head">
               <h3>功能描述</h3>
             </div>
-            <div class="docs-structured-list" data-docs-preview="features" contenteditable="true" tabindex="0" aria-label="功能描述内容，可直接编辑或粘贴图片"><div class="docs-outline-line level-1" data-level="1"><b class="docs-outline-index" contenteditable="false">1</b><div class="docs-outline-copy" spellcheck="false">支持查看设备的录像回放（包含：本地录像、云录像、相册）</div></div><div class="docs-outline-line level-1" data-level="1"><b class="docs-outline-index" contenteditable="false">2</b><div class="docs-outline-copy" spellcheck="false">本地录像：按设备、日期维度，展示本地录像</div></div><div class="docs-outline-line level-2" data-level="2"><b class="docs-outline-index" contenteditable="false">1</b><div class="docs-outline-copy" spellcheck="false">设备，默认选择第一个设备，需记住上次选中的设备，下次进入页面，展示上次选中的设备</div></div><div class="docs-outline-line level-2" data-level="2"><b class="docs-outline-index" contenteditable="false">2</b><div class="docs-outline-copy" spellcheck="false">日期，默认选择今天</div></div><div class="docs-outline-line level-1" data-level="1"><b class="docs-outline-index" contenteditable="false">3</b><div class="docs-outline-copy" spellcheck="false">回放时间轴：固定使用 24 小时制，不跟随设备端时间制式</div></div><div class="docs-outline-line level-2" data-level="2"><b class="docs-outline-index" contenteditable="false">1</b><div class="docs-outline-copy" spellcheck="false">支持手动拖动时间轴，播放对应时间点的录像</div></div><div class="docs-outline-line level-2" data-level="2"><b class="docs-outline-index" contenteditable="false">2</b><div class="docs-outline-copy" spellcheck="false">拖到无录像时间点，自动定位到下个录像起始点</div></div><div class="docs-outline-line level-1" data-level="1"><b class="docs-outline-index" contenteditable="false">4</b><div class="docs-outline-copy" spellcheck="false">录像播放控制：截图、录像、倍速、声音开关、全屏</div></div><div class="docs-outline-line level-2" data-level="2"><b class="docs-outline-index" contenteditable="false">1</b><div class="docs-outline-copy" spellcheck="false">截图：截取当前画面，保存到设备SD卡，保存后显示2s缩略图预览。若设备未插SD卡，提示需插卡</div></div><div class="docs-outline-line level-2" data-level="2"><b class="docs-outline-index" contenteditable="false">2</b><div class="docs-outline-copy" spellcheck="false">录像：开始/停止录像，保存到设备SD卡，保存后显示2s视频缩略图预览。若设备未插SD卡，提示需插卡</div></div><div class="docs-outline-line level-2" data-level="2"><b class="docs-outline-index" contenteditable="false">3</b><div class="docs-outline-copy" spellcheck="false">倍速：支持1、2、4、8倍</div></div><div class="docs-outline-line level-2" data-level="2"><b class="docs-outline-index" contenteditable="false">4</b><div class="docs-outline-copy" spellcheck="false">声音开关：开启/关闭音频</div></div><div class="docs-outline-line level-2" data-level="2"><b class="docs-outline-index" contenteditable="false">5</b><div class="docs-outline-copy" spellcheck="false">全屏：点击进入全屏页面播放录像</div></div><div class="docs-outline-line level-1" data-level="1"><b class="docs-outline-index" contenteditable="false">5</b><div class="docs-outline-copy" spellcheck="false">事件记录：若一个事件里包含多个事件类型，展示多个事件类型。支持通过事件类型，筛选事件记录</div></div><div class="docs-outline-line level-2" data-level="2"><b class="docs-outline-index" contenteditable="false">1</b><div class="docs-outline-copy" spellcheck="false">点击某个事件记录，播放对应事件记录的录像</div></div><div class="docs-outline-line level-1" data-level="1"><b class="docs-outline-index" contenteditable="false">6</b><div class="docs-outline-copy" spellcheck="false">事件类型筛选：筛选包含选中类型的事件记录。默认全选，支持勾选多个/单个事件类型</div></div><div class="docs-outline-line level-1" data-level="1"><b class="docs-outline-index" contenteditable="false">7</b><div class="docs-outline-copy" spellcheck="false">云录像：需登录账号，付费才支持</div></div><div class="docs-outline-line level-1" data-level="1"><b class="docs-outline-index" contenteditable="false">8</b><div class="docs-outline-copy" spellcheck="false">相册：展示用户 截图/录像 保存在设备SD卡上的图片/视频</div></div><div class="docs-outline-line level-2" data-level="2"><b class="docs-outline-index" contenteditable="false">1</b><div class="docs-outline-copy" spellcheck="false">按时间倒序展示。按日期分类展示，支持按日期筛选</div></div><div class="docs-outline-line level-2" data-level="2"><b class="docs-outline-index" contenteditable="false">2</b><div class="docs-outline-copy" spellcheck="false">支持全屏查看、删除</div></div><div class="docs-outline-line level-2" data-level="2"><b class="docs-outline-index" contenteditable="false">3</b><div class="docs-outline-copy" spellcheck="false">在SD卡上独立存储，不进行循环覆盖存储，存储空间不足时，截图/录像时提示用户空间不足</div></div></div>
-            <textarea class="docs-editor" id="docsFeatureList" hidden="" aria-label="功能描述，每行一条" style="height: 72px;">支持查看设备的录像回放（包含：本地录像、云录像、相册）
-本地录像：按设备、日期维度，展示本地录像
-  设备，默认选择第一个设备，需记住上次选中的设备，下次进入页面，展示上次选中的设备
-  日期，默认选择今天
-回放时间轴：固定使用 24 小时制，不跟随设备端时间制式
-  支持手动拖动时间轴，播放对应时间点的录像
-  拖到无录像时间点，自动定位到下个录像起始点
-录像播放控制：截图、录像、倍速、声音开关、全屏
+            <div class="docs-structured-list" data-docs-preview="features" contenteditable="true" tabindex="0" aria-label="功能描述内容，可直接编辑或粘贴图片"><div class="docs-outline-line level-1" data-level="1"><b class="docs-outline-index" contenteditable="false">1</b><div class="docs-outline-copy" spellcheck="false">目前支持接入的设备类型：BBM设备（包含婴儿床）、及后续对接过协议的Wi-Fi设备/蓝牙网关设备</div></div><div class="docs-outline-line level-1" data-level="1"><b class="docs-outline-index" contenteditable="false">2</b><div class="docs-outline-copy" spellcheck="false">主页展示2个模块：实时画面、看护状态卡片</div></div><div class="docs-outline-line level-1" data-level="1"><b class="docs-outline-index" contenteditable="false">3</b><div class="docs-outline-copy" spellcheck="false">实时画面：展示BBM设备的实时监控画面</div></div><div class="docs-outline-line level-2" data-level="2"><b class="docs-outline-index" contenteditable="false">1</b><div class="docs-outline-copy" spellcheck="false">当BBM设备数=1 时，设备tab选中该设备，展示单画面实时监控</div></div><div class="docs-outline-line level-2" data-level="2"><b class="docs-outline-index" contenteditable="false">2</b><div class="docs-outline-copy" spellcheck="false">实时画面显示当前时间（年月日时分秒）</div></div><div class="docs-outline-line level-2" data-level="2"><b class="docs-outline-index" contenteditable="false">3</b><div class="docs-outline-copy" spellcheck="false">实时画面功能按钮 包含：安抚音、休眠/唤醒、对讲、截图、录像、声音开关、音频模式、设置入口</div></div><div class="docs-outline-line level-3" data-level="3"><b class="docs-outline-index" contenteditable="false">1</b><div class="docs-outline-copy" spellcheck="false">点击 实时画面 非功能按钮区域，隐藏/显示 功能按钮</div></div><div class="docs-outline-line level-3" data-level="3"><b class="docs-outline-index" contenteditable="false">2</b><div class="docs-outline-copy" spellcheck="false">双击 实时画面 非功能按钮区域，进入全屏页面</div></div><div class="docs-outline-line level-3" data-level="3"><b class="docs-outline-index" contenteditable="false">3</b><div class="docs-outline-copy" spellcheck="false">在 实时画面 非功能按钮区域，双指捏合支持缩放画面，最大放大至4倍</div></div><div class="docs-outline-line level-2" data-level="2"><b class="docs-outline-index" contenteditable="false">4</b><div class="docs-outline-copy" spellcheck="false">安抚音：支持设置 安抚音播停、安抚音选择、安抚音音量、安抚音定时时间（不定时/定时10/15/20/30min）</div></div><div class="docs-outline-line level-3" data-level="3"><b class="docs-outline-index" contenteditable="false">1</b><div class="docs-outline-copy" spellcheck="false">点击按钮，弹出半模态弹窗。弹窗内，安抚音播放默认暂停、安抚音默认选中第一个、默认音量50%、默认不定时</div></div><div class="docs-outline-line level-3" data-level="3"><b class="docs-outline-index" contenteditable="false">2</b><div class="docs-outline-copy" spellcheck="false">安抚音播放时，按钮变为播放态；安抚音暂停时，按钮变为常规态</div></div><div class="docs-outline-line level-3" data-level="3"><b class="docs-outline-index" contenteditable="false">3</b><div class="docs-outline-copy" spellcheck="false">点击弹窗内任一设置，立即生效</div></div><div class="docs-outline-line level-3" data-level="3"><b class="docs-outline-index" contenteditable="false">4</b><div class="docs-outline-copy" spellcheck="false">再次点击按钮/或点击弹窗外其他空白区域，弹窗收起</div></div><div class="docs-outline-line level-3" data-level="3"><b class="docs-outline-index" contenteditable="false">5</b><div class="docs-outline-copy" spellcheck="false">需记忆用户的设置，下次点击按钮，展示用户上次的设置</div></div><div class="docs-outline-line level-2" data-level="2"><b class="docs-outline-index" contenteditable="false">5</b><div class="docs-outline-copy" spellcheck="false">休眠/唤醒：支持快捷休眠设备，一键隐私模式</div></div><div class="docs-outline-line level-3" data-level="3"><b class="docs-outline-index" contenteditable="false">1</b><div class="docs-outline-copy" spellcheck="false">开启后，摄像头休眠（音视频断流，不检测不报警不录像），只能接收指令。</div></div><div class="docs-outline-line level-3" data-level="3"><b class="docs-outline-index" contenteditable="false">2</b><div class="docs-outline-copy" spellcheck="false">关闭后，恢复正常实时监控</div></div><div class="docs-outline-line level-2" data-level="2"><b class="docs-outline-index" contenteditable="false">6</b><div class="docs-outline-copy" spellcheck="false">对讲：支持与设备进行双向语音</div></div><div class="docs-outline-line level-3" data-level="3"><b class="docs-outline-index" contenteditable="false">1</b><div class="docs-outline-copy" spellcheck="false">首次点击对讲，展示提示弹窗。点击确认，开启对讲；点击取消，不开启对讲</div></div><div class="docs-outline-line level-3" data-level="3"><b class="docs-outline-index" contenteditable="false">2</b><div class="docs-outline-copy" spellcheck="false">点击开启对讲，再次点击结束对讲</div></div><div class="docs-outline-line level-3" data-level="3"><b class="docs-outline-index" contenteditable="false">3</b><div class="docs-outline-copy" spellcheck="false">开启对讲时，若声音开关关闭，自动开启声音开关播放音频；关闭对讲后，声音开关回到关闭状态</div></div><div class="docs-outline-line level-2" data-level="2"><b class="docs-outline-index" contenteditable="false">7</b><div class="docs-outline-copy" spellcheck="false">截图：截取当前画面，保存到设备SD卡，保存后显示2s缩略图预览。若设备未插SD卡，提示需插卡</div></div><div class="docs-outline-line level-2" data-level="2"><b class="docs-outline-index" contenteditable="false">8</b><div class="docs-outline-copy" spellcheck="false">录像：开始/停止录像，保存到设备SD卡，保存后显示2s视频缩略图预览。若设备未插SD卡，提示需插卡</div></div><div class="docs-outline-line level-2" data-level="2"><b class="docs-outline-index" contenteditable="false">9</b><div class="docs-outline-copy" spellcheck="false">声音开关：开启/关闭音频，控制设备端音频接收</div></div><div class="docs-outline-line level-2" data-level="2"><b class="docs-outline-index" contenteditable="false">10</b><div class="docs-outline-copy" spellcheck="false">音频模式：点击时，弹出提示弹窗</div></div><div class="docs-outline-line level-3" data-level="3"><b class="docs-outline-index" contenteditable="false">1</b><div class="docs-outline-copy" spellcheck="false">提示弹窗：开启此功能，息屏后仍能保持音频传输。开启后，省电模式将自动关闭，是否开启？</div></div><div class="docs-outline-line level-3" data-level="3"><b class="docs-outline-index" contenteditable="false">2</b><div class="docs-outline-copy" spellcheck="false">弹窗点击确认，开启音频模式；点击取消，不开启音频模式</div></div><div class="docs-outline-line level-3" data-level="3"><b class="docs-outline-index" contenteditable="false">3</b><div class="docs-outline-copy" spellcheck="false">弹窗内，勾选不再提示。下次点击按钮，不再弹出提示弹窗</div></div><div class="docs-outline-line level-2" data-level="2"><b class="docs-outline-index" contenteditable="false">11</b><div class="docs-outline-copy" spellcheck="false">设备入口：点击，跳转设备设置页</div></div><div class="docs-outline-line level-2" data-level="2"><b class="docs-outline-index" contenteditable="false">12</b><div class="docs-outline-copy" spellcheck="false">实时画面 状态：正常出流、设备离线、设备休眠</div></div><div class="docs-outline-line level-1" data-level="1"><b class="docs-outline-index" contenteditable="false">4</b><div class="docs-outline-copy" spellcheck="false">看护状态卡片：展示当前设备 宝宝睡眠状态、呼吸率/心率、环境温湿度。根据实时画面，展示相应的看护状态卡片。</div></div><div class="docs-outline-line level-2" data-level="2"><b class="docs-outline-index" contenteditable="false">1</b><div class="docs-outline-copy" spellcheck="false">宝宝睡眠状态：包含 睡眠中、已醒来、将睡、将醒。从设备端实时获取</div></div><div class="docs-outline-line level-3" data-level="3"><b class="docs-outline-index" contenteditable="false">1</b><div class="docs-outline-copy" spellcheck="false">睡眠中状态：展示 睡眠中 + 本次入睡时长（精确到分钟）</div></div><div class="docs-outline-line level-3" data-level="3"><b class="docs-outline-index" contenteditable="false">2</b><div class="docs-outline-copy" spellcheck="false">其他状态（已醒来/将睡/将醒）：展示 已醒来/将睡/将醒</div></div><div class="docs-outline-line level-3" data-level="3"><b class="docs-outline-index" contenteditable="false">3</b><div class="docs-outline-copy" spellcheck="false">宝宝不在画面：不展示该状态</div></div><div class="docs-outline-line level-3" data-level="3"><b class="docs-outline-index" contenteditable="false">4</b><div class="docs-outline-copy" spellcheck="false">设备离线：不展示该状态</div></div><div class="docs-outline-line level-2" data-level="2"><b class="docs-outline-index" contenteditable="false">2</b><div class="docs-outline-copy" spellcheck="false">呼吸率/心率：展示每分钟数据</div></div><div class="docs-outline-line level-3" data-level="3"><b class="docs-outline-index" contenteditable="false">1</b><div class="docs-outline-copy" spellcheck="false">宝宝不在画面中情况：不展示数据</div></div><div class="docs-outline-line level-3" data-level="3"><b class="docs-outline-index" contenteditable="false">2</b><div class="docs-outline-copy" spellcheck="false">未检测到数据情况：不展示数据</div></div><div class="docs-outline-line level-3" data-level="3"><b class="docs-outline-index" contenteditable="false">3</b><div class="docs-outline-copy" spellcheck="false">设备离线：不展示数据</div></div><div class="docs-outline-line level-2" data-level="2"><b class="docs-outline-index" contenteditable="false">3</b><div class="docs-outline-copy" spellcheck="false">环境温湿度：展示当前设备的温湿度数据</div></div><div class="docs-outline-line level-3" data-level="3"><b class="docs-outline-index" contenteditable="false">1</b><div class="docs-outline-copy" spellcheck="false">设备离线：不展示数据</div></div></div>
+            <textarea class="docs-editor" id="docsFeatureList" hidden="" aria-label="功能描述，每行一条" style="height: 72px;">目前支持接入的设备类型：BBM设备（包含婴儿床）、及后续对接过协议的Wi-Fi设备/蓝牙网关设备
+主页展示2个模块：实时画面、看护状态卡片
+实时画面：展示BBM设备的实时监控画面
+  当BBM设备数=1 时，设备tab选中该设备，展示单画面实时监控
+  实时画面显示当前时间（年月日时分秒）
+  实时画面功能按钮 包含：安抚音、休眠/唤醒、对讲、截图、录像、声音开关、音频模式、设置入口
+    点击 实时画面 非功能按钮区域，隐藏/显示 功能按钮
+    双击 实时画面 非功能按钮区域，进入全屏页面
+    在 实时画面 非功能按钮区域，双指捏合支持缩放画面，最大放大至4倍
+  安抚音：支持设置 安抚音播停、安抚音选择、安抚音音量、安抚音定时时间（不定时/定时10/15/20/30min）
+    点击按钮，弹出半模态弹窗。弹窗内，安抚音播放默认暂停、安抚音默认选中第一个、默认音量50%、默认不定时
+    安抚音播放时，按钮变为播放态；安抚音暂停时，按钮变为常规态
+    点击弹窗内任一设置，立即生效
+    再次点击按钮/或点击弹窗外其他空白区域，弹窗收起
+    需记忆用户的设置，下次点击按钮，展示用户上次的设置
+  休眠/唤醒：支持快捷休眠设备，一键隐私模式
+    开启后，摄像头休眠（音视频断流，不检测不报警不录像），只能接收指令。
+    关闭后，恢复正常实时监控
+  对讲：支持与设备进行双向语音
+    首次点击对讲，展示提示弹窗。点击确认，开启对讲；点击取消，不开启对讲
+    点击开启对讲，再次点击结束对讲
+    开启对讲时，若声音开关关闭，自动开启声音开关播放音频；关闭对讲后，声音开关回到关闭状态
   截图：截取当前画面，保存到设备SD卡，保存后显示2s缩略图预览。若设备未插SD卡，提示需插卡
   录像：开始/停止录像，保存到设备SD卡，保存后显示2s视频缩略图预览。若设备未插SD卡，提示需插卡
-  倍速：支持1、2、4、8倍
-  声音开关：开启/关闭音频
-  全屏：点击进入全屏页面播放录像
-事件记录：若一个事件里包含多个事件类型，展示多个事件类型。支持通过事件类型，筛选事件记录
-  点击某个事件记录，播放对应事件记录的录像
-事件类型筛选：筛选包含选中类型的事件记录。默认全选，支持勾选多个/单个事件类型
-云录像：需登录账号，付费才支持
-相册：展示用户 截图/录像 保存在设备SD卡上的图片/视频
-  按时间倒序展示。按日期分类展示，支持按日期筛选
-  支持全屏查看、删除
-  在SD卡上独立存储，不进行循环覆盖存储，存储空间不足时，截图/录像时提示用户空间不足</textarea>
+  声音开关：开启/关闭音频，控制设备端音频接收
+  音频模式：点击时，弹出提示弹窗
+    提示弹窗：开启此功能，息屏后仍能保持音频传输。开启后，省电模式将自动关闭，是否开启？
+    弹窗点击确认，开启音频模式；点击取消，不开启音频模式
+    弹窗内，勾选不再提示。下次点击按钮，不再弹出提示弹窗
+  设备入口：点击，跳转设备设置页
+  实时画面 状态：正常出流、设备离线、设备休眠
+看护状态卡片：展示当前设备 宝宝睡眠状态、呼吸率/心率、环境温湿度。根据实时画面，展示相应的看护状态卡片。
+  宝宝睡眠状态：包含 睡眠中、已醒来、将睡、将醒。从设备端实时获取
+    睡眠中状态：展示 睡眠中 + 本次入睡时长（精确到分钟）
+    其他状态（已醒来/将睡/将醒）：展示 已醒来/将睡/将醒
+    宝宝不在画面：不展示该状态
+    设备离线：不展示该状态
+  呼吸率/心率：展示每分钟数据
+    宝宝不在画面中情况：不展示数据
+    未检测到数据情况：不展示数据
+    设备离线：不展示数据
+  环境温湿度：展示当前设备的温湿度数据
+    设备离线：不展示数据</textarea>
           </section>
           <section class="docs-card" tabindex="0">
             <div class="docs-card-head">
               <h3>其他规则</h3>
             </div>
-            <div class="docs-structured-list" data-docs-preview="rules" contenteditable="true" tabindex="0" aria-label="其他规则内容，可直接编辑或粘贴图片"><div class="docs-outline-line level-1" data-level="1"><b class="docs-outline-index" contenteditable="false">1</b><div class="docs-outline-copy" spellcheck="false">本地录像 页面状态：未插卡、存储卡异常、设备离线、无录像</div></div><div class="docs-outline-line level-1" data-level="1"><b class="docs-outline-index" contenteditable="false">2</b><div class="docs-outline-copy" spellcheck="false">云录像 页面状态：未登录账号、未付费、已付费</div></div><div class="docs-outline-line level-1" data-level="1"><b class="docs-outline-index" contenteditable="false">3</b><div class="docs-outline-copy" spellcheck="false">相册页面状态：未插卡、存储卡异常、设备离线、无数据</div></div></div>
-            <textarea class="docs-editor" id="docsRuleList" hidden="" aria-label="其他规则，每行一条" style="height: 72px;">本地录像 页面状态：未插卡、存储卡异常、设备离线、无录像
-云录像 页面状态：未登录账号、未付费、已付费
-相册页面状态：未插卡、存储卡异常、设备离线、无数据</textarea>
+            <div class="docs-structured-list" data-docs-preview="rules" contenteditable="true" tabindex="0" aria-label="其他规则内容，可直接编辑或粘贴图片"><div class="docs-outline-line level-1" data-level="1"><b class="docs-outline-index" contenteditable="false">1</b><div class="docs-outline-copy" spellcheck="false">状态栏信息：日期/星期、时间、屏端Wi-Fi信息、屏端电量、闹钟信息、静音</div></div><div class="docs-outline-line level-2" data-level="2"><b class="docs-outline-index" contenteditable="false">1</b><div class="docs-outline-copy" spellcheck="false">日期/星期：展示 年月日/星期，按时区展示</div></div><div class="docs-outline-line level-2" data-level="2"><b class="docs-outline-index" contenteditable="false">2</b><div class="docs-outline-copy" spellcheck="false">时间：展示 时分，按时区展示</div></div><div class="docs-outline-line level-2" data-level="2"><b class="docs-outline-index" contenteditable="false">3</b><div class="docs-outline-copy" spellcheck="false">屏端Wi-Fi信息：已联网，展示Wi-Fi信号强度；未联网，展示Wi-Fi断连图标</div></div><div class="docs-outline-line level-2" data-level="2"><b class="docs-outline-index" contenteditable="false">4</b><div class="docs-outline-copy" spellcheck="false">屏端电量：展示电量进度+电量百分比数值。电量低于20%，电量标红。充电时，展示充电状态</div></div><div class="docs-outline-line level-2" data-level="2"><b class="docs-outline-index" contenteditable="false">5</b><div class="docs-outline-copy" spellcheck="false">闹钟信息：如果用户已设置闹钟，展示闹钟图标；否则不展示</div></div><div class="docs-outline-line level-2" data-level="2"><b class="docs-outline-index" contenteditable="false">6</b><div class="docs-outline-copy" spellcheck="false">静音：如果用户已关闭音量，展示静音图标；否则不展示</div></div></div>
+            <textarea class="docs-editor" id="docsRuleList" hidden="" aria-label="其他规则，每行一条" style="height: 72px;">状态栏信息：日期/星期、时间、屏端Wi-Fi信息、屏端电量、闹钟信息、静音
+  日期/星期：展示 年月日/星期，按时区展示
+  时间：展示 时分，按时区展示
+  屏端Wi-Fi信息：已联网，展示Wi-Fi信号强度；未联网，展示Wi-Fi断连图标
+  屏端电量：展示电量进度+电量百分比数值。电量低于20%，电量标红。充电时，展示充电状态
+  闹钟信息：如果用户已设置闹钟，展示闹钟图标；否则不展示
+  静音：如果用户已关闭音量，展示静音图标；否则不展示</textarea>
           </section>
         </div>
       </section>
@@ -12319,7 +12804,7 @@
     "desc": "用于首次开机引导",
     "bullets": [
       "屏端初始化与添加BBM设备流程，如下图：",
-      "![](public/docs-80cfd25967ce.png)",
+      "![](file:///Users/lute/Desktop/code/client/public/docs-80cfd25967ce.png)",
       "屏端初始化向导：包含 开机动画、选择语言、选择时区、屏端联网、账号登录",
       "  开机动画：自动展示3s，进入下一步",
       "  选择语言：英语（默认）、德语、法语、西班牙语、意大利语、阿拉伯语",
@@ -12383,8 +12868,8 @@
     ],
     "featureEditorVersion": 2,
     "rules": [
-      "- 单画面：展示睡眠安抚、开关机、对讲、截图、录像、设备设置操作。",
-      "- 二画面和四画面：每个画面内只展示对应的睡眠安抚、设备设置入口。",
+      "- 单画面：展示安抚音、开关机、对讲、截图、录像、设备设置操作。",
+      "- 二画面和四画面：每个画面内只展示对应的安抚音、设备设置入口。",
       "- 全屏模式下，展示退出全屏操作。"
     ],
     "ruleEditorVersion": 2,
@@ -12440,11 +12925,13 @@
       "云录像 页面状态：未登录账号、未付费、已付费",
       "相册页面状态：未插卡、存储卡异常、设备离线、无数据"
     ],
-    "ruleEditorVersion": 2
+    "ruleEditorVersion": 2,
+    "featureHtml": "",
+    "ruleHtml": ""
   },
   "智能看护设置": {
     "title": "智能看护设置",
-    "desc": "管理所有BBM设备的智能看护检测项、睡眠安抚设置和通知设置。",
+    "desc": "管理所有BBM设备的智能看护检测项、安抚音设置和通知设置。",
     "bullets": [
       "智能看护设置，包含 智能看护检测设置、通知设置和免打扰时段。",
       "智能看护检测项：检测开关，默认全开启",
@@ -12690,7 +13177,7 @@
     "desc": "用于首次开机引导",
     "bullets": [
       "屏端初始化与添加BBM设备流程，如下图：",
-      "![](public/docs-80cfd25967ce.png)",
+      "![](file:///Users/lute/Desktop/code/client/public/docs-80cfd25967ce.png)",
       "屏端初始化向导：包含 开机动画、选择语言、选择时区、屏端联网、账号登录",
       "  开机动画：自动展示3s，进入下一步",
       "  选择语言：英语（默认）、德语、法语、西班牙语、意大利语、阿拉伯语",
@@ -12745,7 +13232,7 @@
     "desc": "用于首次开机引导",
     "bullets": [
       "屏端初始化与添加BBM设备流程，如下图：",
-      "![](public/docs-80cfd25967ce.png)",
+      "![](file:///Users/lute/Desktop/code/client/public/docs-80cfd25967ce.png)",
       "屏端初始化向导：包含 开机动画、选择语言、选择时区、屏端联网、账号登录",
       "  开机动画：自动展示3s，进入下一步",
       "  选择语言：英语（默认）、德语、法语、西班牙语、意大利语、阿拉伯语",
@@ -12797,36 +13284,54 @@
   },
   "实时监控区 / 主页": {
     "title": "主页",
-    "desc": "默认进入宝宝实时监控主页，展示实时监控画面，当前看护状态、其他生态设备控制区",
+    "desc": "默认进入宝宝实时监控主页，展示实时监控画面和当前看护状态",
     "bullets": [
-      "主页展示3个模块：实时画面、当前看护状态卡片、其他生态设备控制。以及状态栏信息",
-      "目前支持接入的设备类型：BM08S设备，及后续对接过协议的Wi-Fi设备/蓝牙网关设备",
-      "实时画面：展示BBM设备（BM08S及其后续BBM设备）的实时监控画面。画面上，显示live图标、设备温湿度数据、当前时间（年月日时分秒）",
-      "  支持单/双画面实时监控。最多2路画面同时查看（Wi-Fi Halow 点对点带宽限制）",
-      "  当BBM设备数=1 时，展示单画面实时监控",
-      "  当BBM设备数=2 时，默认选中 全部设备 进行双画面展示。支持切换任意单设备/或全部设备 进行展示",
-      "  当BBM设备数>2时，默认选中 全部设备 进行双画面展示，支持滑页，滑到下一页查看。支持切换任意单设备/或全部设备 进行展示",
-      "  单画面：展示 睡眠安抚、休眠/唤醒、对讲、截图、录像、声音开关、仅音频、设置入口",
-      "  双画面：展示 睡眠安抚、设置入口",
-      "睡眠安抚：支持 安抚音播停、安抚音选择（单曲/循环）、安抚音音量、安抚音定时时间（不定时/定时10/15/20/30min）",
-      "休眠/唤醒：开启后，摄像头休眠（音视频断流，不检测不报警不录像），只能接收指令。关闭后，恢复正常工作",
-      "对讲：点击开启对讲，再次点击结束对讲；静音时点击对讲，自动取消静音并开始播放音频；对讲结束后声音开关回到对讲前状态",
-      "截图：截取当前画面，保存到设备SD卡，保存后显示2s缩略图预览。若设备未插SD卡，提示需插卡",
-      "录像：开始/停止录像，保存到设备SD卡，保存后显示2s视频缩略图预览。若设备未插SD卡，提示需插卡",
-      "声音开关：开启/关闭音频，控制设备端音频接收",
-      "仅音频：点击提示弹窗：开启此功能，息屏后仍能保持音频传输。开启后，省电模式将自动关闭，是否开启？",
-      "当前看护状态卡片：展示 宝宝当前睡眠状态、呼吸率/心率、体温贴/空气质量数据（需接入体温贴、空气净化器设备）。根据实时画面，展示相应的看护状态卡片。",
-      "宝宝当前睡眠状态：展示 睡眠中、醒着、将睡、将醒。从设备端实时获取",
-      "  睡眠中状态：同步展示 已入睡时长（精确到分钟）",
-      "  宝宝不在画面状态：展示 空",
-      "  设备离线：不展示该状态",
-      "呼吸率/心率：展示每分钟数据",
-      "  宝宝睡着情况：展示每分钟数据",
-      "  宝宝醒着情况：根据宝宝状态展示，平静时可测得就展示；活跃情况不可测得就不展示",
-      "  宝宝不在画面中情况：不展示数据",
-      "体温贴/空气质量数据：接入体温贴、空气净化器设备时展示。根据测量机制，更新数据",
-      "穿衣建议：按环境温湿度，给出相应穿衣建议指南。",
-      "其他生态设备控制区：展示后续接入的其他设备（非BBM设备）",
+      "目前支持接入的设备类型：BBM设备（包含婴儿床）、及后续对接过协议的Wi-Fi设备/蓝牙网关设备",
+      "主页展示2个模块：实时画面、看护状态卡片",
+      "实时画面：展示BBM设备的实时监控画面",
+      "  当BBM设备数=1 时，设备tab选中该设备，展示单画面实时监控",
+      "  实时画面显示当前时间（年月日时分秒）",
+      "  实时画面功能按钮 包含：安抚音、休眠/唤醒、对讲、截图、录像、声音开关、音频模式、设置入口",
+      "    点击 实时画面 非功能按钮区域，隐藏/显示 功能按钮",
+      "    双击 实时画面 非功能按钮区域，进入全屏页面",
+      "    在 实时画面 非功能按钮区域，双指捏合支持缩放画面，最大放大至4倍",
+      "  安抚音：支持设置 安抚音播停、安抚音选择、安抚音音量、安抚音定时时间（不定时/定时10/15/20/30min）",
+      "    点击按钮，弹出半模态弹窗。弹窗内，安抚音播放默认暂停、安抚音默认选中第一个、默认音量50%、默认不定时",
+      "    安抚音播放时，按钮变为播放态；安抚音暂停时，按钮变为常规态",
+      "    点击弹窗内任一设置，立即生效",
+      "    再次点击按钮/或点击弹窗外其他空白区域，弹窗收起",
+      "    需记忆用户的设置，下次点击按钮，展示用户上次的设置",
+      "  休眠/唤醒：支持快捷休眠设备，一键隐私模式",
+      "    开启后，摄像头休眠（音视频断流，不检测不报警不录像），只能接收指令。",
+      "    关闭后，恢复正常实时监控",
+      "  对讲：支持与设备进行双向语音",
+      "    首次点击对讲，展示提示弹窗。点击确认，开启对讲；点击取消，不开启对讲",
+      "    点击开启对讲，再次点击结束对讲",
+      "    开启对讲时，若声音开关关闭，自动开启声音开关播放音频；关闭对讲后，声音开关回到关闭状态",
+      "  截图：截取当前画面，保存到设备SD卡，保存后显示2s缩略图预览。若设备未插SD卡，提示需插卡",
+      "  录像：开始/停止录像，保存到设备SD卡，保存后显示2s视频缩略图预览。若设备未插SD卡，提示需插卡",
+      "  声音开关：开启/关闭音频，控制设备端音频接收",
+      "  音频模式：点击时，弹出提示弹窗",
+      "    提示弹窗：开启此功能，息屏后仍能保持音频传输。开启后，省电模式将自动关闭，是否开启？",
+      "    弹窗点击确认，开启音频模式；点击取消，不开启音频模式",
+      "    弹窗内，勾选不再提示。下次点击按钮，不再弹出提示弹窗",
+      "  设备入口：点击，跳转设备设置页",
+      "  实时画面 状态：正常出流、设备离线、设备休眠",
+      "看护状态卡片：展示当前设备 宝宝睡眠状态、呼吸率/心率、环境温湿度。根据实时画面，展示相应的看护状态卡片。",
+      "  宝宝睡眠状态：包含 睡眠中、已醒来、将睡、将醒。从设备端实时获取",
+      "    睡眠中状态：展示 睡眠中 + 本次入睡时长（精确到分钟）",
+      "    其他状态（已醒来/将睡/将醒）：展示 已醒来/将睡/将醒",
+      "    宝宝不在画面：不展示该状态",
+      "    设备离线：不展示该状态",
+      "  呼吸率/心率：展示每分钟数据",
+      "    宝宝不在画面中情况：不展示数据",
+      "    未检测到数据情况：不展示数据",
+      "    设备离线：不展示数据",
+      "  环境温湿度：展示当前设备的温湿度数据",
+      "    设备离线：不展示数据"
+    ],
+    "featureEditorVersion": 2,
+    "rules": [
       "状态栏信息：日期/星期、时间、屏端Wi-Fi信息、屏端电量、闹钟信息、静音",
       "  日期/星期：展示 年月日/星期，按时区展示",
       "  时间：展示 时分，按时区展示",
@@ -12835,24 +13340,7 @@
       "  闹钟信息：如果用户已设置闹钟，展示闹钟图标；否则不展示",
       "  静音：如果用户已关闭音量，展示静音图标；否则不展示"
     ],
-    "featureEditorVersion": 2,
-    "rules": [
-      "设备实时监控画面 状态：设备离线、设备休眠",
-      "当前看护状态卡片 状态：设备离线/未检测到数据状态、宝宝睡着状态、宝宝醒着状态"
-    ],
     "ruleEditorVersion": 2
-  },
-  "实时监控区 / 单IPC主页": {
-    "title": "单IPC主页",
-    "desc": "默认进入宝宝实时监控主页，展示实时监控画面，当前看护状态",
-    "bullets": [
-      "只有BBM设备（BM08S及后续BBM设备），没有其他生态设备时，不展示其他生态设备控制区"
-    ],
-    "featureEditorVersion": 2,
-    "rules": [],
-    "ruleEditorVersion": 2,
-    "featureHtml": "",
-    "ruleHtml": ""
   },
   "实时监控区 / 双IPC主页": {
     "title": "双IPC主页",
@@ -12867,8 +13355,8 @@
       "接入设备类型：点对点（BM08S）、Wi-Fi、蓝牙网关"
     ],
     "rules": [
-      "- 单画面：展示睡眠安抚、开关机、对讲、截图、录像、设备设置操作。",
-      "- 二画面和四画面：每个画面内只展示对应的睡眠安抚、设备设置入口。",
+      "- 单画面：展示安抚音、开关机、对讲、截图、录像、设备设置操作。",
+      "- 二画面和四画面：每个画面内只展示对应的安抚音、设备设置入口。",
       "- 全屏模式下，展示退出全屏操作。"
     ],
     "featureHtml": "",
@@ -12880,9 +13368,7 @@
     "title": "设备离线主页",
     "desc": "设备离线状态页",
     "bullets": [
-      "设备离线时，展示该状态页",
-      "  实时监控画面展示：设备离线",
-      "  当前看护状态卡片展示：未检测到宝宝"
+      "设备离线时，展示该状态页"
     ],
     "featureEditorVersion": 2,
     "rules": [],
@@ -12903,8 +13389,8 @@
       "接入设备类型：点对点（BM08S）、Wi-Fi、蓝牙网关"
     ],
     "rules": [
-      "- 单画面：展示睡眠安抚、开关机、对讲、截图、录像、设备设置操作。",
-      "- 二画面和四画面：每个画面内只展示对应的睡眠安抚、设备设置入口。",
+      "- 单画面：展示安抚音、开关机、对讲、截图、录像、设备设置操作。",
+      "- 二画面和四画面：每个画面内只展示对应的安抚音、设备设置入口。",
       "- 全屏模式下，展示退出全屏操作。"
     ],
     "featureHtml": "",
@@ -12912,8 +13398,8 @@
     "featureEditorVersion": 2,
     "ruleEditorVersion": 2
   },
-  "实时监控区 / 睡眠安抚": {
-    "title": "睡眠安抚",
+  "实时监控区 / 安抚音": {
+    "title": "安抚音",
     "desc": "默认进入宝宝实时监控主页，展示实时监控画面，当前状态信息、其他生态设备控制区",
     "bullets": [
       "- 支持单画面/多画面实时展示",
@@ -12925,8 +13411,8 @@
       "接入设备类型：点对点（BM08S）、Wi-Fi、蓝牙网关"
     ],
     "rules": [
-      "- 单画面：展示睡眠安抚、开关机、对讲、截图、录像、设备设置操作。",
-      "- 二画面和四画面：每个画面内只展示对应的睡眠安抚、设备设置入口。",
+      "- 单画面：展示安抚音、开关机、对讲、截图、录像、设备设置操作。",
+      "- 二画面和四画面：每个画面内只展示对应的安抚音、设备设置入口。",
       "- 全屏模式下，展示退出全屏操作。"
     ],
     "featureHtml": "",
@@ -12947,8 +13433,8 @@
       "接入设备类型：点对点（BM08S）、Wi-Fi、蓝牙网关"
     ],
     "rules": [
-      "- 单画面：展示睡眠安抚、开关机、对讲、截图、录像、设备设置操作。",
-      "- 二画面和四画面：每个画面内只展示对应的睡眠安抚、设备设置入口。",
+      "- 单画面：展示安抚音、开关机、对讲、截图、录像、设备设置操作。",
+      "- 二画面和四画面：每个画面内只展示对应的安抚音、设备设置入口。",
       "- 全屏模式下，展示退出全屏操作。"
     ],
     "featureHtml": "",
@@ -12960,8 +13446,8 @@
     "title": "单画面全屏",
     "desc": "",
     "bullets": [
-      "主页，点击单画面/双画面，进入单画面/双画面全屏页面",
-      "全屏页，点击退出全屏，返回主页"
+      "主页，双击 单画面-实时画面，进入单画面全屏页面",
+      "全屏页，双击 单画面-实时画面/点击退出全屏，返回主页"
     ],
     "featureEditorVersion": 2,
     "rules": [],
@@ -12982,8 +13468,8 @@
       "接入设备类型：点对点（BM08S）、Wi-Fi、蓝牙网关"
     ],
     "rules": [
-      "- 单画面：展示睡眠安抚、开关机、对讲、截图、录像、设备设置操作。",
-      "- 二画面和四画面：每个画面内只展示对应的睡眠安抚、设备设置入口。",
+      "- 单画面：展示安抚音、开关机、对讲、截图、录像、设备设置操作。",
+      "- 二画面和四画面：每个画面内只展示对应的安抚音、设备设置入口。",
       "- 全屏模式下，展示退出全屏操作。"
     ],
     "featureHtml": "",
@@ -13039,7 +13525,7 @@
       "本地录像：支持通过时间轴、事件记录查看录像",
       "  倍速：支持1、2、4、8倍",
       "云录像：需登录账号，付费才支持。",
-      "相册：展示两个tab：相册、时光相册。相册展示用户截图/录像保存的图片/视频；时光相册展示宝宝第一次哭闹/翻身/坐起/站立/爬行/吃手/吃奶嘴的录像记录。均按时间倒序排列展示",
+      "相册：展示用户截图/录像保存的图片和视频，按时间倒序排列展示",
       "  按日期分类展示，支持按日期筛选",
       "  支持全屏查看、删除",
       "后续支持承接：精彩时刻、成长记录等入口。",
@@ -13134,13 +13620,29 @@
     "featureHtml": "",
     "ruleHtml": ""
   },
-  "实时监控区 / 多IPC主页": {
-    "title": "多IPC主页",
+  "实时监控区 / 多设备主页": {
+    "title": "多设备主页",
     "desc": "默认进入宝宝实时监控主页，展示实时监控画面，当前看护状态",
     "bullets": [
-      "只有BBM设备（BM08S及后续BBM设备），没有其他生态设备时，不展示其他生态设备控制区",
-      "BBM设备数>1时，最多同时展示2路实时画面，展示两个当前看护状态卡片",
-      "当BBM设备数>2时，支持滑页，滑到下一页查看"
+      "实时画面：当BBM设备数≧2时，最多2路实时画面同时查看（Wi-Fi Halow 点对点带宽限制）",
+      "  当BBM设备数=2 时，设备tab默认选中全部设备，进行双画面实时监控展示",
+      "  当BBM设备数>2时，设备tab默认选中全部设备，进行双画面实时监控展示；支持滑页，滑到下一页查看",
+      "  设备tab支持切换任意单设备/或全部设备 进行展示",
+      "  设备tab选中全部设备时，实时画面默认选中第一个画面，画面内的功能按钮针对选中的画面生效",
+      "  点击 实时画面 非功能按钮区域，切换选中的画面",
+      "  双击 实时画面 非功能按钮区域，进入全屏页面",
+      "看护状态卡片：根据实时画面，展示相应的两个看护状态卡片。"
+    ],
+    "featureEditorVersion": 2,
+    "rules": [],
+    "ruleEditorVersion": 2
+  },
+  "实时监控区 / 主页-生态设备": {
+    "title": "主页-生态设备",
+    "desc": "默认进入宝宝实时监控主页，展示实时监控画面，当前看护状态、其他生态设备控制区",
+    "bullets": [
+      "后续接入其他生态设备（体温贴/白噪声/加湿器/空气净化器等非BBM设备）时，展示其他生态设备控制区",
+      "一期暂不考虑 其他生态设备"
     ],
     "featureEditorVersion": 2,
     "rules": [],
@@ -13148,81 +13650,29 @@
     "featureHtml": "",
     "ruleHtml": ""
   },
-  "实时监控区 / 主页-睡眠看护": {
-    "title": "主页-睡眠看护",
+  "实时监控区 / 主页-生态设备-多画面": {
+    "title": "主页-生态设备-多画面",
     "desc": "默认进入宝宝实时监控主页，展示实时监控画面，当前看护状态、其他生态设备控制区",
     "bullets": [
-      "主页展示3个模块：实时画面、当前看护状态卡片、其他生态设备控制。以及状态栏信息",
-      "目前支持接入的设备类型：BM08S设备，及后续对接过协议的Wi-Fi设备/蓝牙网关设备",
-      "实时画面：展示BBM设备（BM08S及其后续BBM设备）的实时监控画面。画面上，显示live图标、设备温湿度数据、当前时间（年月日时分秒）",
-      "  支持单/双画面实时监控。最多2路画面同时查看（Wi-Fi Halow 点对点带宽限制）",
-      "  当BBM设备数=1 时，展示单画面实时监控",
-      "  当BBM设备数=2 时，默认选中 全部设备 进行双画面展示。支持切换任意单设备/或全部设备 进行展示",
-      "  当BBM设备数>2时，默认选中 全部设备 进行双画面展示，支持滑页，滑到下一页查看。支持切换任意单设备/或全部设备 进行展示",
-      "  单画面：展示 睡眠安抚、休眠/唤醒、对讲、截图、录像、声音开关、仅音频、设置入口",
-      "  双画面：展示 睡眠安抚、设置入口",
-      "睡眠安抚：支持 安抚音播停、安抚音选择（单曲/循环）、安抚音音量、安抚音定时时间（不定时/定时10/15/20/30min）",
-      "休眠/唤醒：开启后，摄像头休眠（音视频断流，不检测不报警不录像），只能接收指令。关闭后，恢复正常工作",
-      "对讲：点击开启对讲，再次点击结束对讲；静音时点击对讲，自动取消静音并开始播放音频；对讲结束后声音开关回到对讲前状态",
-      "截图：截取当前画面，保存到设备SD卡，保存后显示2s缩略图预览。若设备未插SD卡，提示需插卡",
-      "录像：开始/停止录像，保存到设备SD卡，保存后显示2s视频缩略图预览。若设备未插SD卡，提示需插卡",
-      "声音开关：开启/关闭音频，控制设备端音频接收",
-      "仅音频：点击提示弹窗：开启此功能，息屏后仍能保持音频传输。开启后，省电模式将自动关闭，是否开启？",
-      "当前看护状态卡片：展示 宝宝当前睡眠状态、呼吸率/心率、体温贴/空气质量数据（需接入体温贴、空气净化器设备）。根据实时画面，展示相应的看护状态卡片。",
-      "宝宝当前睡眠状态：展示 睡眠中、醒着、将睡、将醒。从设备端实时获取",
-      "  睡眠中状态：同步展示 已入睡时长（精确到分钟）",
-      "  宝宝不在画面状态：展示 空",
-      "  设备离线：不展示该状态",
-      "呼吸率/心率：展示每分钟数据",
-      "  宝宝睡着情况：展示每分钟数据",
-      "  宝宝醒着情况：根据宝宝状态展示，平静时可测得就展示；活跃情况不可测得就不展示",
-      "  宝宝不在画面中情况：不展示数据",
-      "体温贴/空气质量数据：接入体温贴、空气净化器设备时展示。根据测量机制，更新数据",
-      "穿衣建议：按环境温湿度，给出相应穿衣建议指南。",
-      "其他生态设备控制区：展示后续接入的其他设备（非BBM设备）",
-      "状态栏信息：日期/星期、时间、屏端Wi-Fi信息、屏端电量、闹钟信息、静音",
-      "  日期/星期：展示 年月日/星期，按时区展示",
-      "  时间：展示 时分，按时区展示",
-      "  屏端Wi-Fi信息：已联网，展示Wi-Fi信号强度；未联网，展示Wi-Fi断连图标",
-      "  屏端电量：展示电量进度+电量百分比数值。电量低于20%，电量标红。充电时，展示充电状态",
-      "  闹钟信息：如果用户已设置闹钟，展示闹钟图标；否则不展示",
-      "  静音：如果用户已关闭音量，展示静音图标；否则不展示"
-    ],
-    "featureEditorVersion": 2,
-    "rules": [
-      "设备实时监控画面 状态：设备离线、设备休眠",
-      "当前看护状态卡片 状态：设备离线/未检测到数据状态、宝宝睡着状态、宝宝醒着状态"
-    ],
-    "ruleEditorVersion": 2,
-    "featureHtml": "",
-    "ruleHtml": ""
-  },
-  "实时监控区 / 主页-多画面": {
-    "title": "主页-多画面",
-    "desc": "默认进入宝宝实时监控主页，展示实时监控画面，当前看护状态、其他生态设备控制区",
-    "bullets": [
-      "BBM设备数>1时，最多同时展示2路实时画面，展示两个当前看护状态卡片",
-      "当BBM设备数>2时，支持滑页，滑到下一页查看"
+      "后续接入其他生态设备（体温贴/白噪声/加湿器/空气净化器等非BBM设备）时，展示其他生态设备控制区",
+      "一期暂不考虑 其他生态设备",
+      "多BBM设备情况"
     ],
     "featureEditorVersion": 2,
     "rules": [],
-    "ruleEditorVersion": 2,
-    "featureHtml": "",
-    "ruleHtml": ""
+    "ruleEditorVersion": 2
   },
   "实时监控区 / 双画面全屏": {
     "title": "双画面全屏",
     "desc": "",
     "bullets": [
-      "主页，点击单画面/双画面，进入单画面/双画面全屏页面",
-      "全屏，点击退出全屏，返回主页",
+      "主页，双击 双画面-实时画面，进入双画面全屏页面",
+      "全屏页，双击 双画面-实时画面/点击退出全屏，返回主页",
       "全屏页面的功能操作，针对选中的设备画面生效。默认选中第一个设备画面。"
     ],
     "featureEditorVersion": 2,
     "rules": [],
-    "ruleEditorVersion": 2,
-    "featureHtml": "",
-    "ruleHtml": ""
+    "ruleEditorVersion": 2
   },
   "宝宝看护指标区 / 未登录状态": {
     "title": "未登录状态",
@@ -13270,14 +13720,12 @@
     "title": "无设备页",
     "desc": "未添加任何BBM设备时的状态页",
     "bullets": [
-      "屏端初始化向导完成后，若还未添加任何设备时，展示该状态页",
-      "点击添加设备，进入添加设备流程（分已配对好、未配对好设备的情况）"
+      "用户删除所有设备，展示该状态页",
+      "点击添加设备，进入添加设备流程"
     ],
     "featureEditorVersion": 2,
     "rules": [],
-    "ruleEditorVersion": 2,
-    "featureHtml": "",
-    "ruleHtml": ""
+    "ruleEditorVersion": 2
   },
   "无设备页 / 主页": {
     "title": "无设备页",
@@ -13302,8 +13750,8 @@
     ],
     "featureEditorVersion": 2,
     "rules": [
-      "单画面底部展示睡眠安抚、开关机、对讲、截图、录像快捷操作。",
-      "二画面和四画面只在每个画面内保留对应房间的睡眠安抚入口。",
+      "单画面底部展示安抚音、开关机、对讲、截图、录像快捷操作。",
+      "二画面和四画面只在每个画面内保留对应房间的安抚音入口。",
       "全屏模式下才展示退出全屏操作。"
     ],
     "ruleEditorVersion": 2,
@@ -13320,8 +13768,8 @@
     ],
     "featureEditorVersion": 2,
     "rules": [
-      "单画面底部展示睡眠安抚、开关机、对讲、截图、录像快捷操作。",
-      "二画面和四画面只在每个画面内保留对应房间的睡眠安抚入口。",
+      "单画面底部展示安抚音、开关机、对讲、截图、录像快捷操作。",
+      "二画面和四画面只在每个画面内保留对应房间的安抚音入口。",
       "全屏模式下才展示退出全屏操作。"
     ],
     "ruleEditorVersion": 2,
@@ -13338,8 +13786,8 @@
     ],
     "featureEditorVersion": 2,
     "rules": [
-      "单画面底部展示睡眠安抚、开关机、对讲、截图、录像快捷操作。",
-      "二画面和四画面只在每个画面内保留对应房间的睡眠安抚入口。",
+      "单画面底部展示安抚音、开关机、对讲、截图、录像快捷操作。",
+      "二画面和四画面只在每个画面内保留对应房间的安抚音入口。",
       "全屏模式下才展示退出全屏操作。"
     ],
     "ruleEditorVersion": 2,
@@ -13356,8 +13804,8 @@
     ],
     "featureEditorVersion": 2,
     "rules": [
-      "单画面底部展示睡眠安抚、开关机、对讲、截图、录像快捷操作。",
-      "二画面和四画面只在每个画面内保留对应房间的睡眠安抚入口。",
+      "单画面底部展示安抚音、开关机、对讲、截图、录像快捷操作。",
+      "二画面和四画面只在每个画面内保留对应房间的安抚音入口。",
       "全屏模式下才展示退出全屏操作。"
     ],
     "ruleEditorVersion": 2,
@@ -13368,15 +13816,13 @@
     "title": "新手引导",
     "desc": "屏端第一次添加/同步设备完成后，",
     "bullets": [
-      "屏端第一次添加/同步设备完成，进入主页实时监控后，展示新手引导",
+      "用户第一次添加/同步设备完成，进入主页实时监控后，展示新手引导",
       "新手引导只展示一次，后续不再展示",
       "新手引导，包含：防啸叫提醒、基础功能设置（添加设备、息屏设置）入口提示、控制中心-快捷设置入口提示"
     ],
     "featureEditorVersion": 2,
     "rules": [],
-    "ruleEditorVersion": 2,
-    "featureHtml": "",
-    "ruleHtml": ""
+    "ruleEditorVersion": 2
   },
   "设备设置": {
     "title": "设备设置",
@@ -13444,10 +13890,10 @@
   },
   "智能看护设置 / 设备智能看护设置": {
     "title": "设备智能看护设置",
-    "desc": "管理看护检测项、睡眠安抚配置和全托管自动看护。",
+    "desc": "管理看护检测项、安抚音配置和全托管自动看护。",
     "bullets": [
       "看护设置覆盖检测项、通知分级和免打扰时段。",
-      "睡眠安抚可配置安抚音、播放时长、灯光和音量。",
+      "安抚音可配置安抚音、播放时长、灯光和音量。",
       "全托管看护支持自动识别宝宝状态并联动设备。"
     ],
     "featureEditorVersion": 2,
@@ -13455,38 +13901,6 @@
       "左侧设置分类切换不同设置页。",
       "页面标题跟随当前分类变化，避免重复展示功能名称。",
       "设置项以开关、分段选项和列表项承载具体配置。"
-    ],
-    "ruleEditorVersion": 2,
-    "featureHtml": "",
-    "ruleHtml": ""
-  },
-  "全局说明": {
-    "title": "全局说明",
-    "desc": "说明BBM智慧屏原型的全局规则。",
-    "bullets": [
-      "屏端的设备功能主要分为：本地功能、云端功能",
-      "  本地功能：实时监控、报警通知、本地录像/相册、设备设置指令等。",
-      "  云端功能：睡眠报告/看护记录/AI建议、云录像等。",
-      "屏端添加的BBM设备，分为：云端设备、本地设备。（屏端初始化时，会强引导用户屏端联网登账号并添加云端设备）",
-      "1、云端设备：已绑定用户账号的设备",
-      "  对设备进行配网上云（设备配网+绑定到账号下）后，即为云端设备",
-      "  分：已联网、未联网的云端设备",
-      "  云端设备，可使用云端功能（设备联网，且屏端联网登账号）",
-      "2、本地设备：未联网、未绑定任何账号的设备",
-      "  未对设备进行配网上云，即为本地设备",
-      "  本地设备，无法使用云端功能",
-      "屏端设备同步逻辑：",
-      "  屏端对设备配网上云，绑定到屏端账号后，设备可自动同步到同账号的app，手机app无需再次配网添加",
-      "  手机app配网添加设备后，设备可自动同步到登录同账号的屏端，无需用户再在屏端进行配对添加（自动进行点对点连接）",
-      "屏端设备删除逻辑，分云端设备、本地设备",
-      "  删除云端设备：重置设备，清空所有设备设置，设备与账号解绑。手机app上的设备也同步解绑删除。",
-      "  删除本地设备：清空屏端的设备设置，解除屏端与设备的点对点连接",
-      "![](public/docs-168965ebe92d.png)"
-    ],
-    "featureEditorVersion": 2,
-    "rules": [
-      "本地设备（未配网上云绑定到账号的设备）、未联网云端设备的配网流程如下：",
-      "![](public/docs-280a435fd2f1.png)"
     ],
     "ruleEditorVersion": 2,
     "featureHtml": "",
@@ -13589,8 +14003,8 @@
     ],
     "featureEditorVersion": 2,
     "rules": [
-      "单画面底部展示睡眠安抚、开关机、对讲、截图、录像快捷操作。",
-      "二画面和四画面只在每个画面内保留对应房间的睡眠安抚入口。",
+      "单画面底部展示安抚音、开关机、对讲、截图、录像快捷操作。",
+      "二画面和四画面只在每个画面内保留对应房间的安抚音入口。",
       "全屏模式下才展示退出全屏操作。"
     ],
     "ruleEditorVersion": 2,
@@ -13928,13 +14342,15 @@
       room: 'niki',
       scene: '\u7761\u7720\u770B\u62A4',
       view: 'single',
-      homeSubPage: 'sleepCare',
+      homeSubPage: 'baseHome',
       selectedSplitRoom: 'niki',
+      multiCameraPage: 0,
       device: '\u767D\u566A\u58F0',
       deviceGroup: '\u6240\u6709\u8BBE\u5907',
       deviceSettingsPanel: '',
       deviceSettingsSource: '',
       deviceSettingsReturnState: null,
+      fullscreenReturnState: null,
       careSettingsSource: '',
       settingsDetailPanel: '',
       replayState: 'normal',
@@ -13945,6 +14361,27 @@
       noDeviceContext: false,
       noDeviceMenuPage: '\u5B9E\u65F6\u76D1\u63A7\u533A',
       globalDocsMode: false,
+      monitorOverlaysHidden: false,
+      sootheDrawerOpen: false,
+      sootheTargetRoom: 'niki',
+      soothePlayingRooms: [],
+      sootheSound: '白噪声',
+      sootheVolume: 36,
+      sootheTimer: '不定时',
+      recordingActive: false,
+      recordingStartedAt: 0,
+      recordingRoom: '',
+      mutedRooms: [],
+      audioOnlyRooms: [],
+      audioOnlyPromptOpen: false,
+      audioOnlyTargetRoom: 'niki',
+      audioOnlyTipSuppressed: false,
+      intercomActive: false,
+      intercomRoom: '',
+      intercomRestoreMuted: false,
+      intercomPromptOpen: false,
+      intercomTipConfirmed: false,
+      powerSavingEnabled: true,
       shareStep: 0
     };
 
@@ -13958,6 +14395,57 @@
       if (appState.page === '\u6D88\u606F\u901A\u77E5') return monitorImageMap.notification;
       if (appState.page === '\u5E72\u9884\u901A\u77E5') return monitorImageMap.intervention;
       return monitorImageMap.default;
+    }
+
+    function renderSootheDrawer() {
+      if (!sootheDrawer) return;
+      const playingBars = '<span class="soothe-playing-bars" aria-hidden="true"><i></i><i></i><i></i></span>';
+      const currentMonitorRoom = appState.room === '\u5168\u90E8\u8BBE\u5907' ? appState.selectedSplitRoom : appState.room;
+      const isMonitorPlaying = appState.soothePlayingRooms.includes(currentMonitorRoom);
+      const isTargetPlaying = appState.soothePlayingRooms.includes(appState.sootheTargetRoom);
+      sootheDrawer.hidden = !appState.sootheDrawerOpen;
+      if (sleepSootheShortcut) {
+        sleepSootheShortcut.classList.toggle('active', isMonitorPlaying);
+        sleepSootheShortcut.setAttribute('aria-label', isMonitorPlaying ? `${appState.sootheSound}播放中` : '安抚音');
+        sleepSootheShortcut.setAttribute('aria-expanded', String(appState.sootheDrawerOpen && appState.sootheTargetRoom === currentMonitorRoom));
+      }
+      if (monitorSootheIcon) {
+        monitorSootheIcon.innerHTML = isMonitorPlaying ? playingBars : '♪';
+      }
+      tiles.forEach((tile) => {
+        const tileSound = tile.querySelector('.tile-sound');
+        const tileSoundIcon = tileSound?.querySelector('.sound-icon');
+        const isTilePlaying = appState.soothePlayingRooms.includes(tile.dataset.room);
+        tileSound?.classList.toggle('active', isTilePlaying);
+        tileSound?.setAttribute('aria-label', isTilePlaying ? `${appState.sootheSound}播放中` : '安抚音');
+        tileSound?.setAttribute('aria-expanded', String(appState.sootheDrawerOpen && appState.sootheTargetRoom === tile.dataset.room));
+        tileSound?.setAttribute('aria-controls', 'sootheDrawer');
+        if (tileSoundIcon) tileSoundIcon.innerHTML = isTilePlaying ? playingBars : '♪';
+      });
+      if (soothePlayIcon) soothePlayIcon.textContent = isTargetPlaying ? 'Ⅱ' : '▶';
+      if (soothePlayLabel) soothePlayLabel.textContent = isTargetPlaying ? '暂停' : '播放';
+      if (sootheSelectionLabel) sootheSelectionLabel.textContent = `${appState.sootheSound} · ${isTargetPlaying ? '播放中' : '未播放'}`;
+      if (sootheVolume) sootheVolume.value = String(appState.sootheVolume);
+      if (sootheVolumeValue) sootheVolumeValue.textContent = `${appState.sootheVolume}%`;
+      sootheSoundOptions.forEach((button) => button.classList.toggle('active', button.dataset.sootheSound === appState.sootheSound));
+      sootheTimerOptions.forEach((button) => button.classList.toggle('active', button.dataset.sootheTimer === appState.sootheTimer));
+    }
+
+    function toggleSootheDrawerForRoom(roomName) {
+      const targetRoom = roomName || 'niki';
+      const isSameOpenDrawer = appState.sootheDrawerOpen && appState.sootheTargetRoom === targetRoom;
+      appState.sootheTargetRoom = targetRoom;
+      appState.sootheDrawerOpen = !isSameOpenDrawer;
+      renderSootheDrawer();
+    }
+
+    function renderControlPowerSaving() {
+      if (!controlPowerSavingToggle) return;
+      controlPowerSavingToggle.classList.toggle('active', appState.powerSavingEnabled);
+      controlPowerSavingToggle.setAttribute('aria-checked', String(appState.powerSavingEnabled));
+      if (controlPowerSavingStatus) {
+        controlPowerSavingStatus.textContent = appState.powerSavingEnabled ? '已开启' : '未开启';
+      }
     }
 
     const careRangeData = {
@@ -14130,8 +14618,35 @@
       split4: 'split4Full'
     };
 
+    function isDualCameraView() {
+      return appState.page === '\u5B9E\u65F6\u76D1\u63A7\u533A'
+        && (appState.view === 'dualHome' || appState.view === 'split2' || appState.view === 'split2Full');
+    }
+
     const monitor = document.getElementById('monitor');
     const monitorClickTarget = document.getElementById('monitorClickTarget');
+    const monitorScreenshotPreview = document.getElementById('monitorScreenshotPreview');
+    const monitorCaptureToast = document.getElementById('monitorCaptureToast');
+    const monitorScreenshotThumbnail = document.getElementById('monitorScreenshotThumbnail');
+    const monitorRecordingButton = document.getElementById('monitorRecordingButton');
+    const monitorRecordingLabel = document.getElementById('monitorRecordingLabel');
+    const monitorSoundToggle = document.getElementById('monitorSoundToggle');
+    const monitorSoundIcon = document.getElementById('monitorSoundIcon');
+    const monitorSoundLabel = document.getElementById('monitorSoundLabel');
+    const monitorAudioOnlyToggle = document.getElementById('monitorAudioOnlyToggle');
+    const monitorAudioOnlyLabel = document.getElementById('monitorAudioOnlyLabel');
+    const audioOnlyConfirmModal = document.getElementById('audioOnlyConfirmModal');
+    const audioOnlySkipPrompt = document.getElementById('audioOnlySkipPrompt');
+    const multiGrid = document.getElementById('multiGrid');
+    const multiCameraPager = document.getElementById('multiCameraPager');
+    const multiCameraPrev = document.getElementById('multiCameraPrev');
+    const multiCameraNext = document.getElementById('multiCameraNext');
+    const multiCameraPageDots = document.getElementById('multiCameraPageDots');
+    let monitorClickTimer = null;
+    let monitorScreenshotTimer = null;
+    let monitorCaptureToastTimer = null;
+    let multiCameraSwipeStart = null;
+    let suppressTileClickUntil = 0;
     const screen = document.querySelector('.screen');
     const appRoot = document.querySelector('.app');
     const sidebar = document.querySelector('.sidebar');
@@ -14144,11 +14659,25 @@
     const breathValue = document.getElementById('breathValue');
     const tempValue = document.getElementById('tempValue');
     const envValue = document.getElementById('envValue');
-    const monitorTempValue = document.getElementById('monitorTempValue');
-    const monitorHumidityValue = document.getElementById('monitorHumidityValue');
+    const monitorTimestamps = document.querySelectorAll('[data-monitor-timestamp]');
+    const controlPowerSavingToggle = document.getElementById('controlPowerSavingToggle');
+    const controlPowerSavingStatus = document.getElementById('controlPowerSavingStatus');
     const canvasLabel = document.getElementById('canvasLabel');
     const fullscreenRoomPill = document.getElementById('fullscreenRoomPill');
     const sleepSootheShortcut = document.getElementById('sleepSootheShortcut');
+    const monitorIntercomButton = document.getElementById('monitorIntercomButton');
+    const monitorIntercomLabel = document.getElementById('monitorIntercomLabel');
+    const intercomConfirmModal = document.getElementById('intercomConfirmModal');
+    const monitorSootheIcon = sleepSootheShortcut?.querySelector('.monitor-soothe-icon');
+    const sootheDrawer = document.getElementById('sootheDrawer');
+    const soothePlayToggle = document.getElementById('soothePlayToggle');
+    const soothePlayIcon = document.getElementById('soothePlayIcon');
+    const soothePlayLabel = document.getElementById('soothePlayLabel');
+    const sootheSelectionLabel = document.getElementById('sootheSelectionLabel');
+    const sootheVolume = document.getElementById('sootheVolume');
+    const sootheVolumeValue = document.getElementById('sootheVolumeValue');
+    const sootheSoundOptions = document.querySelectorAll('[data-soothe-sound]');
+    const sootheTimerOptions = document.querySelectorAll('[data-soothe-timer]');
     const sceneSleepHeading = document.getElementById('sceneSleepHeading');
     const replayPage = document.getElementById('replayPage');
     const settingsPage = document.getElementById('settingsPage');
@@ -14564,7 +15093,7 @@
         return {
           icon: stateIcon,
           title: status.statusType === 'asleep' ? `${status.baby}${status.state}` : `${status.baby}${status.state}`,
-          statusTitle: status.statusType === 'asleep' ? '\u7761\u7720\u4E2D' : '\u9192\u7740',
+          statusTitle: status.statusType === 'asleep' ? '\u7761\u7720\u4E2D' : '\u5DF2\u9192\u6765',
           meta: status.meta,
           statusMeta: status.statusType === 'asleep' ? status.meta : '',
           time: status.statusType === 'asleep' ? status.time : '',
@@ -14576,7 +15105,7 @@
       return {
         icon: stateIcon,
         title: `${status.baby}${status.state}`,
-        statusTitle: status.statusType === 'asleep' ? '\u7761\u7720\u4E2D' : '\u9192\u7740',
+        statusTitle: status.statusType === 'asleep' ? '\u7761\u7720\u4E2D' : '\u5DF2\u9192\u6765',
         meta: status.meta,
         statusMeta: status.statusType === 'asleep' ? status.meta : '',
         time: status.statusType === 'asleep' ? status.time : '',
@@ -14587,38 +15116,32 @@
     }
 
     function renderMonitorBabyStatus(showSplit2, showSplit4, isOffline) {
-      const splitRooms = showSplit4 ? ['niki', 'neo', 'niki2', 'niki3'] : ['niki', 'neo'];
-      const isSplitView = showSplit2 || showSplit4;
+      const splitRooms = showSplit4 ? ['niki', 'neo', 'niki2', 'niki3'] : getMultiCameraPageRooms();
       const splitCareMetrics = {
         niki: { breath: '28 br/min', heart: '108 bpm', temp: '24.5\u00B0C', humidity: '55%', bodyTemp: '36.6\u00B0C', airQuality: '\u4F18' },
         neo: { breath: '--', heart: '--', temp: '24.7\u00B0C', humidity: '54%', bodyTemp: '36.5\u00B0C', airQuality: '\u826F' },
         niki2: { breath: '--', heart: '--', temp: '24.3\u00B0C', humidity: '57%', bodyTemp: '--', airQuality: '\u4F18' },
         niki3: { breath: '30 br/min', heart: '112 bpm', temp: '24.8\u00B0C', humidity: '56%', bodyTemp: '36.6\u00B0C', airQuality: '\u4F18' }
       };
-      const envIconMarkup = `
-        <svg class="monitor-env-icon" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 14.76V5a4 4 0 0 0-8 0v9.76a6 6 0 1 0 8 0Z"></path><path d="M10 8v8"></path></svg>
-      `;
-      const humidityIconMarkup = `
-        <svg class="monitor-env-icon" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3.5S6 10.1 6 14.2a6 6 0 0 0 12 0C18 10.1 12 3.5 12 3.5Z"></path></svg>
-      `;
       const currentBaby = babyStatusByRoom[appState.room] || babyStatusByRoom['niki'];
       const currentStatus = getBabyCareStatus(currentBaby, { isOffline, isSoothe: appState.scene === '\u5165\u7761\u5B89\u629A' });
       const currentMetrics = splitCareMetrics[appState.room] || splitCareMetrics.niki;
-      const sleepValues = document.querySelectorAll('.scene-sleep .scene-vital-item strong, .scene-sleep .scene-env-card strong');
-      const normalSleepValues = [currentMetrics.breath, currentMetrics.heart, currentMetrics.bodyTemp, currentMetrics.airQuality];
-      if (monitorTempValue) monitorTempValue.textContent = isOffline ? '--' : currentMetrics.temp;
-      if (monitorHumidityValue) monitorHumidityValue.textContent = isOffline ? '--' : currentMetrics.humidity;
-      tiles.forEach((tile) => {
-        const roomName = tile.dataset.room;
-        const metrics = splitCareMetrics[roomName] || splitCareMetrics.niki;
-        let overlay = tile.querySelector('.tile-env-overlay');
-        if (!overlay) {
-          overlay = document.createElement('span');
-          overlay.className = 'tile-env-overlay';
-          tile.appendChild(overlay);
-        }
-        overlay.innerHTML = `<span aria-label="\u5BA4\u6E29">${envIconMarkup}<strong>${metrics.temp}</strong></span><span aria-label="\u6E7F\u5EA6">${humidityIconMarkup}<strong>${metrics.humidity}</strong></span>`;
-        overlay.hidden = !isSplitView;
+      const sleepVitalValues = document.querySelectorAll('.scene-sleep > .scene-breath-card > .scene-vitals-grid:first-child .scene-vital-item strong');
+      const sleepEnvironmentValues = document.querySelectorAll('.scene-sleep > .scene-env-grid .scene-env-card strong');
+      const staticRoomTemperatureValues = document.querySelectorAll('.scene-mode-card > .scene-breath-card [data-room-temperature]');
+      const staticRoomHumidityValues = document.querySelectorAll('.scene-mode-card > .scene-breath-card [data-room-humidity]');
+      const unavailableValue = isOffline ? '--' : null;
+      sleepVitalValues.forEach((item, index) => {
+        item.textContent = unavailableValue || [currentMetrics.breath, currentMetrics.heart][index];
+      });
+      sleepEnvironmentValues.forEach((item, index) => {
+        item.textContent = unavailableValue || [currentMetrics.bodyTemp, currentMetrics.airQuality][index];
+      });
+      staticRoomTemperatureValues.forEach((item) => {
+        item.textContent = unavailableValue || currentMetrics.temp;
+      });
+      staticRoomHumidityValues.forEach((item) => {
+        item.textContent = unavailableValue || currentMetrics.humidity;
       });
       if (sceneSleepTitle) {
         sceneSleepTitle.textContent = currentStatus.statusTitle || currentStatus.title;
@@ -14632,9 +15155,6 @@
       if (sceneSleepHeading) {
         sceneSleepHeading.textContent = `${currentBaby.baby}\u7684\u72B6\u6001`;
       }
-      sleepValues.forEach((item, index) => {
-        item.textContent = isOffline ? '--' : normalSleepValues[index];
-      });
       if (!sceneSplitStatus) return;
       if (!showSplit2 && !showSplit4) {
         sceneSplitStatus.innerHTML = '';
@@ -14649,15 +15169,220 @@
             <div class="scene-mode-top">
               <div><div class="scene-status-heading">${status.baby}\u7684\u72B6\u6001</div><div class="scene-mode-state"><span class="scene-mode-icon">${view.icon}</span><span class="scene-mode-state-text"><strong>${view.statusTitle || view.title}</strong>${(view.statusMeta || view.meta) ? `<span class="scene-mode-subtitle">${view.statusMeta || view.meta}</span>` : ''}</span></div></div>
             </div>
-            <div class="scene-split-metrics" aria-label="${status.baby}\u4F53\u5F81\u4E0E\u73AF\u5883\u6570\u636E">
-              <div class="scene-split-metric"><span>\u547C\u5438\u7387</span><strong>${metrics.breath}</strong></div>
-              <div class="scene-split-metric"><span>\u5FC3\u7387</span><strong>${metrics.heart}</strong></div>
-              <div class="scene-split-metric"><span>\u4F53\u6E29\u8D34</span><strong>${metrics.bodyTemp}</strong></div>
-              <div class="scene-split-metric"><span>\u7A7A\u6C14\u8D28\u91CF</span><strong>${metrics.airQuality}</strong></div>
-            </div>
+            <div class="scene-breath-card"><div class="scene-vitals-grid"><div class="scene-vital-item"><span>\u547C\u5438\u7387</span><strong>${metrics.breath}</strong></div><div class="scene-vital-item"><span>\u5FC3\u7387</span><strong>${metrics.heart}</strong></div></div><div class="scene-vitals-grid scene-room-env-grid"><div class="scene-vital-item"><span>\u6E29\u5EA6</span><strong data-room-temperature>${metrics.temp}</strong></div><div class="scene-vital-item"><span>\u6E7F\u5EA6</span><strong data-room-humidity>${metrics.humidity}</strong></div></div></div>
+            <div class="scene-env-grid"><div class="scene-env-card"><span>\u4F53\u6E29\u8D34</span><strong>${metrics.bodyTemp}</strong></div><div class="scene-env-card"><span>\u7A7A\u6C14\u8D28\u91CF</span><strong>${metrics.airQuality}</strong></div></div>
           </div>
         `;
       }).join('');
+    }
+
+    function getMultiCameraPageRooms() {
+      const rooms = Array.from(tiles, (tile) => tile.dataset.room).filter(Boolean);
+      const pageCount = Math.max(1, Math.ceil(rooms.length / 2));
+      const page = Math.min(Math.max(Number(appState.multiCameraPage) || 0, 0), pageCount - 1);
+      return rooms.slice(page * 2, page * 2 + 2);
+    }
+
+    function renderMultiCameraPage(showSplit2) {
+      const pageCount = Math.max(1, Math.ceil(tiles.length / 2));
+      const hasPagination = showSplit2 && pageCount > 1;
+      appState.multiCameraPage = Math.min(Math.max(Number(appState.multiCameraPage) || 0, 0), pageCount - 1);
+
+      tiles.forEach((tile, index) => {
+        const tilePage = Math.floor(index / 2);
+        tile.classList.toggle('page-hidden', showSplit2 && tilePage !== appState.multiCameraPage);
+      });
+
+      if (multiCameraPager) multiCameraPager.hidden = !hasPagination;
+      if (!hasPagination) return;
+
+      const visibleRooms = getMultiCameraPageRooms();
+      if (!visibleRooms.includes(appState.selectedSplitRoom)) {
+        appState.selectedSplitRoom = visibleRooms[0] || 'niki';
+      }
+      if (multiCameraPrev) multiCameraPrev.disabled = appState.multiCameraPage === 0;
+      if (multiCameraNext) multiCameraNext.disabled = appState.multiCameraPage === pageCount - 1;
+      if (multiCameraPageDots) {
+        multiCameraPageDots.replaceChildren();
+        Array.from({ length: pageCount }, (_, index) => {
+          const dot = document.createElement('button');
+          dot.className = 'multi-camera-page-dot' + (index === appState.multiCameraPage ? ' active' : '');
+          dot.type = 'button';
+          dot.dataset.multiCameraPage = String(index);
+          dot.setAttribute('aria-label', '第 ' + (index + 1) + ' 页');
+          dot.setAttribute('aria-current', index === appState.multiCameraPage ? 'page' : 'false');
+          multiCameraPageDots.append(dot);
+        });
+      }
+    }
+
+    function setMultiCameraPage(nextPage) {
+      const pageCount = Math.max(1, Math.ceil(tiles.length / 2));
+      const page = Math.min(Math.max(Number(nextPage) || 0, 0), pageCount - 1);
+      if (page === appState.multiCameraPage) return;
+      appState.multiCameraPage = page;
+      appState.selectedSplitRoom = getMultiCameraPageRooms()[0] || 'niki';
+      renderState();
+    }
+
+    function updateMonitorTimestamps() {
+      const now = new Date();
+      const pad = (value) => String(value).padStart(2, '0');
+      const year = now.getFullYear();
+      const month = pad(now.getMonth() + 1);
+      const day = pad(now.getDate());
+      const hours = pad(now.getHours());
+      const minutes = pad(now.getMinutes());
+      const seconds = pad(now.getSeconds());
+      const displayValue = `${year}\u5E74${month}\u6708${day}\u65E5 ${hours}:${minutes}:${seconds}`;
+      const dateTimeValue = `${year}-${month}-${day}T${hours}:${minutes}:${seconds}`;
+      monitorTimestamps.forEach((timestamp) => {
+        timestamp.textContent = displayValue;
+        timestamp.dateTime = dateTimeValue;
+      });
+    }
+
+    function getMonitorCaptureRoom() {
+      return appState.room === '\u5168\u90E8\u8BBE\u5907' ? appState.selectedSplitRoom : appState.room;
+    }
+
+    function getMonitorCaptureSource(roomName) {
+      if (!monitor) return null;
+      if (!monitor.classList.contains('split-2') && !monitor.classList.contains('split-4')) return monitor;
+      return Array.from(tiles).find((tile) => tile.dataset.room === roomName) || monitor;
+    }
+
+    function showMonitorCaptureToast(message) {
+      if (!monitorCaptureToast) return;
+      monitorCaptureToast.textContent = message;
+      monitorCaptureToast.hidden = false;
+      monitorCaptureToast.style.animation = 'none';
+      void monitorCaptureToast.offsetWidth;
+      monitorCaptureToast.style.animation = '';
+      if (monitorCaptureToastTimer) clearTimeout(monitorCaptureToastTimer);
+      monitorCaptureToastTimer = setTimeout(() => {
+        monitorCaptureToast.hidden = true;
+        monitorCaptureToastTimer = null;
+      }, 2000);
+    }
+
+    function showMonitorCapturePreview(kind = 'screenshot', roomName = getMonitorCaptureRoom(), durationSeconds = 0) {
+      if (!monitorScreenshotPreview || !monitorScreenshotThumbnail) return;
+      const sourceElement = getMonitorCaptureSource(roomName);
+      if (!sourceElement) return;
+      const sourceStyle = getComputedStyle(sourceElement);
+      monitorScreenshotThumbnail.style.backgroundImage = sourceStyle.backgroundImage;
+      monitorScreenshotThumbnail.style.backgroundPosition = sourceStyle.backgroundPosition;
+      monitorScreenshotThumbnail.style.backgroundSize = sourceStyle.backgroundSize;
+      monitorScreenshotPreview.classList.toggle('video-preview', kind === 'video');
+      monitorScreenshotPreview.hidden = false;
+      monitorScreenshotPreview.style.animation = 'none';
+      void monitorScreenshotPreview.offsetWidth;
+      monitorScreenshotPreview.style.animation = '';
+      if (monitorScreenshotTimer) clearTimeout(monitorScreenshotTimer);
+      monitorScreenshotTimer = setTimeout(() => {
+        monitorScreenshotPreview.hidden = true;
+        monitorScreenshotTimer = null;
+      }, 2000);
+    }
+
+    function renderMonitorSoundControl() {
+      if (!monitorSoundToggle) return;
+      const roomName = getMonitorCaptureRoom();
+      const isMuted = appState.mutedRooms.includes(roomName);
+      monitorSoundToggle.classList.toggle('sound-muted', isMuted);
+      monitorSoundToggle.setAttribute('aria-pressed', String(!isMuted));
+      monitorSoundToggle.setAttribute('aria-label', isMuted ? '开启声音' : '关闭声音');
+      monitorSoundToggle.title = isMuted ? '开启声音' : '关闭声音';
+      if (monitorSoundIcon) monitorSoundIcon.textContent = isMuted ? '⊘' : '◕';
+      if (monitorSoundLabel) monitorSoundLabel.textContent = isMuted ? '声音关' : '声音开';
+    }
+
+    function renderAudioOnlyControl() {
+      if (monitorAudioOnlyToggle) {
+        const isActive = appState.audioOnlyRooms.includes(getMonitorCaptureRoom());
+        monitorAudioOnlyToggle.classList.toggle('audio-only-active', isActive);
+        monitorAudioOnlyToggle.setAttribute('aria-pressed', String(isActive));
+        monitorAudioOnlyToggle.setAttribute('aria-label', isActive ? '关闭音频模式' : '开启音频模式');
+        monitorAudioOnlyToggle.title = isActive ? '关闭音频模式' : '开启音频模式';
+        if (monitorAudioOnlyLabel) monitorAudioOnlyLabel.textContent = isActive ? '音频模式中' : '音频模式';
+      }
+      if (audioOnlyConfirmModal) audioOnlyConfirmModal.hidden = !appState.audioOnlyPromptOpen;
+    }
+
+    function enableAudioOnly(roomName) {
+      const audioOnlyRooms = new Set(appState.audioOnlyRooms);
+      audioOnlyRooms.add(roomName || getMonitorCaptureRoom());
+      appState.audioOnlyRooms = Array.from(audioOnlyRooms);
+      appState.audioOnlyPromptOpen = false;
+      appState.powerSavingEnabled = false;
+      if (audioOnlySkipPrompt) audioOnlySkipPrompt.checked = false;
+      renderAudioOnlyControl();
+      renderControlPowerSaving();
+    }
+
+    try {
+      appState.audioOnlyTipSuppressed = localStorage.getItem('bbm-audio-only-tip-suppressed') === 'true';
+    } catch (error) {
+      appState.audioOnlyTipSuppressed = false;
+    }
+
+    function startIntercom() {
+      const roomName = getMonitorCaptureRoom();
+      const mutedRooms = new Set(appState.mutedRooms);
+      appState.intercomRoom = roomName;
+      appState.intercomRestoreMuted = mutedRooms.has(roomName);
+      mutedRooms.delete(roomName);
+      appState.mutedRooms = Array.from(mutedRooms);
+      appState.intercomActive = true;
+      renderIntercomControl();
+      renderMonitorSoundControl();
+    }
+
+    function stopIntercom() {
+      const mutedRooms = new Set(appState.mutedRooms);
+      if (appState.intercomRestoreMuted && appState.intercomRoom) mutedRooms.add(appState.intercomRoom);
+      appState.mutedRooms = Array.from(mutedRooms);
+      appState.intercomActive = false;
+      appState.intercomRoom = '';
+      appState.intercomRestoreMuted = false;
+      renderIntercomControl();
+      renderMonitorSoundControl();
+    }
+
+    function renderRecordingControl() {
+      if (!monitorRecordingButton) return;
+      monitorRecordingButton.classList.toggle('recording-active', appState.recordingActive);
+      monitorRecordingButton.setAttribute('aria-pressed', String(appState.recordingActive));
+      monitorRecordingButton.setAttribute('aria-label', appState.recordingActive ? '停止录像' : '开始录像');
+      monitorRecordingButton.title = appState.recordingActive ? '停止录像' : '录像';
+      if (monitorRecordingLabel) monitorRecordingLabel.textContent = appState.recordingActive ? '录像中' : '录像';
+    }
+
+    function renderIntercomControl() {
+      if (monitorIntercomButton) {
+        monitorIntercomButton.classList.toggle('intercom-active', appState.intercomActive);
+        monitorIntercomButton.setAttribute('aria-pressed', String(appState.intercomActive));
+        monitorIntercomButton.setAttribute('aria-label', appState.intercomActive ? '结束对讲' : '开启对讲');
+        monitorIntercomButton.title = appState.intercomActive ? '结束对讲' : '语音对讲';
+      }
+      if (monitorIntercomLabel) monitorIntercomLabel.textContent = appState.intercomActive ? '对讲中' : '对讲';
+      if (intercomConfirmModal) intercomConfirmModal.hidden = !appState.intercomPromptOpen;
+    }
+
+    function confirmIntercomTip() {
+      appState.intercomTipConfirmed = true;
+      try {
+        localStorage.setItem('bbm-intercom-tip-confirmed', 'true');
+      } catch (error) {
+        // Local files can deny storage in stricter browser modes.
+      }
+    }
+
+    try {
+      appState.intercomTipConfirmed = localStorage.getItem('bbm-intercom-tip-confirmed') === 'true';
+    } catch (error) {
+      appState.intercomTipConfirmed = false;
     }
 
     function renderShareStep() {
@@ -14860,6 +15585,7 @@
 
     function sanitizeStoredDocs(docs) {
       const sanitized = { ...(docs || {}) };
+      delete sanitized['全局说明'];
       Object.keys(sanitized).forEach((page) => {
         const meta = sanitized[page];
         if (!meta || typeof meta !== 'object') return;
@@ -14902,11 +15628,11 @@
       }
       if (page === '实时监控区') {
         if (button.dataset.view === 'single') {
-          return button.dataset.homeSubPage === 'offlineDevice' ? '设备离线主页' : '单IPC主页';
+          return button.dataset.homeSubPage === 'offlineDevice' ? '设备离线主页' : '主页';
         }
-        if (button.dataset.view === 'dualHome') return '多IPC主页';
-        if (button.dataset.scene === '睡眠看护') return '主页-睡眠看护';
-        if (button.dataset.view === 'split2') return '主页-多画面';
+        if (button.dataset.view === 'dualHome') return '多设备主页';
+        if (button.dataset.scene === '睡眠看护') return '主页-生态设备';
+        if (button.dataset.view === 'split2') return '主页-生态设备-多画面';
         if (button.dataset.view === 'singleFull') return '单画面全屏';
         if (button.dataset.view === 'split2Full') return '双画面全屏';
         return '主页';
@@ -14937,6 +15663,7 @@
         '日常活动统计 / 录像回放': '日常活动统计',
         '智能看护快捷设置 / 设置': '智能看护快捷设置',
         '账号信息 / 账号': '账号信息',
+        '实时监控区 / 多IPC主页': '实时监控区 / 多设备主页',
         '切网提示 / 弱网切网提示': '切网提示',
         '切网提示 / 弱网&切网提示': '切网提示'
       };
@@ -16016,7 +16743,17 @@
 
     function sanitizeRemovedPrototypeFeatures(root) {
       if (!root) return;
-      root.querySelectorAll('[data-page="安全检测分级反馈"], .safety-feedback-card').forEach((node) => node.remove());
+      root.querySelectorAll('[data-page="安全检测分级反馈"], .safety-feedback-card, .scene-clothing-advice').forEach((node) => node.remove());
+      root.querySelectorAll('.nav-sub-item[data-page="实时监控区"][data-view="single"]:not([data-home-sub-page])').forEach((node) => node.remove());
+      root.querySelectorAll('.nav-sub-item[data-page="实时监控区"][data-scene="睡眠看护"]').forEach((node) => {
+        node.textContent = '主页-生态设备';
+      });
+      root.querySelectorAll('.nav-sub-item[data-page="实时监控区"][data-view="split2"]').forEach((node) => {
+        node.textContent = '主页-生态设备-多画面';
+      });
+      root.querySelectorAll('.nav-sub-item[data-page="实时监控区"][data-view="dualHome"]').forEach((node) => {
+        node.textContent = '多设备主页';
+      });
       root.querySelectorAll('style').forEach((style) => {
         style.textContent = style.textContent.replace(/[^{}]*safety-feedback[^{}]*\{[^{}]*\}/g, '');
       });
@@ -16025,6 +16762,28 @@
           try {
             const docs = JSON.parse(script.textContent || '{}');
             delete docs['安全检测分级反馈'];
+            delete docs['实时监控区 / 单IPC主页'];
+            if (docs['实时监控区 / 多IPC主页']) {
+              docs['实时监控区 / 多设备主页'] = docs['实时监控区 / 多IPC主页'];
+              delete docs['实时监控区 / 多IPC主页'];
+            }
+            if (docs['实时监控区 / 多设备主页']) {
+              docs['实时监控区 / 多设备主页'].title = '多设备主页';
+            }
+            if (docs['实时监控区 / 主页-睡眠看护']) {
+              docs['实时监控区 / 主页-生态设备'] = docs['实时监控区 / 主页-睡眠看护'];
+              delete docs['实时监控区 / 主页-睡眠看护'];
+            }
+            if (docs['实时监控区 / 主页-生态设备']) {
+              docs['实时监控区 / 主页-生态设备'].title = '主页-生态设备';
+            }
+            if (docs['实时监控区 / 主页-多画面']) {
+              docs['实时监控区 / 主页-生态设备-多画面'] = docs['实时监控区 / 主页-多画面'];
+              delete docs['实时监控区 / 主页-多画面'];
+            }
+            if (docs['实时监控区 / 主页-生态设备-多画面']) {
+              docs['实时监控区 / 主页-生态设备-多画面'].title = '主页-生态设备-多画面';
+            }
             script.textContent = JSON.stringify(docs, null, 2).replace(/</g, '\\u003C');
           } catch (error) {}
         }
@@ -16549,15 +17308,19 @@
       const showSplitStatus2 = showSplit && showSplit2;
       const showSplit4 = showSplit && (appState.view === 'split4' || appState.view === 'split4Full');
 
+      if (showSplit && showSplit2) appState.monitorOverlaysHidden = false;
       monitor.classList.toggle('split-2', showSplit && showSplit2);
       monitor.classList.toggle('split-4', showSplit && showSplit4);
       if (showSplit && !roomSets[appState.view]?.includes(appState.selectedSplitRoom)) {
         appState.selectedSplitRoom = 'niki';
       }
+      renderMultiCameraPage(showSplit && showSplit2);
       screen.classList.toggle('fullscreen-mode', isFull);
       screen.classList.toggle('full-single', appState.view === 'singleFull');
+      screen.classList.toggle('base-home', isMonitorPage && appState.homeSubPage === 'baseHome');
       screen.classList.toggle('single-device-home', isMonitorPage && appState.homeSubPage === 'singleDevice');
       screen.classList.toggle('dual-device-home', isMonitorPage && appState.homeSubPage === 'dualDevice');
+      screen.classList.toggle('ecological-device-home', isMonitorPage && (appState.homeSubPage === '\u7761\u7720\u770B\u62A4' || appState.homeSubPage === 'split2'));
       screen.classList.toggle('offline-device-home', isMonitorPage && appState.homeSubPage === 'offlineDevice');
       screen.classList.remove('activity-scene');
       screen.classList.toggle('device-page-mode', isDevicePage);
@@ -16615,6 +17378,7 @@
       screen.classList.toggle('control-page-mode', isControlPage);
       screen.classList.toggle('screensaver-page-mode', isScreensaverPage);
       screen.classList.toggle('power-page-mode', isPowerPage);
+      monitor.classList.toggle('overlays-hidden', appState.monitorOverlaysHidden);
       if (!isReplayPage) setReplayFullscreen(false);
       requestAnimationFrame(markInlineEditableText);
       monitor.style.setProperty('--monitor-image', `url("${getMonitorImage()}")`);
@@ -16622,8 +17386,6 @@
         const currentBaby = babyStatusByRoom[appState.room];
         fullscreenRoomPill.textContent = currentBaby ? `${room.roomLabel} \u00B7 ${currentBaby.baby}` : room.roomLabel;
       }
-      const livePill = document.querySelector('.live-pill.live');
-      if (livePill) livePill.textContent = isMonitorPage && appState.homeSubPage === 'offlineDevice' ? '\u79BB\u7EBF' : 'Live';
       if (rightPanel) {
         rightPanel.dataset.scenePanel = appState.scene;
         rightPanel.dataset.monitorView = showSplit ? (appState.view === 'dualHome' ? 'split2' : appState.view) : 'single';
@@ -16640,6 +17402,12 @@
       canvasLabel.textContent = appState.globalDocsMode ? '\u5168\u5C40\u8BF4\u660E' : (isDevicePage ? `${appState.page} / ${appState.deviceGroup}` : (isDeviceSettingsPage ? `${appState.page} / niki\u6444\u50CF\u5934` : (isCarePage ? `${appState.page} / \u6307\u6807\u8D8B\u52BF` : (isCareSettingsPage ? `${appState.page} / \u8BBE\u7F6E` : (isReplayPage ? `${appState.page} / ${appState.replayState === 'noCard' ? '\u672A\u63D2\u5361' : '\u5F55\u50CF\u56DE\u653E'}` : (isSettingsPage ? `${appState.page} / \u8BBE\u7F6E` : (isAccountPage ? `${appState.page} / ${accountPanelTitles[appState.accountPanel] || '\u8D26\u53F7\u4FE1\u606F'}` : (isNotificationPage ? `\u4E3B\u9875 / ${appState.page}` : (isNoDevicePage ? '\u4E3B\u9875 / \u65E0\u8BBE\u5907\u9875' : (isOnboardingPage ? `${appState.page} / \u9996\u6B21\u5F00\u673A` : (isGuidePage ? (isNetworkSwitchPage ? '\u5207\u7F51\u63D0\u793A' : `${appState.page} / ${appState.guideState === 'network-switch' ? '\u5207\u7F51\u63D0\u793A' : '\u4F7F\u7528\u63D0\u793A'}`) : (isControlPage ? `${appState.page} / \u5FEB\u6377\u63A7\u5236` : (isScreensaverPage ? `${appState.page} / \u5FEB\u6377\u8BB0\u5F55` : (isPowerPage ? `${appState.page} / \u5173\u673A\u786E\u8BA4` : (isFull ? `${appState.page} / ${room.roomLabel}` : `${appState.page} / ${room.roomLabel} / ${appState.scene}`)))))))))))))));
 
       renderRoomTabs();
+      renderSootheDrawer();
+      renderIntercomControl();
+      renderRecordingControl();
+      renderMonitorSoundControl();
+      renderAudioOnlyControl();
+      renderControlPowerSaving();
       renderCareRange();
       renderNotificationContent();
       renderMonitorBabyStatus(showSplitStatus2, showSplit4, isMonitorPage && appState.homeSubPage === 'offlineDevice');
@@ -16677,17 +17445,13 @@
               ? appState.homeSubPage === 'singleDevice'
               : appState.homeSubPage === button.dataset.view));
         } else if (isSceneSub) {
-          isActive = button.dataset.scene === appState.scene && appState.page === button.dataset.page && appState.homeSubPage !== 'singleDevice' && appState.homeSubPage !== 'dualDevice' && appState.homeSubPage !== 'offlineDevice';
+          isActive = button.dataset.scene === appState.scene && appState.page === button.dataset.page && appState.homeSubPage === button.dataset.scene;
         } else {
           isActive = (button.dataset.page === appState.page && !(button.dataset.page === '\u667A\u80FD\u770B\u62A4\u8BBE\u7F6E' && isDeviceCareSettings)) || (button.dataset.page === '\u8BBE\u5907\u8BBE\u7F6E' && isDeviceCareSettings);
         }
         button.classList.toggle('active', !appState.globalDocsMode && isActive);
       });
       sceneButtons.forEach((button) => button.classList.toggle('active', button.dataset.scene === appState.scene));
-      if (sleepSootheShortcut) {
-        const sootheActive = appState.scene === '\u5165\u7761\u5B89\u629A';
-        sleepSootheShortcut.classList.toggle('active', sootheActive);
-      }
       tiles.forEach((tile) => {
         const selected = showSplit ? tile.dataset.room === appState.selectedSplitRoom : tile.dataset.room === appState.room;
         tile.classList.toggle('active', selected);
@@ -16711,7 +17475,8 @@
           || onboardingIndex === unpairedDevicePanelIndex
           || unpairedDeviceFlowIndexes.has(onboardingIndex)
         );
-        const isRegularNavActive = navOnboardingIndex === null && !isPlainOnboardingNav && page === appState.page;
+        const isHomeChildNavActive = page === '\u5B9E\u65F6\u76D1\u63A7\u533A' && appState.page === '\u65B0\u624B\u5F15\u5BFC';
+        const isRegularNavActive = navOnboardingIndex === null && !isPlainOnboardingNav && (page === appState.page || isHomeChildNavActive);
         const noDeviceNavPage = appState.noDeviceContext ? '\u65E0\u8BBE\u5907\u9875' : appState.noDeviceMenuPage;
         const isNoDeviceNavActive = appState.noDeviceContext && navOnboardingIndex === null && !isPlainOnboardingNav && page === noDeviceNavPage;
         const isPlainOnboardingActive = isPlainOnboardingNav && page === appState.page && !hasActiveOnboardingJump;
@@ -16758,6 +17523,22 @@
       activatePage('\u5B9E\u65F6\u76D1\u63A7\u533A');
     }
 
+    function rememberFullscreenReturnState() {
+      const fullscreenViews = ['singleFull', 'split2Full', 'split4Full'];
+      if (fullscreenViews.includes(appState.view)) return;
+      appState.fullscreenReturnState = {
+        page: appState.page,
+        view: appState.view,
+        room: appState.room,
+        selectedSplitRoom: appState.selectedSplitRoom,
+        scene: appState.scene,
+        homeSubPage: appState.homeSubPage,
+        docsPage: appState.docsPage,
+        docsTitle: appState.docsTitle,
+        docsKey: appState.docsKey
+      };
+    }
+
 
     function activatePage(page) {
       appState.globalDocsMode = false;
@@ -16794,7 +17575,7 @@
       }
       if (page === '\u5B9E\u65F6\u76D1\u63A7\u533A') {
         appState.scene = '\u7761\u7720\u770B\u62A4';
-        appState.homeSubPage = 'sleepCare';
+        appState.homeSubPage = 'baseHome';
       }
       if (page === '\u5207\u7F51\u63D0\u793A') {
         appState.scene = '\u7761\u7720\u770B\u62A4';
@@ -16813,6 +17594,7 @@
 
     function enterFullscreenView() {
       if (!fullscreenViewMap[appState.view]) return;
+      rememberFullscreenReturnState();
       appState.view = fullscreenViewMap[appState.view];
       appState.room = appState.view === 'singleFull' ? 'niki' : '\u5168\u90E8\u8BBE\u5907';
       appState.selectedSplitRoom = appState.view === 'singleFull' ? 'niki' : 'niki';
@@ -16822,12 +17604,34 @@
 
     function enterSingleFullscreenView() {
       if (appState.homeSubPage === 'offlineDevice') return;
+      rememberFullscreenReturnState();
       appState.page = '\u5B9E\u65F6\u76D1\u63A7\u533A';
       appState.view = 'singleFull';
       appState.room = 'niki';
       appState.scene = '\u7761\u7720\u770B\u62A4';
       appState.homeSubPage = 'singleDevice';
       renderState();
+    }
+
+    function exitFullscreenView() {
+      const fullscreenViews = ['singleFull', 'split2Full', 'split4Full'];
+      if (!fullscreenViews.includes(appState.view)) return false;
+      if (appState.fullscreenReturnState) {
+        const returnState = appState.fullscreenReturnState;
+        appState.fullscreenReturnState = null;
+        Object.assign(appState, returnState);
+        renderState();
+        return true;
+      }
+      const isDualFullscreen = appState.view === 'split2Full' || appState.view === 'split4Full';
+      appState.view = isDualFullscreen ? 'dualHome' : 'single';
+      appState.room = isDualFullscreen ? '\u5168\u90E8\u8BBE\u5907' : 'niki';
+      appState.selectedSplitRoom = 'niki';
+      appState.scene = '\u7761\u7720\u770B\u62A4';
+      appState.homeSubPage = isDualFullscreen ? 'dualDevice' : 'baseHome';
+      setDocsContext('\u5B9E\u65F6\u76D1\u63A7\u533A', isDualFullscreen ? '多设备主页' : '主页');
+      renderState();
+      return true;
     }
 
     navButtons.forEach((button) => {
@@ -16908,6 +17712,9 @@
       button.addEventListener('click', () => {
         safeSavePrototypeDocs();
         appState.globalDocsMode = false;
+        if (button.dataset.view === 'singleFull' || button.dataset.view === 'split2Full' || button.dataset.view === 'split4Full') {
+          appState.fullscreenReturnState = null;
+        }
         setDocsContext(button.dataset.page, getDocsLabelForNavButton(button) || button.dataset.page);
         if (button.dataset.onboardingJump) {
           appState.noDeviceContext = false;
@@ -16959,6 +17766,20 @@
           renderState();
           return;
         }
+        if (button.dataset.page === '\u65B0\u624B\u5F15\u5BFC') {
+          appState.noDeviceContext = false;
+          activatePage(button.dataset.page);
+          return;
+        }
+        if (button.dataset.page === '\u65E0\u8BBE\u5907\u9875') {
+          appState.noDeviceContext = true;
+          appState.noDeviceMenuPage = '\u5B9E\u65F6\u76D1\u63A7\u533A';
+          appState.page = '\u65E0\u8BBE\u5907\u9875';
+          appState.view = 'single';
+          appState.room = 'niki';
+          renderState();
+          return;
+        }
         if (button.dataset.page === '\u667A\u80FD\u770B\u62A4\u8BBE\u7F6E') {
           appState.careSettingsSource = '';
         }
@@ -16988,6 +17809,7 @@
         appState.view = button.dataset.view;
         appState.room = appState.view === 'single' || appState.view === 'singleFull' ? 'niki' : '\u5168\u90E8\u8BBE\u5907';
         appState.selectedSplitRoom = appState.view === 'single' || appState.view === 'singleFull' ? 'niki' : 'niki';
+        appState.multiCameraPage = 0;
         appState.scene = '\u7761\u7720\u770B\u62A4';
         appState.homeSubPage = button.dataset.homeSubPage || (button.dataset.view === 'single' ? 'singleDevice' : button.dataset.view);
         renderState();
@@ -17047,22 +17869,38 @@
     });
 
     monitor.addEventListener('click', (event) => {
-      if (appState.homeSubPage === 'offlineDevice') return;
-      if (event.target.closest('button') || event.target.closest('.monitor-actions')) return;
+      if (appState.page === '\u65B0\u624B\u5F15\u5BFC' || appState.homeSubPage === 'offlineDevice') return;
+      if (event.target.closest('button') || event.target.closest('.monitor-actions') || event.target.closest('.soothe-drawer')) return;
+      if (event.target.closest('.camera-tile')) return;
+      if (monitorClickTimer) clearTimeout(monitorClickTimer);
+      monitorClickTimer = setTimeout(() => {
+        appState.monitorOverlaysHidden = !appState.monitorOverlaysHidden;
+        renderState();
+        monitorClickTimer = null;
+      }, 240);
+    }, true);
+
+    monitor.addEventListener('dblclick', (event) => {
+      if (appState.page === '\u65B0\u624B\u5F15\u5BFC' || appState.homeSubPage === 'offlineDevice') return;
+      const cameraTile = event.target.closest('.camera-tile');
+      const nonTileButton = event.target.closest('button') && !cameraTile;
+      if (nonTileButton || event.target.closest('.monitor-actions') || event.target.closest('.soothe-drawer') || event.target.closest('.tile-setting') || event.target.closest('.tile-sound') || event.target.closest('.tile-sleep-state')) return;
+      if (monitorClickTimer) {
+        clearTimeout(monitorClickTimer);
+        monitorClickTimer = null;
+      }
+      if (exitFullscreenView()) {
+        event.preventDefault();
+        event.stopPropagation();
+        return;
+      }
+      if (cameraTile) return;
       if (appState.view === 'single' || appState.view === 'singleFull') {
         enterSingleFullscreenView();
         return;
       }
-      if (event.target.closest('.camera-tile')) return;
       enterFullscreenView();
     }, true);
-
-    if (monitorClickTarget) {
-      monitorClickTarget.addEventListener('click', (event) => {
-        event.stopPropagation();
-        enterSingleFullscreenView();
-      });
-    }
 
     sceneButtons.forEach((button) => {
       button.addEventListener('click', () => {
@@ -17199,11 +18037,60 @@
 
     if (sleepSootheShortcut) {
       sleepSootheShortcut.addEventListener('click', () => {
-        appState.page = '\u5B9E\u65F6\u76D1\u63A7\u533A';
-        appState.scene = '\u5165\u7761\u5B89\u629A';
-        renderState();
+        const targetRoom = appState.room === '\u5168\u90E8\u8BBE\u5907' ? appState.selectedSplitRoom : appState.room;
+        toggleSootheDrawerForRoom(targetRoom);
       });
     }
+
+    if (controlPowerSavingToggle) {
+      controlPowerSavingToggle.addEventListener('click', () => {
+        appState.powerSavingEnabled = !appState.powerSavingEnabled;
+        renderControlPowerSaving();
+      });
+    }
+
+    if (soothePlayToggle) {
+      soothePlayToggle.addEventListener('click', () => {
+        const playingRooms = new Set(appState.soothePlayingRooms);
+        if (playingRooms.has(appState.sootheTargetRoom)) {
+          playingRooms.delete(appState.sootheTargetRoom);
+        } else {
+          playingRooms.add(appState.sootheTargetRoom);
+        }
+        appState.soothePlayingRooms = Array.from(playingRooms);
+        renderSootheDrawer();
+      });
+    }
+
+    sootheSoundOptions.forEach((button) => {
+      button.addEventListener('click', () => {
+        appState.sootheSound = button.dataset.sootheSound || '白噪声';
+        renderSootheDrawer();
+      });
+    });
+
+    sootheTimerOptions.forEach((button) => {
+      button.addEventListener('click', () => {
+        appState.sootheTimer = button.dataset.sootheTimer || '不定时';
+        renderSootheDrawer();
+      });
+    });
+
+    if (sootheVolume) {
+      sootheVolume.addEventListener('input', () => {
+        appState.sootheVolume = Number(sootheVolume.value) || 0;
+        renderSootheDrawer();
+      });
+    }
+
+    document.addEventListener('click', (event) => {
+      if (!appState.sootheDrawerOpen || !sootheDrawer) return;
+      if (sootheDrawer.contains(event.target) || event.target.closest('#sleepSootheShortcut') || event.target.closest('.tile-sound')) return;
+      appState.sootheDrawerOpen = false;
+      renderSootheDrawer();
+      event.preventDefault();
+      event.stopImmediatePropagation();
+    }, true);
 
     function setReplayFullscreen(isFullscreen) {
       if (!replayPage) return;
@@ -17273,6 +18160,12 @@
 
     tiles.forEach((tile) => {
       tile.addEventListener('click', (event) => {
+        if (appState.page === '\u65B0\u624B\u5F15\u5BFC') return;
+        if (Date.now() < suppressTileClickUntil) {
+          event.preventDefault();
+          event.stopPropagation();
+          return;
+        }
         if (event.target.closest('[data-action="monitor-wake"]') || event.target.closest('.tile-sleep-state')) {
           return;
         }
@@ -17287,39 +18180,91 @@
         }
         if (event.target.closest('.tile-sound')) {
           event.stopPropagation();
-          appState.page = '\u5B9E\u65F6\u76D1\u63A7\u533A';
-          appState.room = tile.dataset.room || 'niki';
-          appState.device = tile.dataset.camera;
-          appState.scene = '\u5165\u7761\u5B89\u629A';
+          toggleSootheDrawerForRoom(tile.dataset.room || 'niki');
+          return;
+        }
+        if (isDualCameraView()) {
+          appState.selectedSplitRoom = tile.dataset.room || 'niki';
+          appState.device = tile.dataset.camera || 'niki摄像头';
+          appState.monitorOverlaysHidden = false;
+          if (appState.sootheDrawerOpen) appState.sootheTargetRoom = appState.selectedSplitRoom;
           renderState();
           return;
         }
-        if (appState.view === 'dualHome') {
+        if (monitorClickTimer) clearTimeout(monitorClickTimer);
+        monitorClickTimer = setTimeout(() => {
+          appState.monitorOverlaysHidden = !appState.monitorOverlaysHidden;
+          renderState();
+          monitorClickTimer = null;
+        }, 240);
+      });
+
+      tile.addEventListener('dblclick', (event) => {
+        if (appState.page === '\u65B0\u624B\u5F15\u5BFC') return;
+        if (Date.now() < suppressTileClickUntil) return;
+        if (event.target.closest('[data-action="monitor-wake"]') || event.target.closest('.tile-sleep-state') || event.target.closest('.tile-setting') || event.target.closest('.tile-sound')) return;
+        event.preventDefault();
+        event.stopPropagation();
+        if (monitorClickTimer) {
+          clearTimeout(monitorClickTimer);
+          monitorClickTimer = null;
+        }
+        if (appState.view === 'dualHome' || appState.view === 'split2' || appState.view === 'split4') {
+          rememberFullscreenReturnState();
           appState.view = fullscreenViewMap[appState.view];
           appState.room = '\u5168\u90E8\u8BBE\u5907';
-          appState.selectedSplitRoom = 'niki';
-          appState.scene = '\u7761\u7720\u770B\u62A4';
-          renderState();
-          return;
-        }
-        if (appState.view === 'split2' || appState.view === 'split4') {
-          appState.view = fullscreenViewMap[appState.view];
-          appState.room = '\u5168\u90E8\u8BBE\u5907';
-          appState.selectedSplitRoom = 'niki';
-          appState.scene = '\u7761\u7720\u770B\u62A4';
-          renderState();
-          return;
-        }
-        if (appState.view === 'split2Full' || appState.view === 'split4Full') {
           appState.selectedSplitRoom = tile.dataset.room || 'niki';
           appState.device = tile.dataset.camera;
+          appState.scene = '\u7761\u7720\u770B\u62A4';
           renderState();
-          return;
         }
-        appState.room = tile.dataset.room;
-        appState.device = tile.dataset.camera;
-        renderState();
       });
+    });
+
+    multiCameraPrev?.addEventListener('click', () => {
+      setMultiCameraPage(appState.multiCameraPage - 1);
+    });
+
+    multiCameraNext?.addEventListener('click', () => {
+      setMultiCameraPage(appState.multiCameraPage + 1);
+    });
+
+    multiCameraPageDots?.addEventListener('click', (event) => {
+      const dot = event.target.closest('[data-multi-camera-page]');
+      if (!dot) return;
+      setMultiCameraPage(Number(dot.dataset.multiCameraPage));
+    });
+
+    multiGrid?.addEventListener('pointerdown', (event) => {
+      if (multiCameraPager?.hidden || event.button !== 0 || event.target.closest('.tile-setting, .tile-sound, .tile-sleep-state')) return;
+      multiCameraSwipeStart = { x: event.clientX, y: event.clientY, pointerId: event.pointerId, captured: false };
+    });
+
+    multiGrid?.addEventListener('pointermove', (event) => {
+      if (!multiCameraSwipeStart || multiCameraSwipeStart.pointerId !== event.pointerId || multiCameraSwipeStart.captured) return;
+      const deltaX = event.clientX - multiCameraSwipeStart.x;
+      const deltaY = event.clientY - multiCameraSwipeStart.y;
+      if (Math.abs(deltaX) < 12 || Math.abs(deltaX) <= Math.abs(deltaY)) return;
+      multiGrid.setPointerCapture?.(event.pointerId);
+      multiCameraSwipeStart.captured = true;
+    });
+
+    multiGrid?.addEventListener('pointerup', (event) => {
+      if (!multiCameraSwipeStart || multiCameraSwipeStart.pointerId !== event.pointerId) return;
+      const deltaX = event.clientX - multiCameraSwipeStart.x;
+      const deltaY = event.clientY - multiCameraSwipeStart.y;
+      const swipeThreshold = Math.max(48, multiGrid.clientWidth * 0.08);
+      const wasCaptured = multiCameraSwipeStart.captured;
+      multiCameraSwipeStart = null;
+      if (wasCaptured) multiGrid.releasePointerCapture?.(event.pointerId);
+      if (Math.abs(deltaX) < swipeThreshold || Math.abs(deltaX) <= Math.abs(deltaY) * 1.25) return;
+      event.preventDefault();
+      suppressTileClickUntil = Date.now() + 450;
+      setMultiCameraPage(appState.multiCameraPage + (deltaX < 0 ? 1 : -1));
+    });
+
+    multiGrid?.addEventListener('pointercancel', () => {
+      multiCameraSwipeStart = null;
     });
 
     deviceButtons.forEach((button) => {
@@ -17826,6 +18771,93 @@
         activatePage('\u5B9D\u5B9D\u770B\u62A4\u6307\u6807\u533A');
         return;
       }
+      if (action.dataset.action === 'monitor-audio-only') {
+        const roomName = getMonitorCaptureRoom();
+        if (appState.audioOnlyRooms.includes(roomName)) {
+          appState.audioOnlyRooms = appState.audioOnlyRooms.filter((room) => room !== roomName);
+          renderAudioOnlyControl();
+        } else if (appState.audioOnlyTipSuppressed) {
+          enableAudioOnly(roomName);
+        } else {
+          appState.audioOnlyTargetRoom = roomName;
+          appState.audioOnlyPromptOpen = true;
+          if (audioOnlySkipPrompt) audioOnlySkipPrompt.checked = false;
+          renderAudioOnlyControl();
+        }
+        return;
+      }
+      if (action.dataset.action === 'audio-only-confirm') {
+        if (audioOnlySkipPrompt?.checked) {
+          appState.audioOnlyTipSuppressed = true;
+          try {
+            localStorage.setItem('bbm-audio-only-tip-suppressed', 'true');
+          } catch (error) {
+            // Local files can deny storage in stricter browser modes.
+          }
+        }
+        enableAudioOnly(appState.audioOnlyTargetRoom || getMonitorCaptureRoom());
+        return;
+      }
+      if (action.dataset.action === 'audio-only-cancel') {
+        appState.audioOnlyPromptOpen = false;
+        if (audioOnlySkipPrompt) audioOnlySkipPrompt.checked = false;
+        renderAudioOnlyControl();
+        return;
+      }
+      if (action.dataset.action === 'monitor-sound') {
+        const roomName = getMonitorCaptureRoom();
+        const mutedRooms = new Set(appState.mutedRooms);
+        if (mutedRooms.has(roomName)) mutedRooms.delete(roomName);
+        else mutedRooms.add(roomName);
+        appState.mutedRooms = Array.from(mutedRooms);
+        renderMonitorSoundControl();
+        return;
+      }
+      if (action.dataset.action === 'monitor-screenshot') {
+        showMonitorCapturePreview('screenshot');
+        showMonitorCaptureToast('截图已保存至录像回放-相册');
+        return;
+      }
+      if (action.dataset.action === 'monitor-recording') {
+        if (!appState.recordingActive) {
+          appState.recordingActive = true;
+          appState.recordingStartedAt = Date.now();
+          appState.recordingRoom = getMonitorCaptureRoom();
+          renderRecordingControl();
+          return;
+        }
+        const elapsedSeconds = Math.max(1, Math.round((Date.now() - appState.recordingStartedAt) / 1000));
+        const recordedRoom = appState.recordingRoom || getMonitorCaptureRoom();
+        appState.recordingActive = false;
+        appState.recordingStartedAt = 0;
+        appState.recordingRoom = '';
+        renderRecordingControl();
+        showMonitorCapturePreview('video', recordedRoom, elapsedSeconds);
+        showMonitorCaptureToast('录像已保存至录像回放-相册');
+        return;
+      }
+      if (action.dataset.action === 'monitor-intercom') {
+        if (appState.intercomActive) {
+          stopIntercom();
+        } else if (appState.intercomTipConfirmed) {
+          startIntercom();
+        } else {
+          appState.intercomPromptOpen = true;
+          renderIntercomControl();
+        }
+        return;
+      }
+      if (action.dataset.action === 'intercom-confirm') {
+        confirmIntercomTip();
+        appState.intercomPromptOpen = false;
+        startIntercom();
+        return;
+      }
+      if (action.dataset.action === 'intercom-cancel') {
+        appState.intercomPromptOpen = false;
+        renderIntercomControl();
+        return;
+      }
       if (action.dataset.action === 'monitor-sleep') {
         const isSplitMonitor = monitor?.classList.contains('split-2') || monitor?.classList.contains('split-4');
         if (isSplitMonitor) {
@@ -17849,14 +18881,33 @@
         return;
       }
       if (action.dataset.action === 'exit-fullscreen') {
-        const fallbackView = {
-          singleFull: 'single',
-          split2Full: 'split2',
-          split4Full: 'split4'
-        };
-        appState.view = fallbackView[appState.view] || 'single';
-        appState.room = appState.view === 'single' ? 'niki' : '\u5168\u90E8\u8BBE\u5907';
-        renderState();
+        exitFullscreenView();
+      }
+    });
+
+    audioOnlyConfirmModal?.addEventListener('click', (event) => {
+      if (event.target !== audioOnlyConfirmModal) return;
+      appState.audioOnlyPromptOpen = false;
+      if (audioOnlySkipPrompt) audioOnlySkipPrompt.checked = false;
+      renderAudioOnlyControl();
+    });
+
+    intercomConfirmModal?.addEventListener('click', (event) => {
+      if (event.target !== intercomConfirmModal) return;
+      appState.intercomPromptOpen = false;
+      renderIntercomControl();
+    });
+
+    document.addEventListener('keydown', (event) => {
+      if (event.key !== 'Escape') return;
+      if (appState.audioOnlyPromptOpen) {
+        appState.audioOnlyPromptOpen = false;
+        if (audioOnlySkipPrompt) audioOnlySkipPrompt.checked = false;
+        renderAudioOnlyControl();
+      }
+      if (appState.intercomPromptOpen) {
+        appState.intercomPromptOpen = false;
+        renderIntercomControl();
       }
     });
 
@@ -18077,10 +19128,22 @@
     initPrototypeScale();
     initResizablePanels();
     syncEmbeddedInlineTextEditsToLocalStorage();
+    updateMonitorTimestamps();
+    window.setInterval(updateMonitorTimestamps, 1000);
     renderState();
     cleanupStaleInlineTextEdits();
     markInlineEditableText();
   </script>
+
+
+
+
+
+
+
+
+
+
 
 
 
