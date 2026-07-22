@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="zh-CN" style="--prototype-scale: 0.67; --docs-width: 816px; --sidebar-width: 298px;"><head>
+<!DOCTYPE html><html lang="zh-CN" style="--prototype-scale: 0.67; --docs-width: 867px; --sidebar-width: 298px;"><head>
   <meta charset="UTF-8">
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -3553,30 +3553,67 @@
       display: block;
     }
 
-    .album-subtabs {
-      display: inline-flex;
-      gap: 8px;
-      padding: 4px;
+    .album-toolbar {
+      display: flex;
+      justify-content: flex-end;
       margin-bottom: 16px;
-      border: 1px solid rgba(134, 164, 202, 0.20);
-      border-radius: 14px;
-      background: rgba(255, 255, 255, 0.04);
     }
 
-    .album-subtab {
-      min-width: 86px;
-      height: 32px;
-      border: 0;
-      border-radius: 10px;
-      background: transparent;
+    .album-date-filter {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      min-width: 174px;
+      height: 36px;
+      border: 1px solid rgba(134, 164, 202, 0.24);
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.055);
+      padding: 0 10px;
       color: #aebbd0;
-      font-size: 13px;
+      font-size: 12px;
+      font-weight: 850;
+    }
+
+    .album-date-filter select {
+      flex: 1;
+      min-width: 0;
+      border: 0;
+      outline: 0;
+      background: transparent;
+      color: #f7fbff;
+      font: inherit;
+    }
+
+    .album-date-group {
+      display: grid;
+      gap: 10px;
+      margin-bottom: 18px;
+    }
+
+    .album-date-group[hidden] {
+      display: none;
+    }
+
+    .album-date-heading {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      min-height: 28px;
+      border-bottom: 1px solid rgba(134, 164, 202, 0.16);
+      padding: 0 2px 8px;
+    }
+
+    .album-date-heading h3 {
+      margin: 0;
+      color: #f7fbff;
+      font-size: 14px;
       font-weight: 900;
     }
 
-    .album-subtab.active {
-      background: linear-gradient(180deg, #52a6ff, #2563eb);
-      color: #fff;
+    .album-date-heading span {
+      color: #8194ae;
+      font-size: 11px;
+      font-weight: 800;
     }
 
     .album-content {
@@ -3788,6 +3825,7 @@
       width: 72px;
       height: 72px;
       place-items: center;
+      border: 0;
       border-radius: 50%;
       background: rgba(255, 255, 255, 0.20);
       color: #fff;
@@ -3850,6 +3888,71 @@
       font-size: 12px;
       font-weight: 900;
       backdrop-filter: blur(12px);
+    }
+
+    .replay-control-btn.recording-active {
+      border-color: rgba(255, 112, 118, 0.88);
+      background: rgba(211, 47, 58, 0.88);
+      box-shadow: 0 0 0 3px rgba(242, 76, 84, 0.16), 0 8px 22px rgba(154, 30, 38, 0.30);
+    }
+
+    .replay-control-btn.sound-muted {
+      border-color: rgba(255, 178, 182, 0.34);
+      background: rgba(17, 24, 39, 0.64);
+      color: #ffb2b6;
+    }
+
+    .replay-speed-control {
+      position: relative;
+    }
+
+    .replay-speed-btn {
+      min-width: 46px;
+    }
+
+    .replay-speed-value {
+      color: #9fcaff;
+    }
+
+    .replay-speed-menu {
+      position: absolute;
+      right: 0;
+      bottom: calc(100% + 8px);
+      z-index: 12;
+      display: grid;
+      min-width: 94px;
+      gap: 4px;
+      border: 1px solid rgba(151, 177, 211, 0.30);
+      border-radius: 8px;
+      background: rgba(10, 18, 31, 0.96);
+      padding: 6px;
+      box-shadow: 0 16px 38px rgba(0, 0, 0, 0.42);
+      backdrop-filter: blur(14px);
+    }
+
+    .replay-speed-menu[hidden] {
+      display: none;
+    }
+
+    .replay-speed-option {
+      height: 32px;
+      border: 0;
+      border-radius: 5px;
+      background: transparent;
+      color: #dce9f8;
+      font-size: 12px;
+      font-weight: 850;
+      text-align: center;
+    }
+
+    .replay-speed-option:hover,
+    .replay-speed-option.active {
+      background: rgba(82, 166, 255, 0.22);
+      color: #fff;
+    }
+
+    .replay-page.replay-fullscreen .replay-screenshot-preview {
+      bottom: 138px;
     }
 
     .timeline-panel {
@@ -7993,7 +8096,7 @@
       font-weight: 850;
     }
 
-    .onboarding-flow-card.is-wifi-step .onboarding-skip-btn {
+    .onboarding-flow-card.is-skippable-step .onboarding-skip-btn {
       display: inline-grid;
       place-items: center;
     }
@@ -10847,9 +10950,9 @@
           <button class="nav-item inline-edit-hint" data-page="屏端初始化向导">屏端初始化向导</button>
           <button class="nav-item inline-edit-hint" data-page="屏端初始化向导" data-onboarding-jump="4" data-onboarding-mode="paired-add">添加设备（已配对好）</button>
           <button class="nav-item inline-edit-hint" data-page="屏端初始化向导" data-onboarding-jump="10">添加设备（未配对好）</button>
-          <button class="nav-item active inline-edit-hint" data-page="实时监控区">主页</button>
+          <button class="nav-item inline-edit-hint" data-page="实时监控区">主页</button>
           <div class="nav-sub">
-            <button class="nav-sub-item active inline-edit-hint" data-page="实时监控区" data-view="dualHome" data-home-sub-page="dualDevice">多设备主页</button>
+            <button class="nav-sub-item inline-edit-hint" data-page="实时监控区" data-view="dualHome" data-home-sub-page="dualDevice">多设备主页</button>
             <button class="nav-sub-item inline-edit-hint" data-page="实时监控区" data-view="single" data-home-sub-page="offlineDevice">设备离线主页</button>
             <button class="nav-sub-item inline-edit-hint" data-page="实时监控区" data-view="singleFull">单画面全屏</button>
             <button class="nav-sub-item inline-edit-hint" data-page="实时监控区" data-view="split2Full">双画面全屏</button>
@@ -10887,7 +10990,7 @@
             <button class="nav-sub-item inline-edit-hint" data-page="设备固件升级失败通知">设备固件升级失败通知</button>
             <button class="nav-sub-item inline-edit-hint" data-page="干预通知">干预通知</button>
           </div>
-          <button class="nav-item inline-edit-hint" data-page="屏保快捷记录">屏保快捷记录</button>
+          <button class="nav-item active inline-edit-hint" data-page="屏保快捷记录">屏保快捷记录</button>
           <button class="nav-item inline-edit-hint" data-page="电源关机">电源关机</button>
         </section>
       </div>
@@ -10898,11 +11001,11 @@
       <div class="canvas-wrap">
         <div class="canvas-head">
           <strong>8 寸平板横屏原型</strong>
-          <span id="canvasLabel">实时监控区 / 全部设备 / 睡眠看护</span>
+          <span id="canvasLabel">屏保快捷记录 / 快捷记录</span>
         </div>
 
         <div class="shell">
-          <div class="screen dual-device-home">
+          <div class="screen screensaver-page-mode">
             <header class="topbar">
               <div class="screen-date inline-edit-hint">2026/5/7 周四</div>
               <div class="screen-status">
@@ -10935,7 +11038,7 @@
             </header>
 
             <nav class="screen-menu" aria-label="屏内主菜单">
-              <button class="screen-menu-item active inline-edit-hint" data-page="实时监控区" data-scene="睡眠看护">主页</button>
+              <button class="screen-menu-item inline-edit-hint" data-page="实时监控区" data-scene="睡眠看护">主页</button>
               <button class="screen-menu-item inline-edit-hint" data-page="宝宝看护指标区" data-scene="睡眠看护">看护记录</button>
               <button class="screen-menu-item inline-edit-hint" data-page="日常活动统计" data-scene="活动" data-room="neo">录像回放</button>
               <button class="screen-menu-item inline-edit-hint" data-page="智能看护快捷设置">设置</button>
@@ -10944,17 +11047,17 @@
             </nav>
 
             <div class="tabs-bar">
-              <div class="tab-group" id="roomTabs"><button class="tab-btn active inline-edit-hint" data-room="全部设备">全部设备</button><button class="tab-btn inline-edit-hint" data-room="niki">cam1</button><button class="tab-btn inline-edit-hint" data-room="neo">cam2</button><button class="tab-btn inline-edit-hint" data-room="niki2">cam3</button><button class="tab-btn inline-edit-hint" data-room="niki3">cam4</button></div>
+              <div class="tab-group" id="roomTabs"><button class="tab-btn active inline-edit-hint" data-room="niki">cam1</button></div>
             </div>
 
             <main class="content">
               <div class="monitor-stack">
-                <section class="monitor split-2" id="monitor" style="--monitor-image: url(&quot;public/baby-sleep-overhead-rotated-monitor-16x9-lite.jpg&quot;);">
+                <section class="monitor" id="monitor" style="--monitor-image: url(&quot;public/baby-sleep-overhead-rotated-monitor-16x9-lite.jpg&quot;);">
                   <div class="monitor-header">
                     <div class="monitor-left-tools">
                       <div class="live-pills">
-                        <span class="cam-name fullscreen-room-pill inline-edit-hint" id="fullscreenRoomPill" hidden="">全部设备</span>
-                        <time class="monitor-timestamp inline-edit-hint" id="monitorTimestamp" data-monitor-timestamp="" datetime="2026-07-17T20:38:07">2026年07月17日 20:38:07</time>
+                        <span class="cam-name fullscreen-room-pill inline-edit-hint" id="fullscreenRoomPill" hidden="">niki · niki</span>
+                        <time class="monitor-timestamp inline-edit-hint" id="monitorTimestamp" data-monitor-timestamp="" datetime="2026-07-22T20:21:09">2026年07月22日 20:21:09</time>
                       </div>
                     </div>
                     <button class="monitor-setting" type="button" title="设备设置" aria-label="设备设置" data-page-jump="设备设置" data-device-settings-source="monitor">
@@ -10989,7 +11092,7 @@
                   <div class="multi-grid" id="multiGrid">
                     <button class="camera-tile active" data-room="niki" data-camera="婴儿床摄像头" style="--pos:center 56%;">
                       <strong class="inline-edit-hint">niki</strong><span class="tile-setting" title="设置" aria-label="设置"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 15.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7Z"></path><path d="M19.4 15a1.8 1.8 0 0 0 .36 1.98l.04.04a2.16 2.16 0 0 1-3.05 3.05l-.04-.04a1.8 1.8 0 0 0-1.98-.36 1.8 1.8 0 0 0-1.1 1.66V21.4a2.16 2.16 0 0 1-4.32 0v-.07a1.8 1.8 0 0 0-1.1-1.66 1.8 1.8 0 0 0-1.98.36l-.04.04a2.16 2.16 0 0 1-3.05-3.05l.04-.04A1.8 1.8 0 0 0 4.6 15a1.8 1.8 0 0 0-1.66-1.1H2.86a2.16 2.16 0 0 1 0-4.32h.07A1.8 1.8 0 0 0 4.6 8a1.8 1.8 0 0 0-.36-1.98l-.04-.04a2.16 2.16 0 0 1 3.05-3.05l.04.04A1.8 1.8 0 0 0 9.27 3.3a1.8 1.8 0 0 0 1.1-1.66V1.6a2.16 2.16 0 0 1 4.32 0v.07a1.8 1.8 0 0 0 1.1 1.66 1.8 1.8 0 0 0 1.98-.36l.04-.04a2.16 2.16 0 0 1 3.05 3.05l-.04.04A1.8 1.8 0 0 0 19.4 8a1.8 1.8 0 0 0 1.66 1.1h.07a2.16 2.16 0 0 1 0 4.32h-.07A1.8 1.8 0 0 0 19.4 15Z"></path></svg></span>
-                    <time class="tile-timestamp inline-edit-hint" data-monitor-timestamp="" datetime="2026-07-17T20:38:07">2026年07月17日 20:38:07</time><span class="tile-sound" title="安抚音" aria-label="安抚音" aria-expanded="false" aria-controls="sootheDrawer"><span class="sound-icon inline-edit-hint">♪</span>安抚音</span>
+                    <time class="tile-timestamp inline-edit-hint" data-monitor-timestamp="" datetime="2026-07-22T20:21:09">2026年07月22日 20:21:09</time><span class="tile-sound" title="安抚音" aria-label="安抚音" aria-expanded="false" aria-controls="sootheDrawer"><span class="sound-icon inline-edit-hint">♪</span>安抚音</span>
       <span class="tile-sleep-state" aria-label="设备休眠状态">
         <span class="monitor-sleep-card">
           <span class="monitor-sleep-icon" aria-hidden="true">
@@ -11013,7 +11116,7 @@
     </button>
                     <button class="camera-tile" data-room="neo" data-camera="neo摄像头" style="--pos:58% 56%;">
                       <strong class="inline-edit-hint">neo</strong><span class="tile-setting" title="设置" aria-label="设置"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 15.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7Z"></path><path d="M19.4 15a1.8 1.8 0 0 0 .36 1.98l.04.04a2.16 2.16 0 0 1-3.05 3.05l-.04-.04a1.8 1.8 0 0 0-1.98-.36 1.8 1.8 0 0 0-1.1 1.66V21.4a2.16 2.16 0 0 1-4.32 0v-.07a1.8 1.8 0 0 0-1.1-1.66 1.8 1.8 0 0 0-1.98.36l-.04.04a2.16 2.16 0 0 1-3.05-3.05l.04-.04A1.8 1.8 0 0 0 4.6 15a1.8 1.8 0 0 0-1.66-1.1H2.86a2.16 2.16 0 0 1 0-4.32h.07A1.8 1.8 0 0 0 4.6 8a1.8 1.8 0 0 0-.36-1.98l-.04-.04a2.16 2.16 0 0 1 3.05-3.05l.04.04A1.8 1.8 0 0 0 9.27 3.3a1.8 1.8 0 0 0 1.1-1.66V1.6a2.16 2.16 0 0 1 4.32 0v.07a1.8 1.8 0 0 0 1.1 1.66 1.8 1.8 0 0 0 1.98-.36l.04-.04a2.16 2.16 0 0 1 3.05 3.05l-.04.04A1.8 1.8 0 0 0 19.4 8a1.8 1.8 0 0 0 1.66 1.1h.07a2.16 2.16 0 0 1 0 4.32h-.07A1.8 1.8 0 0 0 19.4 15Z"></path></svg></span>
-                    <time class="tile-timestamp inline-edit-hint" data-monitor-timestamp="" datetime="2026-07-17T20:38:07">2026年07月17日 20:38:07</time><span class="tile-sound" title="安抚音" aria-label="安抚音" aria-expanded="false" aria-controls="sootheDrawer"><span class="sound-icon inline-edit-hint">♪</span>安抚音</span>
+                    <time class="tile-timestamp inline-edit-hint" data-monitor-timestamp="" datetime="2026-07-22T20:21:09">2026年07月22日 20:21:09</time><span class="tile-sound" title="安抚音" aria-label="安抚音" aria-expanded="false" aria-controls="sootheDrawer"><span class="sound-icon inline-edit-hint">♪</span>安抚音</span>
       <span class="tile-sleep-state" aria-label="设备休眠状态">
         <span class="monitor-sleep-card">
           <span class="monitor-sleep-icon" aria-hidden="true">
@@ -11035,9 +11138,9 @@
         </span>
       </span>
     </button>
-                    <button class="camera-tile page-hidden" data-room="niki2" data-camera="niki2摄像头" style="--pos:50% 42%;">
+                    <button class="camera-tile" data-room="niki2" data-camera="niki2摄像头" style="--pos:50% 42%;">
                       <strong class="inline-edit-hint">niki2</strong><span class="tile-setting" title="设置" aria-label="设置"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 15.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7Z"></path><path d="M19.4 15a1.8 1.8 0 0 0 .36 1.98l.04.04a2.16 2.16 0 0 1-3.05 3.05l-.04-.04a1.8 1.8 0 0 0-1.98-.36 1.8 1.8 0 0 0-1.1 1.66V21.4a2.16 2.16 0 0 1-4.32 0v-.07a1.8 1.8 0 0 0-1.1-1.66 1.8 1.8 0 0 0-1.98.36l-.04.04a2.16 2.16 0 0 1-3.05-3.05l.04-.04A1.8 1.8 0 0 0 4.6 15a1.8 1.8 0 0 0-1.66-1.1H2.86a2.16 2.16 0 0 1 0-4.32h.07A1.8 1.8 0 0 0 4.6 8a1.8 1.8 0 0 0-.36-1.98l-.04-.04a2.16 2.16 0 0 1 3.05-3.05l.04.04A1.8 1.8 0 0 0 9.27 3.3a1.8 1.8 0 0 0 1.1-1.66V1.6a2.16 2.16 0 0 1 4.32 0v.07a1.8 1.8 0 0 0 1.1 1.66 1.8 1.8 0 0 0 1.98-.36l.04-.04a2.16 2.16 0 0 1 3.05 3.05l-.04.04A1.8 1.8 0 0 0 19.4 8a1.8 1.8 0 0 0 1.66 1.1h.07a2.16 2.16 0 0 1 0 4.32h-.07A1.8 1.8 0 0 0 19.4 15Z"></path></svg></span>
-                    <time class="tile-timestamp inline-edit-hint" data-monitor-timestamp="" datetime="2026-07-17T20:38:07">2026年07月17日 20:38:07</time><span class="tile-sound" title="安抚音" aria-label="安抚音" aria-expanded="false" aria-controls="sootheDrawer"><span class="sound-icon inline-edit-hint">♪</span>安抚音</span>
+                    <time class="tile-timestamp inline-edit-hint" data-monitor-timestamp="" datetime="2026-07-22T20:21:09">2026年07月22日 20:21:09</time><span class="tile-sound" title="安抚音" aria-label="安抚音" aria-expanded="false" aria-controls="sootheDrawer"><span class="sound-icon inline-edit-hint">♪</span>安抚音</span>
       <span class="tile-sleep-state" aria-label="设备休眠状态">
         <span class="monitor-sleep-card">
           <span class="monitor-sleep-icon" aria-hidden="true">
@@ -11059,9 +11162,9 @@
         </span>
       </span>
     </button>
-                    <button class="camera-tile page-hidden loading" data-room="niki3" data-camera="niki3摄像头" style="--pos:47% 50%;">
+                    <button class="camera-tile" data-room="niki3" data-camera="niki3摄像头" style="--pos:47% 50%;">
                       <strong class="inline-edit-hint">niki3</strong><span class="tile-setting" title="设置" aria-label="设置"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 15.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7Z"></path><path d="M19.4 15a1.8 1.8 0 0 0 .36 1.98l.04.04a2.16 2.16 0 0 1-3.05 3.05l-.04-.04a1.8 1.8 0 0 0-1.98-.36 1.8 1.8 0 0 0-1.1 1.66V21.4a2.16 2.16 0 0 1-4.32 0v-.07a1.8 1.8 0 0 0-1.1-1.66 1.8 1.8 0 0 0-1.98.36l-.04.04a2.16 2.16 0 0 1-3.05-3.05l.04-.04A1.8 1.8 0 0 0 4.6 15a1.8 1.8 0 0 0-1.66-1.1H2.86a2.16 2.16 0 0 1 0-4.32h.07A1.8 1.8 0 0 0 4.6 8a1.8 1.8 0 0 0-.36-1.98l-.04-.04a2.16 2.16 0 0 1 3.05-3.05l.04.04A1.8 1.8 0 0 0 9.27 3.3a1.8 1.8 0 0 0 1.1-1.66V1.6a2.16 2.16 0 0 1 4.32 0v.07a1.8 1.8 0 0 0 1.1 1.66 1.8 1.8 0 0 0 1.98-.36l.04-.04a2.16 2.16 0 0 1 3.05 3.05l-.04.04A1.8 1.8 0 0 0 19.4 8a1.8 1.8 0 0 0 1.66 1.1h.07a2.16 2.16 0 0 1 0 4.32h-.07A1.8 1.8 0 0 0 19.4 15Z"></path></svg></span>
-                    <time class="tile-timestamp inline-edit-hint" data-monitor-timestamp="" datetime="2026-07-17T20:38:07">2026年07月17日 20:38:07</time><span class="tile-sound" title="安抚音" aria-label="安抚音" aria-expanded="false" aria-controls="sootheDrawer"><span class="sound-icon inline-edit-hint">♪</span>安抚音</span>
+                    <time class="tile-timestamp inline-edit-hint" data-monitor-timestamp="" datetime="2026-07-22T20:21:09">2026年07月22日 20:21:09</time><span class="tile-sound" title="安抚音" aria-label="安抚音" aria-expanded="false" aria-controls="sootheDrawer"><span class="sound-icon inline-edit-hint">♪</span>安抚音</span>
       <span class="tile-sleep-state" aria-label="设备休眠状态">
         <span class="monitor-sleep-card">
           <span class="monitor-sleep-icon" aria-hidden="true">
@@ -11085,7 +11188,7 @@
     </button>
                   </div>
 
-                  <div class="multi-camera-pager" id="multiCameraPager" aria-label="实时画面分页">
+                  <div class="multi-camera-pager" id="multiCameraPager" aria-label="实时画面分页" hidden="">
                     <button class="multi-camera-page-arrow previous inline-edit-hint" id="multiCameraPrev" type="button" title="上一页" aria-label="上一页" disabled="">‹</button>
                     <div class="multi-camera-page-dots" id="multiCameraPageDots" aria-label="选择实时画面页"><button class="multi-camera-page-dot active" type="button" data-multi-camera-page="0" aria-label="第 1 页" aria-current="page"></button><button class="multi-camera-page-dot" type="button" data-multi-camera-page="1" aria-label="第 2 页" aria-current="false"></button></div>
                     <button class="multi-camera-page-arrow next inline-edit-hint" id="multiCameraNext" type="button" title="下一页" aria-label="下一页">›</button>
@@ -11167,7 +11270,7 @@
                         <span class="intercom-confirm-icon inline-edit-hint" aria-hidden="true">☎</span>
                         <h3 id="intercomConfirmTitle" class="inline-edit-hint">开启对讲</h3>
                       </div>
-                      <p id="intercomConfirmDesc" class="inline-edit-hint">尽量将看护屏与设备保持一定距离，避免引起啸叫。</p>
+                      <p id="intercomConfirmDesc" class="inline-edit-hint">请将看护屏与设备保持一定距离，避免引起啸叫</p>
                       <div class="intercom-confirm-actions">
                         <button class="intercom-cancel inline-edit-hint" type="button" data-action="intercom-cancel">取消</button>
                         <button class="intercom-confirm inline-edit-hint" type="button" data-action="intercom-confirm">确认</button>
@@ -11191,7 +11294,7 @@
                 </section>
               </div>
 
-              <aside class="right-panel" id="rightPanel" data-scene-panel="睡眠看护" data-monitor-view="split2">
+              <aside class="right-panel" id="rightPanel" data-scene-panel="睡眠看护" data-monitor-view="single">
                 <div class="scene-mode-card scene-soothe">
                   <div class="scene-mode-top">
                     <div><div class="scene-mode-state"><span class="scene-mode-icon inline-edit-hint">☾</span><span class="scene-mode-state-text"><strong class="inline-edit-hint">niki平静</strong><span class="scene-mode-subtitle"></span></span></div></div>
@@ -11201,23 +11304,7 @@
                   <div class="scene-env-grid"><div class="scene-env-card"><span class="inline-edit-hint">体温贴</span><strong class="inline-edit-hint">36.6°C</strong></div><div class="scene-env-card"><span class="inline-edit-hint">空气质量</span><strong class="inline-edit-hint">优</strong></div></div>
                 </div>
                 <div class="scene-mode-card scene-sleep">
-                  <div class="scene-split-status" id="sceneSplitStatus">
-          <div class="scene-split-card">
-            <div class="scene-mode-top">
-              <div><div class="scene-status-heading inline-edit-hint">niki的状态</div><div class="scene-mode-state"><span class="scene-mode-icon inline-edit-hint">☾</span><span class="scene-mode-state-text"><strong class="inline-edit-hint">睡眠中</strong><span class="scene-mode-subtitle inline-edit-hint">已入睡2h40min</span></span></div></div>
-            </div>
-            <div class="scene-breath-card"><div class="scene-vitals-grid"><div class="scene-vital-item"><span class="inline-edit-hint">呼吸率</span><strong class="inline-edit-hint">28 br/min</strong></div><div class="scene-vital-item"><span class="inline-edit-hint">心率</span><strong class="inline-edit-hint">108 bpm</strong></div></div><div class="scene-vitals-grid scene-room-env-grid"><div class="scene-vital-item"><span class="inline-edit-hint">温度</span><strong data-room-temperature="" class="inline-edit-hint">24.5°C</strong></div><div class="scene-vital-item"><span class="inline-edit-hint">湿度</span><strong data-room-humidity="" class="inline-edit-hint">55%</strong></div></div></div>
-            <div class="scene-env-grid"><div class="scene-env-card"><span class="inline-edit-hint">体温贴</span><strong class="inline-edit-hint">36.6°C</strong></div><div class="scene-env-card"><span class="inline-edit-hint">空气质量</span><strong class="inline-edit-hint">优</strong></div></div>
-          </div>
-        
-          <div class="scene-split-card">
-            <div class="scene-mode-top">
-              <div><div class="scene-status-heading inline-edit-hint">neo的状态</div><div class="scene-mode-state"><span class="scene-mode-icon inline-edit-hint">☀</span><span class="scene-mode-state-text"><strong class="inline-edit-hint">已醒来</strong></span></div></div>
-            </div>
-            <div class="scene-breath-card"><div class="scene-vitals-grid"><div class="scene-vital-item"><span class="inline-edit-hint">呼吸率</span><strong class="inline-edit-hint">--</strong></div><div class="scene-vital-item"><span class="inline-edit-hint">心率</span><strong class="inline-edit-hint">--</strong></div></div><div class="scene-vitals-grid scene-room-env-grid"><div class="scene-vital-item"><span class="inline-edit-hint">温度</span><strong data-room-temperature="" class="inline-edit-hint">24.7°C</strong></div><div class="scene-vital-item"><span class="inline-edit-hint">湿度</span><strong data-room-humidity="" class="inline-edit-hint">54%</strong></div></div></div>
-            <div class="scene-env-grid"><div class="scene-env-card"><span class="inline-edit-hint">体温贴</span><strong class="inline-edit-hint">36.5°C</strong></div><div class="scene-env-card"><span class="inline-edit-hint">空气质量</span><strong class="inline-edit-hint">良</strong></div></div>
-          </div>
-        </div>
+                  <div class="scene-split-status" id="sceneSplitStatus"></div>
                   <div class="scene-mode-top">
                     <div><div class="scene-status-heading inline-edit-hint" id="sceneSleepHeading">niki的状态</div><div class="scene-mode-state"><span class="scene-mode-icon inline-edit-hint">☾</span><span class="scene-mode-state-text"><strong id="sceneSleepTitle" class="inline-edit-hint">睡眠中</strong><span class="scene-mode-subtitle inline-edit-hint" id="sceneSleepMeta">已入睡2h40min</span></span></div></div>
                   </div>
@@ -11265,7 +11352,6 @@
                     <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="17" rx="3"></rect><path d="M8 2v4M16 2v4M3 10h18"></path></svg>
                     2026/05/09
                   </button>
-                  <button class="add-device-btn inline-edit-hint" type="button" data-page-jump="智能看护设置">智能看护设置</button>
                 </div>
               </div>
 
@@ -11569,14 +11655,26 @@
               <section class="replay-layout" aria-label="事件回放">
                 <div class="replay-main">
                   <section class="video-player" aria-label="录像画面">
-                    <div class="video-center-play inline-edit-hint">▶</div>
+                    <button class="video-center-play inline-edit-hint" id="replayPlayToggle" type="button" aria-label="播放录像" aria-pressed="false" title="播放">▶</button>
                     <div class="replay-empty-state"><span class="inline-edit-hint">未检测到存储卡</span></div>
+                    <div class="monitor-capture-toast replay-capture-toast" id="replayCaptureToast" role="status" aria-live="polite" hidden=""></div>
+                    <div class="monitor-screenshot-preview replay-screenshot-preview" id="replayCapturePreview" role="status" aria-live="polite" hidden="">
+                      <div class="monitor-screenshot-thumbnail" id="replayCaptureThumbnail" aria-hidden="true"><b class="monitor-video-preview-icon inline-edit-hint">▶</b></div>
+                    </div>
                     <button class="replay-event-drawer-btn inline-edit-hint" type="button" data-replay-action="toggle-events">事件记录</button>
                     <div class="replay-controls">
-                      <button class="replay-control-btn inline-edit-hint" type="button">截图</button>
-                      <button class="replay-control-btn inline-edit-hint" type="button">录像</button>
-                      <button class="replay-control-btn inline-edit-hint" type="button">倍速</button>
-                      <button class="replay-control-btn inline-edit-hint" type="button">声音</button>
+                      <button class="replay-control-btn inline-edit-hint" id="replayScreenshotButton" type="button" data-replay-action="screenshot" aria-label="截图">截图</button>
+                      <button class="replay-control-btn" id="replayRecordingButton" type="button" data-replay-action="recording" aria-pressed="false" aria-label="开始录像" title="录像"><span id="replayRecordingLabel" class="inline-edit-hint">录像</span></button>
+                      <div class="replay-speed-control">
+                        <button class="replay-control-btn replay-speed-btn" id="replaySpeedButton" type="button" data-replay-action="speed" aria-label="播放倍速，当前 1x" aria-expanded="false" aria-controls="replaySpeedMenu" title="当前 1x"><span class="replay-speed-value inline-edit-hint" id="replaySpeedValue">1x</span></button>
+                        <div class="replay-speed-menu" id="replaySpeedMenu" role="menu" aria-label="选择播放倍速" hidden="">
+                          <button class="replay-speed-option active inline-edit-hint" type="button" role="menuitemradio" aria-checked="true" data-replay-speed="1">1x</button>
+                          <button class="replay-speed-option inline-edit-hint" type="button" role="menuitemradio" aria-checked="false" data-replay-speed="2">2x</button>
+                          <button class="replay-speed-option inline-edit-hint" type="button" role="menuitemradio" aria-checked="false" data-replay-speed="4">4x</button>
+                          <button class="replay-speed-option inline-edit-hint" type="button" role="menuitemradio" aria-checked="false" data-replay-speed="8">8x</button>
+                        </div>
+                      </div>
+                      <button class="replay-control-btn" id="replaySoundToggle" type="button" data-replay-action="sound" aria-pressed="true" aria-label="关闭声音" title="关闭声音"><span id="replaySoundLabel" class="inline-edit-hint">声音开</span></button>
                       <button class="replay-control-btn inline-edit-hint" type="button" data-replay-action="fullscreen">全屏</button>
                     </div>
                   </section>
@@ -11652,18 +11750,33 @@
               </section>
 
               <section class="album-panel" aria-label="相册">
-                <div class="album-subtabs" role="tablist" aria-label="相册类型">
-                  <button class="album-subtab active inline-edit-hint" type="button" data-album-tab="saved">相册</button>
+                <div class="album-toolbar">
+                  <label class="album-date-filter"><span class="inline-edit-hint">日期</span><select id="albumDateFilter" aria-label="按日期筛选相册"><option value="all">全部日期</option><option value="2026-05-13">2026年5月13日</option><option value="2026-05-12">2026年5月12日</option><option value="2026-05-11">2026年5月11日</option><option value="2026-05-10">2026年5月10日</option><option value="2026-05-09">2026年5月9日</option></select></label>
                 </div>
-                <div class="album-content active" data-album-content="saved">
-                  <div class="album-grid">
-                    <button class="album-card" type="button"><span class="album-thumb"></span><span class="album-card-copy"><strong class="inline-edit-hint">录像 2026/5/13 20:42</strong></span></button>
-                    <button class="album-card" type="button"><span class="album-thumb"></span><span class="album-card-copy"><strong class="inline-edit-hint">截图 2026/5/13 18:16</strong></span></button>
-                    <button class="album-card" type="button"><span class="album-thumb"></span><span class="album-card-copy"><strong class="inline-edit-hint">录像 2026/5/12 21:08</strong></span></button>
-                    <button class="album-card" type="button"><span class="album-thumb"></span><span class="album-card-copy"><strong class="inline-edit-hint">截图 2026/5/11 09:35</strong></span></button>
-                    <button class="album-card" type="button"><span class="album-thumb"></span><span class="album-card-copy"><strong class="inline-edit-hint">录像 2026/5/10 15:20</strong></span></button>
-                    <button class="album-card" type="button"><span class="album-thumb"></span><span class="album-card-copy"><strong class="inline-edit-hint">截图 2026/5/9 10:12</strong></span></button>
-                  </div>
+                <div class="album-content active">
+                  <section class="album-date-group" data-album-date="2026-05-13">
+                    <header class="album-date-heading"><h3 class="inline-edit-hint">2026年5月13日</h3><span class="inline-edit-hint">2 项</span></header>
+                    <div class="album-grid">
+                      <button class="album-card" type="button"><span class="album-thumb"></span><span class="album-card-copy"><strong class="inline-edit-hint">录像 20:42</strong></span></button>
+                      <button class="album-card" type="button"><span class="album-thumb"></span><span class="album-card-copy"><strong class="inline-edit-hint">截图 18:16</strong></span></button>
+                    </div>
+                  </section>
+                  <section class="album-date-group" data-album-date="2026-05-12">
+                    <header class="album-date-heading"><h3 class="inline-edit-hint">2026年5月12日</h3><span class="inline-edit-hint">1 项</span></header>
+                    <div class="album-grid"><button class="album-card" type="button"><span class="album-thumb"></span><span class="album-card-copy"><strong class="inline-edit-hint">录像 21:08</strong></span></button></div>
+                  </section>
+                  <section class="album-date-group" data-album-date="2026-05-11">
+                    <header class="album-date-heading"><h3 class="inline-edit-hint">2026年5月11日</h3><span class="inline-edit-hint">1 项</span></header>
+                    <div class="album-grid"><button class="album-card" type="button"><span class="album-thumb"></span><span class="album-card-copy"><strong class="inline-edit-hint">截图 09:35</strong></span></button></div>
+                  </section>
+                  <section class="album-date-group" data-album-date="2026-05-10">
+                    <header class="album-date-heading"><h3 class="inline-edit-hint">2026年5月10日</h3><span class="inline-edit-hint">1 项</span></header>
+                    <div class="album-grid"><button class="album-card" type="button"><span class="album-thumb"></span><span class="album-card-copy"><strong class="inline-edit-hint">录像 15:20</strong></span></button></div>
+                  </section>
+                  <section class="album-date-group" data-album-date="2026-05-09">
+                    <header class="album-date-heading"><h3 class="inline-edit-hint">2026年5月9日</h3><span class="inline-edit-hint">1 项</span></header>
+                    <div class="album-grid"><button class="album-card" type="button"><span class="album-thumb"></span><span class="album-card-copy"><strong class="inline-edit-hint">截图 10:12</strong></span></button></div>
+                  </section>
                 </div>
               </section>
             </main>
@@ -11672,7 +11785,7 @@
               <header class="device-settings-head">
                 <div class="device-settings-title">
                   <button class="care-settings-back inline-edit-hint" type="button" data-action="device-settings-back" aria-label="返回">‹</button>
-                  <div><h2 id="deviceSettingsTitle" class="inline-edit-hint">设备设置</h2><p id="deviceSettingsSubtitle" class="inline-edit-hint">白噪声</p></div>
+                  <div><h2 id="deviceSettingsTitle" class="inline-edit-hint">设备设置</h2><p id="deviceSettingsSubtitle" class="inline-edit-hint">婴儿床摄像头</p></div>
                 </div>
               </header>
               <div class="device-settings-scroll">
@@ -12195,7 +12308,7 @@
               <section class="alert-modal" id="alertModal" aria-label="消息通知弹窗">
                 <div class="alert-baby-icon" id="alertIcon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.5 14.5A6.8 6.8 0 0 1 9.5 6a7 7 0 1 0 8 8.5Z"></path><path d="M18.5 5.5v4M16.5 7.5h4"></path></svg></div>
                 <div class="alert-copy">
-                  <div class="alert-text inline-edit-hint" id="alertText" spellcheck="false" data-inline-edit-key="#alertText:实时监控区">12:09 检测到消息</div>
+                  <div class="alert-text inline-edit-hint" id="alertText" spellcheck="false" data-inline-edit-key="#alertText:屏保快捷记录">12:09 检测到消息</div>
                   <div class="alert-detail-list" id="alertDetailList" hidden="">
                     <p class="inline-edit-hint">1、请确保摄像头上电</p>
                     <p><span class="inline-edit-hint">2、可将看护屏尽量靠近设备，或</span><button class="alert-detail-link inline-edit-hint" type="button" data-page-jump="设备设置" data-device-settings-source="monitor" data-device-settings-panel-jump="wifi">开启网络扩展</button></p>
@@ -12553,7 +12666,7 @@
                   </div>
                   <section class="onboarding-skip-modal is-hidden" id="onboardingWifiSkipModal" aria-label="不联网确认弹窗">
                     <div class="onboarding-skip-dialog" role="dialog" aria-modal="true">
-                      <p class="inline-edit-hint">不联网使用，设备无法支持看护记录，看护分析与建议等功能。是否确认不联网？</p>
+                      <p class="inline-edit-hint" id="onboardingSkipMessage">不联网使用，设备无法支持看护记录、看护分析与建议等功能。是否确认跳过？</p>
                       <div class="onboarding-skip-actions">
                         <button class="setup-primary-btn inline-edit-hint" type="button" data-onboarding-wifi-skip-confirm="">确认</button>
                         <button class="setup-secondary-btn inline-edit-hint" type="button" data-onboarding-wifi-skip-cancel="">取消</button>
@@ -12602,7 +12715,7 @@
               </section>
             </main>
 
-            <main class="guide-page" id="guidePage" data-guide-state="step-1">
+            <main class="guide-page" id="guidePage" data-guide-state="normal">
               <div class="guide-backdrop" aria-hidden="true"></div>
               <div class="guide-network-switch" aria-label="切网提示">
                 <section class="alert-modal" aria-label="本地连接信号弱提示">
@@ -12818,8 +12931,8 @@
       <section class="docs-panel">
         <div class="docs-head">
           <div class="docs-head-main">
-            <input class="docs-title-input" id="docsTitle" type="text" value="多设备主页" aria-label="页面功能说明标题" style="width: 150px;">
-            <textarea class="docs-desc-input" id="docsDesc" aria-label="页面功能说明描述">默认进入宝宝实时监控主页，展示实时监控画面，当前看护状态</textarea>
+            <input class="docs-title-input" id="docsTitle" type="text" value="屏保页面" aria-label="页面功能说明标题" style="width: 123px;">
+            <textarea class="docs-desc-input" id="docsDesc" aria-label="页面功能说明描述">屏端待机时展示时间与宝宝看护快捷记录入口。</textarea>
           </div>
           <div class="docs-actions">
             <button class="docs-save" id="docsSaveHtml" type="button">保存HTML</button>
@@ -12831,15 +12944,17 @@
             <div class="docs-card-head">
               <h3>功能描述</h3>
             </div>
-            <div class="docs-structured-list" data-docs-preview="features" contenteditable="true" tabindex="0" aria-label="功能描述内容，可直接编辑或粘贴图片"><div class="docs-outline-line level-1" data-level="1"><b class="docs-outline-index" contenteditable="false">1</b><div class="docs-outline-copy" spellcheck="false">实时画面：当BBM设备数≧2时，最多2路实时画面同时查看（Wi-Fi Halow 点对点带宽限制）</div></div><div class="docs-outline-line level-2" data-level="2"><b class="docs-outline-index" contenteditable="false">1</b><div class="docs-outline-copy" spellcheck="false">当BBM设备数=2 时，设备tab默认选中全部设备，进行双画面实时监控展示</div></div><div class="docs-outline-line level-2" data-level="2"><b class="docs-outline-index" contenteditable="false">2</b><div class="docs-outline-copy" spellcheck="false">当BBM设备数&gt;2时，设备tab默认选中全部设备，进行双画面实时监控展示；支持滑页，滑到下一页查看</div></div><div class="docs-outline-line level-2" data-level="2"><b class="docs-outline-index" contenteditable="false">3</b><div class="docs-outline-copy" spellcheck="false">设备tab支持切换任意单设备/或全部设备 进行展示</div></div><div class="docs-outline-line level-2" data-level="2"><b class="docs-outline-index" contenteditable="false">4</b><div class="docs-outline-copy" spellcheck="false">设备tab选中全部设备时，实时画面默认选中第一个画面，画面内的功能按钮针对选中的画面生效</div></div><div class="docs-outline-line level-2" data-level="2"><b class="docs-outline-index" contenteditable="false">5</b><div class="docs-outline-copy" spellcheck="false">点击 实时画面 非功能按钮区域，切换选中的画面</div></div><div class="docs-outline-line level-2" data-level="2"><b class="docs-outline-index" contenteditable="false">6</b><div class="docs-outline-copy" spellcheck="false">双击 实时画面 非功能按钮区域，进入全屏页面</div></div><div class="docs-outline-line level-1" data-level="1"><b class="docs-outline-index" contenteditable="false">2</b><div class="docs-outline-copy" spellcheck="false">看护状态卡片：根据实时画面，展示相应的两个看护状态卡片。</div></div></div>
-            <textarea class="docs-editor" id="docsFeatureList" hidden="" aria-label="功能描述，每行一条" style="height: 72px;">实时画面：当BBM设备数≧2时，最多2路实时画面同时查看（Wi-Fi Halow 点对点带宽限制）
-  当BBM设备数=2 时，设备tab默认选中全部设备，进行双画面实时监控展示
-  当BBM设备数&gt;2时，设备tab默认选中全部设备，进行双画面实时监控展示；支持滑页，滑到下一页查看
-  设备tab支持切换任意单设备/或全部设备 进行展示
-  设备tab选中全部设备时，实时画面默认选中第一个画面，画面内的功能按钮针对选中的画面生效
-  点击 实时画面 非功能按钮区域，切换选中的画面
-  双击 实时画面 非功能按钮区域，进入全屏页面
-看护状态卡片：根据实时画面，展示相应的两个看护状态卡片。</textarea>
+            <div class="docs-structured-list" data-docs-preview="features" contenteditable="true" tabindex="0" aria-label="功能描述内容，可直接编辑或粘贴图片"><div class="docs-outline-line level-1" data-level="1"><b class="docs-outline-index" contenteditable="false">1</b><div class="docs-outline-copy" spellcheck="false">屏端达到息屏时间后，展示该屏保页面。展示：日期/时间、天气、宝宝当前睡眠状态、手动喂养记录入口</div></div><div class="docs-outline-line level-1" data-level="1"><b class="docs-outline-index" contenteditable="false">2</b><div class="docs-outline-copy" spellcheck="false">屏保页面无任何操作3分钟后，自动息屏</div></div><div class="docs-outline-line level-1" data-level="1"><b class="docs-outline-index" contenteditable="false">3</b><div class="docs-outline-copy" spellcheck="false">亮屏情况，按电源键，屏端直接息屏</div></div><div class="docs-outline-line level-1" data-level="1"><b class="docs-outline-index" contenteditable="false">4</b><div class="docs-outline-copy" spellcheck="false">息屏情况，按电源键，屏端直接亮屏</div></div><div class="docs-outline-line level-1" data-level="1"><b class="docs-outline-index" contenteditable="false">5</b><div class="docs-outline-copy" spellcheck="false">天气：屏端联网时，按用户时区/或连接的Wi-Fi信息，获取展示</div></div><div class="docs-outline-line level-1" data-level="1"><b class="docs-outline-index" contenteditable="false">6</b><div class="docs-outline-copy" spellcheck="false">宝宝当前睡眠状态：展示 睡眠中、睡醒、将睡、将醒。宝宝在位时才展示，不在位/设备离线时不展示。</div></div><div class="docs-outline-line level-2" data-level="2"><b class="docs-outline-index" contenteditable="false">1</b><div class="docs-outline-copy" spellcheck="false">有多个宝宝，展示多个宝宝状态信息</div></div><div class="docs-outline-line level-1" data-level="1"><b class="docs-outline-index" contenteditable="false">7</b><div class="docs-outline-copy" spellcheck="false">手动喂养记录入口：提供记喂养、记睡眠和换尿布三个快捷入口。点击可进行快捷记录。同手机app的喂养记录模块</div></div><div class="docs-outline-line level-2" data-level="2"><b class="docs-outline-index" contenteditable="false">1</b><div class="docs-outline-copy" spellcheck="false">屏端登录账号后，才展示三个手动喂养记录入口；未登录账号，则不展示该入口</div></div><div class="docs-outline-line level-2" data-level="2"><b class="docs-outline-index" contenteditable="false">2</b><div class="docs-outline-copy" spellcheck="false">有多个宝宝，支持按宝宝进行快捷记录</div></div></div>
+            <textarea class="docs-editor" id="docsFeatureList" hidden="" aria-label="功能描述，每行一条" style="height: 72px;">屏端达到息屏时间后，展示该屏保页面。展示：日期/时间、天气、宝宝当前睡眠状态、手动喂养记录入口
+屏保页面无任何操作3分钟后，自动息屏
+亮屏情况，按电源键，屏端直接息屏
+息屏情况，按电源键，屏端直接亮屏
+天气：屏端联网时，按用户时区/或连接的Wi-Fi信息，获取展示
+宝宝当前睡眠状态：展示 睡眠中、睡醒、将睡、将醒。宝宝在位时才展示，不在位/设备离线时不展示。
+  有多个宝宝，展示多个宝宝状态信息
+手动喂养记录入口：提供记喂养、记睡眠和换尿布三个快捷入口。点击可进行快捷记录。同手机app的喂养记录模块
+  屏端登录账号后，才展示三个手动喂养记录入口；未登录账号，则不展示该入口
+  有多个宝宝，支持按宝宝进行快捷记录</textarea>
           </section>
           <section class="docs-card" tabindex="0">
             <div class="docs-card-head">
@@ -12990,7 +13105,8 @@
       "回放时间轴：固定使用 24 小时制，不跟随设备端时间制式",
       "  支持手动拖动时间轴，播放对应时间点的录像",
       "  拖到无录像时间点，自动定位到下个录像起始点",
-      "录像播放控制：截图、录像、倍速、声音开关、全屏",
+      "录像播放控制：播放/暂停、截图、录像、倍速、声音开关、全屏",
+      "  播放/暂停：点击画面中央按钮切换录像播放与暂停状态",
       "  截图：截取当前画面，保存到设备SD卡，保存后显示2s缩略图预览。若设备未插SD卡，提示需插卡",
       "  录像：开始/停止录像，保存到设备SD卡，保存后显示2s视频缩略图预览。若设备未插SD卡，提示需插卡",
       "  倍速：支持1、2、4、8倍",
@@ -13249,14 +13365,15 @@
       "亮屏情况，按电源键，屏端直接息屏",
       "息屏情况，按电源键，屏端直接亮屏",
       "天气：屏端联网时，按用户时区/或连接的Wi-Fi信息，获取展示",
-      "宝宝当前睡眠状态：展示 睡眠中、睡醒、将睡、将醒。宝宝在位时才展示，不在位/设备离线时不展示",
-      "手动喂养记录入口：提供记喂养、记睡眠和换尿布三个快捷入口。点击可进行快捷记录。同手机app的喂养记录模块"
+      "宝宝当前睡眠状态：展示 睡眠中、睡醒、将睡、将醒。宝宝在位时才展示，不在位/设备离线时不展示。",
+      "  有多个宝宝，展示多个宝宝状态信息",
+      "手动喂养记录入口：提供记喂养、记睡眠和换尿布三个快捷入口。点击可进行快捷记录。同手机app的喂养记录模块",
+      "  屏端登录账号后，才展示三个手动喂养记录入口；未登录账号，则不展示该入口",
+      "  有多个宝宝，支持按宝宝进行快捷记录"
     ],
     "featureEditorVersion": 2,
     "rules": [],
-    "ruleEditorVersion": 2,
-    "featureHtml": "",
-    "ruleHtml": ""
+    "ruleEditorVersion": 2
   },
   "屏端初始化向导 / 添加设备（已配对好）": {
     "title": "添加设备（已配对好）",
@@ -13458,7 +13575,9 @@
     ],
     "featureEditorVersion": 2,
     "rules": [],
-    "ruleEditorVersion": 2
+    "ruleEditorVersion": 2,
+    "featureHtml": "",
+    "ruleHtml": ""
   },
   "实时监控区 / 睡眠看护": {
     "title": "睡眠看护",
@@ -13535,7 +13654,9 @@
     ],
     "featureEditorVersion": 2,
     "rules": [],
-    "ruleEditorVersion": 2
+    "ruleEditorVersion": 2,
+    "featureHtml": "",
+    "ruleHtml": ""
   },
   "实时监控区 / 二画面全屏": {
     "title": "二画面全屏",
@@ -13595,9 +13716,7 @@
       "在屏端未联网/登账号，或摄像头未配网上云的情况下，云端功能无法使用/获取最新数据。在此总结一个【云端功能页面状态的引导判断流程】如下：",
       "![](file:///Users/lute/Desktop/code/client/public/docs-214bd27f00eb.png)"
     ],
-    "ruleEditorVersion": 2,
-    "featureHtml": "",
-    "ruleHtml": ""
+    "ruleEditorVersion": 2
   },
   "日常活动统计 / 录像回放": {
     "title": "录像回放",
@@ -13605,6 +13724,7 @@
     "bullets": [
       "支持查看设备的录像回放（包含：本地录像、云录像、相册）",
       "本地录像：支持通过时间轴、事件记录查看录像",
+      "  播放/暂停：点击画面中央按钮切换录像播放与暂停状态",
       "  倍速：支持1、2、4、8倍",
       "云录像：需登录账号，付费才支持。",
       "相册：展示用户截图/录像保存的图片和视频，按时间倒序排列展示",
@@ -13728,7 +13848,9 @@
     ],
     "featureEditorVersion": 2,
     "rules": [],
-    "ruleEditorVersion": 2
+    "ruleEditorVersion": 2,
+    "featureHtml": "",
+    "ruleHtml": ""
   },
   "实时监控区 / 主页-生态设备-多画面": {
     "title": "主页-生态设备-多画面",
@@ -13740,7 +13862,9 @@
     ],
     "featureEditorVersion": 2,
     "rules": [],
-    "ruleEditorVersion": 2
+    "ruleEditorVersion": 2,
+    "featureHtml": "",
+    "ruleHtml": ""
   },
   "实时监控区 / 双画面全屏": {
     "title": "双画面全屏",
@@ -13752,7 +13876,9 @@
     ],
     "featureEditorVersion": 2,
     "rules": [],
-    "ruleEditorVersion": 2
+    "ruleEditorVersion": 2,
+    "featureHtml": "",
+    "ruleHtml": ""
   },
   "宝宝看护指标区 / 未登录状态": {
     "title": "未登录状态",
@@ -13805,7 +13931,9 @@
     ],
     "featureEditorVersion": 2,
     "rules": [],
-    "ruleEditorVersion": 2
+    "ruleEditorVersion": 2,
+    "featureHtml": "",
+    "ruleHtml": ""
   },
   "无设备页 / 主页": {
     "title": "无设备页",
@@ -13902,7 +14030,9 @@
     ],
     "featureEditorVersion": 2,
     "rules": [],
-    "ruleEditorVersion": 2
+    "ruleEditorVersion": 2,
+    "featureHtml": "",
+    "ruleHtml": ""
   },
   "设备设置": {
     "title": "设备设置",
@@ -14434,6 +14564,7 @@
       careSettingsSource: '',
       settingsDetailPanel: '',
       replayState: 'normal',
+      albumDateFilter: 'all',
       careRange: 'day',
       careState: 'normal',
       guideState: 'step-1',
@@ -14451,6 +14582,11 @@
       recordingActive: false,
       recordingStartedAt: 0,
       recordingRoom: '',
+      replayPlaying: false,
+      replayRecordingActive: false,
+      replayRecordingStartedAt: 0,
+      replaySoundMuted: false,
+      replaySpeed: 1,
       mutedRooms: [],
       audioOnlyRooms: [],
       audioOnlyPromptOpen: false,
@@ -14725,6 +14861,8 @@
     let monitorClickTimer = null;
     let monitorScreenshotTimer = null;
     let monitorCaptureToastTimer = null;
+    let replayCapturePreviewTimer = null;
+    let replayCaptureToastTimer = null;
     let multiCameraSwipeStart = null;
     let suppressTileClickUntil = 0;
     const screen = document.querySelector('.screen');
@@ -14764,11 +14902,24 @@
     const accountPage = document.getElementById('accountPage');
     const deviceSettingsPage = document.getElementById('deviceSettingsPage');
     const replaySourceButtons = document.querySelectorAll('#replayPage .replay-tab, #replayPage .album-btn');
-    const albumSubTabs = document.querySelectorAll('[data-album-tab]');
-    const albumContents = document.querySelectorAll('[data-album-content]');
+    const albumDateFilter = document.getElementById('albumDateFilter');
+    const albumDateGroups = document.querySelectorAll('[data-album-date]');
     const replayVideoPlayer = document.querySelector('#replayPage .video-player');
     const replayFullscreenButton = document.querySelector('[data-replay-action="fullscreen"]');
     const replayEventDrawerButton = document.querySelector('[data-replay-action="toggle-events"]');
+    const replayPlayToggle = document.getElementById('replayPlayToggle');
+    const replayScreenshotButton = document.getElementById('replayScreenshotButton');
+    const replayRecordingButton = document.getElementById('replayRecordingButton');
+    const replayRecordingLabel = document.getElementById('replayRecordingLabel');
+    const replaySoundToggle = document.getElementById('replaySoundToggle');
+    const replaySoundLabel = document.getElementById('replaySoundLabel');
+    const replaySpeedButton = document.getElementById('replaySpeedButton');
+    const replaySpeedValue = document.getElementById('replaySpeedValue');
+    const replaySpeedMenu = document.getElementById('replaySpeedMenu');
+    const replaySpeedOptions = document.querySelectorAll('[data-replay-speed]');
+    const replayCaptureToast = document.getElementById('replayCaptureToast');
+    const replayCapturePreview = document.getElementById('replayCapturePreview');
+    const replayCaptureThumbnail = document.getElementById('replayCaptureThumbnail');
     const roomTabs = document.getElementById('roomTabs');
     const deviceSettingsTitle = document.getElementById('deviceSettingsTitle');
     const deviceSettingsSubtitle = document.getElementById('deviceSettingsSubtitle');
@@ -14859,6 +15010,7 @@
     const onboardingWifiSkipModal = document.getElementById('onboardingWifiSkipModal');
     const onboardingWifiSkipConfirm = document.querySelector('[data-onboarding-wifi-skip-confirm]');
     const onboardingWifiSkipCancel = document.querySelector('[data-onboarding-wifi-skip-cancel]');
+    const onboardingSkipMessage = document.getElementById('onboardingSkipMessage');
     const pairedAddStartButtons = document.querySelectorAll('[data-paired-add-start]');
     const cameraPairButtons = document.querySelectorAll('[data-camera-pair]');
     const selectedCameraName = document.querySelector('[data-selected-camera-name]');
@@ -15386,6 +15538,85 @@
         monitorScreenshotPreview.hidden = true;
         monitorScreenshotTimer = null;
       }, 2000);
+    }
+
+    function showReplayCaptureToast(message) {
+      if (!replayCaptureToast) return;
+      replayCaptureToast.textContent = message;
+      replayCaptureToast.hidden = false;
+      replayCaptureToast.style.animation = 'none';
+      void replayCaptureToast.offsetWidth;
+      replayCaptureToast.style.animation = '';
+      if (replayCaptureToastTimer) clearTimeout(replayCaptureToastTimer);
+      replayCaptureToastTimer = setTimeout(() => {
+        replayCaptureToast.hidden = true;
+        replayCaptureToastTimer = null;
+      }, 2000);
+    }
+
+    function showReplayCapturePreview(kind = 'screenshot') {
+      if (!replayCapturePreview || !replayCaptureThumbnail || !replayVideoPlayer) return;
+      const sourceStyle = getComputedStyle(replayVideoPlayer);
+      replayCaptureThumbnail.style.backgroundImage = sourceStyle.backgroundImage;
+      replayCaptureThumbnail.style.backgroundPosition = sourceStyle.backgroundPosition;
+      replayCaptureThumbnail.style.backgroundSize = sourceStyle.backgroundSize;
+      replayCapturePreview.classList.toggle('video-preview', kind === 'video');
+      replayCapturePreview.hidden = false;
+      replayCapturePreview.style.animation = 'none';
+      void replayCapturePreview.offsetWidth;
+      replayCapturePreview.style.animation = '';
+      if (replayCapturePreviewTimer) clearTimeout(replayCapturePreviewTimer);
+      replayCapturePreviewTimer = setTimeout(() => {
+        replayCapturePreview.hidden = true;
+        replayCapturePreviewTimer = null;
+      }, 2000);
+    }
+
+    function renderReplayPlayControl() {
+      if (!replayPlayToggle) return;
+      replayPlayToggle.textContent = appState.replayPlaying ? 'Ⅱ' : '▶';
+      replayPlayToggle.setAttribute('aria-pressed', String(appState.replayPlaying));
+      replayPlayToggle.setAttribute('aria-label', appState.replayPlaying ? '暂停录像' : '播放录像');
+      replayPlayToggle.title = appState.replayPlaying ? '暂停' : '播放';
+    }
+
+    function renderReplayRecordingControl() {
+      if (!replayRecordingButton) return;
+      replayRecordingButton.classList.toggle('recording-active', appState.replayRecordingActive);
+      replayRecordingButton.setAttribute('aria-pressed', String(appState.replayRecordingActive));
+      replayRecordingButton.setAttribute('aria-label', appState.replayRecordingActive ? '停止录像' : '开始录像');
+      replayRecordingButton.title = appState.replayRecordingActive ? '停止录像' : '录像';
+      if (replayRecordingLabel) replayRecordingLabel.textContent = appState.replayRecordingActive ? '录像中' : '录像';
+    }
+
+    function renderReplaySoundControl() {
+      if (!replaySoundToggle) return;
+      replaySoundToggle.classList.toggle('sound-muted', appState.replaySoundMuted);
+      replaySoundToggle.setAttribute('aria-pressed', String(!appState.replaySoundMuted));
+      replaySoundToggle.setAttribute('aria-label', appState.replaySoundMuted ? '开启声音' : '关闭声音');
+      replaySoundToggle.title = appState.replaySoundMuted ? '开启声音' : '关闭声音';
+      if (replaySoundLabel) replaySoundLabel.textContent = appState.replaySoundMuted ? '声音关' : '声音开';
+    }
+
+    function renderAlbumDateFilter() {
+      const selectedDate = appState.albumDateFilter || 'all';
+      if (albumDateFilter) albumDateFilter.value = selectedDate;
+      albumDateGroups.forEach((group) => {
+        group.hidden = selectedDate !== 'all' && group.dataset.albumDate !== selectedDate;
+      });
+    }
+
+    function renderReplaySpeedControl() {
+      if (replaySpeedValue) replaySpeedValue.textContent = `${appState.replaySpeed}x`;
+      if (replaySpeedButton) {
+        replaySpeedButton.setAttribute('aria-label', `播放倍速，当前 ${appState.replaySpeed}x`);
+        replaySpeedButton.title = `当前 ${appState.replaySpeed}x`;
+      }
+      replaySpeedOptions.forEach((option) => {
+        const isActive = Number(option.dataset.replaySpeed) === appState.replaySpeed;
+        option.classList.toggle('active', isActive);
+        option.setAttribute('aria-checked', String(isActive));
+      });
     }
 
     function renderMonitorSoundControl() {
@@ -16984,6 +17215,7 @@
     }
 
     let onboardingIndex = -1;
+    let onboardingSkipTargetIndex = 2;
     let onboardingCompletedIndex = 0;
     let onboardingBootTimer = null;
     let onboardingPairTimer = null;
@@ -17052,7 +17284,7 @@
           panel.classList.toggle('active', Number(panel.dataset.onboardingPanel) === -1);
         });
         setupActions?.classList.add('is-hidden');
-        onboardingFlowCard?.classList.remove('is-wifi-step');
+        onboardingFlowCard?.classList.remove('is-skippable-step');
         onboardingWifiSkipModal?.classList.add('is-hidden');
         if (setupPrevButton) {
           setupPrevButton.hidden = true;
@@ -17080,7 +17312,7 @@
       const isBootScreen = onboardingIndex === -1;
       const hideSetupActions = isBootScreen || onboardingIndex === pairedDeviceWelcomeIndex;
       setupActions?.classList.toggle('is-hidden', hideSetupActions);
-      onboardingFlowCard?.classList.toggle('is-wifi-step', onboardingIndex === 2 && onboardingFlowMode === 'initial');
+      onboardingFlowCard?.classList.toggle('is-skippable-step', onboardingFlowMode === 'initial' && (onboardingIndex === 2 || onboardingIndex === 3));
       onboardingWifiSkipModal?.classList.add('is-hidden');
       if (setupPrevButton) {
         const addFlowFloorIndex = getStandaloneAddFlowFloorIndex();
@@ -17529,6 +17761,11 @@
       renderIntercomControl();
       renderRecordingControl();
       renderMonitorSoundControl();
+      renderReplayPlayControl();
+      renderReplayRecordingControl();
+      renderReplaySoundControl();
+      renderReplaySpeedControl();
+      renderAlbumDateFilter();
       renderAudioOnlyControl();
       renderControlPowerSaving();
       renderCareRange();
@@ -18224,6 +18461,73 @@
       event.stopImmediatePropagation();
     }, true);
 
+    if (replayPlayToggle) {
+      replayPlayToggle.addEventListener('click', (event) => {
+        event.stopPropagation();
+        appState.replayPlaying = !appState.replayPlaying;
+        renderReplayPlayControl();
+      });
+    }
+
+    if (replayScreenshotButton) {
+      replayScreenshotButton.addEventListener('click', (event) => {
+        event.stopPropagation();
+        showReplayCapturePreview('screenshot');
+        showReplayCaptureToast('截图已保存至录像回放-相册');
+      });
+    }
+
+    if (replayRecordingButton) {
+      replayRecordingButton.addEventListener('click', (event) => {
+        event.stopPropagation();
+        if (!appState.replayRecordingActive) {
+          appState.replayRecordingActive = true;
+          appState.replayRecordingStartedAt = Date.now();
+          renderReplayRecordingControl();
+          return;
+        }
+        appState.replayRecordingActive = false;
+        appState.replayRecordingStartedAt = 0;
+        renderReplayRecordingControl();
+        showReplayCapturePreview('video');
+        showReplayCaptureToast('录像已保存至录像回放-相册');
+      });
+    }
+
+    if (replaySoundToggle) {
+      replaySoundToggle.addEventListener('click', (event) => {
+        event.stopPropagation();
+        appState.replaySoundMuted = !appState.replaySoundMuted;
+        renderReplaySoundControl();
+      });
+    }
+
+    if (replaySpeedButton && replaySpeedMenu) {
+      replaySpeedButton.addEventListener('click', (event) => {
+        event.stopPropagation();
+        const shouldOpen = replaySpeedMenu.hidden;
+        replaySpeedMenu.hidden = !shouldOpen;
+        replaySpeedButton.setAttribute('aria-expanded', String(shouldOpen));
+      });
+    }
+
+    replaySpeedOptions.forEach((option) => {
+      option.addEventListener('click', (event) => {
+        event.stopPropagation();
+        appState.replaySpeed = Number(option.dataset.replaySpeed) || 1;
+        if (replaySpeedMenu) replaySpeedMenu.hidden = true;
+        if (replaySpeedButton) replaySpeedButton.setAttribute('aria-expanded', 'false');
+        renderReplaySpeedControl();
+      });
+    });
+
+    document.addEventListener('click', (event) => {
+      if (!replaySpeedMenu || replaySpeedMenu.hidden) return;
+      if (event.target.closest('.replay-speed-control')) return;
+      replaySpeedMenu.hidden = true;
+      replaySpeedButton?.setAttribute('aria-expanded', 'false');
+    });
+
     function setReplayFullscreen(isFullscreen) {
       if (!replayPage) return;
       replayPage.classList.toggle('replay-fullscreen', isFullscreen);
@@ -18265,13 +18569,12 @@
       });
     });
 
-    albumSubTabs.forEach((button) => {
-      button.addEventListener('click', () => {
-        const target = button.dataset.albumTab;
-        albumSubTabs.forEach((item) => item.classList.toggle('active', item === button));
-        albumContents.forEach((item) => item.classList.toggle('active', item.dataset.albumContent === target));
+    if (albumDateFilter) {
+      albumDateFilter.addEventListener('change', () => {
+        appState.albumDateFilter = albumDateFilter.value || 'all';
+        renderAlbumDateFilter();
       });
-    });
+    }
 
     careRangeButtons.forEach((button) => {
       button.addEventListener('click', () => {
@@ -18438,6 +18741,14 @@
     }
 
     onboardingWifiSkipButton?.addEventListener('click', () => {
+      onboardingSkipTargetIndex = onboardingIndex;
+      const isAccountStep = onboardingSkipTargetIndex === 3;
+      if (onboardingSkipMessage) {
+        onboardingSkipMessage.textContent = isAccountStep
+          ? '暂不登录账号，将无法使用看护记录、看护分析与建议等账号功能。是否确认跳过？'
+          : '不联网使用，设备无法支持看护记录、看护分析与建议等功能。是否确认跳过？';
+      }
+      onboardingWifiSkipModal?.setAttribute('aria-label', isAccountStep ? '不登录确认弹窗' : '不联网确认弹窗');
       toggleOnboardingWifiSkipModal(true);
     });
 
@@ -18446,7 +18757,11 @@
     });
 
     onboardingWifiSkipConfirm?.addEventListener('click', () => {
+      const nextIndex = onboardingSkipTargetIndex === 3 ? cameraPowerIndex : 3;
+      onboardingCompletedIndex = Math.max(onboardingCompletedIndex, nextIndex);
+      onboardingIndex = nextIndex;
       toggleOnboardingWifiSkipModal(false);
+      renderOnboardingStep();
     });
 
     onboardingWifiSkipModal?.addEventListener('click', (event) => {
@@ -19293,6 +19608,8 @@
     cleanupStaleInlineTextEdits();
     markInlineEditableText();
   </script>
+
+
 
 
 
